@@ -17,7 +17,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: CustomCard(),
+      home: Row(
+      children: const [
+        CustomCard(
+          image: "https://picsum.photos/250?image=9",
+          title:"Spider-Man",
+          year: 2007
+        ),
+
+      ],
+      )
     );
   }
 }
