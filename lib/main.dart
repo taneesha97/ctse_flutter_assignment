@@ -1,4 +1,5 @@
 import 'package:ctse_assignment_1/components/card_custom.dart';
+import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,16 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Row(
-      children: const [
-        CustomCard(
-          image: "https://picsum.photos/250?image=9",
-          title:"Spider-Man",
-          year: 2007
-        ),
-
-      ],
-      )
+      home: MovieWiki(),
     );
   }
 }
