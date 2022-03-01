@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/components/audio_quizes/audio_quiz_body.dart';
 import 'package:ctse_assignment_1/components/quiz/body.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _QuizScreenState extends State<QuizScreen> {
           child: Text("Movie Categories"),
         ),
       ),
-      body: Body(),
+      body: AudioQuizBody(),
     );
   }
 }
