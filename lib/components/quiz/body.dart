@@ -5,30 +5,12 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Padding(
       padding: EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         children: [
-          SizedBox(
-            height: 8,
-          ),
-          Text.rich(
-            TextSpan(
-                text: "Question 1",
-                style: Theme.of(context).textTheme.headline4,
-                // .copyWith(color: Colors.black54
-                // ),
-                children: [
-                  TextSpan(
-                    text: "/10",
-                    style: Theme.of(context).textTheme.headline5,
-                  )
-                ]),
-          ),
-          Divider(
-            thickness: 1.5,
-          ),
           SizedBox(
             height: 8,
           ),
@@ -40,6 +22,22 @@ class Body extends StatelessWidget {
                 color: Colors.white, borderRadius: BorderRadius.circular(25)),
             child: Column(
               children: [
+                Text.rich(
+                  TextSpan(
+                      text: "1",
+                      style: Theme.of(context).textTheme.headline6,
+                      // .copyWith(color: Colors.black54
+                      // ),
+                      children: [
+                        TextSpan(
+                          text: "/10",
+                          style: Theme.of(context).textTheme.headline6,
+                        )
+                      ]),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
                 Text(
                   "Guess the Movie",
                   style: Theme.of(context)
@@ -48,11 +46,18 @@ class Body extends StatelessWidget {
                       .copyWith(color: Colors.blueGrey),
                 ),
                 SizedBox(
-                  height: 4,
+                  height: 8,
                 ),
-
+                Image.asset(
+                  "assets/images/movie1.jpg",
+                  height: 150,
+                  width: 300,
+                ),
+                SizedBox(
+                  height: 8,
+                ),
                 ListView.builder(
-                  itemCount: 5,
+                  itemCount: 4,
                   shrinkWrap: true,
                   itemBuilder: (context, index) => Options(),
                 )
@@ -90,7 +95,7 @@ class Options extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: Text(
-                    "Colombo",
+                    "Goosebumps",
                     style: TextStyle(color: Colors.black45, fontSize: 16),
                   ),
                 ),
