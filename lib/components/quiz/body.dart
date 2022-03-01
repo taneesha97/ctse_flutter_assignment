@@ -16,10 +16,11 @@ class Body extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 4),
-            padding: EdgeInsets.all(4),
+            padding: EdgeInsets.all(12),
             width: double.infinity,
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(25)),
+                color: Color.fromARGB(196, 151, 151, 163),
+                borderRadius: BorderRadius.circular(25)),
             child: Column(
               children: [
                 Text.rich(
@@ -78,28 +79,28 @@ class Options extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Material(
-        child: InkWell(
-          child: Container(
-            margin: EdgeInsets.only(bottom: 8),
-            padding: EdgeInsets.only(top: 8, bottom: 8),
-            //color: Color.fromARGB(255, 0, 238, 255),
-            decoration: BoxDecoration(
-              border: Border.all(color: Color.fromARGB(255, 13, 213, 227)),
-              borderRadius: BorderRadius.circular(15),
-              color: Color.fromARGB(255, 0, 238, 255),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(
-                    "Goosebumps",
-                    style: TextStyle(color: Colors.black45, fontSize: 16),
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 10),
+        child: Material(
+          borderRadius: BorderRadius.circular(15),
+          color: Color.fromARGB(255, 0, 238, 255),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(25),
+            child: Container(
+              margin: EdgeInsets.only(bottom: 8),
+              padding: EdgeInsets.only(top: 8, bottom: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Goosebumps",
+                      style: TextStyle(color: Colors.black45, fontSize: 16),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
