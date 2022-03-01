@@ -12,16 +12,27 @@ class MovieWiki extends StatelessWidget {
         centerTitle: true,
       ),
       body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 200,
-              )
-            ],
-          )
-        )
-      ),
+          child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+              height: 200,
+              child: ListView.builder(
+                  itemCount: 10,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => Container(
+                        height: 150,
+                        width: 150,
+                        margin: const EdgeInsets.all(10),
+                        child: Center(
+                          child: Text("Card $index",
+                          style: const TextStyle(color: Colors.white)),
+                        ),
+                        color: Colors.green[700],
+                      )))
+        ],
+      ))),
     );
   }
 }
