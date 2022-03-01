@@ -51,7 +51,7 @@ class AudioQuizBody extends StatelessWidget {
                   height: 8,
                 ),
                 Image.asset(
-                  "assets/images/movie1.jpg",
+                  "assets/images/audioplayer.png",
                   height: 150,
                   width: 300,
                 ),
