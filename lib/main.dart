@@ -1,4 +1,4 @@
-import 'package:ctse_assignment_1/components/screen_components/quiz_screen.dart';
+import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

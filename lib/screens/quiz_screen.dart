@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/components/quiz/body.dart';
 import 'package:flutter/material.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -10,6 +11,13 @@ class QuizScreen extends StatefulWidget {
 class _QuizScreenState extends State<QuizScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text("Movie Categories"),
+        ),
+      ),
+      body: Body(),
+    );
   }
 }
