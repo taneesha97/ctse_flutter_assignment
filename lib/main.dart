@@ -1,23 +1,24 @@
-
-import 'package:ctse_assignment_1/screens/quiz_screen.dart';
+import 'package:ctse_assignment_1/components/card_custom.dart';
+import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "flutter app",
-      home: QuizScreen(),
-      // routes: <String, WidgetBuilder>{
-      //   '/first': (context) => HomePage(),
-      //   '/second': (context) => SecondScreen("Second Screen"),
-      // },
-      
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MovieWiki(),
     );
   }
 }
