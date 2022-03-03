@@ -27,7 +27,7 @@ class QuestionCard extends StatelessWidget {
         children: [
           Text.rich(
             TextSpan(
-                text: "1",
+                text: "${question.id}",
                 style: Theme.of(context).textTheme.headline6,
                 children: [
                   TextSpan(
@@ -40,7 +40,7 @@ class QuestionCard extends StatelessWidget {
             height: 8,
           ),
           Text(
-            "Guess the Movie",
+            question.question,
             style: Theme.of(context)
                 .textTheme
                 .headline6!
