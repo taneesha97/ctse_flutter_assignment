@@ -1,5 +1,8 @@
+import 'package:ctse_assignment_1/Controllers/QuestionController.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../progressbar.dart';
 import 'options.dart';
 
 class Body extends StatelessWidget {
@@ -29,8 +32,6 @@ class Body extends StatelessWidget {
                   TextSpan(
                       text: "1",
                       style: Theme.of(context).textTheme.headline6,
-                      // .copyWith(color: Colors.black54
-                      // ),
                       children: [
                         TextSpan(
                           text: "/10",
@@ -63,7 +64,11 @@ class Body extends StatelessWidget {
                   itemCount: 4,
                   shrinkWrap: true,
                   itemBuilder: (context, index) => Options(),
-                )
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                ProgressBar(),
               ],
             ),
           ),
