@@ -1,5 +1,6 @@
 import 'package:ctse_assignment_1/components/card_custom.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
+import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MovieWiki(),
+      home: QuizScreen(),
     );
   }
 }

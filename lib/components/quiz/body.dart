@@ -2,8 +2,9 @@ import 'package:ctse_assignment_1/Controllers/QuestionController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../models/quiz.dart';
 import '../progressbar.dart';
-import 'options.dart';
+import 'questioncard.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -11,6 +12,8 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    QuestionController _questionController = Get.put(QuestionController());
+
     return SafeArea(
         child: Padding(
       padding: EdgeInsets.symmetric(horizontal: 8),
@@ -19,58 +22,23 @@ class Body extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 4),
-            padding: EdgeInsets.all(12),
-            width: double.infinity,
-            decoration: BoxDecoration(
-                color: Color.fromARGB(196, 151, 151, 163),
-                borderRadius: BorderRadius.circular(25)),
-            child: Column(
-              children: [
-                Text.rich(
-                  TextSpan(
-                      text: "1",
-                      style: Theme.of(context).textTheme.headline6,
-                      children: [
-                        TextSpan(
-                          text: "/10",
-                          style: Theme.of(context).textTheme.headline6,
-                        )
-                      ]),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  "Guess the Movie",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6!
-                      .copyWith(color: Colors.blueGrey),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Image.asset(
-                  "assets/images/movie1.jpg",
-                  height: 150,
-                  width: 300,
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                ListView.builder(
-                  itemCount: 4,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => Options(),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                ProgressBar(),
-              ],
+          Flexible(
+            child: PageView.builder(
+              // Block swipe to next qn
+              physics: NeverScrollableScrollPhysics(),
+              controller: _questionController.pageController,
+              onPageChanged: _questionController.updateTheQnNum,
+              itemCount: _questionController.questions.length,
+              itemBuilder: (context, index) =>
+                  QuestionCard(question: _questionController.questions[index]),
             ),
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          ProgressBar(),
+          SizedBox(
+            height: 12,
           ),
         ],
       ),
