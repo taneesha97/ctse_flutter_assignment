@@ -1,4 +1,4 @@
-import 'package:ctse_assignment_1/components/card_custom.dart';
+import 'package:ctse_assignment_1/components/moviecard/card_custom.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 

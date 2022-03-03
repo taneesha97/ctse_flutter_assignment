@@ -1,4 +1,5 @@
-import 'package:ctse_assignment_1/components/card_custom.dart';
+import 'package:ctse_assignment_1/components/moviecard/card_custom.dart';
+import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MovieWiki(),
+      home: IndexPage(),
     );
   }
 }
