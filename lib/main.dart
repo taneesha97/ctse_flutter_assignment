@@ -19,16 +19,15 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        backgroundColor: Colors.black,
       ),
-      initialRoute: '/',
+      // initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) => const MovieWiki(),
+        '/movieWiki': (context) => const MovieWiki(),
         // When navigating to the "/second" route, build the SecondScreen widget.
-        '/second': (context) => QuizScreen(),
+        '/quizScreen': (context) => QuizScreen(),
       },
-      home: IndexPage(),
+      home: const IndexPage(),
     );
   }
 }
