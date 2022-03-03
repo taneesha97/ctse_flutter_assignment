@@ -1,6 +1,5 @@
 import 'package:ctse_assignment_1/components/card_custom.dart';
 import 'package:flutter/material.dart';
-
 import '../constants.dart';
 
 class MovieWiki extends StatelessWidget {
