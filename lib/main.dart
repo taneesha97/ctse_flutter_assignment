@@ -1,4 +1,5 @@
-import 'package:ctse_assignment_1/components/card_custom.dart';
+import 'package:ctse_assignment_1/components/moviecard/card_custom.dart';
+import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,16 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        backgroundColor: Colors.black,
       ),
-      home: QuizScreen(),
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => const MovieWiki(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/second': (context) => QuizScreen(),
+      },
+      home: IndexPage(),
     );
   }
 }
