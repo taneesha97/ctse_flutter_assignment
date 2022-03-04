@@ -7,7 +7,7 @@ class Styles {
 
   // Section Attributes.
   static const LargeTextSize = 26.0;
-  static const MediumTextSize = 20.0;
+  static const MediumTextSize = 18.0;
   static const BodyTextSize =  16.0;
   static const String FontNameDefault = "Raleway";
 
