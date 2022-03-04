@@ -1,4 +1,3 @@
-import 'package:ctse_assignment_1/components/moviecard/card_custom.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
