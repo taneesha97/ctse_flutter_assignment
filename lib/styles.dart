@@ -2,12 +2,18 @@
 import 'package:flutter/material.dart';
 
 
-const String FontNameDefault = "Raleway";
+
 class Styles {
 
+  // Section Attributes.
   static const LargeTextSize = 26.0;
   static const MediumTextSize = 20.0;
   static const BodyTextSize =  16.0;
+  static const String FontNameDefault = "Raleway";
+
+  // Screen Header Attributes.
+  static final headerOfScreenSize = 30.0;
+  static final subHeaderOfScreenSize = 26.0;
 
   static final Color _textColorStrong = _hexToColor('000000');
   static final Color _textColorDefault = _hexToColor('000000');
@@ -34,6 +40,20 @@ class Styles {
     fontFamily: "Montserrat",
     fontWeight: FontWeight.w300,
     fontSize: BodyTextSize,
+    color: _hexToColor('000000'),
+  );
+
+  static final screenHeader = TextStyle(
+    fontFamily: "Raleway",
+    fontWeight: FontWeight.w600,
+    fontSize: headerOfScreenSize,
+    color: _hexToColor('000000'),
+  );
+
+  static final screenSubHeader = TextStyle(
+    fontFamily: "Raleway",
+    fontWeight: FontWeight.w300,
+    fontSize: subHeaderOfScreenSize,
     color: _hexToColor('000000'),
   );
 

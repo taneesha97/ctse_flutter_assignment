@@ -1,6 +1,8 @@
-import 'package:ctse_assignment_1/components/moviecard/card_custom.dart';
+import 'package:ctse_assignment_1/components/movie/moviecard/card_custom.dart';
+import 'package:ctse_assignment_1/components/movie/moviecategory/movie_category.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
+import '../styles.dart';
 
 class MovieWiki extends StatelessWidget {
   const MovieWiki({Key? key}) : super(key: key);
@@ -23,28 +25,28 @@ class MovieWiki extends StatelessWidget {
           ),
           const Padding(
             padding: EdgeInsets.only(
-              left: 8,
+              left: 9,
             ),
             child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Movie Categories",
                   style: TextStyle(
-                      fontFamily: "Roboto",
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30),
-                )),
+                    fontFamily: "Raleway",
+                    fontWeight: FontWeight.w600,
+                    fontSize: 30,
+                  ))),
           ),
           const Padding(
             padding: EdgeInsets.only(
-              left: 8,
+              left: 9,
             ),
             child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Categories",
                   style: TextStyle(
-                      fontFamily: "Roboto",
+                      fontFamily: "Raleway",
                       fontSize: 20),
                 )),
           ),
@@ -66,11 +68,11 @@ class MovieWiki extends StatelessWidget {
           ),
           Flexible(
             child: ListView.builder(
-              itemCount: 15,
+              itemCount: 1,
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) => ListTile(
-                title: Text("List $index"),
+                title: MovieCategory(),
               ),
             ),
           )
