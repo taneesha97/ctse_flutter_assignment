@@ -29,7 +29,7 @@ class MovieCategory extends StatelessWidget {
           ),
         ),
         Container(
-          height: 280,
+          height: 230,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [

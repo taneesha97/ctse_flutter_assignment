@@ -18,7 +18,6 @@ class MovieWiki extends StatelessWidget {
       body: Container(
           child: SingleChildScrollView(
               child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(
             height: 15,
@@ -52,9 +51,8 @@ class MovieWiki extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(
-              left: 20,
-              top: 5,
-              right: 20,
+              left: 10,
+              right: 5,
             ),
             child: Row (
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,16 +84,14 @@ class MovieWiki extends StatelessWidget {
                       child: CustomCard(title: "Spider-Man", year: 2007),
                     )),
           ),
-          Flexible(
-            child: ListView.builder(
-              itemCount: 1,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (context, index) => ListTile(
-                title: MovieCategory(),
-              ),
-            ),
-          )
+
+          Container(
+            child: MovieCategory(),
+          ),
+
+          Container(
+            child: MovieCategory(),
+          ),
         ],
       ))),
     );
