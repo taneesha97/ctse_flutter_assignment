@@ -17,11 +17,11 @@ class LongMovieCard extends StatelessWidget {
             height: 150,
             width: 100,
             decoration:  BoxDecoration(
-              image: DecorationImage(
+              image: const DecorationImage(
                 image: NetworkImage("https://lumiere-a.akamaihd.net/v1/images/p_msmarvel_disneyplus_20899_1e4e7c4d.jpeg"),
                 fit: BoxFit.cover,
               ),
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10.0),
                 bottomLeft: Radius.circular(10.0),
               ),
@@ -40,7 +40,7 @@ class LongMovieCard extends StatelessWidget {
               height: 150,
               width: 240,
               decoration:  BoxDecoration(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(10.0),
                   bottomRight: Radius.circular(10.0),
                 ),

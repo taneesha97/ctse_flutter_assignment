@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -90,7 +91,13 @@ class IndexPage extends StatelessWidget {
                       fixedSize: const Size(640, 70),
                       // foreground
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  SingleMoviePage()),
+                      );
+                    },
                     child: Text(
                       'Single Movie Page',
                       style:
@@ -116,7 +123,7 @@ class IndexPage extends StatelessWidget {
                       );
                     },
                     child: Text(
-                      'Movie Wiki Page',
+                      'Audio Quiz',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),

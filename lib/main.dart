@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         backgroundColor: Colors.black,
       ),
-      home: MovieWiki(),
+      home: IndexPage(),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:ctse_assignment_1/components/movie/moviecard/long_movie_card.dar
 import 'package:ctse_assignment_1/components/movie/moviecard/medium_movie_card.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/movie_category.dart';
+import 'package:ctse_assignment_1/screens/movie_all.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../styles.dart';
@@ -21,10 +22,6 @@ class MovieWiki extends StatelessWidget {
           child: SingleChildScrollView(
               child: Column(
         children: [
-          const LongMovieCategory(),
-          const SizedBox(
-            height: 15,
-          ),
           const Padding(
             padding: EdgeInsets.only(
               left: 9,
@@ -69,7 +66,13 @@ class MovieWiki extends StatelessWidget {
                 ),
                 TextButton(
                   child: const Text("View All"),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>  AllMovieScreen()),
+                    );
+                  },
                 ),
               ],
             ),
