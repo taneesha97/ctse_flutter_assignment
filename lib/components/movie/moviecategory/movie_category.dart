@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../styles.dart';
-import '../moviecard/get_widget_card.dart';
+import '../moviecard/small_movie_card.dart';
 
 class MovieCategory extends StatelessWidget {
   const MovieCategory({Key? key}) : super(key: key);

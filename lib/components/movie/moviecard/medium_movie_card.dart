@@ -42,9 +42,9 @@ class CustomCard extends StatelessWidget {
                     blurRadius: 8,
                   ),
                 ],
-                borderRadius: new BorderRadius.only(
-                  topLeft: const Radius.circular(10.0),
-                  topRight: const Radius.circular(10.0),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(10.0),
                 ),
                 image: const DecorationImage(
                   fit: BoxFit.cover,

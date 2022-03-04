@@ -1,4 +1,6 @@
-import 'package:ctse_assignment_1/components/movie/moviecard/card_custom.dart';
+import 'package:ctse_assignment_1/components/movie/moviecard/long_movie_card.dart';
+import 'package:ctse_assignment_1/components/movie/moviecard/medium_movie_card.dart';
+import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/movie_category.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
@@ -19,6 +21,7 @@ class MovieWiki extends StatelessWidget {
           child: SingleChildScrollView(
               child: Column(
         children: [
+          const LongMovieCategory(),
           const SizedBox(
             height: 15,
           ),
