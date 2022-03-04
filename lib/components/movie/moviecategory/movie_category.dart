@@ -35,13 +35,6 @@ class MovieCategory extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: movieList.length,
             itemBuilder: (ctx,i) => MovieCard(index: i),
-            // children: [
-            //   MovieCard(),
-            //   MovieCard(),
-            //   MovieCard(),
-            //   MovieCard(),
-            //   MovieCard(),
-            // ],
           ),
         )
       ],
