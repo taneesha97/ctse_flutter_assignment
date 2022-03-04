@@ -1,4 +1,5 @@
 import 'package:ctse_assignment_1/components/moviecard/card_custom.dart';
+import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/movieWiki': (context) => const MovieWiki(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/quizScreen': (context) => QuizScreen(),
+        '/samplescreen': (context) => SampleScreen(),
       },
       home: const IndexPage(),
     );
