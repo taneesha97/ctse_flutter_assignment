@@ -21,13 +21,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         backgroundColor: Colors.black,
       ),
-      initialRoute: '/',
-      routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
-        '/': (context) => const MovieWiki(),
-        // When navigating to the "/second" route, build the SecondScreen widget.
-        '/second': (context) => QuizScreen(),
-      },
       home: IndexPage(),
     );
   }

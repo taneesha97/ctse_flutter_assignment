@@ -14,6 +14,7 @@ class Styles {
   static final Color _textColorFaint = _hexToColor('999999');
   static final Color textColorBright = _hexToColor('FFFFFF');
   static final Color accentColor = _hexToColor('FF0000');
+  static final Color indexPurple = _hexToColor('7F26FDFF');
 
   static final navBarTitle = TextStyle(
     fontFamily: FontNameDefault,
