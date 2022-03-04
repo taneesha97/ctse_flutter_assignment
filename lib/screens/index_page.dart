@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
 import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
@@ -139,9 +140,16 @@ class IndexPage extends StatelessWidget {
                       fixedSize: const Size(640, 70),
                       // foreground
                     ),
-                    onPressed: () {},
+
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  LongMovieCategory()),
+                      );
+                    },
                     child: Text(
-                      'Movie Wiki Page',
+                      'Movie Library Page',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),

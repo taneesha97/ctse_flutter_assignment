@@ -25,6 +25,7 @@ class MovieWiki extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(
               left: 9,
+              top: 7,
             ),
             child: Align(
                 alignment: Alignment.centerLeft,
