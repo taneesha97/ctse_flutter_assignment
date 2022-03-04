@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/movie.dart';
 import '../../../styles.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard({Key? key}) : super(key: key);
+  final int index;
+  const MovieCard({Key? key, required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +28,9 @@ class MovieCard extends StatelessWidget {
                   topLeft: const Radius.circular(10.0),
                   topRight: const Radius.circular(10.0),
                 ),
-                image: const DecorationImage(
+                image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(
-                      "https://lumiere-a.akamaihd.net/v1/images/p_avengersendgame_19751_e14a0104.jpeg"),
+                  image: NetworkImage(movieList[index].imageUrl.toString()),
                 )
             ),
           ),
@@ -40,11 +41,11 @@ class MovieCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("The Avengers",
+                    Text(movieList[index].title.toString(),
                       overflow: TextOverflow.ellipsis,
                       style: Styles.textSectionHeader,
                     ),
-                    Text("2016",
+                    Text(movieList[index].year,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.textSectionBody,
                     ),

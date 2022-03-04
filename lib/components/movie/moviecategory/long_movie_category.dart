@@ -35,6 +35,7 @@ class LongMovieCategory extends StatelessWidget {
                     ],
                   ),
                 ),
+                
                 LongMovieCard(),
                 LongMovieCard(),
                 LongMovieCard(),
