@@ -9,6 +9,7 @@ class Styles {
   static const LargeTextSize = 26.0;
   static const MediumTextSize = 18.0;
   static const BodyTextSize =  16.0;
+  static const subBodyTextSize =  12.0;
   static const String FontNameDefault = "Raleway";
 
   // Screen Header Attributes.
@@ -40,6 +41,13 @@ class Styles {
     fontFamily: "Montserrat",
     fontWeight: FontWeight.w300,
     fontSize: BodyTextSize,
+    color: _hexToColor('000000'),
+  );
+
+  static final textSectionSubBody = TextStyle(
+    fontFamily: "Montserrat",
+    fontWeight: FontWeight.w300,
+    fontSize: subBodyTextSize,
     color: _hexToColor('000000'),
   );
 

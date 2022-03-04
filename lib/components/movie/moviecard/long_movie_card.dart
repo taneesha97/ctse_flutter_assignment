@@ -76,13 +76,18 @@ class LongMovieCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Text("This is the first part of the movie "
-                        "app UI tutorial in Flutter. Here you'll learn about "
-                        "various flutter widgets like ListView with various "
-                        "configurations of it and other widgets like container, "
-                        "text, singleChildScrollView etc.",
-                      overflow: TextOverflow.ellipsis,
-                      style: Styles.textSectionBody,
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Flexible(
+                      child: Text("This is the first part of the movie "
+                          "app UI tutorial in Flutter. Here you'll learn about "
+                          "various flutter widgets like ListView with various "
+                          "configurations of it and other widgets like container, "
+                          "text, singleChildScrollView etc.",
+                        overflow: TextOverflow.fade,
+                        style: Styles.textSectionSubBody,
+                      ),
                     )
                   ],
                 ),
