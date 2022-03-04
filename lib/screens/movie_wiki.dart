@@ -50,6 +50,30 @@ class MovieWiki extends StatelessWidget {
                       fontSize: 20),
                 )),
           ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              top: 5,
+              right: 20,
+            ),
+            child: Row (
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Recommended",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextButton(
+                  child: const Text("View All"),
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ),
+
           const SizedBox(
             height: 3,
           ),
@@ -59,11 +83,7 @@ class MovieWiki extends StatelessWidget {
                 itemCount: 10,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => Container(
-                      height: 180,
-                      width: 140,
-                      margin: const EdgeInsets.all(10),
-                      child: const Center(
-                          child: CustomCard(title: "Spider-Man", year: 2007)),
+                      child: CustomCard(title: "Spider-Man", year: 2007),
                     )),
           ),
           Flexible(

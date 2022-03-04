@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+import '../../../styles.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({
@@ -26,67 +27,66 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width * 0.4,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
       child: Column(
-        children: <Widget>[
-          GestureDetector(
-            onTap: testingPressFunction,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
-                ),
+        children: [
+          Container(
+            height: 120,
+            width: 200,
+            decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    offset: Offset(1,2),
-                    blurRadius: 10,
-                    spreadRadius: 1,
-                    color: Color(0xFF3C4046)// Add the opacity here.
+                    color: Colors.grey.withOpacity(0.4),
+                    spreadRadius: 2,
+                    blurRadius: 8,
                   ),
                 ],
-              ),
-              child: Column(
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight:  Radius.circular(10),
-                    ),
-                    child: Image.network(
-                      name,
-                      width: size.width * 0.4,
-                      fit: BoxFit.cover,
-                      height: 110,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 8,
-                      bottom: 8,
-                    ),
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: title.toString() + "\n",
-                            style: TextStyle(fontFamily: "lato", fontWeight: FontWeight.bold, color: primaryTextColor),
-                          ),
-                          TextSpan(
-                            text: year.toString(),
-                            style: TextStyle(fontFamily: "lato", fontWeight: FontWeight.bold, color: secondTextColor, fontSize: 10),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                borderRadius: new BorderRadius.only(
+                  topLeft: const Radius.circular(10.0),
+                  topRight: const Radius.circular(10.0),
+                ),
+                image: const DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                      "https://lumiere-a.akamaihd.net/v1/images/p_avengersendgame_19751_e14a0104.jpeg"),
+                )
             ),
+          ),
+          Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("The Avengers",
+                      overflow: TextOverflow.ellipsis,
+                      style: Styles.textSectionHeader,
+                    ),
+                    Text("2016",
+                      overflow: TextOverflow.ellipsis,
+                      style: Styles.textSectionBody,
+                    ),
+                  ],
+                ),
+              ),
+              height: 60,
+              width: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: const Radius.circular(10.0),
+                  bottomRight: const Radius.circular(10.0),
+                ),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.4),
+                    spreadRadius: 2,
+                    blurRadius: 8,
+                  ),
+                ],
+              )
           )
         ],
       ),
