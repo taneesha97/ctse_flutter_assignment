@@ -51,13 +51,26 @@ class SingleMoviePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("This is Movie Title", style: Styles.overTheImageTitle,),
-                      Text("2007"),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("This is Movie Title", style: Styles.overTheImageTitle,),
+                            Icon(
+                              Icons.bookmark_add,
+                              color: Colors.white,
+                              size: 30.0,
+                            ),
+                          ],
+                        ),
+                        Text("2007", style: Styles.overTheImageSubTitle),
+                      ],
+                    ),
                   ),
                 ],
               ),

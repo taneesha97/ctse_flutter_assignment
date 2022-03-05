@@ -76,6 +76,14 @@ class Styles {
     color: textColorBright,
   );
 
+  static final overTheImageSubTitle = TextStyle(
+    fontFamily: "Raleway",
+    fontWeight: FontWeight.w300,
+    fontSize: 20,
+    fontStyle: FontStyle.italic,
+    color: textColorBright,
+  );
+
   static Color _hexToColor(String code) {
     return Color(int.parse(code.substring(0, 6), radix: 16) + 0xFF000000);
   }
