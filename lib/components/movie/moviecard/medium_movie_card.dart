@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+import '../../../models/movie.dart';
 import '../../../screens/movie_single.dart';
 import '../../../styles.dart';
 
 class CustomCard extends StatelessWidget {
+  final int index;
   const CustomCard({
     // Input Parameters.
     Key? key,
     this.image,
     this.title,
     this.year,
-    this.press,
+    this.press, required this.index,
 
   }) : super(key: key);
 
@@ -55,10 +57,10 @@ class CustomCard extends StatelessWidget {
                     topLeft: Radius.circular(10.0),
                     topRight: Radius.circular(10.0),
                   ),
-                  image: const DecorationImage(
+                  image:  DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        "https://lumiere-a.akamaihd.net/v1/images/p_avengersendgame_19751_e14a0104.jpeg"),
+                        movieList[index].imageUrl.toString()),
                   )
               ),
             ),
@@ -69,11 +71,11 @@ class CustomCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("The Avengers",
+                      Text(movieList[index].title.toString(),
                         overflow: TextOverflow.ellipsis,
                         style: Styles.textSectionHeader,
                       ),
-                      Text("2016",
+                      Text(movieList[index].year,
                         overflow: TextOverflow.ellipsis,
                         style: Styles.textSectionBody,
                       ),

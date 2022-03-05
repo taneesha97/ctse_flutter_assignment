@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
+import '../../../models/movie.dart';
 import '../../../screens/movie_single.dart';
 import '../../../styles.dart';
 
 class LongMovieCard extends StatelessWidget {
-  const LongMovieCard({Key? key}) : super(key: key);
+  final int index;
+  const LongMovieCard({Key? key, required this.index}) : super(key: key);
 
 
   @override
@@ -29,8 +30,8 @@ class LongMovieCard extends StatelessWidget {
               height: 150,
               width: 100,
               decoration:  BoxDecoration(
-                image: const DecorationImage(
-                  image: NetworkImage("https://lumiere-a.akamaihd.net/v1/images/p_msmarvel_disneyplus_20899_1e4e7c4d.jpeg"),
+                image:   DecorationImage(
+                  image: NetworkImage(movieList[index].imageUrl.toString()),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: const BorderRadius.only(
@@ -75,9 +76,11 @@ class LongMovieCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("The Avengers",
-                            overflow: TextOverflow.ellipsis,
-                            style: Styles.textSectionHeader,
+                          Flexible(
+                            child: Text(movieList[index].title.toString(),
+                              overflow: TextOverflow.ellipsis,
+                              style: Styles.textSectionHeader,
+                            ),
                           ),
                           const SizedBox(
                             width: 10,
@@ -86,7 +89,7 @@ class LongMovieCard extends StatelessWidget {
                             padding: const EdgeInsets.only(
                               top: 3,
                             ),
-                            child: Text("2016",
+                            child: Text(movieList[index].year,
                               overflow: TextOverflow.ellipsis,
                               style: Styles.textSectionBody,
                             ),
@@ -97,11 +100,7 @@ class LongMovieCard extends StatelessWidget {
                         height: 6,
                       ),
                       Flexible(
-                        child: Text("This is the first part of the movie "
-                              "app UI tutorial in Flutter. Here you'll learn about "
-                              "various flutter widgets like ListView with various "
-                              "configurations of it and other widgets like container, "
-                              "text, singleChildScrollView etc.",
+                        child: Text(movieList[index].description.toString(),
                             style: Styles.textSectionSubBody,
                           ),
                         ),
