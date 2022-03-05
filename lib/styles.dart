@@ -16,6 +16,7 @@ class Styles {
   static final headerOfScreenSize = 30.0;
   static final subHeaderOfScreenSize = 26.0;
 
+  static final Color primaryThemeColor =_hexToColor("0DD6E3");
   static final Color _textColorStrong = _hexToColor('000000');
   static final Color _textColorDefault = _hexToColor('000000');
   static final Color _textColorFaint = _hexToColor('999999');

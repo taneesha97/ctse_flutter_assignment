@@ -76,8 +76,13 @@ class SingleMoviePage extends StatelessWidget {
               ),
               Container(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Heading Movie"),
+                    Divider(
+                      color: Styles.primaryThemeColor,
+                      thickness: 5,
+                    ),
                     Text("Description Movie"),
                   ],
                 ),
