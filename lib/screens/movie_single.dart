@@ -91,6 +91,10 @@ class SingleMoviePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Text("Cast and Crew"),
+                    Divider(
+                      color: Styles.primaryThemeColor,
+                      thickness: 5,
+                    ),
                     Row(
                       children: [
                         // Custom Card comes here with a horizontal Scroller.
@@ -103,6 +107,10 @@ class SingleMoviePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Text("Quiz Information"),
+                    Divider(
+                      color: Styles.primaryThemeColor,
+                      thickness: 5,
+                    ),
                     Row(
                       children: [
                         // Quiz information card comes here.
@@ -115,6 +123,10 @@ class SingleMoviePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Text("Movie Rating"), // Header
+                    Divider(
+                      color: Styles.primaryThemeColor,
+                      thickness: 5,
+                    ),
                     Text("IMBd Movie Rating = ")
                   ],
                 ),
