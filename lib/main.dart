@@ -1,7 +1,17 @@
+
 import 'package:ctse_assignment_1/components/movie/moviecard/medium_movie_card.dart';
+
+
+
+import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
+
+
 import 'package:ctse_assignment_1/screens/index_page.dart';
+import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
+import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
+import 'package:ctse_assignment_1/screens/score_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,7 +31,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         backgroundColor: Colors.black,
       ),
+
       home: IndexPage(),
+
     );
   }
 }
