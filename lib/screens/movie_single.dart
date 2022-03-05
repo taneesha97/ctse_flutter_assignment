@@ -19,7 +19,6 @@ class SingleMoviePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
           child: Column(
             children: <Widget>[
               Stack(
@@ -49,8 +48,7 @@ class SingleMoviePage extends StatelessWidget {
                           stops: const [
                             0.0,
                             1.0
-                          ]
-                      ),
+                          ]),
                     ),
                   ),
                   Padding(
@@ -62,7 +60,10 @@ class SingleMoviePage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("This is Movie Title", style: Styles.overTheImageTitle,),
+                            Text(
+                              "This is Movie Title",
+                              style: Styles.overTheImageTitle,
+                            ),
                             const Icon(
                               Icons.bookmark_add,
                               color: Colors.white,
@@ -76,54 +77,31 @@ class SingleMoviePage extends StatelessWidget {
                   ),
                 ],
               ),
-              SinglePageHeader(reusableWidget: Text(movieList[3].description.toString(), style: Styles.textSectionBody,)),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Cast and Crew" , style: Styles.textSectionHeader),
-                    Divider(
-                      color: Styles.primaryThemeColor,
-                      thickness: 5,
-                    ),
-                    Row(
-                      children: [
-                        // Custom Card comes here with a horizontal Scroller.
-                      ],
-                    )
-                  ],
-                ),
+              SinglePageHeader(
+                  header: "Heading Movie",
+                  reusableWidget: Text(
+                    movieList[3].description.toString(),
+                    style: Styles.textSectionBody,
+                  )),
+              SinglePageHeader(
+                  header: "Cast and Crew",
+                  reusableWidget: Row(
+                    children: const [
+                      // Custom Card comes here with a horizontal Scroller.
+                    ],
+                  )),
+              SinglePageHeader(
+                  header: "Quiz information",
+                  reusableWidget: Row(
+                    children: const [
+                      // Custom Card comes here with a horizontal Scroller.
+                    ],
+                  )),
+              SinglePageHeader(
+                header: "Movie Rating",
+                reusableWidget:
+                    Text("IMBd Movie Rating = ", style: Styles.textSectionBody),
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Quiz Information" , style: Styles.textSectionHeader),
-                    Divider(
-                      color: Styles.primaryThemeColor,
-                      thickness: 5,
-                    ),
-                    Row(
-                      children: [
-                        // Quiz information card comes here.
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Movie Rating" , style: Styles.textSectionHeader), // Header
-                    Divider(
-                      color: Styles.primaryThemeColor,
-                      thickness: 5,
-                    ),
-                    Text("IMBd Movie Rating = ", style: Styles.textSectionBody)
-                  ],
-                ),
-              )
             ],
           ),
         ),
