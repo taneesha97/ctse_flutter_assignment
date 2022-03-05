@@ -6,6 +6,8 @@ class QuizeList extends StatefulWidget {
 }
 //
 class _QuizeListState extends State<QuizeList> {
+  List category = ["Romantic", "Horror","Thriller","Animation","Romantic","Action","Romantic","Horror"];
+  List time = ["20min", "10min","20min","15min","20min", "10min","20min","15min"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,6 +17,7 @@ class _QuizeListState extends State<QuizeList> {
           style: TextStyle(color: Colors.black),
         ),
       ),
+
     );
   }
 }
