@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/movie/moviecategory/singel_page_header.dart';
+import '../models/movie.dart';
 import '../styles.dart';
 
 class SingleMoviePage extends StatelessWidget {
@@ -61,7 +63,7 @@ class SingleMoviePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("This is Movie Title", style: Styles.overTheImageTitle,),
-                            Icon(
+                            const Icon(
                               Icons.bookmark_add,
                               color: Colors.white,
                               size: 30.0,
@@ -74,19 +76,7 @@ class SingleMoviePage extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Heading Movie", style: Styles.textSectionHeader,),
-                    Divider(
-                      color: Styles.primaryThemeColor,
-                      thickness: 5,
-                    ),
-                    Text("Description Movie", style: Styles.textSectionBody),
-                  ],
-                ),
-              ),
+              SinglePageHeader(reusableWidget: Text(movieList[3].description.toString(), style: Styles.textSectionBody,)),
               Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
