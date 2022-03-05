@@ -81,7 +81,6 @@ class Styles {
     fontFamily: "Raleway",
     fontWeight: FontWeight.w300,
     fontSize: 20,
-    fontStyle: FontStyle.italic,
     color: textColorBright,
   );
 

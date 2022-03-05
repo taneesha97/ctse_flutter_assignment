@@ -78,19 +78,20 @@ class SingleMoviePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Heading Movie"),
+                    Text("Heading Movie", style: Styles.textSectionHeader,),
                     Divider(
                       color: Styles.primaryThemeColor,
                       thickness: 5,
                     ),
-                    Text("Description Movie"),
+                    Text("Description Movie", style: Styles.textSectionBody),
                   ],
                 ),
               ),
               Container(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Cast and Crew"),
+                    Text("Cast and Crew" , style: Styles.textSectionHeader),
                     Divider(
                       color: Styles.primaryThemeColor,
                       thickness: 5,
@@ -105,8 +106,9 @@ class SingleMoviePage extends StatelessWidget {
               ),
               Container(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Quiz Information"),
+                    Text("Quiz Information" , style: Styles.textSectionHeader),
                     Divider(
                       color: Styles.primaryThemeColor,
                       thickness: 5,
@@ -121,13 +123,14 @@ class SingleMoviePage extends StatelessWidget {
               ),
               Container(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Movie Rating"), // Header
+                    Text("Movie Rating" , style: Styles.textSectionHeader), // Header
                     Divider(
                       color: Styles.primaryThemeColor,
                       thickness: 5,
                     ),
-                    Text("IMBd Movie Rating = ")
+                    Text("IMBd Movie Rating = ", style: Styles.textSectionBody)
                   ],
                 ),
               )
