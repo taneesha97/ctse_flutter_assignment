@@ -6,8 +6,18 @@ class QuizeList extends StatefulWidget {
 }
 //
 class _QuizeListState extends State<QuizeList> {
-  List category = ["Romantic", "Horror","Thriller","Animation","Romantic","Action","Romantic","Horror"];
-  List time = ["20min", "10min","20min","15min","20min", "10min","20min","15min"];
+  List category = ["Romantic", "Horror","Thriller","Animation","Romantic","Action"];
+  List time = ["20min", "10min","20min","15min","20min", "10min"];
+
+  Widget deleteItems(){
+    return Container(
+      alignment: Alignment.centerRight,
+      padding: EdgeInsets.only(right: 20),
+      color: Colors.red,
+      child: Icon(Icons.delete, color: Colors.white),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,24 +62,26 @@ class _QuizeListState extends State<QuizeList> {
                     Container(
                       alignment: Alignment.center,
                       // padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-                      width: 55.0,
-                      height: 55.0,
-                      margin: EdgeInsets.all(2),
-                      color: Colors.blue,
-                      child: Center(
-                          child: Text.rich(
-                            TextSpan(
-                                text: "76pts",
-                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white )
-                            ),
-                          )
+                      // width: 55.0,
+                      // height: 55.0,
+                      // margin: EdgeInsets.all(2),
+                      // color: Colors.blue,
+                      // ignore: deprecated_member_use
+                      child: FlatButton(
+                        onPressed: (){},
+                        color: Colors.lightBlue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: Text("Start", style: TextStyle(color: Colors.white)),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-          )
+          ),
+
       ),
 
     );

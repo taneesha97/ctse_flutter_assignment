@@ -1,9 +1,11 @@
+import 'package:ctse_assignment_1/screens/example_list.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../components/form_dropdown/Scrollbar.dart';
 import '../components/form_dropdown/ExpandedListAnimationWidget.dart';
+
 
 
 class DropDown extends StatefulWidget {
@@ -315,8 +317,8 @@ class _DropDownState extends State<DropDown> {
                         ),
                         child: Text('Delete'),
                         onPressed: (){
-
-                        }),
+                          Navigator.push(context, MaterialPageRoute(builder: (context) =>  ExampleList(title: 'Exaple List',)));
+                      }),
                   ],
                 )
               ],
