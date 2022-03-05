@@ -44,13 +44,21 @@ class SingleMoviePage extends StatelessWidget {
                             Colors.grey.withOpacity(0.0),
                             Colors.black,
                           ],
-                          stops: [
+                          stops: const [
                             0.0,
                             1.0
                           ]
-                      )
+                      ),
                     ),
-                  )
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("This is Movie Title", style: Styles.overTheImageTitle,),
+                      Text("2007"),
+                    ],
+                  ),
                 ],
               ),
               Container(

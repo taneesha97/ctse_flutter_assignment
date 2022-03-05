@@ -65,6 +65,17 @@ class Styles {
     color: _hexToColor('000000'),
   );
 
+  // Movie Single Page - Stylings
+
+  /// Over the Image Title.
+  static final overTheImageTitle = TextStyle(
+    fontFamily: "Raleway",
+    fontWeight: FontWeight.w600,
+    fontSize: 30,
+    fontStyle: FontStyle.italic,
+    color: textColorBright,
+  );
+
   static Color _hexToColor(String code) {
     return Color(int.parse(code.substring(0, 6), radix: 16) + 0xFF000000);
   }
