@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -299,7 +300,8 @@ class _DropDownState extends State<DropDown> {
                         ),
                         child: Text('Add Label'),
                         onPressed: (){
-
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (context) => QuizeList()));
                         }),
                     SizedBox(height: 20),
                     ElevatedButton(
