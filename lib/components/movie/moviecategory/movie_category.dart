@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/models/movie.dart';
 import 'package:flutter/material.dart';
 import '../../../styles.dart';
 import '../moviecard/small_movie_card.dart';
@@ -30,15 +31,10 @@ class MovieCategory extends StatelessWidget {
         ),
         Container(
           height: 230,
-          child: ListView(
+          child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            children: [
-              MovieCard(),
-              MovieCard(),
-              MovieCard(),
-              MovieCard(),
-              MovieCard(),
-            ],
+            itemCount: movieList.length,
+            itemBuilder: (ctx,i) => MovieCard(index: i),
           ),
         )
       ],
