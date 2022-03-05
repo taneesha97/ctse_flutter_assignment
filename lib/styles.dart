@@ -27,7 +27,7 @@ class Styles {
     fontFamily: FontNameDefault,
     fontWeight: FontWeight.w800,
     fontSize: MediumTextSize,
-    color: _textColorDefault,
+    color: textColorBright,
   );
 
   static final textSectionHeader = TextStyle(
