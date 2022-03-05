@@ -74,7 +74,7 @@ class _MyScrollbarState extends State<MyScrollbar> {
   Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (context, orientation) {
-        _orientation ??= orientation;
+        _orientation = orientation;
         if (orientation != _orientation) {
           _orientation = orientation;
           _updateScrollPainter(_scrollController.position);

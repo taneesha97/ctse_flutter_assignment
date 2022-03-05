@@ -76,6 +76,25 @@ class IndexPage extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red, // background
+                  onPrimary: Colors.white,
+                  padding: const EdgeInsets.all(20.0),
+                  fixedSize: const Size(640, 70),
+                  // foreground
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/formScreen');
+                },
+                child: Text(
+                  'File scrren',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
             ],
           ),
         ),
