@@ -5,6 +5,7 @@ import 'package:ctse_assignment_1/components/movie/moviecategory/movie_category.
 import 'package:ctse_assignment_1/screens/movie_all.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
+import '../models/movie.dart';
 import '../styles.dart';
 
 class MovieWiki extends StatelessWidget {
@@ -85,10 +86,10 @@ class MovieWiki extends StatelessWidget {
           SizedBox(
             height: 200,
             child: ListView.builder(
-                itemCount: 10,
+                itemCount: movieList.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => Container(
-                      child: CustomCard(title: "Spider-Man", year: 2007),
+                      child: CustomCard(index: index),
                     )),
           ),
 
