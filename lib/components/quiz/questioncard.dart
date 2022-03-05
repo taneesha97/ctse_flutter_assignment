@@ -24,49 +24,60 @@ class QuestionCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: Color.fromARGB(196, 151, 151, 163),
           borderRadius: BorderRadius.circular(25)),
-      child: Column(
-        children: [
-          Text.rich(
-            TextSpan(
-                text: "${question.id}",
-                style: Theme.of(context).textTheme.headline6,
+      child: Center(
+        child: Column(
+          children: [
+            Text.rich(
+              TextSpan(
+                  text: "${question.id}",
+                  style: Theme.of(context).textTheme.headline6,
+                  children: [
+                    TextSpan(
+                      text: "/10",
+                      style: Theme.of(context).textTheme.headline6,
+                    )
+                  ]),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Center(
+              child: Text(
+                question.question,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6!
+                    .copyWith(color: Colors.blueGrey),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Image.asset(
+              "assets/images/movie1.jpg",
+              height: 150,
+              width: 300,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Expanded(
+              child: Column(
                 children: [
-                  TextSpan(
-                    text: "/10",
-                    style: Theme.of(context).textTheme.headline6,
-                  )
-                ]),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Text(
-            question.question,
-            style: Theme.of(context)
-                .textTheme
-                .headline6!
-                .copyWith(color: Colors.blueGrey),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Image.asset(
-            "assets/images/movie1.jpg",
-            height: 150,
-            width: 300,
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          ListView.builder(
-              itemCount: 4,
-              shrinkWrap: true,
-              itemBuilder: (context, index) => Options(
-                    index: index,
-                    text: question.options[index],
-                    press: () => _controller.checkAns(question, index),
-                  )),
-        ],
+                  ListView.builder(
+                      itemCount: 4,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => Options(
+                            index: index,
+                            text: question.options[index],
+                            press: () => _controller.checkAns(question, index),
+                          )),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
