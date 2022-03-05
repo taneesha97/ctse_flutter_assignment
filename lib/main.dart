@@ -1,5 +1,4 @@
 
-import 'package:ctse_assignment_1/components/moviecard/card_custom.dart';
 import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
 
 import 'package:ctse_assignment_1/screens/index_page.dart';
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
         '/quizScreen': (context) => QuizScreen(),
         '/samplescreen': (context) => SampleScreen(),
         '/scorescreen': (context) => ScorePage(),
-        '/formscreen': (context) => DropDown(),
+        '/formScreen': (context) => DropDown(),
       },
       home: const IndexPage(),
     );

@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
+import '../components/form_dropdown/ExpandedListAnimationWidget.dart';
 import '../components/form_dropdown/Scrollbar.dart';
-import '../components/form_dropdown/ExpandedListAnimationWidget';
 
 
 class DropDown extends StatefulWidget {
@@ -20,9 +20,9 @@ class _DropDownState extends State<DropDown> {
   bool isStrechedDropDown2 = false;
   bool isStrechedDropDown3 = false;
 
-  late int groupValue;
-  late int groupValue2;
-  late int groupValue3;
+  int? groupValue;
+  int? groupValue2;
+  int? groupValue3;
 
   String title = 'Enter Movie Category';
   String title2 = 'Enter No of questions';
