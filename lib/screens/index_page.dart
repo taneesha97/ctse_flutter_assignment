@@ -75,13 +75,13 @@ class IndexPage extends StatelessWidget {
                             builder: (context) => const MovieWiki()),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       'Movie Wiki Page',
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   ElevatedButton(
@@ -99,13 +99,13 @@ class IndexPage extends StatelessWidget {
                             builder: (context) =>  SingleMoviePage()),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       'Single Movie Page',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   ElevatedButton(
@@ -123,7 +123,7 @@ class IndexPage extends StatelessWidget {
                             builder: (context) =>  QuizScreen()),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       'Audio Quiz',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
