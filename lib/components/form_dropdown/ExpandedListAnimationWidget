@@ -5,7 +5,7 @@ class ExpandedSection extends StatefulWidget {
   final int height;
   final bool expand;
 
-  ExpandedSection({this.expand = false, this.child, this.height});
+  ExpandedSection({this.expand = false, required this.child, required this.height});
 
   @override
   _ExpandedSectionState createState() => _ExpandedSectionState();

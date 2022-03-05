@@ -3,6 +3,7 @@ import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
+import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:ctse_assignment_1/screens/score_screen.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/quizScreen': (context) => QuizScreen(),
         '/samplescreen': (context) => SampleScreen(),
         '/scorescreen': (context) => ScorePage(),
+        '/formscreen': (context) => DropDown(),
       },
       home: const IndexPage(),
     );
