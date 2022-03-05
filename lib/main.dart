@@ -1,6 +1,13 @@
+
+import 'package:ctse_assignment_1/components/moviecard/card_custom.dart';
+import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
+
 import 'package:ctse_assignment_1/screens/index_page.dart';
+import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
+import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
+import 'package:ctse_assignment_1/screens/score_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -25,6 +32,9 @@ class MyApp extends StatelessWidget {
         '/movieWiki': (context) => const MovieWiki(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/quizScreen': (context) => QuizScreen(),
+        '/samplescreen': (context) => SampleScreen(),
+        '/scorescreen': (context) => ScorePage(),
+        '/formscreen': (context) => DropDown(),
       },
       home: const IndexPage(),
     );
