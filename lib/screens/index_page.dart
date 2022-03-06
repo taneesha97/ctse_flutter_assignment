@@ -96,7 +96,7 @@ class IndexPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  SingleMoviePage()),
+                            builder: (context) =>  const SingleMoviePage(index: 1,)),
                       );
                     },
                     child: const Text(

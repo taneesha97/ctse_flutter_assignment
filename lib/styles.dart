@@ -84,6 +84,14 @@ class Styles {
     color: textColorBright,
   );
 
+  /// Actor card related styles.
+  static final actorCardHeader = TextStyle(
+    fontFamily: "Montserrat",
+    fontWeight: FontWeight.w600,
+    fontSize: 15,
+    color: _hexToColor('000000'),
+  );
+
   static Color _hexToColor(String code) {
     return Color(int.parse(code.substring(0, 6), radix: 16) + 0xFF000000);
   }

@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-
+import '../components/movie/moviecard/actor_card.dart';
 import '../components/movie/moviecategory/singel_page_header.dart';
 import '../models/movie.dart';
 import '../styles.dart';
 
 class SingleMoviePage extends StatelessWidget {
-  const SingleMoviePage({Key? key}) : super(key: key);
+  const SingleMoviePage({Key? key,  required this.index}) : super(key: key);
+  final int index;
+  final String imageURL = "https://i.ytimg.com/vi/yy8rTU-QSTM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBvdUVP-UfTIKERUpCUIcCWVwK-5A";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Single Movie",
-          style: Styles.navBarTitle,
-        ),
-      ),
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -24,18 +20,18 @@ class SingleMoviePage extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: 300,
+                    height: 250,
                     width: MediaQuery.of(context).size.width,
-                    decoration: const BoxDecoration(
+                    decoration:  BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage(
-                            "https://lumiere-a.akamaihd.net/v1/images/image_b741f363.jpeg?region=0,0,1920,1080&width=480"),
+                            imageURL),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   Container(
-                    height: 300,
+                    height: 150,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       gradient: LinearGradient(
@@ -46,13 +42,17 @@ class SingleMoviePage extends StatelessWidget {
                             Colors.black,
                           ],
                           stops: const [
-                            0.0,
-                            1.0
+                            0.1,
+                            1.0,
                           ]),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.only(
+                      top: 20,
+                      left: 8,
+                      right: 8,
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,17 +61,22 @@ class SingleMoviePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "This is Movie Title",
+                              movieList[index].title.toString(),
                               style: Styles.overTheImageTitle,
                             ),
-                            const Icon(
-                              Icons.bookmark_add,
-                              color: Colors.white,
-                              size: 30.0,
+                            GestureDetector(
+                              onTap: (){
+                                print("");
+                              },
+                              child: const Icon(
+                                Icons.bookmark_add,
+                                color: Colors.white,
+                                size: 30.0,
+                              ),
                             ),
                           ],
                         ),
-                        Text("2007", style: Styles.overTheImageSubTitle),
+                        Text(movieList[1].year.toString(), style: Styles.overTheImageSubTitle),
                       ],
                     ),
                   ),
@@ -80,14 +85,27 @@ class SingleMoviePage extends StatelessWidget {
               SinglePageHeader(
                   header: "Heading Movie",
                   reusableWidget: Text(
-                    movieList[3].description.toString(),
+                    movieList[1].description.toString(),
                     style: Styles.textSectionBody,
                   )),
               SinglePageHeader(
                   header: "Cast and Crew",
-                  reusableWidget: Row(
-                    children: const [
-                      // Custom Card comes here with a horizontal Scroller.
+                  reusableWidget: Column(
+                    children:  [
+                      Container(
+                        width: 400,
+                        height: 90,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 4,
+                          itemBuilder: (ctx,i) => Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: 10
+                            ),
+                            child: const ActorCard(),
+                          ),
+                        ),
+                      ),
                     ],
                   )),
               SinglePageHeader(
@@ -100,7 +118,7 @@ class SingleMoviePage extends StatelessWidget {
               SinglePageHeader(
                 header: "Movie Rating",
                 reusableWidget:
-                    Text("IMBd Movie Rating = ", style: Styles.textSectionBody),
+                    Text("IMBd Movie Rating 9.8 ", style: Styles.textSectionBody),
               ),
             ],
           ),
