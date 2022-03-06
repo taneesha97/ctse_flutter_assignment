@@ -5,8 +5,8 @@ import '../models/movie.dart';
 import '../styles.dart';
 
 class SingleMoviePage extends StatelessWidget {
-  const SingleMoviePage({Key? key, this.index}) : super(key: key);
-  final int? index;
+  const SingleMoviePage({Key? key,  required this.index}) : super(key: key);
+  final int index;
   final String imageURL = "https://i.ytimg.com/vi/yy8rTU-QSTM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBvdUVP-UfTIKERUpCUIcCWVwK-5A";
 
   @override
@@ -61,7 +61,7 @@ class SingleMoviePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              movieList[1].title.toString(),
+                              movieList[index].title.toString(),
                               style: Styles.overTheImageTitle,
                             ),
                             GestureDetector(
