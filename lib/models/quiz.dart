@@ -50,7 +50,7 @@ final QuizList = [
   Question(
       id: 2,
       question: "Year this movie released",
-      imageUri: "https://i.pinimg.com/474x/95/32/da/9532daba366b33e003dff5dbbf5eabe7.jpg",
+      imageUri: "",
       answer: 4,
       options: ['2009', '2004', '2021', '2015']
   ),

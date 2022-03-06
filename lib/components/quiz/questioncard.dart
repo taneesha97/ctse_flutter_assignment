@@ -73,11 +73,24 @@ class QuestionCard extends StatelessWidget {
             SizedBox(
               height: 8,
             ),
-      Image.network(
-              QuizList[index].imageUri.toString(),
-              height: 170,
-              width: 150,
+            Column(
+              children: [
+                if(QuizList[index].imageUri != "")...[
+
+                  Image.network(
+                    QuizList[index].imageUri.toString(),
+                    height: 170,
+                    width: 150,
+                  ),
+                ]else ...[
+                  SizedBox(
+                    height: 2,
+                  ),
+                ],
+              ],
             ),
+
+
             SizedBox(
               height: 8,
             ),
