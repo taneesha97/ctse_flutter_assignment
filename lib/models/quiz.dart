@@ -3,14 +3,17 @@ class Question {
   final String question;
   final List<String> options;
 
-  Question({required this.id, required this.question, required this.answer, required this.options});
+  Question(
+      {required this.id,
+      required this.question,
+      required this.answer,
+      required this.options});
 }
 
 const List sample_data = [
   {
     "id": 1,
-    "question":
-    "Guess the Movie",
+    "question": "Guess the Movie",
     "options": ['Goosebumps', 'Google', 'Facebook', 'Microsoft'],
     "answer_index": 1,
   },
