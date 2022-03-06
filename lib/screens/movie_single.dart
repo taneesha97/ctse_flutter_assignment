@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/movie/moviecard/actor_card.dart';
 import '../components/movie/moviecategory/singel_page_header.dart';
 import '../models/movie.dart';
 import '../styles.dart';
@@ -87,7 +88,7 @@ class SingleMoviePage extends StatelessWidget {
                   header: "Cast and Crew",
                   reusableWidget: Row(
                     children: const [
-                      // Custom Card comes here with a horizontal Scroller.
+                      ActorCard(),
                     ],
                   )),
               SinglePageHeader(
