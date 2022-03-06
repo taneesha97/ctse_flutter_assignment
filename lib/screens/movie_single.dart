@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-
 import '../components/movie/moviecard/actor_card.dart';
 import '../components/movie/moviecategory/singel_page_header.dart';
 import '../models/movie.dart';
 import '../styles.dart';
 
 class SingleMoviePage extends StatelessWidget {
-  const SingleMoviePage({Key? key}) : super(key: key);
+  const SingleMoviePage({Key? key, this.index}) : super(key: key);
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Single Movie",
+          movieList[2].title.toString(),
           style: Styles.navBarTitle,
         ),
       ),
@@ -27,10 +27,10 @@ class SingleMoviePage extends StatelessWidget {
                   Container(
                     height: 250,
                     width: MediaQuery.of(context).size.width,
-                    decoration: const BoxDecoration(
+                    decoration:  BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage(
-                            "https://lumiere-a.akamaihd.net/v1/images/image_b741f363.jpeg?region=0,0,1920,1080&width=480"),
+                            movieList[2].imageUrl.toString()),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -91,9 +91,22 @@ class SingleMoviePage extends StatelessWidget {
                   )),
               SinglePageHeader(
                   header: "Cast and Crew",
-                  reusableWidget: Row(
-                    children: const [
-                      ActorCard(),
+                  reusableWidget: Column(
+                    children:  [
+                      Container(
+                        width: 400,
+                        height: 90,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 4,
+                          itemBuilder: (ctx,i) => Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: 10
+                            ),
+                            child: const ActorCard(),
+                          ),
+                        ),
+                      ),
                     ],
                   )),
               SinglePageHeader(
