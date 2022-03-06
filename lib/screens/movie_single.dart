@@ -76,7 +76,7 @@ class SingleMoviePage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Text(movieList[1].year.toString(), style: Styles.overTheImageSubTitle),
+                        Text(movieList[index].year.toString(), style: Styles.overTheImageSubTitle),
                       ],
                     ),
                   ),
@@ -118,7 +118,7 @@ class SingleMoviePage extends StatelessWidget {
               SinglePageHeader(
                 header: "Movie Rating",
                 reusableWidget:
-                    Text("IMBd Movie Rating 9.8 ", style: Styles.textSectionBody),
+                    Text("IMdB Movie Rating 9.8 ", style: Styles.textSectionBody),
               ),
             ],
           ),
