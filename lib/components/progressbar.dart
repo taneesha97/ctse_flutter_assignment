@@ -24,7 +24,7 @@ class ProgressBar extends StatelessWidget {
                     width: constraints.maxWidth * controller.animation.value,
                     decoration: BoxDecoration(
                       // gradient: kPrimaryGradient,
-                      color: Color(0xFF3F4768),
+                      color: Color(0xFF66DBCC),
                       borderRadius: BorderRadius.circular(50),
                     ),
                   ),
@@ -36,8 +36,8 @@ class ProgressBar extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "${(controller.animation.value * 60).round()} sec",
-                          style: TextStyle(color: Colors.white),
+                          "${(controller.animation.value * 10).round()} sec",
+                          style: TextStyle(color: Colors.black),
                         ),
 
                         //SvgPicture.asset("assets/icons/clock.svg"),
