@@ -27,9 +27,10 @@ class QuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
 
-    onPress (Question question, int selectedIndex) {
+    onPress (Question question, int selectedIndex, int? questionID) {
       print(question.answer);
       print(selectedIndex + 1);
+      print(questionID);
       _controller.checkAns(question, selectedIndex);
     }
 
@@ -89,7 +90,7 @@ class QuestionCard extends StatelessWidget {
                       itemBuilder: (context, index1) => Options(
                             index: index1,
                             text: QuizList[index].options![index1],
-                            press: () => onPress(question, index1),
+                            press: () => onPress(question, index1, QuizList[index].id),
                           )),
                 ],
               ),
