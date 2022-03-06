@@ -7,15 +7,13 @@ import '../styles.dart';
 class SingleMoviePage extends StatelessWidget {
   const SingleMoviePage({Key? key, this.index}) : super(key: key);
   final int? index;
+  final String imageURL = "https://i.ytimg.com/vi/Vaz_kpmTi0M/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD4f7SJYl-eRII0Xpt2AFUabz9wtg";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          movieList[2].title.toString(),
-          style: Styles.navBarTitle,
-        ),
+        title: Text(movieList[1].title.toString())
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -25,18 +23,18 @@ class SingleMoviePage extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: 250,
+                    height: 240,
                     width: MediaQuery.of(context).size.width,
                     decoration:  BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage(
-                            movieList[2].imageUrl.toString()),
+                            imageURL),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   Container(
-                    height: 260,
+                    height: 170,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       gradient: LinearGradient(
@@ -53,7 +51,11 @@ class SingleMoviePage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.only(
+                      top: 20,
+                      left: 8,
+                      right: 8,
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +64,7 @@ class SingleMoviePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "This is Movie Title",
+                              movieList[1].title.toString(),
                               style: Styles.overTheImageTitle,
                             ),
                             GestureDetector(
@@ -77,7 +79,7 @@ class SingleMoviePage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Text("2007", style: Styles.overTheImageSubTitle),
+                        Text(movieList[1].year.toString(), style: Styles.overTheImageSubTitle),
                       ],
                     ),
                   ),
@@ -86,7 +88,7 @@ class SingleMoviePage extends StatelessWidget {
               SinglePageHeader(
                   header: "Heading Movie",
                   reusableWidget: Text(
-                    movieList[3].description.toString(),
+                    movieList[1].description.toString(),
                     style: Styles.textSectionBody,
                   )),
               SinglePageHeader(
