@@ -8,6 +8,9 @@ import 'options.dart';
 class QuestionCard extends StatelessWidget {
 
   final int index;
+
+
+
   const QuestionCard({
     Key? key,
     required this.question,
@@ -18,9 +21,19 @@ class QuestionCard extends StatelessWidget {
   final String image = 'assets/images/movie1.jpg';
   //comment
 
+
+
   @override
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
+
+    onPress (Question question, int selectedIndex) {
+      print(question.answer);
+      print(selectedIndex + 1);
+      _controller.checkAns(question, selectedIndex);
+    }
+
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
       padding: EdgeInsets.all(5),
@@ -76,7 +89,7 @@ class QuestionCard extends StatelessWidget {
                       itemBuilder: (context, index1) => Options(
                             index: index1,
                             text: QuizList[index].options![index1],
-                            press: () => _controller.checkAns(question, index1),
+                            press: () => onPress(question, index1),
                           )),
                 ],
               ),
