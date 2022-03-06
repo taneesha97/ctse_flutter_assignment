@@ -25,7 +25,7 @@ class SingleMoviePage extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: 300,
+                    height: 250,
                     width: MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
@@ -36,7 +36,7 @@ class SingleMoviePage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 300,
+                    height: 260,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       gradient: LinearGradient(
@@ -65,10 +65,15 @@ class SingleMoviePage extends StatelessWidget {
                               "This is Movie Title",
                               style: Styles.overTheImageTitle,
                             ),
-                            const Icon(
-                              Icons.bookmark_add,
-                              color: Colors.white,
-                              size: 30.0,
+                            GestureDetector(
+                              onTap: (){
+                                print("");
+                              },
+                              child: const Icon(
+                                Icons.bookmark_add,
+                                color: Colors.white,
+                                size: 30.0,
+                              ),
                             ),
                           ],
                         ),
@@ -101,7 +106,7 @@ class SingleMoviePage extends StatelessWidget {
               SinglePageHeader(
                 header: "Movie Rating",
                 reusableWidget:
-                    Text("IMBd Movie Rating = ", style: Styles.textSectionBody),
+                    Text("IMBd Movie Rating 9.8 ", style: Styles.textSectionBody),
               ),
             ],
           ),
