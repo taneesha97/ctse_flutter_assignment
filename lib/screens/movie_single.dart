@@ -7,14 +7,11 @@ import '../styles.dart';
 class SingleMoviePage extends StatelessWidget {
   const SingleMoviePage({Key? key, this.index}) : super(key: key);
   final int? index;
-  final String imageURL = "https://i.ytimg.com/vi/Vaz_kpmTi0M/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD4f7SJYl-eRII0Xpt2AFUabz9wtg";
+  final String imageURL = "https://i.ytimg.com/vi/yy8rTU-QSTM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBvdUVP-UfTIKERUpCUIcCWVwK-5A";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(movieList[1].title.toString())
-      ),
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -23,7 +20,7 @@ class SingleMoviePage extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: 240,
+                    height: 250,
                     width: MediaQuery.of(context).size.width,
                     decoration:  BoxDecoration(
                       image: DecorationImage(
@@ -34,7 +31,7 @@ class SingleMoviePage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 170,
+                    height: 150,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       gradient: LinearGradient(
@@ -45,8 +42,8 @@ class SingleMoviePage extends StatelessWidget {
                             Colors.black,
                           ],
                           stops: const [
-                            0.0,
-                            1.0
+                            0.1,
+                            1.0,
                           ]),
                     ),
                   ),
