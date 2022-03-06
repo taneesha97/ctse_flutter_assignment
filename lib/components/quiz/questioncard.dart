@@ -6,12 +6,16 @@ import '../../models/quiz.dart';
 import 'options.dart';
 
 class QuestionCard extends StatelessWidget {
+
+  final int index;
   const QuestionCard({
     Key? key,
     required this.question,
+    required this.index
   }) : super(key: key);
 
   final Question question;
+  final String image = 'assets/images/movie1.jpg';
   //comment
 
   @override
@@ -29,7 +33,7 @@ class QuestionCard extends StatelessWidget {
           children: [
             Text.rich(
               TextSpan(
-                  text: "${question.id}",
+                  text: "${QuizList[index].id}",
                   style: Theme.of(context).textTheme.headline6,
                   children: [
                     TextSpan(
@@ -43,7 +47,8 @@ class QuestionCard extends StatelessWidget {
             ),
             Center(
               child: Text(
-                question.question,
+                //movieList[index].title.toString()
+                QuizList[index].question.toString(),
                 style: Theme.of(context)
                     .textTheme
                     .headline6!
@@ -54,10 +59,10 @@ class QuestionCard extends StatelessWidget {
             SizedBox(
               height: 8,
             ),
-            Image.asset(
-              "assets/images/movie1.jpg",
-              height: 150,
-              width: 300,
+      Image.network(
+              QuizList[index].imageUri.toString(),
+              height: 170,
+              width: 150,
             ),
             SizedBox(
               height: 8,
@@ -68,10 +73,10 @@ class QuestionCard extends StatelessWidget {
                   ListView.builder(
                       itemCount: 4,
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => Options(
-                            index: index,
-                            text: question.options[index],
-                            press: () => _controller.checkAns(question, index),
+                      itemBuilder: (context, index1) => Options(
+                            index: index1,
+                            text: QuizList[index].options![index1],
+                            press: () => _controller.checkAns(question, index1),
                           )),
                 ],
               ),
