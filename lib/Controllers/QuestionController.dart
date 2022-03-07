@@ -13,15 +13,16 @@ class QuestionController extends GetxController
   late PageController _pageController;
   PageController get pageController => this._pageController;
 
-  List<Question> _questions = sample_data
-      .map(
-        (question) => Question(
-            id: question['id'],
-            question: question['question'],
-            options: question['options'],
-            answer: question['answer_index']),
-      )
-      .toList();
+  List<Question> _questions = QuizList;
+  // List<Question> _questions = questions
+  //     .map(
+  //       (question) => Question(
+  //           id: question['id'],
+  //           question: question['question'],
+  //           options: question['options'],
+  //           answer: question['answer_index']),
+  //     )
+  //     .toList();
 
   List<Question> get questions => this._questions;
 
@@ -47,7 +48,7 @@ class QuestionController extends GetxController
     super.onInit();
 
     _animationController =
-        AnimationController(duration: Duration(seconds: 60), vsync: this);
+        AnimationController(duration: Duration(seconds: 10), vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
       ..addListener(() {
         // update like setState
@@ -70,7 +71,7 @@ class QuestionController extends GetxController
   void checkAns(Question question, int selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
-    _correctAns = question.answer;
+    _correctAns = question.answer!;
     _selectedAns = selectedIndex;
 
     if (_correctAns == _selectedAns) _numOfCorrectAns++;

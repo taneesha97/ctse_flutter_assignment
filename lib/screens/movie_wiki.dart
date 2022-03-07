@@ -14,12 +14,10 @@ class MovieWiki extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Movie Wiki"),
-        backgroundColor: primaryColor,
-        centerTitle: true,
-      ),
       body: Container(
+        margin: EdgeInsets.only(
+          top: 24,
+        ),
           child: SingleChildScrollView(
               child: Column(
         children: [

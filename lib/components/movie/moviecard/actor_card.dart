@@ -10,6 +10,7 @@ class ActorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(6),
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(

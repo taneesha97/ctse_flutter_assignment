@@ -37,7 +37,7 @@ class CustomCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>  SingleMoviePage()),
+                builder: (context) =>  SingleMoviePage(index: 2)),
           );
         },
         child: Column(

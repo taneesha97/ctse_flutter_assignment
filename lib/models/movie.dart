@@ -1,3 +1,4 @@
+
 class Movie {
   final String? id;
   final String? title;
@@ -161,3 +162,4 @@ final bestMovieList = [
       duration: '100 min'
   ),
 ];
+
