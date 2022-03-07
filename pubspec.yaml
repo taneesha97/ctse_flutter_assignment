@@ -38,6 +38,7 @@ dependencies:
   getwidget: ^2.0.5
   audioplayers: ^0.20.1
   get: ^4.6.1
+  firebase_core: ^1.13.1
 
 dev_dependencies:
   flutter_test:
