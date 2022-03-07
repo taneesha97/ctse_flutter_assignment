@@ -21,7 +21,7 @@ class _QuizScreenState extends State<QuizScreen> {
           child: Text("Movie Categories"),
         ),
       ),
-      body: Body(),
+      body: AudioQuizBody(),
     );
   }
 }
