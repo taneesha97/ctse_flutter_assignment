@@ -12,8 +12,7 @@ class LongMovieCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Provider to the fetch all the movies.
-    //Stream<QuerySnapshot> movies = Provider.of<CrudModel>(context, listen: false).movies;
-    final Stream<QuerySnapshot> movies = FirebaseFirestore.instance.collection('movies').snapshots();
+    Stream<QuerySnapshot> movies = Provider.of<CrudModel>(context, listen: false).movies;
     return Container(
         child: Column(
           children: [
@@ -56,7 +55,7 @@ class LongMovieCategory extends StatelessWidget {
                   return ListView.builder(
                     itemCount: data.size,
                     itemBuilder: (context, index){
-                      return Text("${data.docs[index]}");
+                      return LongMovieCard(index: index);
                     },
                   );
                 },
