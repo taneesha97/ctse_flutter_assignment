@@ -12,11 +12,12 @@ import '../styles.dart';
 class IndexPage extends StatelessWidget {
   const IndexPage({Key? key}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
-    String value = Provider.of<CrudModel>(context, listen: false).testingValue;
+
+    // Loose Constructor.
+    // Provider.of<CrudModel>(context, listen: false).sendTextTesting();
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.black,
@@ -177,7 +178,6 @@ class IndexPage extends StatelessWidget {
                     ),
 
                     onPressed: () {
-                      print(value);
                     },
                     child: const Text(
                       'Movie Library Page',
