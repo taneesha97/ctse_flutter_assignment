@@ -82,7 +82,8 @@ class _DropDownState extends State<DropDown> {
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 20, vertical: 10),
-                                          child: Text(
+                                          child:
+                                          Text(
                                             title,
                                           ),
                                         ),

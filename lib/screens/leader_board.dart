@@ -70,6 +70,25 @@ class _LeaderBoardState extends State<LeaderBoard> {
                         ),
                       ],
                     ),
+
+                        Container(
+                        padding: EdgeInsets.only(left: 8.0),color: Colors.pink,
+                            child: Row(
+                              children: [
+                                  Ink(
+                                    decoration: ShapeDecoration(
+                                    shape: CircleBorder(), color: Colors.white),
+                              child: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.black,
+                                  size: 20,
+                  )),
+                 ),
+               ]
+            )
+          ),
                     Container(
                       alignment: Alignment.center,
                       // padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
