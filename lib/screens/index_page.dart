@@ -2,16 +2,21 @@ import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_cate
 import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
+import 'package:ctse_assignment_1/util/crud_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../styles.dart';
 
 class IndexPage extends StatelessWidget {
   const IndexPage({Key? key}) : super(key: key);
 
+
+
   @override
   Widget build(BuildContext context) {
+    String value = Provider.of<CrudModel>(context, listen: false).testingValue;
     return Container(
       decoration: const BoxDecoration(
         color: Colors.black,
@@ -152,6 +157,32 @@ class IndexPage extends StatelessWidget {
                       'Movie Library Page',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+
+
+
+
+                  // Testing Button
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+
+                    onPressed: () {
+                      print(value);
+                    },
+                    child: const Text(
+                      'Movie Library Page',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
