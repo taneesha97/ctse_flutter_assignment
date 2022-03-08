@@ -2,13 +2,17 @@ import 'dart:typed_data';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:ctse_assignment_1/components/progressbar.dart';
+import 'package:ctse_assignment_1/util/Quizes/quiz_crud_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
 import 'Options.dart';
 
 class AudioQuizBody extends StatefulWidget {
+  
   AudioQuizBody({Key? key}) : super(key: key);
 
   @override
