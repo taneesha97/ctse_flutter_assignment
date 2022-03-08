@@ -6,34 +6,25 @@ import '../../models/quiz.dart';
 import 'options.dart';
 
 class QuestionCard extends StatelessWidget {
-
   final int index;
 
-
-
-  const QuestionCard({
-    Key? key,
-    required this.question,
-    required this.index
-  }) : super(key: key);
+  const QuestionCard({Key? key, required this.question, required this.index})
+      : super(key: key);
 
   final Question question;
   final String image = 'assets/images/movie1.jpg';
   //comment
 
-
-
   @override
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
 
-    onPress (Question question, int selectedIndex, int? questionID) {
+    onPress(Question question, int selectedIndex, String? questionID) {
       print(question.answer);
       print(selectedIndex + 1);
       print(questionID);
       _controller.checkAns(question, selectedIndex);
     }
-
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
@@ -75,22 +66,19 @@ class QuestionCard extends StatelessWidget {
             ),
             Column(
               children: [
-                if(QuizList[index].imageUri != "")...[
-
+                if (QuizList[index].imageUri != "") ...[
                   Image.network(
                     QuizList[index].imageUri.toString(),
                     height: 170,
                     width: 150,
                   ),
-                ]else ...[
+                ] else ...[
                   SizedBox(
                     height: 2,
                   ),
                 ],
               ],
             ),
-
-
             SizedBox(
               height: 8,
             ),
@@ -103,7 +91,8 @@ class QuestionCard extends StatelessWidget {
                       itemBuilder: (context, index1) => Options(
                             index: index1,
                             text: QuizList[index].options![index1],
-                            press: () => onPress(question, index1, QuizList[index].id),
+                            press: () =>
+                                onPress(question, index1, QuizList[index].id),
                           )),
                 ],
               ),
