@@ -60,20 +60,33 @@ class _QuizeListState extends State<QuizeList> {
                       ],
                     ),
                     Container(
-                      alignment: Alignment.center,
-                      // padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-                      // width: 55.0,
-                      // height: 55.0,
-                      // margin: EdgeInsets.all(2),
-                      // color: Colors.blue,
-                      // ignore: deprecated_member_use
-                      child: FlatButton(
-                        onPressed: (){},
-                        color: Colors.lightBlue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Text("Start", style: TextStyle(color: Colors.white)),
+                      padding: EdgeInsets.all(5),
+                      child: Row(
+                        children: [
+                          Ink(
+                            decoration: ShapeDecoration(
+                                shape: CircleBorder(), color: Colors.blue),
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.add_chart,
+                                  color: Colors.white,
+                                )),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Ink(
+                            decoration: ShapeDecoration(
+                                shape: CircleBorder(), color: Colors.red),
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                )),
+                          ),
+                        ],
                       ),
                     ),
                   ],

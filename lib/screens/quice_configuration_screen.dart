@@ -317,7 +317,7 @@ class _DropDownState extends State<DropDown> {
                         ),
                         child: Text('Delete'),
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>  ExampleList(title: 'Exaple List',)));
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) =>  ExampleList(title: 'Exaple List',)));
                       }),
                   ],
                 )
