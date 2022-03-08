@@ -20,6 +20,7 @@ class LongMovieCategory extends StatelessWidget {
               padding: const EdgeInsets.only(
                 left: 10,
                 right: 10,
+                top: 10,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,10 +31,6 @@ class LongMovieCategory extends StatelessWidget {
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
-                  TextButton(
-                    child: const Text("View All"),
-                    onPressed: () {},
                   ),
                 ],
               ),
