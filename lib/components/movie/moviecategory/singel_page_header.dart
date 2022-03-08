@@ -24,14 +24,17 @@ class SinglePageHeader extends StatelessWidget {
             color: Styles.primaryThemeColor,
             thickness: 5,
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 10,
-              top: 5,
-              bottom: 5,
-              right: 5,
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 10,
+                top: 5,
+                bottom: 5,
+                right: 5,
+              ),
+              child: reusableWidget,
             ),
-            child: reusableWidget,
           ),
         ],
       ),
