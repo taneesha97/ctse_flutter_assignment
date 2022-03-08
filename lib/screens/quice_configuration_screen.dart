@@ -1,8 +1,6 @@
-import 'package:ctse_assignment_1/screens/example_list.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../components/form_dropdown/Scrollbar.dart';
 import '../components/form_dropdown/ExpandedListAnimationWidget.dart';
 
@@ -35,16 +33,42 @@ class _DropDownState extends State<DropDown> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          title: Text(
-            "Quiz Configuration",
-            style: TextStyle(color: Colors.black),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(200),
+          child: AppBar(
+            centerTitle: true,
+            flexibleSpace: ClipRRect(
+              borderRadius: BorderRadius.only(bottomRight: Radius.circular(50), bottomLeft: Radius.circular(50)),
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/p2.png"),
+                        fit: BoxFit.fill,
+                        // colorFilter: ColorFilter.mode(Colors.blue.withOpacity(0), BlendMode.darken)
+                    )
+                ),
+              ),
+            ),
+
+            title: Text(
+              "Quice Configuration",
+              style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
+            ),
+            backgroundColor: Colors.pink,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(bottomRight: Radius.circular(50), bottomLeft: Radius.circular(50))
+            ),
           ),
+          // title: Text(
+          //   "Quiz Configuration",
+          //   style: TextStyle(color: Colors.black),
+          // ),
         ),
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          padding: EdgeInsets.symmetric(vertical: 50, horizontal: 60),
           child: SafeArea(
             child: Column(
               children: [
@@ -332,7 +356,7 @@ class _DropDownState extends State<DropDown> {
                   ],
                 ),
 
-                SizedBox(height: 150),
+                SizedBox(height: 80),
                 Column(
                   children: [
                     ElevatedButton(
@@ -350,19 +374,19 @@ class _DropDownState extends State<DropDown> {
                               context, MaterialPageRoute(builder: (context) => QuizeList()));
                         }),
                     SizedBox(height: 20),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: Size(105, 45),
-                          textStyle: TextStyle(fontSize: 15),
-                          primary: Colors.pink,
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(10.0),
-                          ),
-                        ),
-                        child: Text('Delete'),
-                        onPressed: (){
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) =>  ExampleList(title: 'Exaple List',)));
-                      }),
+                    // ElevatedButton(
+                    //     style: ElevatedButton.styleFrom(
+                    //       minimumSize: Size(105, 45),
+                    //       textStyle: TextStyle(fontSize: 15),
+                    //       primary: Colors.pink,
+                    //       shape: new RoundedRectangleBorder(
+                    //         borderRadius: new BorderRadius.circular(10.0),
+                    //       ),
+                    //     ),
+                    //     child: Text('Delete'),
+                    //     onPressed: (){
+                    //       // Navigator.push(context, MaterialPageRoute(builder: (context) =>  ExampleList(title: 'Exaple List',)));
+                    //   }),
                   ],
                 )
               ],
