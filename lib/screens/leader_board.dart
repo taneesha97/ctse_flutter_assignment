@@ -32,7 +32,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
               ),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+                // padding: EdgeInsets.only()
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,7 +42,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children:<Widget> [
                         Container(
-                          height: 55.0,
+                          height: 60.0,
                           width: 5.0,
                           color: Colors.pink,
                           // margin: EdgeInsets.only(right: 0, left: 0),
@@ -72,7 +72,8 @@ class _LeaderBoardState extends State<LeaderBoard> {
                     ),
 
                         Container(
-                        padding: EdgeInsets.only(left: 8.0),color: Colors.pink,
+                        margin: EdgeInsets.only(left: 120.0),
+                        // color: Colors.pink,
                             child: Row(
                               children: [
                                   Ink(
@@ -93,8 +94,8 @@ class _LeaderBoardState extends State<LeaderBoard> {
                       alignment: Alignment.center,
                       // padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                       width: 55.0,
-                      height: 55.0,
-                      margin: EdgeInsets.all(2),
+                      height: 60.0,
+                      // margin: EdgeInsets.all(2),
                       color: Colors.blue,
                       child: Center(
                           child: Text.rich(

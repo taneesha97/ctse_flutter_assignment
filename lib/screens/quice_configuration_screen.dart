@@ -23,7 +23,6 @@ class _DropDownState extends State<DropDown> {
   bool isStrechedDropDown2 = false;
   bool isStrechedDropDown3 = false;
 
-  //comment djejebjvebjn
   int? groupValue;
   int? groupValue2;
   int? groupValue3;
@@ -58,7 +57,7 @@ class _DropDownState extends State<DropDown> {
                         margin: EdgeInsets.only(left: 5.0, bottom: 5.0, top: 5.0),
                         child: Text(
                           "Quiz Configuration",
-                          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                           style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
                         ),
                       ),
                       Row(
@@ -191,6 +190,7 @@ class _DropDownState extends State<DropDown> {
                                                   horizontal: 20, vertical: 10),
                                               child: Text(
                                                 title2,
+                                                style: TextStyle(color: Colors.black45),
                                               ),
                                             ),
                                           ),
@@ -284,6 +284,7 @@ class _DropDownState extends State<DropDown> {
                                                   horizontal: 20, vertical: 10),
                                               child: Text(
                                                 title3,
+                                                style: TextStyle(color: Colors.black45),
                                               ),
                                             ),
                                           ),
