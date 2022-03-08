@@ -1,27 +1,28 @@
-// class DatabaseService {
-//   final Firestore _db = Firestore.instance;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ctse_assignment_1/models/quiz.dart';
+import 'package:firebase_database/firebase_database.dart';
 
-//   /// Get a stream of a single document
-//   Stream<SuperHero> streamHero(String id) {
-//     return _db
-//         .collection('heroes')
-//         .document(id)
-//         .snapshots()
-//         .map((snap) => SuperHero.fromMap(snap.data));
-//   }
+class DatabaseService {
+  //final Firestore _db = Firestore.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-//   /// Query a subcollection
-//   Stream<List<Weapon>> streamWeapons(FirebaseUser user) {
-//     var ref = _db.collection('heroes').document(user.uid).collection('weapons');
+  Future<dynamic> readQuizes() async {
+    QuerySnapshot querySnapshot;
+    List docs = [];
+    try {
+      querySnapshot = await _db.collection('quizes').get();
+      print('sss');
+      print(querySnapshot.docs);
+      // if (querySnapshot.docs.isNotEmpty) {
+      //   for (var doc in querySnapshot.docs.toList()) {
+      //     Map a = {"id": doc.id, "title": doc['title']};
 
-//     return ref.snapshots().map((list) =>
-//         list.documents.map((doc) => Weapon.fromFirestore(doc)).toList());
-    
-//   }
-
-//   /// Write data
-//   Future<void> createHero(String heroId) {
-//     return _db.collection('heroes').document(heroId).setData({ /* some data */ });
-//   }
-
-// }
+      //     docs.add(a);
+      //   }
+      //   return docs;
+      // }
+    } catch (e) {
+      print(e);
+    }
+  }
+}
