@@ -1,7 +1,4 @@
-import 'dart:js';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ctse_assignment_1/models/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../util/crud_model.dart';
@@ -12,6 +9,7 @@ class MovieCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Later Changed this to relevant category of movies.
     Stream<QuerySnapshot> movies = Provider.of<CrudModel>(context, listen: false).movies;
     return Column(
       children: <Widget>[
@@ -49,6 +47,7 @@ class MovieCategory extends StatelessWidget {
 
               return ListView.builder(
                 itemCount: data.size,
+                scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index){
                   return MovieCard(index: index);
                 },

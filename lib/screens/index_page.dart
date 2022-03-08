@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../styles.dart';
+import 'movie_all.dart';
 
 class IndexPage extends StatelessWidget {
   const IndexPage({Key? key}) : super(key: key);
@@ -174,9 +175,14 @@ class IndexPage extends StatelessWidget {
                     ),
 
                     onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  AllMovieScreen()),
+                      );
                     },
                     child: const Text(
-                      'Movie Library Page',
+                      'All Movies Page',
                       style:
                       TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
