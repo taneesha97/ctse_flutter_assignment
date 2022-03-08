@@ -14,10 +14,6 @@ class IndexPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    // Loose Constructor.
-    // Provider.of<CrudModel>(context, listen: false).sendTextTesting();
-
     return Container(
       decoration: const BoxDecoration(
         color: Colors.black,

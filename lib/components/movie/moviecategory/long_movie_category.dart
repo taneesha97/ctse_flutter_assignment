@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/movie.dart';
+import '../../../util/crud_model.dart';
 import '../moviecard/long_movie_card.dart';
 
 class LongMovieCategory extends StatelessWidget {
@@ -8,6 +11,9 @@ class LongMovieCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Provider to the fetch all the movies.
+    //Stream<QuerySnapshot> movies = Provider.of<CrudModel>(context, listen: false).movies;
+    final Stream<QuerySnapshot> movies = FirebaseFirestore.instance.collection('movies').snapshots();
     return Container(
         child: Column(
           children: [
@@ -36,10 +42,25 @@ class LongMovieCategory extends StatelessWidget {
 
             Container(
               height: MediaQuery.of(context).size.height - 128,
-              child: ListView.builder(
-                itemCount: movieList.length,
-                itemBuilder: (ctx,i) => LongMovieCard(index: i),
-              ),
+              child: StreamBuilder<QuerySnapshot>(
+                stream: movies,
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+                  if(snapshot.hasError){
+                    return Text("There an Error Loading Movies");
+                  }
+                  if(snapshot.connectionState == ConnectionState.waiting){
+                    return Text("Loading");
+                  }
+                  final data = snapshot.requireData;
+
+                  return ListView.builder(
+                    itemCount: data.size,
+                    itemBuilder: (context, index){
+                      return Text("${data.docs[index]}");
+                    },
+                  );
+                },
+              )
             ),
           ],
         ));
