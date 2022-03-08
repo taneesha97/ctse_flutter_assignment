@@ -1,4 +1,5 @@
 import 'package:ctse_assignment_1/Controllers/QuestionController.dart';
+import 'package:ctse_assignment_1/service/quiz_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +20,16 @@ class Body extends StatelessWidget {
     Stream<QuerySnapshot> movies =
         Provider.of<QuizCrudModel>(context, listen: false).quizesList;
     print(movies);
+
+    DatabaseService db;
+    List docs = [];
+    db = DatabaseService();
+    db.readQuizes().then((value) => {
+          print(value),
+          // setState(() {
+          //   docs = value;
+          // })
+        });
 
     return SafeArea(
         child: Padding(

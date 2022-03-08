@@ -13,14 +13,20 @@ class DatabaseService {
       querySnapshot = await _db.collection('quizes').get();
       print('sss');
       print(querySnapshot.docs);
-      // if (querySnapshot.docs.isNotEmpty) {
-      //   for (var doc in querySnapshot.docs.toList()) {
-      //     Map a = {"id": doc.id, "title": doc['title']};
+      if (querySnapshot.docs.isNotEmpty) {
+        for (var doc in querySnapshot.docs.toList()) {
+          Map a = {
+            "id": doc.id,
+            "question": doc['question'],
+            "answer": doc['answer'],
+            "options": doc['options'],
+            "imageUri": doc['imageUri']
+          };
 
-      //     docs.add(a);
-      //   }
-      //   return docs;
-      // }
+          docs.add(a);
+        }
+        return docs;
+      }
     } catch (e) {
       print(e);
     }
