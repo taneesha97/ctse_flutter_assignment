@@ -1,4 +1,3 @@
-
 import 'package:ctse_assignment_1/components/movie/moviecard/medium_movie_card.dart';
 import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
