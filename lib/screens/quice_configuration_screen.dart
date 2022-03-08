@@ -49,246 +49,288 @@ class _DropDownState extends State<DropDown> {
           child: SafeArea(
             child: Column(
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Color(0xff1e88e5)),
-                              borderRadius: BorderRadius.all(Radius.circular(12))),
-                          child: Column(
-                            children: [
-                              Container(
-                                // height: 45,
-                                  width: double.infinity,
-                                  padding: EdgeInsets.only(right: 10),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Color(0xff1e88e5),
-                                      ),
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                                  constraints: BoxConstraints(
-                                    minHeight: 45,
-                                    minWidth: double.infinity,
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 10),
-                                          child:
-                                          Text(
-                                            title,
-                                          ),
+                Container(
+                  // color: Colors.lightGreenAccent,
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        margin: EdgeInsets.only(left: 5.0, bottom: 5.0, top: 5.0),
+                        child: Text(
+                          "Quiz Configuration",
+                          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Color(0xff1e88e5)),
+                                    borderRadius: BorderRadius.all(Radius.circular(12))),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      // height: 45,
+                                        width: double.infinity,
+                                        padding: EdgeInsets.only(right: 10),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Color(0xff1e88e5),
+                                            ),
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(10))),
+                                        constraints: BoxConstraints(
+                                          minHeight: 45,
+                                          minWidth: double.infinity,
                                         ),
-                                      ),
-                                      GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              isStrechedDropDown =
-                                              !isStrechedDropDown;
-                                            });
-                                          },
-                                          child: Icon(isStrechedDropDown
-                                              ? Icons.arrow_upward
-                                              : Icons.arrow_downward))
-                                    ],
-                                  )),
-                              ExpandedSection(
-                                expand: isStrechedDropDown,
-                                height: 100,
-                                child: MyScrollbar(
-                                  builder: (context, scrollController2) =>
-                                      ListView.builder(
-                                          padding: EdgeInsets.all(0),
-                                          controller: scrollController2,
-                                          shrinkWrap: true,
-                                          itemCount: _list.length,
-                                          itemBuilder: (context, index) {
-                                            return RadioListTile(
-                                                title: Text(_list.elementAt(index)),
-                                                value: index,
-                                                groupValue: groupValue,
-                                                onChanged: (val) {
+                                        alignment: Alignment.center,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 20, vertical: 10),
+                                                child:
+                                                Text(
+                                                  title,
+                                                  style: TextStyle(color: Colors.black45),
+                                                ),
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                                onTap: () {
                                                   setState(() {
-                                                    groupValue = val as int;
-                                                    title = _list.elementAt(index);
+                                                    isStrechedDropDown =
+                                                    !isStrechedDropDown;
                                                   });
-                                                });
-                                          }),
+                                                },
+                                                child: Icon(isStrechedDropDown
+                                                    ? Icons.arrow_upward
+                                                    : Icons.arrow_downward))
+                                          ],
+                                        )),
+                                    ExpandedSection(
+                                      expand: isStrechedDropDown,
+                                      height: 100,
+                                      child: MyScrollbar(
+                                        builder: (context, scrollController2) =>
+                                            ListView.builder(
+                                                padding: EdgeInsets.all(0),
+                                                controller: scrollController2,
+                                                shrinkWrap: true,
+                                                itemCount: _list.length,
+                                                itemBuilder: (context, index) {
+                                                  return RadioListTile(
+                                                      title: Text(_list.elementAt(index)),
+                                                      value: index,
+                                                      groupValue: groupValue,
+                                                      onChanged: (val) {
+                                                        setState(() {
+                                                          groupValue = val as int;
+                                                          title = _list.elementAt(index);
+                                                        });
+                                                      });
+                                                }),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        )),
-                  ],
+                              )),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 40),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Column(
                   children: [
-                    Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Color(0xff1e88e5)),
-                              borderRadius: BorderRadius.all(Radius.circular(12))),
-                          child: Column(
-                            children: [
-                              Container(
-                                // height: 45,
-                                  width: double.infinity,
-                                  padding: EdgeInsets.only(right: 10),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Color(0xff1e88e5),
-                                      ),
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                                  constraints: BoxConstraints(
-                                    minHeight: 45,
-                                    minWidth: double.infinity,
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 10),
-                                          child: Text(
-                                            title2,
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 5.0, bottom: 5.0, top: 5.0),
+                      child: Text(
+                        "Quiz Configuration",
+                        style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Color(0xff1e88e5)),
+                                  borderRadius: BorderRadius.all(Radius.circular(12))),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    // height: 45,
+                                      width: double.infinity,
+                                      padding: EdgeInsets.only(right: 10),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Color(0xff1e88e5),
                                           ),
-                                        ),
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(10))),
+                                      constraints: BoxConstraints(
+                                        minHeight: 45,
+                                        minWidth: double.infinity,
                                       ),
-                                      GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              isStrechedDropDown2 =
-                                              !isStrechedDropDown2;
-                                            });
-                                          },
-                                          child: Icon(isStrechedDropDown2
-                                              ? Icons.arrow_upward
-                                              : Icons.arrow_downward))
-                                    ],
-                                  )),
-                              ExpandedSection(
-                                expand: isStrechedDropDown2,
-                                height: 100,
-                                child: MyScrollbar(
-                                  builder: (context, scrollController2) =>
-                                      ListView.builder(
-                                          padding: EdgeInsets.all(0),
-                                          controller: scrollController2,
-                                          shrinkWrap: true,
-                                          itemCount: _list2.length,
-                                          itemBuilder: (context, index) {
-                                            return RadioListTile(
-                                                title: Text(_list2.elementAt(index)),
-                                                value: index,
-                                                groupValue: groupValue2,
-                                                onChanged: (val) {
-                                                  setState(() {
-                                                    groupValue2 = val as int;
-                                                    title2 = _list2.elementAt(index);
-                                                  });
+                                      alignment: Alignment.center,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 20, vertical: 10),
+                                              child: Text(
+                                                title2,
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  isStrechedDropDown2 =
+                                                  !isStrechedDropDown2;
                                                 });
-                                          }),
-                                ),
+                                              },
+                                              child: Icon(isStrechedDropDown2
+                                                  ? Icons.arrow_upward
+                                                  : Icons.arrow_downward))
+                                        ],
+                                      )),
+                                  ExpandedSection(
+                                    expand: isStrechedDropDown2,
+                                    height: 100,
+                                    child: MyScrollbar(
+                                      builder: (context, scrollController2) =>
+                                          ListView.builder(
+                                              padding: EdgeInsets.all(0),
+                                              controller: scrollController2,
+                                              shrinkWrap: true,
+                                              itemCount: _list2.length,
+                                              itemBuilder: (context, index) {
+                                                return RadioListTile(
+                                                    title: Text(_list2.elementAt(index)),
+                                                    value: index,
+                                                    groupValue: groupValue2,
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        groupValue2 = val as int;
+                                                        title2 = _list2.elementAt(index);
+                                                      });
+                                                    });
+                                              }),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        )),
+                            )),
+                      ],
+                    ),
                   ],
                 ),
+
                 SizedBox(height: 40),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Column(
                   children: [
-                    Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Color(0xff1e88e5)),
-                              borderRadius: BorderRadius.all(Radius.circular(12))),
-                          child: Column(
-                            children: [
-                              Container(
-                                // height: 45,
-                                  width: double.infinity,
-                                  padding: EdgeInsets.only(right: 10),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Color(0xff1e88e5),
-                                      ),
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
-                                  constraints: BoxConstraints(
-                                    minHeight: 45,
-                                    minWidth: double.infinity,
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 10),
-                                          child: Text(
-                                            title3,
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: 5.0, bottom: 5.0, top: 5.0),
+                      child: Text(
+                        "Quiz Configuration",
+                        style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Color(0xff1e88e5)),
+                                  borderRadius: BorderRadius.all(Radius.circular(12))),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    // height: 45,
+                                      width: double.infinity,
+                                      padding: EdgeInsets.only(right: 10),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: Color(0xff1e88e5),
                                           ),
-                                        ),
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(10))),
+                                      constraints: BoxConstraints(
+                                        minHeight: 45,
+                                        minWidth: double.infinity,
                                       ),
-                                      GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              isStrechedDropDown3 =
-                                              !isStrechedDropDown3;
-                                            });
-                                          },
-                                          child: Icon(isStrechedDropDown3
-                                              ? Icons.arrow_upward
-                                              : Icons.arrow_downward))
-                                    ],
-                                  )),
-                              ExpandedSection(
-                                expand: isStrechedDropDown3,
-                                height: 100,
-                                child: MyScrollbar(
-                                  builder: (context, scrollController3) =>
-                                      ListView.builder(
-                                          padding: EdgeInsets.all(0),
-                                          controller: scrollController3,
-                                          shrinkWrap: true,
-                                          itemCount: _list3.length,
-                                          itemBuilder: (context, index) {
-                                            return RadioListTile(
-                                                title: Text(_list3.elementAt(index)),
-                                                value: index,
-                                                groupValue: groupValue3,
-                                                onChanged: (val) {
-                                                  setState(() {
-                                                    groupValue3 = val as int;
-                                                    title3 = _list3.elementAt(index);
-                                                  });
+                                      alignment: Alignment.center,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 20, vertical: 10),
+                                              child: Text(
+                                                title3,
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  isStrechedDropDown3 =
+                                                  !isStrechedDropDown3;
                                                 });
-                                          }),
-                                ),
+                                              },
+                                              child: Icon(isStrechedDropDown3
+                                                  ? Icons.arrow_upward
+                                                  : Icons.arrow_downward))
+                                        ],
+                                      )),
+                                  ExpandedSection(
+                                    expand: isStrechedDropDown3,
+                                    height: 100,
+                                    child: MyScrollbar(
+                                      builder: (context, scrollController3) =>
+                                          ListView.builder(
+                                              padding: EdgeInsets.all(0),
+                                              controller: scrollController3,
+                                              shrinkWrap: true,
+                                              itemCount: _list3.length,
+                                              itemBuilder: (context, index) {
+                                                return RadioListTile(
+                                                    title: Text(_list3.elementAt(index)),
+                                                    value: index,
+                                                    groupValue: groupValue3,
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        groupValue3 = val as int;
+                                                        title3 = _list3.elementAt(index);
+                                                      });
+                                                    });
+                                              }),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        )),
+                            )),
+                      ],
+                    ),
                   ],
                 ),
+
                 SizedBox(height: 150),
                 Column(
                   children: [
