@@ -6,9 +6,14 @@ import '../../../models/movie.dart';
 import '../../../util/crud_model.dart';
 import '../moviecard/long_movie_card.dart';
 
-class LongMovieCategory extends StatelessWidget {
+class LongMovieCategory extends StatefulWidget {
   const LongMovieCategory({Key? key}) : super(key: key);
 
+  @override
+  State<LongMovieCategory> createState() => _LongMovieCategoryState();
+}
+
+class _LongMovieCategoryState extends State<LongMovieCategory> {
   @override
   Widget build(BuildContext context) {
     // Provider to the fetch all the movies.
