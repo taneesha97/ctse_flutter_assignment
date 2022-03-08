@@ -1,18 +1,18 @@
-import 'package:ctse_assignment_1/components/movie/moviecard/long_movie_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctse_assignment_1/components/movie/moviecard/medium_movie_card.dart';
-import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/movie_category.dart';
 import 'package:ctse_assignment_1/screens/movie_all.dart';
 import 'package:flutter/material.dart';
-import '../constants.dart';
-import '../models/movie.dart';
-import '../styles.dart';
+import 'package:provider/provider.dart';
+import '../util/crud_model.dart';
 
 class MovieWiki extends StatelessWidget {
   const MovieWiki({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Provider Movies - Changed to the Appropriate movie list.
+    Stream<QuerySnapshot> movies = Provider.of<CrudModel>(context, listen: false).movies;
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(
@@ -83,12 +83,26 @@ class MovieWiki extends StatelessWidget {
           ),
           SizedBox(
             height: 200,
-            child: ListView.builder(
-                itemCount: movieList.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => Container(
-                      child: CustomCard(index: index),
-                    )),
+            child: StreamBuilder<QuerySnapshot>(
+              stream: movies,
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+                if(snapshot.hasError){
+                  return Text("There an Error Loading Movies");
+                }
+                if(snapshot.connectionState == ConnectionState.waiting){
+                  return Text("Loading");
+                }
+                final data = snapshot.requireData;
+
+                return ListView.builder(
+                  itemCount: data.size,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index){
+                    return CustomCard(index: index);
+                  },
+                );
+              },
+            ),
           ),
 
           Container(
