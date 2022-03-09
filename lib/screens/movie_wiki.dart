@@ -7,7 +7,8 @@ import 'package:provider/provider.dart';
 import '../util/crud_model.dart';
 
 class MovieWiki extends StatelessWidget {
-  const MovieWiki({Key? key}) : super(key: key);
+  late QuerySnapshot<Object?> array_data;
+  MovieWiki({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +71,7 @@ class MovieWiki extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>  AllMovieScreen()),
+                          builder: (context) =>  AllMovieScreen(index: array_data)),
                     );
                   },
                 ),
@@ -93,6 +94,7 @@ class MovieWiki extends StatelessWidget {
                   return Text("Loading");
                 }
                 final data = snapshot.requireData;
+                array_data = data;
 
                 return ListView.builder(
                   itemCount: data.size,

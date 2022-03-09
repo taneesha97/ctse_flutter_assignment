@@ -2,6 +2,7 @@ import 'package:ctse_assignment_1/components/movie/moviecard/medium_movie_card.d
 import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/leader_board.dart';
+import 'package:ctse_assignment_1/screens/movie_all.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           backgroundColor: Colors.black,
         ),
-        home: IndexPage(),
+        home: MovieWiki(),
       ),
     );
   }
