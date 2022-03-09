@@ -42,7 +42,7 @@ class _DropDownState extends State<DropDown> {
               child: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/images/p2.png"),
+                        image: AssetImage("assets/images/p2.jpg"),
                         fit: BoxFit.fill,
                         // colorFilter: ColorFilter.mode(Colors.blue.withOpacity(0), BlendMode.darken)
                     )
@@ -53,7 +53,7 @@ class _DropDownState extends State<DropDown> {
             title: Text(
               "Quice Configuration",
               style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
             ),
             backgroundColor: Colors.pink,
             shape: RoundedRectangleBorder(
