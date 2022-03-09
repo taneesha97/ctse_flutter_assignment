@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../screens/quice_configuration_splash.dart';
+
 class CardView1 extends StatelessWidget {
 
   final int index;
@@ -53,7 +55,10 @@ class CardView1 extends StatelessWidget {
                         decoration: ShapeDecoration(
                             shape: CircleBorder(), color: Colors.blue),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (context) => SplashQuiceConfig()));
+                            },
                             icon: Icon(
                               Icons.start,
                               color: Colors.white,

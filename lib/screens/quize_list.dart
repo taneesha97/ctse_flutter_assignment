@@ -8,8 +8,8 @@ class QuizeList extends StatefulWidget {
 }
 //
 class _QuizeListState extends State<QuizeList> {
-  List category = ["Romantic", "Horror","Thriller","Animation","Romantic","Action"];
-  List time = ["20min", "10min","20min","15min","20min", "10min"];
+  List category = ["Romantic", "Horror","Thriller","Animation","Romantic","Romantic", "Horror","Thriller","Animation","Romantic"];
+  List time = ["20min", "10min","20min","15min","20min", "10min","20min", "10min","20min","15min"];
 
   Widget deleteItems(){
     return Container(
