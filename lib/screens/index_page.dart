@@ -2,6 +2,7 @@ import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_cate
 import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
+import 'package:ctse_assignment_1/screens/quice_configuration_splash.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:ctse_assignment_1/screens/score_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -172,7 +173,7 @@ class IndexPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  ScorePage()),
+                            builder: (context) =>  SplashQuiceConfig()),
                       );
                     },
                     child: const Text(
