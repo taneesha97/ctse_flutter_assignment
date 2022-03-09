@@ -3,15 +3,15 @@ import 'package:flutter/cupertino.dart';
 
 class CrudModel extends ChangeNotifier{
 
+  final Stream<QuerySnapshot> _movieStream = FirebaseFirestore.instance.collection('movies').snapshots();
+
+  // Testing Constructor.
+  CrudModel();
+
   //Testing
   String _testString = "Test Value 1";
 
-  CrudModel(){
-    this._testString = "Test Value 2";
-  }
-
   // Steam Data For the Movies.
-  final Stream<QuerySnapshot> _movieStream = FirebaseFirestore.instance.collection('movies').snapshots();
 
   // Getter for the User Steam.
   Stream<QuerySnapshot> get movies {
@@ -22,5 +22,8 @@ class CrudModel extends ChangeNotifier{
   String  get getTestString{
     return _testString;
   }
+
+  // Steam a List of Books from (Method).
+
 
 }

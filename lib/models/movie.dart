@@ -18,7 +18,7 @@ class Movie {
     required this.duration,
   });
 
-  Movie.fromMap(Map snapshot,String id) :
+  Movie.fromMap(Map<String, dynamic> snapshot,String id) :
         id = id ?? '',
         title = snapshot['title'] ?? '',
         imageUrl = snapshot['imageUrl'] ?? '',
