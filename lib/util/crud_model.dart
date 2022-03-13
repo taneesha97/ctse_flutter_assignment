@@ -8,7 +8,7 @@ class CrudModel extends ChangeNotifier{
 
   // Testing Constructor.
   CrudModel(){
-
+    TestingMethod();
   }
 
   //Testing
@@ -32,6 +32,12 @@ class CrudModel extends ChangeNotifier{
         duration: e.get("id"),
     )).toList());
   }
+
+  void TestingMethod(){
+    Stream<List<Movie>> movies = getListOfMovies;
+    print("This is List of Movies From CrudModel - $movies");
+  }
+
 
   // Steam a List of Books from (Method).
 
