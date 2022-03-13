@@ -172,6 +172,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_view_model:
+    dependency: "direct main"
+    description:
+      name: flutter_view_model
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.22"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -345,6 +352,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.2"
+  quiver_hashcode:
+    dependency: transitive
+    description:
+      name: quiver_hashcode
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
+  rx_command:
+    dependency: transitive
+    description:
+      name: rx_command
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.2.1"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.24.1"
   sky_engine:
     dependency: transitive
     description: flutter
