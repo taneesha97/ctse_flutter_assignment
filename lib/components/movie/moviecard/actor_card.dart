@@ -24,37 +24,40 @@ class ActorCard extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Row(
-          children: [
-            Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
-                        spreadRadius: 2,
-                        blurRadius: 8,
-                      ),
-                    ],
-                    borderRadius: new BorderRadius.circular(100),
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(imageUrl),
-                    )
-                ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Actor Name", style: Styles.actorCardHeader, overflow: TextOverflow.ellipsis,),
-                  Text("Character Name", style: TextStyle(fontSize: 12),),
-                ],
+        child: InkWell(
+          onTap: (){},
+          child: Row(
+            children: [
+              Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.4),
+                          spreadRadius: 2,
+                          blurRadius: 8,
+                        ),
+                      ],
+                      borderRadius: new BorderRadius.circular(100),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(imageUrl),
+                      )
+                  ),
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Actor Name", style: Styles.actorCardHeader, overflow: TextOverflow.ellipsis,),
+                    Text("Character Name", style: TextStyle(fontSize: 12),),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
