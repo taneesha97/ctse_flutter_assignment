@@ -14,15 +14,6 @@ class QuestionController extends GetxController
   PageController get pageController => this._pageController;
 
   List<Question> _questions = QuizList;
-  // List<Question> _questions = questions
-  //     .map(
-  //       (question) => Question(
-  //           id: question['id'],
-  //           question: question['question'],
-  //           options: question['options'],
-  //           answer: question['answer_index']),
-  //     )
-  //     .toList();
 
   List<Question> get questions => this._questions;
 
@@ -71,7 +62,7 @@ class QuestionController extends GetxController
   void checkAns(Question question, int selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
-    _correctAns = question.answer!;
+    _correctAns = question.answer! as int;
     _selectedAns = selectedIndex;
 
     if (_correctAns == _selectedAns) _numOfCorrectAns++;

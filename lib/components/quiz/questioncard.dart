@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,21 +13,25 @@ class QuestionCard extends StatelessWidget {
 
   const QuestionCard({Key? key, required this.question, required this.index})
       : super(key: key);
+  // const QuestionCard({Key? key, required this.index}) : super(key: key);
 
   final Question question;
+
   final String image = 'assets/images/movie1.jpg';
   //comment
 
   @override
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
+    print('ttiiiee');
+    //print(question);
 
-    onPress(Question question, int selectedIndex, String? questionID) {
-      print(question.answer);
-      print(selectedIndex + 1);
-      print(questionID);
-      _controller.checkAns(question, selectedIndex);
-    }
+    // onPress(Question question, int selectedIndex, String? questionID) {
+    //   print(question.answer);
+    //   print(selectedIndex + 1);
+    //   print(questionID);
+    //   _controller.checkAns(question, selectedIndex);
+    // }
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
@@ -91,8 +98,8 @@ class QuestionCard extends StatelessWidget {
                       itemBuilder: (context, index1) => Options(
                             index: index1,
                             text: QuizList[index].options![index1],
-                            press: () =>
-                                onPress(question, index1, QuizList[index].id),
+                            // press: () =>
+                            //     onPress(question, index1, QuizList[index].id),
                           )),
                 ],
               ),
