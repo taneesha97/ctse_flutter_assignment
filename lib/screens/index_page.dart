@@ -1,4 +1,5 @@
 import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
+import 'package:ctse_assignment_1/screens/movie_multi_select.dart';
 import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
@@ -145,14 +146,14 @@ class IndexPage extends StatelessWidget {
                     ),
 
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) =>  LongMovieCategory()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  MovieMultiSelect()),
+                      );
                     },
                     child: const Text(
-                      'Movie Library Page',
+                      'Movie Multi Select',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
