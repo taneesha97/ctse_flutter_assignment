@@ -44,6 +44,7 @@ class MovieCategory extends StatelessWidget {
                 return Text("Loading");
               }
               final data = snapshot.requireData;
+              data.docs.map((e) => print(e));
 
               return ListView.builder(
                 itemCount: data.size,

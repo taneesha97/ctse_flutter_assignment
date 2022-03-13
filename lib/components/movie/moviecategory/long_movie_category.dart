@@ -7,13 +7,15 @@ import '../../../util/crud_model.dart';
 import '../moviecard/long_movie_card.dart';
 
 class LongMovieCategory extends StatefulWidget {
-  const LongMovieCategory({Key? key}) : super(key: key);
+  final QuerySnapshot<Object?> index;
+  const LongMovieCategory({Key? key, required this.index,}) : super(key: key);
 
   @override
   State<LongMovieCategory> createState() => _LongMovieCategoryState();
 }
 
 class _LongMovieCategoryState extends State<LongMovieCategory> {
+
   @override
   Widget build(BuildContext context) {
     // Provider to the fetch all the movies.
@@ -29,7 +31,7 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                   const Text(
                     "Recommended",
                     style: TextStyle(
                       fontSize: 18,
@@ -44,28 +46,35 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
               ),
             ),
 
-            Container(
-              height: MediaQuery.of(context).size.height - 128,
-              child: StreamBuilder<QuerySnapshot>(
-                stream: movies,
-                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-                  if(snapshot.hasError){
-                    return Text("There an Error Loading Movies");
-                  }
-                  if(snapshot.connectionState == ConnectionState.waiting){
-                    return Text("Loading");
-                  }
-                  final data = snapshot.requireData;
-
-                  return ListView.builder(
-                    itemCount: data.size,
-                    itemBuilder: (context, index){
-                      return LongMovieCard(index: index);
-                    },
-                  );
-                },
-              )
-            ),
+            // Container(
+            //   height: MediaQuery.of(context).size.height - 128,
+            //   child: StreamBuilder<QuerySnapshot>(
+            //     stream: movies,
+            //     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+            //       if(snapshot.hasError){
+            //         return Text("There an Error Loading Movies");
+            //       }
+            //       if(snapshot.connectionState == ConnectionState.waiting){
+            //         return Text("Loading");
+            //       }
+            //       final data = snapshot.requireData;
+            //
+            //       return ListView.builder(
+            //         itemCount: data.size,
+            //         itemBuilder: (context, index){
+            //           return LongMovieCard(index: index);
+            //         },
+            //       );
+            //     },
+            //   )
+            // ),
+            Flexible(
+              child: ListView.builder(
+                  itemCount: 4,
+                  itemBuilder: (context, index){
+                    return LongMovieCard(index: index);
+                  }),
+            )
           ],
         ));
   }
