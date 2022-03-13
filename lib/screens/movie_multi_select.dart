@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../components/movie/moviecard/movie_select.dart';
 import '../util/crud_model.dart';
 
 class MovieMultiSelect extends StatefulWidget {
@@ -13,6 +15,19 @@ class MovieMultiSelect extends StatefulWidget {
 }
 
 class _MovieMultiSelectState extends State<MovieMultiSelect> {
+  List<SelectedMovieModel> selectedMovies = [];
+
+  // Temporary Hard coded Array List;
+
+  /// Drop this model and replaced it with the movies model.
+
+  List<SelectedMovieModel> selectableMovies = [
+    SelectedMovieModel("title", "imageUrl", true, 1908),
+    SelectedMovieModel("title", "imageUrl", true, 1908),
+    SelectedMovieModel("title", "imageUrl", true, 1908),
+    SelectedMovieModel("title", "imageUrl", true, 1908),
+  ];
+
   @override
   Widget build(BuildContext context) {
     // Importing the movies from Provider.
@@ -29,9 +44,9 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
       body:
         SafeArea(child: Container(
           child: ListView.builder(
-            itemCount: 4,
+            itemCount: selectableMovies.length,
             itemBuilder: (BuildContext context, int index){
-              return Text("this");
+              return SelectableMovie(selectedMovieModel: selectableMovies[index], selectedMoviesListRef: selectedMovies);
             },
           ),
         ),

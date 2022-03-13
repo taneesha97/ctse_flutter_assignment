@@ -1,5 +1,3 @@
-import 'dart:core';
-import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,11 +29,11 @@ class _SelectableMovieState extends State<SelectableMovie> {
         ),
       ),
       title: Text(
-        widget.title,
+        widget.selectedMovieModel.title,
         style: TextStyle(fontWeight: FontWeight.w600),
       ),
-      subtitle: Text(widget.year.toString()),
-      trailing: widget.isSelected
+      subtitle: Text(widget.selectedMovieModel.year.toString()),
+      trailing: widget.selectedMovieModel.isSelected
           ? Icon(
         Icons.check_circle,
         color: Colors.green[700],
@@ -45,7 +43,12 @@ class _SelectableMovieState extends State<SelectableMovie> {
       ),
       onTap:((){
         setState(() {
-
+            widget.selectedMovieModel.isSelected = !widget.selectedMovieModel.isSelected;
+            if(widget.selectedMovieModel.isSelected == true){
+              widget.selectedMoviesListRef.add(widget.selectedMovieModel);
+            } else if (widget.selectedMovieModel.isSelected == false){
+              widget.selectedMoviesListRef.removeWhere((element) =>element.title == widget.selectedMovieModel.title);
+            }
         });
       }),
     );
