@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/models/movie.dart';
 import 'package:ctse_assignment_1/util/crud_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 void main() {
@@ -6,9 +7,10 @@ void main() {
     final crudModel = CrudModel();
 
     //Act
-
+    Stream<List<Movie>> movies = crudModel.getListOfMovies;
 
     // Asset
+    print(movies);
 
   });
 }
