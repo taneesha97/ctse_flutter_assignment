@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ctse_assignment_1/models/movie.dart';
 import 'package:flutter/cupertino.dart';
 
 class CrudModel extends ChangeNotifier{
@@ -6,12 +7,12 @@ class CrudModel extends ChangeNotifier{
   final Stream<QuerySnapshot> _movieStream = FirebaseFirestore.instance.collection('movies').snapshots();
 
   // Testing Constructor.
-  CrudModel();
+  CrudModel(){
+
+  }
 
   //Testing
   String _testString = "Test Value 1";
-
-  // Steam Data For the Movies.
 
   // Getter for the User Steam.
   Stream<QuerySnapshot> get movies {
@@ -19,8 +20,17 @@ class CrudModel extends ChangeNotifier{
   }
 
   // Getter for the private testing variable.
-  String  get getTestString{
-    return _testString;
+  Stream<List<Movie>>  get getListOfMovies{
+
+    return _movieStream.map((event) => event.docs.map((e) => Movie(
+        id: e.get("id"),
+        title: e.get("name"),
+        imageUrl: e.get("title"),
+        description: e.get("id"),
+        rating: e.get("id"),
+        year: e.get("id"),
+        duration: e.get("id"),
+    )).toList());
   }
 
   // Steam a List of Books from (Method).
