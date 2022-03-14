@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,21 +13,26 @@ class QuestionCard extends StatelessWidget {
 
   const QuestionCard({Key? key, required this.question, required this.index})
       : super(key: key);
+  // const QuestionCard({Key? key, required this.index}) : super(key: key);
 
   final Question question;
+
   final String image = 'assets/images/movie1.jpg';
   //comment
 
   @override
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
+    print('ttiiiee');
+    print(question.question);
+    print('tddd');
 
-    onPress(Question question, int selectedIndex, String? questionID) {
-      print(question.answer);
-      print(selectedIndex + 1);
-      print(questionID);
-      _controller.checkAns(question, selectedIndex);
-    }
+    // onPress(Question question, int selectedIndex, String? questionID) {
+    //   print(question.answer);
+    //   print(selectedIndex + 1);
+    //   print(questionID);
+    //   _controller.checkAns(question, selectedIndex);
+    // }
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
@@ -38,7 +46,7 @@ class QuestionCard extends StatelessWidget {
           children: [
             Text.rich(
               TextSpan(
-                  text: "${QuizList[index].id}",
+                  text: "${question.id}",
                   style: Theme.of(context).textTheme.headline6,
                   children: [
                     TextSpan(
@@ -53,7 +61,7 @@ class QuestionCard extends StatelessWidget {
             Center(
               child: Text(
                 //movieList[index].title.toString()
-                QuizList[index].question.toString(),
+                question.question.toString(),
                 style: Theme.of(context)
                     .textTheme
                     .headline6!
@@ -66,9 +74,9 @@ class QuestionCard extends StatelessWidget {
             ),
             Column(
               children: [
-                if (QuizList[index].imageUri != "") ...[
+                if (question.imageUri.toString() != "") ...[
                   Image.network(
-                    QuizList[index].imageUri.toString(),
+                    question.imageUri.toString(),
                     height: 170,
                     width: 150,
                   ),
@@ -90,9 +98,9 @@ class QuestionCard extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index1) => Options(
                             index: index1,
-                            text: QuizList[index].options![index1],
-                            press: () =>
-                                onPress(question, index1, QuizList[index].id),
+                            text: question.options![index1],
+                            // press: () =>
+                            //     onPress(question, index1, QuizList[index].id),
                           )),
                 ],
               ),

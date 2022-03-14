@@ -13,18 +13,10 @@ class QuestionController extends GetxController
   late PageController _pageController;
   PageController get pageController => this._pageController;
 
-  List<Question> _questions = QuizList;
-  // List<Question> _questions = questions
-  //     .map(
-  //       (question) => Question(
-  //           id: question['id'],
-  //           question: question['question'],
-  //           options: question['options'],
-  //           answer: question['answer_index']),
-  //     )
-  //     .toList();
+  //List<Question> _questions = QuizList;
+  //Provider.of<QuizCrudModel>(context, listen: false).readQuizes()
 
-  List<Question> get questions => this._questions;
+  //List<Question> get questions => this._questions;
 
   bool _isAnswered = false;
   bool get isAnswered => this._isAnswered;
@@ -71,7 +63,7 @@ class QuestionController extends GetxController
   void checkAns(Question question, int selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
-    _correctAns = question.answer!;
+    _correctAns = question.answer! as int;
     _selectedAns = selectedIndex;
 
     if (_correctAns == _selectedAns) _numOfCorrectAns++;
@@ -87,7 +79,9 @@ class QuestionController extends GetxController
   }
 
   void nextQuestion() {
-    if (_questionNumber.value != _questions.length) {
+    // if (_questionNumber.value != _questions.length) {
+    if (_questionNumber.value != 10) {
+      // have to chnage
       _isAnswered = false;
       _pageController.nextPage(
           duration: Duration(milliseconds: 250), curve: Curves.ease);
