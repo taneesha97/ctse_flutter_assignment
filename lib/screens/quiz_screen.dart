@@ -12,7 +12,6 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  QuestionController _questionController = Get.put(QuestionController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

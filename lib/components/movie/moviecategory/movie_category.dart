@@ -1,6 +1,7 @@
-import 'package:ctse_assignment_1/models/movie.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../../../styles.dart';
+import 'package:provider/provider.dart';
+import '../../../util/crud_model.dart';
 import '../moviecard/small_movie_card.dart';
 
 class MovieCategory extends StatelessWidget {
@@ -8,6 +9,8 @@ class MovieCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Later Changed this to relevant category of movies.
+    Stream<QuerySnapshot> movies = Provider.of<CrudModel>(context, listen: false).movies;
     return Column(
       children: <Widget>[
         Padding(
@@ -31,11 +34,27 @@ class MovieCategory extends StatelessWidget {
         ),
         Container(
           height: 230,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: movieList.length,
-            itemBuilder: (ctx,i) => MovieCard(index: i),
-          ),
+          child: StreamBuilder<QuerySnapshot>(
+            stream: movies,
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+              if(snapshot.hasError){
+                return Text("There an Error Loading Movies");
+              }
+              if(snapshot.connectionState == ConnectionState.waiting){
+                return Text("Loading");
+              }
+              final data = snapshot.requireData;
+              data.docs.map((e) => print(e));
+
+              return ListView.builder(
+                itemCount: data.size,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index){
+                  return MovieCard(index: index);
+                },
+              );
+            },
+          )
         )
       ],
     );

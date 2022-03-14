@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,17 +9,31 @@ import '../../models/quiz.dart';
 import 'options.dart';
 
 class QuestionCard extends StatelessWidget {
-  const QuestionCard({
-    Key? key,
-    required this.question,
-  }) : super(key: key);
+  final int index;
+
+  const QuestionCard({Key? key, required this.question, required this.index})
+      : super(key: key);
+  // const QuestionCard({Key? key, required this.index}) : super(key: key);
 
   final Question question;
+
+  final String image = 'assets/images/movie1.jpg';
   //comment
 
   @override
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
+    print('ttiiiee');
+    print(question.question);
+    print('tddd');
+
+    // onPress(Question question, int selectedIndex, String? questionID) {
+    //   print(question.answer);
+    //   print(selectedIndex + 1);
+    //   print(questionID);
+    //   _controller.checkAns(question, selectedIndex);
+    // }
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
       padding: EdgeInsets.all(5),
@@ -43,7 +60,8 @@ class QuestionCard extends StatelessWidget {
             ),
             Center(
               child: Text(
-                question.question,
+                //movieList[index].title.toString()
+                question.question.toString(),
                 style: Theme.of(context)
                     .textTheme
                     .headline6!
@@ -54,10 +72,20 @@ class QuestionCard extends StatelessWidget {
             SizedBox(
               height: 8,
             ),
-            Image.asset(
-              "assets/images/movie1.jpg",
-              height: 150,
-              width: 300,
+            Column(
+              children: [
+                if (question.imageUri.toString() != "") ...[
+                  Image.network(
+                    question.imageUri.toString(),
+                    height: 170,
+                    width: 150,
+                  ),
+                ] else ...[
+                  SizedBox(
+                    height: 2,
+                  ),
+                ],
+              ],
             ),
             SizedBox(
               height: 8,
@@ -68,10 +96,11 @@ class QuestionCard extends StatelessWidget {
                   ListView.builder(
                       itemCount: 4,
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => Options(
-                            index: index,
-                            text: question.options[index],
-                            press: () => _controller.checkAns(question, index),
+                      itemBuilder: (context, index1) => Options(
+                            index: index1,
+                            text: question.options![index1],
+                            // press: () =>
+                            //     onPress(question, index1, QuizList[index].id),
                           )),
                 ],
               ),

@@ -54,9 +54,9 @@ class Options extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
-                            "${index! + 1}. $text",
+                            "$text",
                             style:
-                                TextStyle(color: Colors.black45, fontSize: 14),
+                                TextStyle(color: Colors.black, fontSize: 14),
                           ),
                         ),
                       ],

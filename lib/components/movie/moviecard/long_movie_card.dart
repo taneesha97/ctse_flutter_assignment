@@ -14,12 +14,13 @@ class LongMovieCard extends StatelessWidget {
     queryData = MediaQuery.of(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
+      child: InkWell(
         onTap: (){
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>  SingleMoviePage()),
+                builder: (context) =>  SingleMoviePage(index: 1,)
+            ),
           );
         },
         child: Row(
