@@ -1,17 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctse_assignment_1/styles.dart';
 import 'package:flutter/material.dart';
 
 class LibraryForm extends StatefulWidget {
-  const LibraryForm({Key? key}) : super(key: key);
+  CollectionReference libraries = FirebaseFirestore.instance.collection('libraries');
+  LibraryForm({Key? key}) : super(key: key);
 
   @override
   _LibraryFormState createState() => _LibraryFormState();
 }
 
 class _LibraryFormState extends State<LibraryForm> {
+
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  String name = "";
+  String library_name = "default";
+
+  Future<void> CreateLibrary() {
+    return widget.libraries.add({
+          "library_name": "libraryName",
+        })
+        .then((value) => print("Library Added"))
+        .catchError((error) => print("Failed to create the Library"));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +50,13 @@ class _LibraryFormState extends State<LibraryForm> {
                   "Custom Libraries to Manage Favorite Movies",
                   style: Styles.textSectionSubBody,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
+                  onSaved: (value){
+                    library_name=value!;
+                    },
                   decoration: const InputDecoration(
                       labelText: "Enter the Library Name"),
                   validator: (value) {
@@ -59,16 +73,7 @@ class _LibraryFormState extends State<LibraryForm> {
                 ),
                 Center(
                   child: ElevatedButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          final status = SnackBar(
-                              content: Text(
-                            "Library Added",
-                            style: Styles.textSectionSubBody,
-                          ));
-                          _scaffoldKey.currentState!.showSnackBar(status);
-                        }
-                      },
+                      onPressed: CreateLibrary,
                       child: Text(
                         "Add to the Library",
                         style: Styles.navBarTitle,
