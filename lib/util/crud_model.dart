@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ctse_assignment_1/models/movie.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../models/movie.dart';
 
 class CrudModel extends ChangeNotifier{
 
@@ -14,12 +15,8 @@ class CrudModel extends ChangeNotifier{
     return _movieStream;
   }
 
-
-
-
   // Getter for the private testing variable.
   // Stream<List<Movie>>  get getListOfMovies{
-  //
   //   return _movieStream.map((event) => event.docs.map((e) => Movie(
   //     id: e.data()["id"] ?? 2,
   //     title: e.data()["title"] ?? "default",
