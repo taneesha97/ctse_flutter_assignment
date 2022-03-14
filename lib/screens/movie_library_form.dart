@@ -17,19 +17,33 @@ class _LibraryFormState extends State<LibraryForm> {
     final double height= MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.teal,
         elevation: 0,
+        toolbarHeight: 10,
       ),
-      body: Container(
-        child: Form(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: height*0.4),
-              Text("Create a Library", style: Styles.textSectionHeader,),
-              Text("Custom Libraries to Manage Favorite Movies", style: Styles.textSectionSubBody,),
-
-            ],
+      body: Padding(
+        padding: EdgeInsets.all(10),
+        child: Container(
+          child: Form(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Create a Library", style: Styles.textSectionHeader,),
+                Text("Custom Libraries to Manage Favorite Movies", style: Styles.textSectionSubBody,),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: "Enter the Library Name"
+                  ),
+                  validator: (value){
+                    if(value!.isEmpty || !RegExp(r'^[a-z]+$').hasMatch(value!)){
+                      return "Please enter correct library name";
+                    } else {
+                      return null;
+                    }
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),
