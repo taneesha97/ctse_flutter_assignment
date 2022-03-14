@@ -24,7 +24,8 @@ class QuestionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
     print('ttiiiee');
-    //print(question);
+    print(question.question);
+    print('tddd');
 
     // onPress(Question question, int selectedIndex, String? questionID) {
     //   print(question.answer);
@@ -45,7 +46,7 @@ class QuestionCard extends StatelessWidget {
           children: [
             Text.rich(
               TextSpan(
-                  text: "${QuizList[index].id}",
+                  text: "${question.id}",
                   style: Theme.of(context).textTheme.headline6,
                   children: [
                     TextSpan(
@@ -60,7 +61,7 @@ class QuestionCard extends StatelessWidget {
             Center(
               child: Text(
                 //movieList[index].title.toString()
-                QuizList[index].question.toString(),
+                question.question.toString(),
                 style: Theme.of(context)
                     .textTheme
                     .headline6!
@@ -73,9 +74,9 @@ class QuestionCard extends StatelessWidget {
             ),
             Column(
               children: [
-                if (QuizList[index].imageUri != "") ...[
+                if (question.imageUri.toString() != "") ...[
                   Image.network(
-                    QuizList[index].imageUri.toString(),
+                    question.imageUri.toString(),
                     height: 170,
                     width: 150,
                   ),
@@ -97,7 +98,7 @@ class QuestionCard extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index1) => Options(
                             index: index1,
-                            text: QuizList[index].options![index1],
+                            text: question.options![index1],
                             // press: () =>
                             //     onPress(question, index1, QuizList[index].id),
                           )),
