@@ -7,39 +7,29 @@ class CrudModel extends ChangeNotifier{
   final Stream<QuerySnapshot> _movieStream = FirebaseFirestore.instance.collection('movies').snapshots();
 
   // Testing Constructor.
-  CrudModel(){
-    TestingMethod();
-  }
-
-  //Testing
-  String _testString = "Test Value 1";
+  CrudModel();
 
   // Getter for the User Steam.
   Stream<QuerySnapshot> get movies {
     return _movieStream;
   }
 
+
+
+
   // Getter for the private testing variable.
-  Stream<List<Movie>>  get getListOfMovies{
-
-    return _movieStream.map((event) => event.docs.map((e) => Movie(
-        id: e.get("id"),
-        title: e.get("name"),
-        imageUrl: e.get("title"),
-        description: e.get("id"),
-        rating: e.get("id"),
-        year: e.get("id"),
-        duration: e.get("id"),
-    )).toList());
-  }
-
-  void TestingMethod(){
-    Stream<List<Movie>> movies = getListOfMovies;
-    print("This is List of Movies From CrudModel - $movies");
-  }
-
-
-  // Steam a List of Books from (Method).
+  // Stream<List<Movie>>  get getListOfMovies{
+  //
+  //   return _movieStream.map((event) => event.docs.map((e) => Movie(
+  //     id: e.data()["id"] ?? 2,
+  //     title: e.data()["title"] ?? "default",
+  //     imageUrl: e.data()["imageUrl"] ?? "default",
+  //     description: e.data()["description"] ?? "default",
+  //     rating: e.data()["rating"] ?? "default",
+  //     year: e.data()["year"] ?? "default",
+  //     duration: e.data()["duration"] ?? "default",
+  //   )).toList());
+  // }
 
 
 }
