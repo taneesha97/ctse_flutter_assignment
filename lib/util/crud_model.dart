@@ -18,15 +18,13 @@ class CrudModel extends ChangeNotifier{
   // Getter for the private testing variable.
   Stream<List<Movie>>  get getListOfMovies{
     return _movieStream.map((event) => event.docs.map((e) => Movie(
-      id: e.data()["id"] ?? 2,
-      title: e.data()["title"] ?? "default",
-      imageUrl: e.data()["imageUrl"] ?? "default",
-      description: e.data()["description"] ?? "default",
-      rating: e.data()["rating"] ?? "default",
-      year: e.data()["year"] ?? "default",
-      duration: e.data()["duration"] ?? "default",
+      id: e["id"] ?? '',
+      title: e["title"] ?? "default",
+      imageUrl: e["imageUrl"] ?? "default",
+      description: e["description"] ?? "default",
+      rating: e["rating"] ?? "default",
+      year: e["year"] ?? "default",
+      duration: e["duration"] ?? "default",
     )).toList());
   }
-
-
 }

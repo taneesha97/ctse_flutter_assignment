@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctse_assignment_1/models/movie.dart';
-import 'package:ctse_assignment_1/util/crud_model.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 
@@ -18,13 +15,13 @@ void main() async {
   Stream<List<Movie>> listOfMovies () {
     //final Stream<QuerySnapshot> _movieStream = FirebaseFirestore.instance.collection('movies').snapshots();
     return snapshot.map((event) => event.docs.map((e) => Movie(
-      id: e.data()["id"] ?? 2,
-      title: e.data()["title"] ?? "default",
-      imageUrl: e.get("title") ?? "default",
-      description: e.get("id") ?? "default",
-      rating: e.get("id") ?? "default",
-      year: e.get("id") ?? "default",
-      duration: e.get("id") ?? "default",
+      id: e["id"] ?? 2,
+      title: e["title"] ?? "default",
+      imageUrl: e["imageUrl"] ?? "default",
+      description: e["description"] ?? "default",
+      rating: e["rating"] ?? "default",
+      year: e["year"] ?? "default",
+      duration: e["duration"] ?? "default",
     )).toList());
   }
 
