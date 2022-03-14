@@ -18,8 +18,8 @@ void main() async {
   Stream<List<Movie>> listOfMovies () {
     //final Stream<QuerySnapshot> _movieStream = FirebaseFirestore.instance.collection('movies').snapshots();
     return snapshot.map((event) => event.docs.map((e) => Movie(
-      id: e.get("id") ?? 2,
-      title: e.get("name") ?? "default",
+      id: e.data()["id"] ?? 2,
+      title: e.data()["title"] ?? "default",
       imageUrl: e.get("title") ?? "default",
       description: e.get("id") ?? "default",
       rating: e.get("id") ?? "default",
@@ -46,7 +46,7 @@ void main() async {
     //Act
 
     // Asset
-    movies.listen((event) => print(event.length));
+    movies.listen((event) => print(event.map((e) => print(e.title))));
 
   });
 
