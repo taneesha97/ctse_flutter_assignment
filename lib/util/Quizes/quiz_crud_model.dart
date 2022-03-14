@@ -21,7 +21,7 @@ class QuizCrudModel extends ChangeNotifier {
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           Question b = Question(
-              id: doc.id.toString(),
+              id: doc['id'].toString(),
               question: doc['question'].toString(),
               answer: doc['answer'].toString(),
               options: doc['options'],

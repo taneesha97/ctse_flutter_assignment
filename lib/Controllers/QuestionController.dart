@@ -13,9 +13,10 @@ class QuestionController extends GetxController
   late PageController _pageController;
   PageController get pageController => this._pageController;
 
-  List<Question> _questions = QuizList;
+  //List<Question> _questions = QuizList;
+  //Provider.of<QuizCrudModel>(context, listen: false).readQuizes()
 
-  List<Question> get questions => this._questions;
+  //List<Question> get questions => this._questions;
 
   bool _isAnswered = false;
   bool get isAnswered => this._isAnswered;
@@ -78,7 +79,9 @@ class QuestionController extends GetxController
   }
 
   void nextQuestion() {
-    if (_questionNumber.value != _questions.length) {
+    // if (_questionNumber.value != _questions.length) {
+    if (_questionNumber.value != 10) {
+      // have to chnage
       _isAnswered = false;
       _pageController.nextPage(
           duration: Duration(milliseconds: 250), curve: Curves.ease);
