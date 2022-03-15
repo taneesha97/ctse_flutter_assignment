@@ -17,6 +17,8 @@ class QuizCrudModel extends ChangeNotifier {
 
   late List<int?> valueSet;
 
+  String QuizID = '';
+
   int noCorrectAnswers = 0;
   int AnsweredQuestions = 0;
   int noWrongAnswers = 0;
@@ -75,9 +77,8 @@ class QuizCrudModel extends ChangeNotifier {
   }
 
 
-  Future<void> updateValues(Question question, String selectedIndex) async {
+  Future<void> updateValues(Question question, String selectedIndex, String QuizID1) async {
     // valueSet = _controller.checkCorrectWrongAnswers(question, selectedIndex.toString())!;
-
     if(question.answer! == (int.parse(selectedIndex) + 1).toString()){
       noCorrectAnswers++;
       AnsweredQuestions++;
@@ -85,14 +86,8 @@ class QuizCrudModel extends ChangeNotifier {
       noWrongAnswers++;
       AnsweredQuestions++;
     }
-    print(selectedIndex + '1');
-    print('hiww');
-    print(noCorrectAnswers);
-    print(AnsweredQuestions);
-    print(noWrongAnswers);
-    print('hsss');
     try {
-      await FirebaseFirestore.instance.collection('result-quizes').doc('ldGIa8qq6vyyKAPUepOa').update({
+      await FirebaseFirestore.instance.collection('result-quizes').doc(QuizID1).update({
         'id': question.id ?? '',
         'no_questions': AnsweredQuestions ?? 0,
         'userId': 1 ?? '',
@@ -104,15 +99,18 @@ class QuizCrudModel extends ChangeNotifier {
     }
   }
 
-  Future<void> create(String id, int no_questions, String userId, int correct_answer, int wrong_answer) async {
+  Future<dynamic> insertQuizData(String id, int noQuestions, String userId, int correctAnswer, int wrongAnswer) async {
     try {
-      await FirebaseFirestore.instance.collection('quizes').add({
-        'id': id,
-        'no_questions': no_questions,
-        'userId': userId,
-        'correct_answer': correct_answer,
-        'wrong_answer': wrong_answer,
+      DocumentReference<Map<String, dynamic>> value = await FirebaseFirestore.instance.collection('result-quizes').add({
+        'id': id ?? '',
+        'no_questions': noQuestions ?? 0,
+        'userId': userId ?? '',
+        'correct_answer': correctAnswer ?? 0,
+        'wrong_answer': wrongAnswer ?? 0,
       });
+      // print(value.id);
+      // print('dkks');
+      return value.id.toString();
     } catch (e) {
       print(e);
     }
@@ -122,4 +120,17 @@ class QuizCrudModel extends ChangeNotifier {
   Stream<QuerySnapshot> get quizesList {
     return _quizList;
   }
+
+  Future<void> saveQuizID(String QuizID1) async {
+    QuizID = QuizID1;
+    print('saveQuizID');
+    print(QuizID);
+  }
+
+  Future<String> shareQuizID() async {
+
+    return QuizID;
+  }
+
+
 }
