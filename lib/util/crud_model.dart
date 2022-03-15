@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../models/library_model.dart';
@@ -54,4 +53,8 @@ class CrudModel extends ChangeNotifier {
     return FirebaseFirestore.instance.collection("libraries").snapshots().map(
         (event) => event.docs.map((e) => Library.fromMap(e.data())).toList());
   }
+
+  // Library Name Update method.
+
+  // Library Delete method.
 }
