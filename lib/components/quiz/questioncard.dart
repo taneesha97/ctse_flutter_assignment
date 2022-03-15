@@ -3,9 +3,11 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../Controllers/QuestionController.dart';
 import '../../models/quiz.dart';
+import '../../util/Quizes/quiz_crud_model.dart';
 import 'options.dart';
 
 class QuestionCard extends StatelessWidget {
@@ -27,12 +29,13 @@ class QuestionCard extends StatelessWidget {
     print(question.question);
     print('tddd');
 
-    // onPress(Question question, int selectedIndex, String? questionID) {
-    //   print(question.answer);
-    //   print(selectedIndex + 1);
-    //   print(questionID);
-    //   _controller.checkAns(question, selectedIndex);
-    // }
+    onPress(Question question, int selectedIndex, String? questionID) {
+      // print(question.answer);
+      // print(selectedIndex + 1);
+      // print(questionID);
+      Provider.of<QuizCrudModel>(context, listen: false).updateValues(question, selectedIndex.toString());
+      _controller.checkAns(question, selectedIndex.toString());
+    }
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
@@ -99,8 +102,7 @@ class QuestionCard extends StatelessWidget {
                       itemBuilder: (context, index1) => Options(
                             index: index1,
                             text: question.options![index1],
-                            // press: () =>
-                            //     onPress(question, index1, QuizList[index].id),
+                            press: () => onPress(question, index1, question.id),
                           )),
                 ],
               ),
