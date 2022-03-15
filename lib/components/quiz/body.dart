@@ -11,7 +11,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
 class Body extends StatefulWidget {
-  Body({Key? key}) : super(key: key);
+  Body({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -33,22 +35,8 @@ class _BodyState extends State<Body> {
               setState(() {
                 docs1 = value;
               }),
-              // docs1 = value,
-              print('check is it working'),
-              print(docs1[0].toJson()),
-              print('ssss'),
+              // docs1 = value
             });
-    // print('hello');
-    // db = DatabaseService();
-    // db.readQuizes().then((value) => {
-    //       docs = value,
-    //       print('hhhhh'),
-    //       print(docs[0].toJson()),
-    //       print('hhhhh salitha'),
-    //       setState(() {
-    //         docs = value;
-    //       })
-    //     });
   }
 
   @override
@@ -81,18 +69,6 @@ class _BodyState extends State<Body> {
                 index: index,
               ),
             ),
-
-            // child: PageView.builder(
-            //   // Block swipe to next qn
-            //   physics: NeverScrollableScrollPhysics(),
-            //   controller: _questionController.pageController,
-            //   onPageChanged: _questionController.updateTheQnNum,
-            //   itemCount: docs.length,
-            //   itemBuilder: (context, index) => QuestionCard(
-            //     question: docs1[index],
-            //     index: index,
-            //   ),
-            // ),
           ),
           SizedBox(
             height: 12,
