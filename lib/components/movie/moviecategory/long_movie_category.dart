@@ -20,6 +20,10 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
     // Provider to the fetch all the movies.
     Stream<QuerySnapshot> movies =
         Provider.of<CrudModel>(context, listen: false).movies;
+
+    // Custom Provider.
+    Stream<List<Movie>> listMovies = Provider.of<CrudModel>(context).getListOfMoviesShort;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -52,10 +56,9 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
               height: 10,
             ),
             Flexible(
-                child: StreamBuilder<QuerySnapshot>(
-              stream: movies,
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                child: StreamBuilder<List<Movie>>(
+              stream: listMovies,
+              builder: (BuildContext context, snapshot) {
                 if (snapshot.hasError) {
                   return Text("There an Error Loading Movies");
                 }
@@ -65,7 +68,7 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
                 final data = snapshot.requireData;
 
                 return ListView.builder(
-                  itemCount: data.size,
+                  itemCount: data.length,
                   itemBuilder: (context, index) {
                     return LongMovieCard(index: index);
                   },
