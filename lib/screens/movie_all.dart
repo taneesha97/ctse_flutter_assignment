@@ -10,11 +10,6 @@ class AllMovieScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("All Movies - Library"),
-        backgroundColor: primaryColor,
-        centerTitle: true,
-      ),
       body: Container(
         child: LongMovieCategory(),
       )

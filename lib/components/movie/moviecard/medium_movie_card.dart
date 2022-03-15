@@ -73,7 +73,7 @@ class CustomCard extends StatelessWidget {
                     children: [
                       Text(movieList[index].title.toString(),
                         overflow: TextOverflow.ellipsis,
-                        style: Styles.textSectionHeader,
+                        style: Styles.smallCardHeader,
                       ),
                       Text(movieList[index].year,
                         overflow: TextOverflow.ellipsis,
