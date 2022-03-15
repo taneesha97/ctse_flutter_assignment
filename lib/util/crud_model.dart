@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../models/library_model.dart';
 import '../models/movie.dart';
 
 class CrudModel extends ChangeNotifier{
@@ -38,7 +39,10 @@ class CrudModel extends ChangeNotifier{
   }
 
   // Method to add libraries to the Firebase.
-  Future addLibraries(Movie movie) async {
+  Future addLibraries(Library library) async {
     final addLibrary = FirebaseFirestore.instance.collection("libraries").doc();
+    library.id = addLibrary.id;
+    final json = library.toJson();
+    await addLibrary.set(json);
   }
 }
