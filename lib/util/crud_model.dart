@@ -27,4 +27,15 @@ class CrudModel extends ChangeNotifier{
       duration: e["duration"] ?? "default",
     )).toList());
   }
+
+  // Getter for the list of movies (Short hand method.) - Not yet tested.
+  Stream<List<Movie>>  get getListOfMoviesShort{
+    Stream<List<Movie>> movies = _movieStream.map((event) => event.docs.map((e) => e.data() as Map<String, dynamic>)).toList() as Stream<List<Movie>>;
+    return movies;
+  }
+
+  // Method to add libraries to the Firebase.
+  Future addLibraries(Movie movie){
+    final
+  }
 }
