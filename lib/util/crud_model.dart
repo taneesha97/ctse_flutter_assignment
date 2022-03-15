@@ -5,8 +5,9 @@ import 'package:flutter/cupertino.dart';
 import '../models/library_model.dart';
 import '../models/movie.dart';
 
-class CrudModel extends ChangeNotifier{
-  final Stream<QuerySnapshot> _movieStream = FirebaseFirestore.instance.collection('movies').snapshots();
+class CrudModel extends ChangeNotifier {
+  final Stream<QuerySnapshot> _movieStream =
+      FirebaseFirestore.instance.collection('movies').snapshots();
 
   // Testing Constructor.
   CrudModel();
@@ -17,24 +18,30 @@ class CrudModel extends ChangeNotifier{
   }
 
   // Getter for the private testing variable.
-  Stream<List<Movie>>  get getListOfMovies {
-    Stream<QuerySnapshot> movieStreams = FirebaseFirestore.instance.collection('movies').snapshots();
+  Stream<List<Movie>> get getListOfMovies {
+    Stream<QuerySnapshot> movieStreams =
+        FirebaseFirestore.instance.collection('movies').snapshots();
 
-    return movieStreams.map((event) => event.docs.map((e) => Movie(
-      id: e["id"] ?? '',
-      title: e["title"] ?? "default",
-      imageUrl: e["imageUrl"] ?? "default",
-      description: e["description"] ?? "default",
-      rating: e["rating"] ?? "default",
-      year: e["year"] ?? "default",
-      duration: e["duration"] ?? "default",
-    )).toList());
+    return movieStreams.map((event) => event.docs
+        .map((e) => Movie(
+              id: e["id"] ?? '',
+              title: e["title"] ?? "default",
+              imageUrl: e["imageUrl"] ?? "default",
+              description: e["description"] ?? "default",
+              rating: e["rating"] ?? "default",
+              year: e["year"] ?? "default",
+              duration: e["duration"] ?? "default",
+            ))
+        .toList());
   }
 
   // Getter for the list of movies (Short hand method.) - Not yet tested.
-  Future<List<Movie>>  get getListOfMoviesShort async{
-    QuerySnapshot _moviesGet =  await FirebaseFirestore.instance.collection("movies").get();
-    List<Movie> movies = _moviesGet.docs.map((e) => Movie.fromMap(e.data() as Map<String, dynamic>)).toList();
+  Future<List<Movie>> get getListOfMoviesShort async {
+    QuerySnapshot _moviesGet =
+        await FirebaseFirestore.instance.collection("movies").get();
+    List<Movie> movies = _moviesGet.docs
+        .map((e) => Movie.fromMap(e.data() as Map<String, dynamic>))
+        .toList();
     return movies;
   }
 
@@ -46,9 +53,9 @@ class CrudModel extends ChangeNotifier{
     await addLibrary.set(json);
   }
 
-  Future<List<Library>>  get getListOfLibraries async{
-    QuerySnapshot _moviesGet =  await FirebaseFirestore.instance.collection("libraries").get();
-    List<Library> libraries = _moviesGet.docs.map((e) => Library.fromMap(e.data() as Map<String, dynamic>)).toList();
-    return libraries;
+  // Get a List of Libraries.
+  Stream<List<Library>> get getListOfLibraries {
+    return FirebaseFirestore.instance.collection("libraries").snapshots().map(
+        (event) => event.docs.map((e) => Library.fromMap(e.data())).toList());
   }
 }
