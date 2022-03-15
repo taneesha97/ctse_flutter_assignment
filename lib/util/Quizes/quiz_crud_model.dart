@@ -96,7 +96,7 @@ class QuizCrudModel extends ChangeNotifier {
         'id': question.id ?? '',
         'no_questions': AnsweredQuestions ?? 0,
         'userId': 1 ?? '',
-        'correct_answer': AnsweredQuestions ?? 0,
+        'correct_answer': noCorrectAnswers ?? 0,
         'wrong_answer': noWrongAnswers ?? 0,
       });
     } catch (e) {
