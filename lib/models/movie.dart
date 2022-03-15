@@ -1,4 +1,7 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+
 class Movie {
   String id;
   String title;
@@ -39,7 +42,7 @@ class Movie {
     };
   }
 
-}
+  }
 
 final movieList = [
   Movie(

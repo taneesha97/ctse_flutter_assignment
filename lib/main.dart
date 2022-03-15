@@ -2,6 +2,7 @@ import 'package:ctse_assignment_1/screens/index_page.dart';
 
 import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/movie_all.dart';
+import 'package:ctse_assignment_1/screens/movie_library_form.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/util/Quizes/quiz_crud_model.dart';
 import 'package:ctse_assignment_1/util/crud_model.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           backgroundColor: Colors.black,
         ),
-        home: IndexPage(),
+        home: LibraryForm(),
       ),
     );
   }

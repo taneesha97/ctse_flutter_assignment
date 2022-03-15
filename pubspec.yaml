@@ -44,6 +44,7 @@ dependencies:
   video_player: ^2.2.19
   provider: ^6.0.2
   get_it: ^7.2.0
+  fake_cloud_firestore: ^1.2.1
   flutter_view_model: ^0.1.22
   localstorage: ^4.0.0+1
 

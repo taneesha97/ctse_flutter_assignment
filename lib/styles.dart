@@ -25,7 +25,7 @@ class Styles {
   static final Color indexPurple = _hexToColor('7F26FDFF');
 
   static final navBarTitle = TextStyle(
-    fontFamily: FontNameDefault,
+    fontFamily: "Montserrat",
     fontWeight: FontWeight.w800,
     fontSize: MediumTextSize,
     color: textColorBright,

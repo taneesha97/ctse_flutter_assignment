@@ -71,7 +71,12 @@ class MovieWiki extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  AllMovieScreen(index: array_data)),
+                                  StreamBuilder<QuerySnapshot>(
+                                    stream: movies,
+                                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                                      return AllMovieScreen();
+                                    }
+                                  )),
                         );
                       },
                     ),
@@ -85,8 +90,7 @@ class MovieWiki extends StatelessWidget {
                 height: 200,
                 child: StreamBuilder<QuerySnapshot>(
                   stream: movies,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasError) {
                       return Text("There an Error Loading Movies");
                     }
