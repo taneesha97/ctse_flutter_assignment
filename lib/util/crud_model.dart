@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../models/movie.dart';
 
 class CrudModel extends ChangeNotifier{
-
   final Stream<QuerySnapshot> _movieStream = FirebaseFirestore.instance.collection('movies').snapshots();
 
   // Testing Constructor.
@@ -16,8 +16,10 @@ class CrudModel extends ChangeNotifier{
   }
 
   // Getter for the private testing variable.
-  Stream<List<Movie>>  get getListOfMovies{
-    return _movieStream.map((event) => event.docs.map((e) => Movie(
+  Stream<List<Movie>>  get getListOfMovies {
+    Stream<QuerySnapshot> movieStreams = FirebaseFirestore.instance.collection('movies').snapshots();
+
+    return movieStreams.map((event) => event.docs.map((e) => Movie(
       id: e["id"] ?? '',
       title: e["title"] ?? "default",
       imageUrl: e["imageUrl"] ?? "default",
@@ -29,13 +31,14 @@ class CrudModel extends ChangeNotifier{
   }
 
   // Getter for the list of movies (Short hand method.) - Not yet tested.
-  Stream<List<Movie>>  get getListOfMoviesShort{
-    Stream<List<Movie>> movies = _movieStream.map((event) => event.docs.map((e) => e.data() as Map<String, dynamic>)).toList() as Stream<List<Movie>>;
+  Future<List<Movie>>  get getListOfMoviesShort async{
+    QuerySnapshot _moviesGet =  await FirebaseFirestore.instance.collection("movies").get();
+    List<Movie> movies = _moviesGet.docs.map((e) => Movie.fromMap(e.data() as Map<String, dynamic>)).toList();
     return movies;
   }
 
   // Method to add libraries to the Firebase.
-  Future addLibraries(Movie movie){
-    final
+  Future addLibraries(Movie movie) async {
+    final addLibrary = FirebaseFirestore.instance.collection("libraries").doc();
   }
 }
