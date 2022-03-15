@@ -1,4 +1,5 @@
 import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
+import 'package:ctse_assignment_1/screens/Sample%20Screen/movie_library_list.dart';
 import 'package:ctse_assignment_1/screens/movie_multi_select.dart';
 import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
@@ -10,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../styles.dart';
 import 'movie_all.dart';
+import 'movie_library_form.dart';
 
 class IndexPage extends StatelessWidget {
   const IndexPage({Key? key}) : super(key: key);
@@ -184,6 +186,58 @@ class IndexPage extends StatelessWidget {
                     },
                     child: const Text(
                       'All Movies Page',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  LibraryList()),
+                      );
+                    },
+                    child: const Text(
+                      'Library List',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  LibraryForm()),
+                      );
+                    },
+                    child: const Text(
+                      'Library Form',
                       style:
                       TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),

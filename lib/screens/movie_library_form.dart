@@ -1,9 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctse_assignment_1/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/library_model.dart';
+import '../util/crud_model.dart';
 
 class LibraryForm extends StatefulWidget {
-  CollectionReference libraries = FirebaseFirestore.instance.collection('libraries');
   LibraryForm({Key? key}) : super(key: key);
 
   @override
@@ -11,23 +13,12 @@ class LibraryForm extends StatefulWidget {
 }
 
 class _LibraryFormState extends State<LibraryForm> {
-
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  String library_name = "default";
-
-  Future<void> CreateLibrary() {
-    return widget.libraries.add({
-          "library_name": "libraryName",
-        })
-        .then((value) => print("Library Added"))
-        .catchError((error) => print("Failed to create the Library"));
-  }
+  String? lname;
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -54,11 +45,10 @@ class _LibraryFormState extends State<LibraryForm> {
                   height: 20,
                 ),
                 TextFormField(
-                  onSaved: (value){
-                    library_name=value!;
-                    },
+                  onChanged: (val) => setState(() => lname = val),
                   decoration: const InputDecoration(
-                      labelText: "Enter the Library Name"),
+                      labelText: "Enter the Library Name",
+                  fillColor: Colors.teal),
                   validator: (value) {
                     if (value!.isEmpty ||
                         !RegExp(r'^[a-z]+$').hasMatch(value!)) {
@@ -73,7 +63,20 @@ class _LibraryFormState extends State<LibraryForm> {
                 ),
                 Center(
                   child: ElevatedButton(
-                      onPressed: CreateLibrary,
+                      onPressed: (){
+                        if (formKey.currentState!.validate()){
+                          // Create the Library Model.
+                          final library = Library(
+                            name: lname.toString(),
+                            optional: "optional",
+                            id: 'default-id',
+                          );
+
+                          // Call the DB method to write to the database.
+                          Provider.of<CrudModel>(context, listen: false).addLibraries(library);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(primary: Colors.teal),
                       child: Text(
                         "Add to the Library",
                         style: Styles.navBarTitle,
