@@ -7,6 +7,7 @@ import '../../models/quiz.dart';
 import '../../util/Quizes/quiz_crud_model.dart';
 import '../progressbar.dart';
 import 'questioncard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
 class Body extends StatefulWidget {
@@ -18,7 +19,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   List<Question> docs1 = [];
-  final QuestionController _questionController = Get.put(QuestionController());
+  QuestionController _questionController = Get.put(QuestionController());
 
   late DatabaseService db;
   List<Question> docs = [];
@@ -26,7 +27,8 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     super.initState();
-    Provider.of<QuizCrudModel>(context, listen: false).readQuizes()
+    Provider.of<QuizCrudModel>(context, listen: false)
+        .readQuizes()
         .then((value) => {
               setState(() {
                 docs1 = value;
@@ -36,6 +38,17 @@ class _BodyState extends State<Body> {
               print(docs1[0].toJson()),
               print('ssss'),
             });
+    // print('hello');
+    // db = DatabaseService();
+    // db.readQuizes().then((value) => {
+    //       docs = value,
+    //       print('hhhhh'),
+    //       print(docs[0].toJson()),
+    //       print('hhhhh salitha'),
+    //       setState(() {
+    //         docs = value;
+    //       })
+    //     });
   }
 
   @override
@@ -50,7 +63,7 @@ class _BodyState extends State<Body> {
 
     return SafeArea(
         child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         children: [
           SizedBox(
@@ -69,6 +82,17 @@ class _BodyState extends State<Body> {
               ),
             ),
 
+            // child: PageView.builder(
+            //   // Block swipe to next qn
+            //   physics: NeverScrollableScrollPhysics(),
+            //   controller: _questionController.pageController,
+            //   onPageChanged: _questionController.updateTheQnNum,
+            //   itemCount: docs.length,
+            //   itemBuilder: (context, index) => QuestionCard(
+            //     question: docs1[index],
+            //     index: index,
+            //   ),
+            // ),
           ),
           SizedBox(
             height: 12,

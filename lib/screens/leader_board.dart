@@ -7,7 +7,7 @@ class LeaderBoard extends StatefulWidget {
 }
 
 class _LeaderBoardState extends State<LeaderBoard> {
-// rank , image, name, place, points
+
   List names = ["Bright vachirawit", "Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit"];
   List place = ["1st place", "1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place"];
   @override

@@ -21,11 +21,11 @@ class QuestionController extends GetxController
   bool _isAnswered = false;
   bool get isAnswered => this._isAnswered;
 
-  late String _correctAns;
-  String get correctAns => this._correctAns;
+  late int _correctAns;
+  int get correctAns => this._correctAns;
 
-  late String _selectedAns;
-  String get selectedAns => this._selectedAns;
+  late int _selectedAns;
+  int get selectedAns => this._selectedAns;
 
   // for more about obs please check documentation
   RxInt _questionNumber = 1.obs;
@@ -33,9 +33,6 @@ class QuestionController extends GetxController
 
   int _numOfCorrectAns = 0;
   int get numOfCorrectAns => this._numOfCorrectAns;
-
-  List<int?>? valueSet;
-
 
   @override
   void onInit() {
@@ -63,28 +60,10 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  List<int?>? checkCorrectWrongAnswers(Question question, String selectedIndex) {
-
-    int noCorrectAnswers = 0;
-    int AnsweredQuestions = 0;
-    int noWrongAnswers = 0;
-    if(question.answer! == selectedIndex){
-      noCorrectAnswers++;
-      AnsweredQuestions++;
-    }else if(question.answer! != selectedIndex){
-      noWrongAnswers++;
-      AnsweredQuestions++;
-    }
-    valueSet?.add(AnsweredQuestions);
-    valueSet?.add(noCorrectAnswers);
-    valueSet?.add(noWrongAnswers);
-    return valueSet;
-  }
-
-  void checkAns(Question question, String selectedIndex) {
+  void checkAns(Question question, int selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
-    _correctAns = question.answer!;
+    _correctAns = question.answer! as int;
     _selectedAns = selectedIndex;
 
     if (_correctAns == _selectedAns) _numOfCorrectAns++;
@@ -101,7 +80,7 @@ class QuestionController extends GetxController
 
   void nextQuestion() {
     // if (_questionNumber.value != _questions.length) {
-    if (_questionNumber.value != 4) {
+    if (_questionNumber.value != 10) {
       // have to chnage
       _isAnswered = false;
       _pageController.nextPage(
@@ -114,11 +93,6 @@ class QuestionController extends GetxController
       // Once timer is finish go to the next qn
       _animationController.forward().whenComplete(nextQuestion);
     } else {
-      //send to the database
-      
-
-
-
       // Get package provide us simple way to naviigate another page
       //Get.to(ScoreScreen());
     }

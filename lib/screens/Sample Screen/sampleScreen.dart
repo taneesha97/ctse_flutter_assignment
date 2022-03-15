@@ -1,92 +1,101 @@
 import 'package:flutter/material.dart';
-import 'package:reviews_slider/reviews_slider.dart';
 
-class SampleScreen extends StatefulWidget {
-  SampleScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SampleScreen> createState() => _SampleScreenState();
-}
-
-class _SampleScreenState extends State<SampleScreen> {
-  int? selectedValue1;
-  int? selectedValue2;
-
-  void onChange1(int value) {
-    setState(() {
-      selectedValue1 = value;
-    });
-  }
-
-  void onChange2(int value) {
-    setState(() {
-      selectedValue2 = value;
-    });
-  }
+class SampleScreen extends StatelessWidget {
+  const SampleScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.grey,
-      child: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'How was the help you received?',
-              style: TextStyle(color: Color(0xFF6f7478), fontSize: 18),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ReviewSlider(
-                onChange: onChange1,
-                optionStyle: TextStyle(
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 1
-                ),
-                options: ['Terrible', 'Malo', 'Bien', 'Vale', 'Genial']
-                
-              ),
-            ),
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ReviewSlider(
-                    onChange: onChange1,
-                    circleDiameter: 40,
-                    optionStyle: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 1
-                    ),
-                    options: ['Terrible', 'Malo', 'Bien', 'Vale', 'Genial']
+      color: Colors.yellow,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SavedQuizComponent(),
+              SavedQuizComponent(),
+              SavedQuizComponent(),
+              SavedQuizComponent(),
+              SavedQuizComponent(),
+              SavedQuizComponent(),
+              SavedQuizComponent(),
+              SavedQuizComponent(),
+              SavedQuizComponent(),
+              SavedQuizComponent(),
+              SavedQuizComponent(),
+              SavedQuizComponent(),
+            ],
+          ),
+        ),
+      ),
+    );
+    ;
+  }
+}
 
+class SavedQuizComponent extends StatelessWidget {
+  const SavedQuizComponent({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: Material(
+        //borderRadius: 20,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Container(
+          // decoration: BoxDecoration(
+          //   borderRadius: BorderRadius.circular(50),
+          // ),
+          child: Padding(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: Column(
+                    children: [Text("Hi 1"), Text("Hi 2")],
+                  ),
                 ),
-              ),
+                // SizedBox(
+                //   width: ,
+                // ),
+                Container(
+                  padding: EdgeInsets.all(5),
+                  child: Row(
+                    children: [
+                      Ink(
+                        decoration: ShapeDecoration(
+                            shape: CircleBorder(), color: Colors.blue),
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                            )),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Ink(
+                        decoration: ShapeDecoration(
+                            shape: CircleBorder(), color: Colors.red),
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            // Text(
-            //     selectedValue1.toString(),
-            //   style: TextStyle(fontSize: 1),
-            // ),
-            // SizedBox(height: 20),
-            // Text(
-            //   '¿Cómo fue la ayuda que recibiste?',
-            //   style: TextStyle(color: Color(0xFF6f7478), fontSize: 18),
-            // ),
-            // SizedBox(height: 20),
-            // ReviewSlider(
-            //     optionStyle: TextStyle(
-            //       color: Colors.red,
-            //       fontWeight: FontWeight.bold,
-            //     ),
-            //     onChange: onChange2,
-            //     initialValue: 1,
-            //     options: ['Terrible', 'Malo', 'Bien', 'Vale', 'Genial']),
-            // Text(selectedValue2.toString()),
-          ],
+          ),
         ),
       ),
     );

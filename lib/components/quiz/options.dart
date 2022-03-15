@@ -21,25 +21,15 @@ class Options extends StatelessWidget {
         init: QuestionController(),
         builder: (qnController) {
           Color getTheRightColor() {
-
             if (qnController.isAnswered) {
-              // ignore: unrelated_type_equality_checks
-              //return Colors.green;
-              // print('hi');
-              // print(qnController.selectedAns);
-              // print(index.toString() == qnController.selectedAns);
-              // print('hi2');
-              if (index.toString() == qnController.selectedAns){
+              if (index == qnController.correctAns) {
                 return Colors.green;
+              } else if (index == qnController.selectedAns &&
+                  qnController.selectedAns != qnController.correctAns) {
+                return Colors.red;
               }
-              // if (index == qnController.correctAns) {
-              //   return Colors.green;
-              // } else if (index == qnController.selectedAns &&
-              //     qnController.selectedAns != qnController.correctAns) {
-              //   return Colors.red;
-              // }
             }
-            return const Color.fromARGB(255, 0, 238, 255);
+            return Colors.grey;
           }
 
           IconData getTheRightIcon() {
@@ -48,31 +38,25 @@ class Options extends StatelessWidget {
 
           return Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: EdgeInsets.only(bottom: 10),
               child: Material(
                 borderRadius: BorderRadius.circular(15),
-                color: getTheRightColor(),
+                color: Color.fromARGB(255, 0, 238, 255),
                 child: InkWell(
                   onTap: press,
                   borderRadius: BorderRadius.circular(25),
                   child: Container(
-                    margin: const EdgeInsets.only(bottom: 7),
-                    padding: const EdgeInsets.only(top: 7, bottom: 7),
-                    // decoration: BoxDecoration(
-                    //   border: Border.all(color: getTheRightColor()),
-                    //   borderRadius: BorderRadius.circular(15),
-                    // ),
+                    margin: EdgeInsets.only(bottom: 7),
+                    padding: EdgeInsets.only(top: 7, bottom: 7),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 10),
+                          padding: EdgeInsets.only(left: 10),
                           child: Text(
                             "$text",
                             style:
-                                const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14),
+                                TextStyle(color: Colors.black, fontSize: 14),
                           ),
                         ),
                       ],
