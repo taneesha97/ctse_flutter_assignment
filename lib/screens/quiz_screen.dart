@@ -6,7 +6,14 @@ import 'package:get/get.dart';
 import '../Controllers/QuestionController.dart';
 
 class QuizScreen extends StatefulWidget {
-  QuizScreen({Key? key}) : super(key: key);
+
+  // final String userID;
+
+
+  QuizScreen({
+    Key? key
+    
+    }) : super(key: key);
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
