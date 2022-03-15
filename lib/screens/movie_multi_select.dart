@@ -26,6 +26,14 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
     SelectedMovieModel("title", "imageUrl", true, 1908),
     SelectedMovieModel("title", "imageUrl", true, 1908),
     SelectedMovieModel("title", "imageUrl", true, 1908),
+    SelectedMovieModel("title", "imageUrl", true, 1908),
+    SelectedMovieModel("title", "imageUrl", true, 1908),
+    SelectedMovieModel("title", "imageUrl", true, 1908),
+    SelectedMovieModel("title", "imageUrl", true, 1908),
+    SelectedMovieModel("title", "imageUrl", true, 1908),
+    SelectedMovieModel("title", "imageUrl", true, 1908),
+    SelectedMovieModel("title", "imageUrl", true, 1908),
+    SelectedMovieModel("title", "imageUrl", true, 1908),
   ];
 
   @override
@@ -42,13 +50,25 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
         title: Text("Movie Multi Select"),
       ),
       body:
-        SafeArea(child: Container(
-          child: ListView.builder(
-            itemCount: selectableMovies.length,
-            itemBuilder: (BuildContext context, int index){
-              return SelectableMovie(selectedMovieModel: selectableMovies[index], selectedMoviesListRef: selectedMovies);
-            },
-          ),
+        SafeArea(child: Column(
+          children: [
+            Flexible(
+              flex: 9,
+              child: ListView.builder(
+                itemCount: selectableMovies.length,
+                itemBuilder: (BuildContext context, int index){
+                  return SelectableMovie(selectedMovieModel: selectableMovies[index], selectedMoviesListRef: selectedMovies);
+                },
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              child: ElevatedButton(
+                onPressed: () {  },
+                child: const Text("Add Movies to the Library"),
+              ),
+            )
+          ],
         ),
 
         )
