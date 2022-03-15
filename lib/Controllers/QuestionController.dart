@@ -21,11 +21,11 @@ class QuestionController extends GetxController
   bool _isAnswered = false;
   bool get isAnswered => this._isAnswered;
 
-  late int _correctAns;
-  int get correctAns => this._correctAns;
+  late String _correctAns;
+  String get correctAns => this._correctAns;
 
-  late int _selectedAns;
-  int get selectedAns => this._selectedAns;
+  late String _selectedAns;
+  String get selectedAns => this._selectedAns;
 
   // for more about obs please check documentation
   RxInt _questionNumber = 1.obs;
@@ -33,6 +33,8 @@ class QuestionController extends GetxController
 
   int _numOfCorrectAns = 0;
   int get numOfCorrectAns => this._numOfCorrectAns;
+
+  List<int?>? valueSet;
 
   @override
   void onInit() {
@@ -60,10 +62,28 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  void checkAns(Question question, int selectedIndex) {
+  List<int?>? checkCorrectWrongAnswers(Question question, String selectedIndex) {
+
+    int noCorrectAnswers = 0;
+    int AnsweredQuestions = 0;
+    int noWrongAnswers = 0;
+    if(question.answer! == selectedIndex){
+      noCorrectAnswers++;
+      AnsweredQuestions++;
+    }else if(question.answer! != selectedIndex){
+      noWrongAnswers++;
+      AnsweredQuestions++;
+    }
+    valueSet?.add(AnsweredQuestions);
+    valueSet?.add(noCorrectAnswers);
+    valueSet?.add(noWrongAnswers);
+    return valueSet;
+  }
+
+  void checkAns(Question question, String selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
-    _correctAns = question.answer! as int;
+    _correctAns = question.answer!;
     _selectedAns = selectedIndex;
 
     if (_correctAns == _selectedAns) _numOfCorrectAns++;
@@ -80,7 +100,7 @@ class QuestionController extends GetxController
 
   void nextQuestion() {
     // if (_questionNumber.value != _questions.length) {
-    if (_questionNumber.value != 10) {
+    if (_questionNumber.value != 4) {
       // have to chnage
       _isAnswered = false;
       _pageController.nextPage(

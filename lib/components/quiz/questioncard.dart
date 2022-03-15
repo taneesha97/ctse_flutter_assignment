@@ -1,21 +1,25 @@
-import 'dart:convert';
-import 'dart:ffi';
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:provider/provider.dart';
 
 import '../../Controllers/QuestionController.dart';
 import '../../models/quiz.dart';
+import '../../util/Quizes/quiz_crud_model.dart';
 import 'options.dart';
 
 class QuestionCard extends StatelessWidget {
   final int index;
 
-  const QuestionCard({Key? key, required this.question, required this.index})
+  QuestionCard({Key? key, required this.question, required this.index})
       : super(key: key);
   // const QuestionCard({Key? key, required this.index}) : super(key: key);
 
   final Question question;
+  final LocalStorage storage = new LocalStorage('localstorage_app');
+
 
   final String image = 'assets/images/movie1.jpg';
   //comment
@@ -23,16 +27,17 @@ class QuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
-    print('ttiiiee');
-    print(question.question);
-    print('tddd');
+    // print(QuizID1);
+    // print('questionCard');
 
-    // onPress(Question question, int selectedIndex, String? questionID) {
-    //   print(question.answer);
-    //   print(selectedIndex + 1);
-    //   print(questionID);
-    //   _controller.checkAns(question, selectedIndex);
-    // }
+    onPress(Question question, int selectedIndex, String? questionID) {
+
+      final QuizID = storage.getItem('QuizID');
+      print(QuizID);
+      print('questionCard');
+      Provider.of<QuizCrudModel>(context, listen: false).updateValues(question, selectedIndex.toString(), QuizID);
+      _controller.checkAns(question, selectedIndex.toString());
+    }
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
@@ -99,8 +104,7 @@ class QuestionCard extends StatelessWidget {
                       itemBuilder: (context, index1) => Options(
                             index: index1,
                             text: question.options![index1],
-                            // press: () =>
-                            //     onPress(question, index1, QuizList[index].id),
+                            press: () => onPress(question, index1, question.id),
                           )),
                 ],
               ),
