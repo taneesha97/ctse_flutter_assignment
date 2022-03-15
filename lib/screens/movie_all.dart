@@ -5,8 +5,7 @@ import '../constants.dart';
 
 class AllMovieScreen extends StatelessWidget {
 
-  final QuerySnapshot<Object?> index;
-  const AllMovieScreen({Key? key, required this.index}) : super(key: key);
+  const AllMovieScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class AllMovieScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Container(
-        child: LongMovieCategory(index: index,),
+        child: LongMovieCategory(),
       )
     );
   }
