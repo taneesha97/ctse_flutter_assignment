@@ -45,4 +45,10 @@ class CrudModel extends ChangeNotifier{
     final json = library.toJson();
     await addLibrary.set(json);
   }
+
+  Future<List<Library>>  get getListOfLibraries async{
+    QuerySnapshot _moviesGet =  await FirebaseFirestore.instance.collection("libraries").get();
+    List<Library> libraries = _moviesGet.docs.map((e) => Library.fromMap(e.data() as Map<String, dynamic>)).toList();
+    return libraries;
+  }
 }
