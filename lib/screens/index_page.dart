@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/components/movie/moviecard/long_library_movie_card.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
 import 'package:ctse_assignment_1/screens/movie_library_list.dart';
 import 'package:ctse_assignment_1/screens/movie_multi_select.dart';
@@ -181,7 +182,7 @@ class IndexPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  LongMovieCategory()),
+                            builder: (context) =>  AllMovieScreen()),
                       );
                     },
                     child: const Text(

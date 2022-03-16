@@ -28,7 +28,7 @@ class LongLibraryMovieCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                height: 150,
+                height: 100,
                 width: 100,
                 decoration:  BoxDecoration(
                   image:   DecorationImage(
@@ -51,7 +51,7 @@ class LongLibraryMovieCard extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: Container(
-                  height: 150,
+                  height: 100,
                   width: queryData.size.width * (67/100),
                   decoration:  BoxDecoration(
                     borderRadius: const BorderRadius.only(
