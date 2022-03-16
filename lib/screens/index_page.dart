@@ -4,7 +4,10 @@ import 'package:ctse_assignment_1/screens/movie_library_list.dart';
 import 'package:ctse_assignment_1/screens/movie_multi_select.dart';
 import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
+import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
+import 'package:ctse_assignment_1/screens/quice_configuration_splash.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
+import 'package:ctse_assignment_1/screens/score_screen.dart';
 import 'package:ctse_assignment_1/util/crud_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -245,6 +248,53 @@ class IndexPage extends StatelessWidget {
                   ),
                   const SizedBox(
                     height: 15,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  SplashQuiceConfig()),
+                      );
+                    },
+                    child: const Text(
+                      'Score Page',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  DropDown()),
+                      );
+                    },
+                    child: const Text(
+                      'Quiz configurationForm',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
