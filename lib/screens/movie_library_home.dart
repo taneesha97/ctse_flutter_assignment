@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../models/movie.dart';
 import '../styles.dart';
 import '../util/crud_model.dart';
+import 'movie_multi_select.dart';
 
 class LibraryHome extends StatefulWidget {
   final String name;
@@ -37,14 +38,38 @@ class _LibraryHomeState extends State<LibraryHome> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                "All Libraries",
-                style: Styles.textSectionHeader,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: 10,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "All Libraries",
+                          style: Styles.textSectionHeader,
+                        ),
+                        Text(
+                          "Custom Libraries to Manage Favorite Movies",
+                          style: Styles.textSectionSubBody,
+                        ),
+                      ],
+                    ),
+                  ),
+                  FloatingActionButton.small(onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>  MovieMultiSelect()),
+                    );
+                  }, child: const Icon(Icons.add), backgroundColor: Colors.teal,),
+                ],
               ),
-              Text(
-                "Custom Libraries to Manage Favorite Movies",
-                style: Styles.textSectionSubBody,
-              ),
+
+
               const SizedBox(
                 height: 10,
               ),
