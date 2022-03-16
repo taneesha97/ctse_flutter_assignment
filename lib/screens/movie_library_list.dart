@@ -77,7 +77,7 @@ class LibraryList extends StatelessWidget {
     },
     child: ListTile(
       leading: const CircleAvatar(child: Text("O")),
-      title: Text(library.name),
+      title: Text(library.id),
     ),
   );
 

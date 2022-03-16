@@ -3,7 +3,6 @@ import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../components/movie/moviecard/movie_select.dart';
 import '../util/crud_model.dart';
 
