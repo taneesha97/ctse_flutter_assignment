@@ -52,7 +52,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: Container(
                   height: 100,
-                  width: queryData.size.width * (67/100),
+                  width: queryData.size.width * (62.2/100),
                   decoration:  BoxDecoration(
                     borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(10.0),
