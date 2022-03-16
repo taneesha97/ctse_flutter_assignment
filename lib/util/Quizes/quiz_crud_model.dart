@@ -128,7 +128,6 @@ class QuizCrudModel extends ChangeNotifier {
   }
 
   Future<String> shareQuizID() async {
-
     return QuizID;
   }
 
