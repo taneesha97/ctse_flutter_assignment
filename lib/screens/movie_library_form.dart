@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../models/library_model.dart';
 import '../util/crud_model.dart';
+import 'movie_library_list.dart';
 
 class LibraryForm extends StatefulWidget {
   LibraryForm({Key? key}) : super(key: key);
@@ -79,6 +80,22 @@ class _LibraryFormState extends State<LibraryForm> {
                       style: ElevatedButton.styleFrom(primary: Colors.teal),
                       child: Text(
                         "Add to the Library",
+                        style: Styles.navBarTitle,
+                      )),
+                ),
+
+                Center(
+                  child: ElevatedButton(
+                      onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>  LibraryList()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(primary: Colors.teal),
+                      child: Text(
+                        "See All Libraries",
                         style: Styles.navBarTitle,
                       )),
                 ),
