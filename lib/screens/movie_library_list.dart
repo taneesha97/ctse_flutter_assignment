@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/library_model.dart';
-import '../../styles.dart';
-import '../../util/crud_model.dart';
+import '../models/library_model.dart';
+import '../styles.dart';
+import '../util/crud_model.dart';
 
 class LibraryList extends StatelessWidget {
   const LibraryList({Key? key}) : super(key: key);

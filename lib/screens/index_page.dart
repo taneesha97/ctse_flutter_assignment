@@ -1,5 +1,5 @@
 import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
-import 'package:ctse_assignment_1/screens/Sample%20Screen/movie_library_list.dart';
+import 'package:ctse_assignment_1/screens/movie_library_list.dart';
 import 'package:ctse_assignment_1/screens/movie_multi_select.dart';
 import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
