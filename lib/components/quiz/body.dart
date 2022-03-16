@@ -23,7 +23,6 @@ class _BodyState extends State<Body> {
   List<Question> docs1 = [];
   QuestionController _questionController = Get.put(QuestionController());
 
-  late DatabaseService db;
   List<Question> docs = [];
 
   @override

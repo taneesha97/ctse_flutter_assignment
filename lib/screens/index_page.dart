@@ -1,6 +1,10 @@
 import 'package:ctse_assignment_1/components/movie/moviecard/long_library_movie_card.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
+
 import 'package:ctse_assignment_1/screens/movie_library_list.dart';
+
+import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
+
 import 'package:ctse_assignment_1/screens/movie_multi_select.dart';
 import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
@@ -11,15 +15,26 @@ import 'package:ctse_assignment_1/screens/score_screen.dart';
 import 'package:ctse_assignment_1/util/crud_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:provider/provider.dart';
 
+import '../Controllers/QuestionController.dart';
 import '../styles.dart';
+import '../util/Quizes/quiz_crud_model.dart';
 import 'movie_all.dart';
 import 'movie_library_form.dart';
 
-class IndexPage extends StatelessWidget {
-  const IndexPage({Key? key}) : super(key: key);
+class IndexPage extends StatefulWidget {
+  @override
+  _IndexPageState createState() => _IndexPageState();
+}
 
+class _IndexPageState extends State<IndexPage> {
+  final LocalStorage storage = new LocalStorage('localstorage_app');
+  late String QuizID = "";
+
+  QuestionController _controller = Get.put(QuestionController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -82,6 +97,30 @@ class IndexPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
+                            builder: (context) => SampleScreen()),
+                      );
+                    },
+                    child: const Text(
+                      'Sample Screen',
+                      style: TextStyle(
+                          fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
                             builder: (context) => MovieWiki()),
                       );
                     },
@@ -127,6 +166,17 @@ class IndexPage extends StatelessWidget {
                       // foreground
                     ),
                     onPressed: () {
+                      Provider.of<QuizCrudModel>(context, listen: false)
+                          .insertQuizData('1', 0, 'U001', 0, 0)
+                          .then((value) {
+                            //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString());
+                            storage.setItem('QuizID', value.toString());
+                            _controller.setQuestionParameter(4, 20);
+
+                      });
+                      // QuizID = id as String;
+
+                      // Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(QuizID);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -150,7 +200,6 @@ class IndexPage extends StatelessWidget {
                       fixedSize: const Size(640, 70),
                       // foreground
                     ),
-
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -168,9 +217,6 @@ class IndexPage extends StatelessWidget {
                     height: 15,
                   ),
 
-
-
-
                   // Testing Button
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -180,7 +226,6 @@ class IndexPage extends StatelessWidget {
                       fixedSize: const Size(640, 70),
                       // foreground
                     ),
-
                     onPressed: () {
                       Navigator.push(
                         context,
