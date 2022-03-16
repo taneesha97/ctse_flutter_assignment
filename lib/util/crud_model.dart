@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../models/library_model.dart';
 import '../models/movie.dart';
 
@@ -36,13 +34,9 @@ class CrudModel extends ChangeNotifier {
   }
 
   // Getter for the list of movies (Short hand method.) - Not yet tested.
-  Future<List<Movie>> get getListOfMoviesShort async {
-    QuerySnapshot _moviesGet =
-        await FirebaseFirestore.instance.collection("movies").get();
-    List<Movie> movies = _moviesGet.docs
-        .map((e) => Movie.fromMap(e.data() as Map<String, dynamic>))
-        .toList();
-    return movies;
+  Stream<List<Movie>> get getListOfMoviesShort {
+    return FirebaseFirestore.instance.collection("movies").snapshots().map(
+            (event) => event.docs.map((e) => Movie.fromMap(e.data())).toList());
   }
 
   // Method to add libraries to the Firebase.
@@ -58,4 +52,8 @@ class CrudModel extends ChangeNotifier {
     return FirebaseFirestore.instance.collection("libraries").snapshots().map(
         (event) => event.docs.map((e) => Library.fromMap(e.data())).toList());
   }
+
+  // Library Name Update method.
+
+  // Library Delete method.
 }

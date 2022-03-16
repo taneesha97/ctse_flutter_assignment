@@ -178,11 +178,11 @@ class IndexPage extends StatelessWidget {
                     ),
 
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) =>  AllMovieScreen()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  LongMovieCategory()),
+                      );
                     },
                     child: const Text(
                       'All Movies Page',

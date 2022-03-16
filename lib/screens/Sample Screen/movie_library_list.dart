@@ -31,7 +31,7 @@ class LibraryList extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      "Create a Library",
+                      "All Libraries",
                       style: Styles.textSectionHeader,
                     ),
                     Text(
