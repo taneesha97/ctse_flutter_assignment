@@ -28,7 +28,7 @@ class LongLibraryMovieCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                height: 150,
+                height: 100,
                 width: 100,
                 decoration:  BoxDecoration(
                   image:   DecorationImage(
@@ -51,8 +51,8 @@ class LongLibraryMovieCard extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: Container(
-                  height: 150,
-                  width: queryData.size.width * (67/100),
+                  height: 100,
+                  width: queryData.size.width * (62.2/100),
                   decoration:  BoxDecoration(
                     borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(10.0),
@@ -80,7 +80,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                             Flexible(
                               child: Text(movieList[index].title.toString(),
                                 overflow: TextOverflow.ellipsis,
-                                style: Styles.textSectionHeader,
+                                style: Styles.smallCardHeader,
                               ),
                             ),
                             const SizedBox(
