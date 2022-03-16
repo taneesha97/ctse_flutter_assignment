@@ -15,12 +15,6 @@ class Options extends StatelessWidget {
     this.press,
   }) : super(key: key);
 
-  // (index) => Option(
-  //             index: index,
-  //             text: question.options[index],
-  //             press: () => _controller.checkAns(question, index),
-  //           ),
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<QuestionController>(
@@ -28,14 +22,16 @@ class Options extends StatelessWidget {
         builder: (qnController) {
           Color getTheRightColor() {
             if (qnController.isAnswered) {
-              if (index == qnController.correctAns) {
+              if (index.toString() == qnController.selectedAns) {
                 return Colors.green;
-              } else if (index == qnController.selectedAns &&
-                  qnController.selectedAns != qnController.correctAns) {
-                return Colors.red;
               }
+
+              // else if (index == qnController.selectedAns &&
+              //     qnController.selectedAns != qnController.correctAns) {
+              //   return Colors.red;
+              // }
             }
-            return Colors.grey;
+            return const Color.fromARGB(255, 0, 238, 255);
           }
 
           IconData getTheRightIcon() {
@@ -47,21 +43,22 @@ class Options extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 10),
               child: Material(
                 borderRadius: BorderRadius.circular(15),
-                color: Color.fromARGB(255, 0, 238, 255),
+                color: getTheRightColor(),
                 child: InkWell(
+                  onTap: press,
                   borderRadius: BorderRadius.circular(25),
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 8),
-                    padding: EdgeInsets.only(top: 8, bottom: 8),
+                    margin: EdgeInsets.only(bottom: 7),
+                    padding: EdgeInsets.only(top: 7, bottom: 7),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
-                            "Goosebumps",
+                            "$text",
                             style:
-                                TextStyle(color: Colors.black45, fontSize: 16),
+                                TextStyle(color: Colors.black, fontSize: 14),
                           ),
                         ),
                       ],
