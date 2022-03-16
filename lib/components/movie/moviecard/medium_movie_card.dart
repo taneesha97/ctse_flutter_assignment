@@ -37,7 +37,7 @@ class CustomCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>  SingleMoviePage()),
+                builder: (context) =>  SingleMoviePage(index: 2)),
           );
         },
         child: Column(
@@ -73,7 +73,7 @@ class CustomCard extends StatelessWidget {
                     children: [
                       Text(movieList[index].title.toString(),
                         overflow: TextOverflow.ellipsis,
-                        style: Styles.textSectionHeader,
+                        style: Styles.smallCardHeader,
                       ),
                       Text(movieList[index].year,
                         overflow: TextOverflow.ellipsis,

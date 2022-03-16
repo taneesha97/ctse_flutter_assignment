@@ -1,22 +1,48 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+
 class Movie {
-  final String? id;
-  final String? title;
-  final String? imageUrl;
-  final String? description;
-  final String? rating;
-  final String year;
-  final String duration;
+  String id;
+  String title;
+  String imageUrl;
+  String description;
+  String rating;
+  String year;
+  String duration;
 
   Movie({
-    this.id,
-    this.title,
-    this.imageUrl,
-    this.description,
-    this.rating,
+    required this.id,
+    required this.title,
+    required this.imageUrl,
+    required this.description,
+    required this.rating,
     required this.year,
     required this.duration,
   });
-}
+
+  Movie.fromMap(Map<String, dynamic> snapshot) :
+        id = snapshot["id"] ?? '',
+        title = snapshot['title'] ?? '',
+        imageUrl = snapshot['imageUrl'] ?? '',
+        description = snapshot['description'] ?? '',
+        rating = snapshot['rating'] ?? '',
+        year = snapshot['year'] ?? '',
+        duration = snapshot['duration'] ?? '';
+
+
+  toJson() {
+    return {
+      "title": title,
+      "imageUrl": imageUrl,
+      "description": description,
+      "rating": rating,
+      "year" : year,
+      "duration": duration,
+    };
+  }
+
+  }
 
 final movieList = [
   Movie(
@@ -161,3 +187,4 @@ final bestMovieList = [
       duration: '100 min'
   ),
 ];
+

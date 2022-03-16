@@ -24,8 +24,17 @@ class Styles {
   static final Color accentColor = _hexToColor('FF0000');
   static final Color indexPurple = _hexToColor('7F26FDFF');
 
+  /// Card Layout - Small Card.
+  static final smallCardHeader = TextStyle(
+    fontFamily: "Montserrat",
+    fontWeight: FontWeight.w600,
+    fontSize: MediumTextSize,
+    color: _hexToColor('000000'),
+  );
+
+
   static final navBarTitle = TextStyle(
-    fontFamily: FontNameDefault,
+    fontFamily: "Montserrat",
     fontWeight: FontWeight.w800,
     fontSize: MediumTextSize,
     color: textColorBright,
@@ -34,7 +43,7 @@ class Styles {
   static final textSectionHeader = TextStyle(
     fontFamily: "Montserrat",
     fontWeight: FontWeight.w600,
-    fontSize: MediumTextSize,
+    fontSize: LargeTextSize,
     color: _hexToColor('000000'),
   );
 
@@ -82,6 +91,14 @@ class Styles {
     fontWeight: FontWeight.w300,
     fontSize: 20,
     color: textColorBright,
+  );
+
+  /// Actor card related styles.
+  static final actorCardHeader = TextStyle(
+    fontFamily: "Montserrat",
+    fontWeight: FontWeight.w600,
+    fontSize: 15,
+    color: _hexToColor('000000'),
   );
 
   static Color _hexToColor(String code) {

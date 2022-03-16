@@ -14,12 +14,13 @@ class LongMovieCard extends StatelessWidget {
     queryData = MediaQuery.of(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
+      child: InkWell(
         onTap: (){
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>  SingleMoviePage()),
+                builder: (context) =>  SingleMoviePage(index: 1,)
+            ),
           );
         },
         child: Row(
@@ -51,7 +52,7 @@ class LongMovieCard extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Container(
                 height: 150,
-                width: queryData.size.width * (67/100),
+                width: queryData.size.width * (62.2/100),
                 decoration:  BoxDecoration(
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(10.0),
@@ -79,7 +80,7 @@ class LongMovieCard extends StatelessWidget {
                           Flexible(
                             child: Text(movieList[index].title.toString(),
                               overflow: TextOverflow.ellipsis,
-                              style: Styles.textSectionHeader,
+                              style: Styles.smallCardHeader,
                             ),
                           ),
                           const SizedBox(
