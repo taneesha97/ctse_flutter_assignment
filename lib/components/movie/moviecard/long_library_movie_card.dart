@@ -80,7 +80,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                             Flexible(
                               child: Text(movieList[index].title.toString(),
                                 overflow: TextOverflow.ellipsis,
-                                style: Styles.textSectionHeader,
+                                style: Styles.smallCardHeader,
                               ),
                             ),
                             const SizedBox(
