@@ -4,6 +4,7 @@ import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/movie_all.dart';
 import 'package:ctse_assignment_1/screens/movie_library_form.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
+import 'package:ctse_assignment_1/util/QuizeConfig/quize_list_crud_model.dart';
 import 'package:ctse_assignment_1/util/Quizes/quiz_crud_model.dart';
 import 'package:ctse_assignment_1/util/crud_model.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => CrudModel()),
         ChangeNotifierProvider(create: (context) => QuizCrudModel()),
+        ChangeNotifierProvider(create: (context) => QuizListCrudModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
