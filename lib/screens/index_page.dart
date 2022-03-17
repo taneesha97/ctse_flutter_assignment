@@ -246,31 +246,6 @@ class IndexPage extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Styles.indexPurple, // background
-                      onPrimary: Colors.white,
-                      padding: const EdgeInsets.all(20.0),
-                      fixedSize: const Size(640, 70),
-                      // foreground
-                    ),
-
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>  LibraryList()),
-                      );
-                    },
-                    child: const Text(
-                      'Library Form',
-                      style:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
                 ],
               ),
             ),
