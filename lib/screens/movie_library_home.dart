@@ -1,4 +1,5 @@
 import 'package:ctse_assignment_1/components/movie/moviecard/long_library_movie_card.dart';
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,9 +10,9 @@ import '../util/crud_model.dart';
 import 'movie_multi_select.dart';
 
 class LibraryHome extends StatefulWidget {
-  final String name;
+  final String libraryId;
   final Stream<List<Movie>>? movies;
-  const LibraryHome({Key? key, required this.name, this.movies}) : super(key: key);
+  const LibraryHome({Key? key, required this.libraryId, this.movies}) : super(key: key);
 
   @override
   State<LibraryHome> createState() => _LibraryHomeState();
@@ -20,7 +21,7 @@ class LibraryHome extends StatefulWidget {
 class _LibraryHomeState extends State<LibraryHome> {
   @override
   Widget build(BuildContext context) {
-    Stream<List<Movie>> listMovies = Provider.of<CrudModel>(context).getListOfMoviesShort;
+    Stream<List<SelectedMovieModel>> listMovies = Provider.of<CrudModel>(context).getMoviesFromLibrary(widget.libraryId);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -63,7 +64,7 @@ class _LibraryHomeState extends State<LibraryHome> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>  MovieMultiSelect()),
+                          builder: (context) =>  MovieMultiSelect(libraryId: widget.libraryId,)),
                     );
                   }, child: const Icon(Icons.add), backgroundColor: Colors.teal,),
                 ],
@@ -76,15 +77,15 @@ class _LibraryHomeState extends State<LibraryHome> {
               Flexible(
                 flex: 9,
                 child: SafeArea(
-                  child: StreamBuilder<List<Movie>>(
+                  child: StreamBuilder<List<SelectedMovieModel>>(
                       stream: listMovies,
                       builder: (context, snapshot) {
                         if(snapshot.hasError){
-                          return Text("Error");
+                          return Text(snapshot.toString());
                         } else if(snapshot.hasData){
                           final libraries = snapshot.data!;
                           return ListView.builder(
-                            itemCount: 5,
+                            itemCount: libraries.length,
                             itemBuilder: (BuildContext context, index){
                               return LongLibraryMovieCard(index: index);
                             },
