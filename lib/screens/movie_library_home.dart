@@ -12,7 +12,8 @@ import 'movie_multi_select.dart';
 class LibraryHome extends StatefulWidget {
   final String libraryId;
   final Stream<List<Movie>>? movies;
-  const LibraryHome({Key? key, required this.libraryId, this.movies}) : super(key: key);
+  final String libraryName;
+  const LibraryHome({Key? key, required this.libraryId, required this.libraryName, this.movies}) : super(key: key);
 
   @override
   State<LibraryHome> createState() => _LibraryHomeState();
@@ -50,7 +51,7 @@ class _LibraryHomeState extends State<LibraryHome> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "All Libraries",
+                          widget.libraryName,
                           style: Styles.textSectionHeader,
                         ),
                         Text(
