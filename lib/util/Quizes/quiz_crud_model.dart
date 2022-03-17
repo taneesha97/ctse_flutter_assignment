@@ -120,7 +120,7 @@ class QuizCrudModel extends ChangeNotifier {
     }
   }
 
-  Future<dynamic> insertFeedBack(String value1, String value2) async {
+  Future<dynamic> insertFeedBack(String? value1, String? value2) async {
     try {
       DocumentReference<Map<String, dynamic>> value =
       await FirebaseFirestore.instance.collection('Feedback').add({

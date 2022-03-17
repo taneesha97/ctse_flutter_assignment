@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:reviews_slider/reviews_slider.dart';
+
+import '../util/Quizes/quiz_crud_model.dart';
 
 class FeedBackForm extends StatefulWidget {
   const FeedBackForm({Key? key}) : super(key: key);
@@ -37,10 +40,7 @@ class _FeedBackFormState extends State<FeedBackForm> {
         reviewSliderValue = 'Best';
       });
     }
-
   }
-
-
 
   void onTextFieldChange ( String value) {
     print(value);
@@ -49,6 +49,7 @@ class _FeedBackFormState extends State<FeedBackForm> {
   void onPress () {
     print(reviewSliderValue);
     print(TextFieldValue);
+    Provider.of<QuizCrudModel>(context, listen: false).insertFeedBack(reviewSliderValue, TextFieldValue);
   }
 
 

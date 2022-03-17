@@ -5,11 +5,10 @@ import '../models/quiz.dart';
 
 class QuestionController extends GetxController
     with SingleGetTickerProviderMixin {
-  final int? ti; 
+  final int? ti;
   QuestionController({
-
     this.ti,
-  }) ;
+  });
   late AnimationController _animationController;
 
   late Animation _animation;
@@ -37,7 +36,7 @@ class QuestionController extends GetxController
 
   int _numOfCorrectAns = 0;
   int get numOfCorrectAns => this._numOfCorrectAns;
-  
+
   int _time = 10;
 
   List<int?>? valueSet;
@@ -102,11 +101,6 @@ class QuestionController extends GetxController
     return valueSet;
   }
 
-  void setQuestionParameter(int No, int time) {
-    _noOfQuestions = No;
-    _time = time;
-  }
-
   void checkAns(Question question, String selectedIndex) {
     // because once user press any option then it will run
     print(question.answer!);
@@ -129,9 +123,8 @@ class QuestionController extends GetxController
   }
 
   void nextQuestion() {
-    
     print(_noOfQuestions);
-    
+
     if (_questionNumber.value != _noOfQuestions) {
       _isAnswered = false;
       _pageController.nextPage(
