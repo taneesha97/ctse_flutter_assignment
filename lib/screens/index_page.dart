@@ -152,7 +152,7 @@ class IndexPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  MovieMultiSelect()),
+                            builder: (context) =>  MovieMultiSelect(libraryId: "pWcw0R9HoJSg2QHpj6jU",)),
                       );
                     },
                     child: const Text(

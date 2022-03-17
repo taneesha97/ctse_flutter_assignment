@@ -7,7 +7,8 @@ import '../components/movie/moviecard/movie_select.dart';
 import '../util/crud_model.dart';
 
 class MovieMultiSelect extends StatefulWidget {
-  const MovieMultiSelect({Key? key}) : super(key: key);
+  final String libraryId;
+  const MovieMultiSelect({Key? key, required this.libraryId}) : super(key: key);
 
   @override
   _MovieMultiSelectState createState() => _MovieMultiSelectState();
@@ -27,8 +28,8 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
   @override
   Widget build(BuildContext context) {
     // Importing the movies from Provider.
-    Stream<QuerySnapshot> movies =
-        Provider.of<CrudModel>(context, listen: false).movies;
+    Stream<List<SelectedMovieModel>> movies =
+        Provider.of<CrudModel>(context, listen: false).getListOfMoviesShortSelectable;
 
     // Importing Movie List from The Steam - Prototype.
 
@@ -42,17 +43,23 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
           children: [
             Flexible(
               flex: 9,
-              child: ListView.builder(
-                itemCount: selectableMovies.length,
-                itemBuilder: (BuildContext context, int index){
-                  return SelectableMovie(selectedMovieModel: selectableMovies[index], selectedMoviesListRef: selectedMovies);
-                },
+              child: StreamBuilder<List<SelectedMovieModel>>(
+                stream: movies,
+                builder: (context, snapshot) {
+                  final movies = snapshot.data!;
+                  return ListView.builder(
+                    itemCount: movies.length,
+                    itemBuilder: (BuildContext context, int index){
+                      return SelectableMovie(selectedMovieModel: movies[index], selectedMoviesListRef: selectedMovies);
+                    },
+                  );
+                }
               ),
             ),
             Flexible(
               flex: 1,
               child: ElevatedButton(
-                onPressed: () {  },
+                onPressed: () { print(widget.libraryId); },
                 child: const Text("Add Movies to the Library"),
               ),
             )

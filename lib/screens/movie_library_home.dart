@@ -64,7 +64,7 @@ class _LibraryHomeState extends State<LibraryHome> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>  MovieMultiSelect()),
+                          builder: (context) =>  MovieMultiSelect(libraryId: widget.libraryId,)),
                     );
                   }, child: const Icon(Icons.add), backgroundColor: Colors.teal,),
                 ],
