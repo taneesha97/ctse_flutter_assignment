@@ -34,11 +34,11 @@ class _DropDownState extends State<DropDown> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(200),
+          preferredSize: Size.fromHeight(150),
           child: AppBar(
             centerTitle: true,
             flexibleSpace: ClipRRect(
-              borderRadius: BorderRadius.only(bottomRight: Radius.circular(50), bottomLeft: Radius.circular(50)),
+              borderRadius: BorderRadius.only(bottomRight: Radius.circular(30), bottomLeft: Radius.circular(30)),
               child: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
@@ -68,7 +68,7 @@ class _DropDownState extends State<DropDown> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          padding: EdgeInsets.symmetric(vertical: 50, horizontal: 60),
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 60),
           child: SafeArea(
             child: Column(
               children: [
@@ -168,7 +168,7 @@ class _DropDownState extends State<DropDown> {
                     ],
                   ),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 10),
                 Column(
                   children: [
                     Container(
@@ -262,7 +262,7 @@ class _DropDownState extends State<DropDown> {
                   ],
                 ),
 
-                SizedBox(height: 40),
+                SizedBox(height: 10),
                 Column(
                   children: [
                     Container(
@@ -356,7 +356,7 @@ class _DropDownState extends State<DropDown> {
                   ],
                 ),
 
-                SizedBox(height: 80),
+                SizedBox(height: 20),
                 Column(
                   children: [
                     ElevatedButton(

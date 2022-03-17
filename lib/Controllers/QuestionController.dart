@@ -102,11 +102,6 @@ class QuestionController extends GetxController
     return valueSet;
   }
 
-  void setQuestionParameter(int No, int time) {
-    _noOfQuestions = No;
-    _time = time;
-  }
-
   void checkAns(Question question, String selectedIndex) {
     // because once user press any option then it will run
     print(question.answer!);
