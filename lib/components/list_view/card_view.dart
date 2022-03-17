@@ -70,6 +70,20 @@ class CardView1 extends StatelessWidget {
                       ),
                       Ink(
                         decoration: ShapeDecoration(
+                            shape: CircleBorder(), color: Colors.green),
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                              size: 15,
+                            )),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Ink(
+                        decoration: ShapeDecoration(
                             shape: CircleBorder(), color: Colors.red),
                         child: IconButton(
                             onPressed: () {},
