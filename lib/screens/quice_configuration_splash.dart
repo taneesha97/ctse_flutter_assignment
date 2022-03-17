@@ -21,26 +21,29 @@ class _SplashQuiceConfigState extends State<SplashQuiceConfig> {
       ),
       body: Container(
         color: Colors.black,
-        child: Column(
-          children: [
-            // Center(
-              Lottie.asset("assets/images/cute-girl.json"),
-              SizedBox(height: 80),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(90, 45),
-                  textStyle: TextStyle(fontSize: 15),
-                  primary: Colors.blue,
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10.0),
+        child: Container(
+          margin: EdgeInsets.only(top: 60.0),
+          child: Column(
+            children: [
+              // Center(
+                Lottie.asset("assets/images/cute-girl.json"),
+                SizedBox(height: 80),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(90, 45),
+                    textStyle: TextStyle(fontSize: 15),
+                    primary: Colors.blue,
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10.0),
+                    ),
                   ),
-                ),
-                child: Text('START'),
-                onPressed: (){
-                  // Navigator.push(
-                      // context, MaterialPageRoute(builder: (context) => QuizeList()));
-                }),
-          ],
+                  child: Text('START'),
+                  onPressed: (){
+                    // Navigator.push(
+                        // context, MaterialPageRoute(builder: (context) => QuizeList()));
+                  }),
+            ],
+          ),
         ),
       ),
     );
