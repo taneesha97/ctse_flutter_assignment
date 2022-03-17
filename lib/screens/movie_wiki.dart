@@ -4,6 +4,8 @@ import 'package:ctse_assignment_1/components/movie/moviecategory/movie_category.
 import 'package:ctse_assignment_1/screens/movie_all.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../components/movie/moviecategory/long_movie_category.dart';
+import '../styles.dart';
 import '../util/crud_model.dart';
 
 class MovieWiki extends StatelessWidget {
@@ -17,28 +19,28 @@ class MovieWiki extends StatelessWidget {
     Stream<QuerySnapshot> movies =
         Provider.of<CrudModel>(context, listen: false).movies;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.teal,
+        elevation: 0,
+        toolbarHeight: 10,
+      ),
       body: Container(
           margin: EdgeInsets.only(
-            top: 24,
+            top: 10,
           ),
           child: SingleChildScrollView(
               child: Column(
             children: [
-              const Padding(
+               Padding(
                 padding: EdgeInsets.only(
                   left: 9,
-                  top: 7,
                 ),
                 child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text("Movie Categories",
-                        style: TextStyle(
-                          fontFamily: "Raleway",
-                          fontWeight: FontWeight.w600,
-                          fontSize: 30,
-                        ))),
+                        style: Styles.textSectionHeader)),
               ),
-              const Padding(
+               Padding(
                 padding: EdgeInsets.only(
                   left: 9,
                 ),
@@ -46,7 +48,7 @@ class MovieWiki extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "Categories",
-                      style: TextStyle(fontFamily: "Raleway", fontSize: 20),
+                      style: Styles.textSectionSubBody,
                     )),
               ),
               Padding(
@@ -74,7 +76,7 @@ class MovieWiki extends StatelessWidget {
                                   StreamBuilder<QuerySnapshot>(
                                     stream: movies,
                                     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                                      return AllMovieScreen();
+                                      return LongMovieCategory();
                                     }
                                   )),
                         );
