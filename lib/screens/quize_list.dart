@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../components/list_view/card_view.dart';
+import '../models/quize_list_model.dart';
+import '../util/QuizeConfig/quize_list_crud_model.dart';
 
 class QuizeList extends StatefulWidget {
   @override
@@ -8,8 +11,23 @@ class QuizeList extends StatefulWidget {
 }
 //
 class _QuizeListState extends State<QuizeList> {
+
+  List<QuizList> docs1 = [];
+
   List category = ["Romantic", "Horror","Thriller","Animation","Romantic","Romantic", "Horror","Thriller","Animation","Romantic"];
   List time = ["20min", "10min","20min","15min","20min", "10min","20min", "10min","20min","15min"];
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<QuizListCrudModel>(context, listen: false)
+        .readQuizList()
+        .then((value) => {
+      setState(() {
+        docs1 = value;
+      }),
+    });
+  }
 
   Widget deleteItems(){
     return Container(

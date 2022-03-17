@@ -21,7 +21,7 @@ class LeaderBoardCrudModel extends ChangeNotifier {
   // int AnsweredQuestions = 0;
   // int noWrongAnswers = 0;
 
-  Future<dynamic> readQuizes() async {
+  Future<dynamic> readLeaderBoard() async {
     QuerySnapshot querySnapshot;
     Stream<QuerySnapshot> _quizList;
     List docs = [];
