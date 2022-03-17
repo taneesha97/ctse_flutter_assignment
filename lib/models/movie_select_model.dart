@@ -21,7 +21,7 @@ class SelectedMovieModel {
     this.year,
   );
 
-  SelectedMovieModel.fromMap(Map<String, dynamic> snapshot, String id) :
+  SelectedMovieModel.fromMap(Map<String, dynamic> snapshot, String id, String libraryId) :
         id = id ?? '',
         title = snapshot['title'] ?? '',
         imageUrl = snapshot['imageUrl'] ?? '',
@@ -29,7 +29,7 @@ class SelectedMovieModel {
         rating = snapshot['rating'] ?? '',
         year = snapshot['year'] ?? '',
         duration = snapshot['duration'] ?? '',
-        libraryId = snapshot['libraryId'] ?? 'none',
+        libraryId = snapshot['libraryId'] ?? libraryId,
         isSelected = snapshot['isSelected'] ?? false;
 
 

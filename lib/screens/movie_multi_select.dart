@@ -29,7 +29,7 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
   Widget build(BuildContext context) {
     // Importing the movies from Provider.
     Stream<List<SelectedMovieModel>> movies =
-        Provider.of<CrudModel>(context, listen: false).getListOfMoviesShortSelectable;
+        Provider.of<CrudModel>(context, listen: false).getListOfMoviesShortSelectable(widget.libraryId);
 
     // Importing Movie List from The Steam - Prototype.
 
@@ -46,11 +46,11 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
               child: StreamBuilder<List<SelectedMovieModel>>(
                 stream: movies,
                 builder: (context, snapshot) {
-                  final movies = snapshot.data!;
+                  final movies = snapshot.data;
                   return ListView.builder(
-                    itemCount: movies.length,
+                    itemCount: movies?.length,
                     itemBuilder: (BuildContext context, int index){
-                      return SelectableMovie(selectedMovieModel: movies[index], selectedMoviesListRef: selectedMovies);
+                      return SelectableMovie(selectedMovieModel: movies![index], selectedMoviesListRef: selectedMovies);
                     },
                   );
                 }
@@ -59,7 +59,10 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
             Flexible(
               flex: 1,
               child: ElevatedButton(
-                onPressed: () { print(widget.libraryId); },
+                onPressed: () {
+                  print(widget.libraryId);
+                  print(selectedMovies.length);
+                },
                 child: const Text("Add Movies to the Library"),
               ),
             )
