@@ -1,4 +1,5 @@
 import 'package:ctse_assignment_1/components/movie/moviecard/long_library_movie_card.dart';
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ class LibraryHome extends StatefulWidget {
 class _LibraryHomeState extends State<LibraryHome> {
   @override
   Widget build(BuildContext context) {
-    Stream<List<Movie>> listMovies = Provider.of<CrudModel>(context).getMoviesFromLibrary("pWcw0R9HoJSg2QHpj6jU");
+    Stream<List<SelectedMovieModel>> listMovies = Provider.of<CrudModel>(context).getMoviesFromLibrary("pWcw0R9HoJSg2QHpj6jU");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -76,15 +77,15 @@ class _LibraryHomeState extends State<LibraryHome> {
               Flexible(
                 flex: 9,
                 child: SafeArea(
-                  child: StreamBuilder<List<Movie>>(
+                  child: StreamBuilder<List<SelectedMovieModel>>(
                       stream: listMovies,
                       builder: (context, snapshot) {
                         if(snapshot.hasError){
-                          return Text("Error");
+                          return Text(snapshot.toString());
                         } else if(snapshot.hasData){
                           final libraries = snapshot.data!;
                           return ListView.builder(
-                            itemCount: 5,
+                            itemCount: libraries.length,
                             itemBuilder: (BuildContext context, index){
                               return LongLibraryMovieCard(index: index);
                             },

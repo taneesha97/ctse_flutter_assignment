@@ -1,7 +1,7 @@
 class SelectedMovieModel {
   String id;
   String title, imageUrl;
-  int year;
+  String year;
   String libraryId;
   String description;
   bool isSelected;
