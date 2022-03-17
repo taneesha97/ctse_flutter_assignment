@@ -5,6 +5,11 @@ import '../models/quiz.dart';
 
 class QuestionController extends GetxController
     with SingleGetTickerProviderMixin {
+  final int? ti; 
+  QuestionController({
+
+    this.ti,
+  }) ;
   late AnimationController _animationController;
 
   late Animation _animation;
@@ -13,14 +18,13 @@ class QuestionController extends GetxController
   late PageController _pageController;
   PageController get pageController => this._pageController;
 
-
   bool _isAnswered = false;
   bool get isAnswered => this._isAnswered;
 
   late String _correctAns;
   String get correctAns => this._correctAns;
 
-  late int _noOfQuestions;
+  int _noOfQuestions = 10;
   int get noOfQuestions => this._noOfQuestions;
 
   late String _selectedAns;
@@ -33,18 +37,33 @@ class QuestionController extends GetxController
   int _numOfCorrectAns = 0;
   int get numOfCorrectAns => this._numOfCorrectAns;
 
-  late int _time;
-  int get time => this._time;
+  int _time = 10;
 
   List<int?>? valueSet;
+
+  void setQuestionParameter(int No, int time) {
+    _noOfQuestions = No;
+    _time = time;
+
+    _animationController =
+        AnimationController(duration: Duration(seconds: _time), vsync: this);
+    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
+      ..addListener(() {
+        // update like setState
+        update();
+      });
+
+    _animationController.forward().whenComplete(nextQuestion);
+    _pageController = PageController();
+  }
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-
+    print(_time);
     _animationController =
-        AnimationController(duration: Duration(seconds: 10), vsync: this);
+        AnimationController(duration: Duration(seconds: _time), vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
       ..addListener(() {
         // update like setState
@@ -64,15 +83,15 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  List<int?>? checkCorrectWrongAnswers(Question question, String selectedIndex) {
-
+  List<int?>? checkCorrectWrongAnswers(
+      Question question, String selectedIndex) {
     int noCorrectAnswers = 0;
     int AnsweredQuestions = 0;
     int noWrongAnswers = 0;
-    if(question.answer! == selectedIndex){
+    if (question.answer! == selectedIndex) {
       noCorrectAnswers++;
       AnsweredQuestions++;
-    }else if(question.answer! != selectedIndex){
+    } else if (question.answer! != selectedIndex) {
       noWrongAnswers++;
       AnsweredQuestions++;
     }
@@ -80,11 +99,6 @@ class QuestionController extends GetxController
     valueSet?.add(noCorrectAnswers);
     valueSet?.add(noWrongAnswers);
     return valueSet;
-  }
-
-  void setQuestionParameter(int No, int time) {
-    _noOfQuestions = No;
-    _time = time;
   }
 
   void checkAns(Question question, String selectedIndex) {
@@ -109,6 +123,7 @@ class QuestionController extends GetxController
   }
 
   void nextQuestion() {
+    print(_noOfQuestions);
     if (_questionNumber.value != _noOfQuestions) {
       _isAnswered = false;
       _pageController.nextPage(

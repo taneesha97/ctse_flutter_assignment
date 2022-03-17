@@ -24,8 +24,6 @@ class IndexPage extends StatefulWidget {
 class _IndexPageState extends State<IndexPage> {
   final LocalStorage storage = new LocalStorage('localstorage_app');
   late String QuizID = "";
-
-  QuestionController _controller = Get.put(QuestionController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -160,9 +158,9 @@ class _IndexPageState extends State<IndexPage> {
                       Provider.of<QuizCrudModel>(context, listen: false)
                           .insertQuizData('1', 0, 'U001', 0, 0)
                           .then((value) {
-                            //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString());
+                            //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
                             storage.setItem('QuizID', value.toString());
-                            _controller.setQuestionParameter(4, 20);
+
 
                       });
                       // QuizID = id as String;
@@ -171,7 +169,7 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  QuizScreen()),
+                            builder: (context) =>  QuizScreen(noOfQuestions: 4, time: 20,)),
                       );
                     },
                     child: const Text(

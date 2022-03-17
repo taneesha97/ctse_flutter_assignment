@@ -6,7 +6,8 @@ import '../Controllers/QuestionController.dart';
 
 class QuizScreen extends StatefulWidget {
 
-  QuizScreen({Key? key})
+  int time, noOfQuestions;
+  QuizScreen({Key? key, required this.time, required this.noOfQuestions})
       : super(key: key);
 
   @override
@@ -22,7 +23,7 @@ class _QuizScreenState extends State<QuizScreen> {
           child: Text("Movie Categories"),
         ),
       ),
-      body: Body(),
+      body: Body(time: widget.time, noOfQuestions: widget.noOfQuestions),
     );
   }
 }
