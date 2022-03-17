@@ -46,11 +46,11 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
               child: StreamBuilder<List<SelectedMovieModel>>(
                 stream: movies,
                 builder: (context, snapshot) {
-                  final movies = snapshot.data!;
+                  final movies = snapshot.data;
                   return ListView.builder(
-                    itemCount: movies.length,
+                    itemCount: movies?.length,
                     itemBuilder: (BuildContext context, int index){
-                      return SelectableMovie(selectedMovieModel: movies[index], selectedMoviesListRef: selectedMovies);
+                      return SelectableMovie(selectedMovieModel: movies![index], selectedMoviesListRef: selectedMovies);
                     },
                   );
                 }
