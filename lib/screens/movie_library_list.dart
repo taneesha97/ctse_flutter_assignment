@@ -72,7 +72,7 @@ class LibraryList extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>  LibraryHome(name: "Default",)),
+            builder: (context) =>   LibraryHome(libraryId: library.id.toString(), libraryName: library.name,)),
       );
     },
     child: ListTile(

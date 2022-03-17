@@ -25,6 +25,7 @@ class QuestionController extends GetxController
   String get correctAns => this._correctAns;
 
   int _noOfQuestions = 10;
+
   int get noOfQuestions => this._noOfQuestions;
 
   late String _selectedAns;
@@ -36,7 +37,7 @@ class QuestionController extends GetxController
 
   int _numOfCorrectAns = 0;
   int get numOfCorrectAns => this._numOfCorrectAns;
-
+  
   int _time = 10;
 
   List<int?>? valueSet;
@@ -101,6 +102,11 @@ class QuestionController extends GetxController
     return valueSet;
   }
 
+  void setQuestionParameter(int No, int time) {
+    _noOfQuestions = No;
+    _time = time;
+  }
+
   void checkAns(Question question, String selectedIndex) {
     // because once user press any option then it will run
     print(question.answer!);
@@ -123,7 +129,9 @@ class QuestionController extends GetxController
   }
 
   void nextQuestion() {
+    
     print(_noOfQuestions);
+    
     if (_questionNumber.value != _noOfQuestions) {
       _isAnswered = false;
       _pageController.nextPage(
