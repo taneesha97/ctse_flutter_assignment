@@ -64,7 +64,7 @@ class CrudModel extends ChangeNotifier {
   // Get Movies from a particular library.
   Stream<List<SelectedMovieModel>> getMoviesFromLibrary (String id) {
     return FirebaseFirestore.instance.collection("library-movies").where("libraryId", isEqualTo: id).snapshots().map(
-            (event) => event.docs.map((e) => SelectedMovieModel.fromMap(e.data(), e.id, "none")).toList());
+            (event) => event.docs.map((e) => SelectedMovieModel.fromMap(e.data(), e.id, "eq18RJ9oVM8LvmdvBayB")).toList());
   }
 
   // Bulk Insert method to insert data to libraries.
