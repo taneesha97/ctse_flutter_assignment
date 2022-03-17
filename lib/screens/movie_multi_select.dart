@@ -21,18 +21,7 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
   /// Drop this model and replaced it with the movies model.
 
   List<SelectedMovieModel> selectableMovies = [
-    SelectedMovieModel("title", "imageUrl", true, 1908),
-    SelectedMovieModel("title", "imageUrl", true, 1908),
-    SelectedMovieModel("title", "imageUrl", true, 1908),
-    SelectedMovieModel("title", "imageUrl", true, 1908),
-    SelectedMovieModel("title", "imageUrl", true, 1908),
-    SelectedMovieModel("title", "imageUrl", true, 1908),
-    SelectedMovieModel("title", "imageUrl", true, 1908),
-    SelectedMovieModel("title", "imageUrl", true, 1908),
-    SelectedMovieModel("title", "imageUrl", true, 1908),
-    SelectedMovieModel("title", "imageUrl", true, 1908),
-    SelectedMovieModel("title", "imageUrl", true, 1908),
-    SelectedMovieModel("title", "imageUrl", true, 1908),
+
   ];
 
   @override

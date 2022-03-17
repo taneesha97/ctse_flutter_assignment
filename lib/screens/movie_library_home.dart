@@ -20,7 +20,7 @@ class LibraryHome extends StatefulWidget {
 class _LibraryHomeState extends State<LibraryHome> {
   @override
   Widget build(BuildContext context) {
-    Stream<List<Movie>> listMovies = Provider.of<CrudModel>(context).getListOfMoviesShort;
+    Stream<List<Movie>> listMovies = Provider.of<CrudModel>(context).getMoviesFromLibrary("pWcw0R9HoJSg2QHpj6jU");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,

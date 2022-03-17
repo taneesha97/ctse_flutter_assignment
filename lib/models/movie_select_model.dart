@@ -1,6 +1,8 @@
 class SelectedMovieModel {
+  String id;
   String title, imageUrl;
   int year;
+  String libraryId;
   String description;
   bool isSelected;
   String rating;
@@ -8,12 +10,39 @@ class SelectedMovieModel {
 
 
   SelectedMovieModel(
+    this.id,
     this.title,
     this.imageUrl,
+    this.libraryId,
     this.description,
     this.rating,
     this.duration,
     this.isSelected,
     this.year,
   );
+
+  SelectedMovieModel.fromMap(Map<String, dynamic> snapshot, String id) :
+        id = id ?? '',
+        title = snapshot['title'] ?? '',
+        imageUrl = snapshot['imageUrl'] ?? '',
+        description = snapshot['description'] ?? '',
+        rating = snapshot['rating'] ?? '',
+        year = snapshot['year'] ?? '',
+        duration = snapshot['duration'] ?? '',
+        libraryId = snapshot['libraryId'] ?? 'none',
+        isSelected = snapshot['isSelected'] ?? false;
+
+
+
+  toJson() {
+    return {
+      "title": title,
+      "imageUrl": imageUrl,
+      "description": description,
+      "rating": rating,
+      "year" : year,
+      "duration": duration,
+      "libraryId": libraryId,
+    };
+  }
 }
