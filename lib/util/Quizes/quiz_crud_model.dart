@@ -40,7 +40,6 @@ class QuizCrudModel extends ChangeNotifier {
               answer: doc['answer'].toString(),
               options: doc['options'],
               imageUri: doc['imageUri'].toString());
-
           docs1.add(b);
         }
         return docs1;
@@ -76,18 +75,21 @@ class QuizCrudModel extends ChangeNotifier {
     // );
   }
 
-
-  Future<void> updateValues(Question question, String selectedIndex, String QuizID1) async {
+  Future<void> updateValues(
+      Question question, String selectedIndex, String QuizID1) async {
     // valueSet = _controller.checkCorrectWrongAnswers(question, selectedIndex.toString())!;
-    if(question.answer! == (int.parse(selectedIndex) + 1).toString()){
+    if (question.answer! == (int.parse(selectedIndex) + 1).toString()) {
       noCorrectAnswers++;
       AnsweredQuestions++;
-    }else if(question.answer! != (int.parse(selectedIndex) + 1).toString()){
+    } else if (question.answer! != (int.parse(selectedIndex) + 1).toString()) {
       noWrongAnswers++;
       AnsweredQuestions++;
     }
     try {
-      await FirebaseFirestore.instance.collection('result-quizes').doc(QuizID1).update({
+      await FirebaseFirestore.instance
+          .collection('result-quizes')
+          .doc(QuizID1)
+          .update({
         'id': question.id ?? '',
         'no_questions': AnsweredQuestions ?? 0,
         'userId': 1 ?? '',
@@ -99,9 +101,11 @@ class QuizCrudModel extends ChangeNotifier {
     }
   }
 
-  Future<dynamic> insertQuizData(String id, int noQuestions, String userId, int correctAnswer, int wrongAnswer) async {
+  Future<dynamic> insertQuizData(String id, int noQuestions, String userId,
+      int correctAnswer, int wrongAnswer) async {
     try {
-      DocumentReference<Map<String, dynamic>> value = await FirebaseFirestore.instance.collection('result-quizes').add({
+      DocumentReference<Map<String, dynamic>> value =
+          await FirebaseFirestore.instance.collection('result-quizes').add({
         'id': id ?? '',
         'no_questions': noQuestions ?? 0,
         'userId': userId ?? '',
@@ -128,9 +132,6 @@ class QuizCrudModel extends ChangeNotifier {
   }
 
   Future<String> shareQuizID() async {
-
     return QuizID;
   }
-
-
 }

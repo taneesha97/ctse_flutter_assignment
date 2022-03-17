@@ -253,7 +253,7 @@ class _AudioQuizBodyState extends State<AudioQuizBody> {
                 SizedBox(
                   height: 16,
                 ),
-                ProgressBar(),
+                ProgressBar(time: 10,),
               ],
             ),
           ),
