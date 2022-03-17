@@ -10,9 +10,9 @@ import '../util/crud_model.dart';
 import 'movie_multi_select.dart';
 
 class LibraryHome extends StatefulWidget {
-  final String name;
+  final String libraryId;
   final Stream<List<Movie>>? movies;
-  const LibraryHome({Key? key, required this.name, this.movies}) : super(key: key);
+  const LibraryHome({Key? key, required this.libraryId, this.movies}) : super(key: key);
 
   @override
   State<LibraryHome> createState() => _LibraryHomeState();
@@ -21,7 +21,7 @@ class LibraryHome extends StatefulWidget {
 class _LibraryHomeState extends State<LibraryHome> {
   @override
   Widget build(BuildContext context) {
-    Stream<List<SelectedMovieModel>> listMovies = Provider.of<CrudModel>(context).getMoviesFromLibrary("pWcw0R9HoJSg2QHpj6jU");
+    Stream<List<SelectedMovieModel>> listMovies = Provider.of<CrudModel>(context).getMoviesFromLibrary(widget.libraryId);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
