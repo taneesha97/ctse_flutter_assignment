@@ -1,8 +1,7 @@
 import 'package:ctse_assignment_1/components/movie/moviecard/long_library_movie_card.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
-
+import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
 import 'package:ctse_assignment_1/screens/movie_library_list.dart';
-
 import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
 
 import 'package:ctse_assignment_1/screens/movie_multi_select.dart';
@@ -29,12 +28,9 @@ class IndexPage extends StatefulWidget {
   @override
   _IndexPageState createState() => _IndexPageState();
 }
-
 class _IndexPageState extends State<IndexPage> {
   final LocalStorage storage = new LocalStorage('localstorage_app');
   late String QuizID = "";
-
-  QuestionController _controller = Get.put(QuestionController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -169,10 +165,8 @@ class _IndexPageState extends State<IndexPage> {
                       Provider.of<QuizCrudModel>(context, listen: false)
                           .insertQuizData('1', 0, 'U001', 0, 0)
                           .then((value) {
-                            //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString());
+                            //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
                             storage.setItem('QuizID', value.toString());
-                            _controller.setQuestionParameter(4, 20);
-
                       });
                       // QuizID = id as String;
 
@@ -180,7 +174,7 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  QuizScreen()),
+                            builder: (context) =>  QuizScreen(noOfQuestions: 4, time: 20,)),
                       );
                     },
                     child: const Text(
@@ -189,7 +183,7 @@ class _IndexPageState extends State<IndexPage> {
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   ElevatedButton(
@@ -204,7 +198,7 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  MovieMultiSelect()),
+                            builder: (context) =>  MovieMultiSelect(libraryId: "pWcw0R9HoJSg2QHpj6jU",)),
                       );
                     },
                     child: const Text(

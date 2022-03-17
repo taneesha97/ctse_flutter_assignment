@@ -11,8 +11,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
 class Body extends StatefulWidget {
+
+  int time, noOfQuestions;
   Body({
     Key? key,
+    required this.time, required this.noOfQuestions
   }) : super(key: key);
 
   @override
@@ -21,7 +24,8 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   List<Question> docs1 = [];
-  QuestionController _questionController = Get.put(QuestionController());
+  late QuestionController _questionController;
+  late AnimationController controller;
 
   List<Question> docs = [];
 
@@ -31,11 +35,15 @@ class _BodyState extends State<Body> {
     Provider.of<QuizCrudModel>(context, listen: false)
         .readQuizes()
         .then((value) => {
+          print(value),
               setState(() {
                 docs1 = value;
               }),
               // docs1 = value
             });
+    _questionController = Get.put(QuestionController(ti: widget.time));
+    
+    _questionController.setQuestionParameter(widget.noOfQuestions, widget.time);
   }
 
   @override
@@ -72,7 +80,7 @@ class _BodyState extends State<Body> {
           SizedBox(
             height: 12,
           ),
-          ProgressBar(),
+          ProgressBar(time: widget.time),
           SizedBox(
             height: 12,
           ),

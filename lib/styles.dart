@@ -1,8 +1,6 @@
 // Common Style file.
 import 'package:flutter/material.dart';
 
-
-
 class Styles {
 
   // Section Attributes.
