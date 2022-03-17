@@ -1,5 +1,7 @@
+import 'package:ctse_assignment_1/components/movie/moviecard/long_library_movie_card.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
 import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
+import 'package:ctse_assignment_1/screens/movie_library_list.dart';
 import 'package:ctse_assignment_1/screens/movie_multi_select.dart';
 import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
@@ -15,6 +17,7 @@ import '../Controllers/QuestionController.dart';
 import '../styles.dart';
 import '../util/Quizes/quiz_crud_model.dart';
 import 'movie_all.dart';
+import 'movie_library_form.dart';
 
 class IndexPage extends StatefulWidget {
   @override
@@ -216,14 +219,66 @@ class _IndexPageState extends State<IndexPage> {
                       // foreground
                     ),
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) =>  AllMovieScreen()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  AllMovieScreen()),
+                      );
                     },
                     child: const Text(
                       'All Movies Page',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  LibraryList()),
+                      );
+                    },
+                    child: const Text(
+                      'Library List',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  LibraryForm()),
+                      );
+                    },
+                    child: const Text(
+                      'Library Form',
                       style:
                       TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),

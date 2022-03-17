@@ -24,6 +24,15 @@ class Styles {
   static final Color accentColor = _hexToColor('FF0000');
   static final Color indexPurple = _hexToColor('7F26FDFF');
 
+  /// Card Layout - Small Card.
+  static final smallCardHeader = TextStyle(
+    fontFamily: "Montserrat",
+    fontWeight: FontWeight.w600,
+    fontSize: MediumTextSize,
+    color: _hexToColor('000000'),
+  );
+
+
   static final navBarTitle = TextStyle(
     fontFamily: "Montserrat",
     fontWeight: FontWeight.w800,
@@ -34,7 +43,7 @@ class Styles {
   static final textSectionHeader = TextStyle(
     fontFamily: "Montserrat",
     fontWeight: FontWeight.w600,
-    fontSize: MediumTextSize,
+    fontSize: LargeTextSize,
     color: _hexToColor('000000'),
   );
 
