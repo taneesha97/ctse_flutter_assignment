@@ -8,8 +8,8 @@ class LeaderBoard extends StatefulWidget {
 
 class _LeaderBoardState extends State<LeaderBoard> {
 
-  List names = ["Bright vachirawit", "Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit"];
-  List place = ["1st place", "1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place"];
+  List names = ["Bright vachirawit", "Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit"];
+  List place = ["1st place", "1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
