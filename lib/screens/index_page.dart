@@ -4,6 +4,7 @@ import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_cate
 import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
 
 import 'package:ctse_assignment_1/screens/leader_board.dart';
+import 'package:ctse_assignment_1/screens/feedback_form.dart';
 
 import 'package:ctse_assignment_1/screens/movie_library_list.dart';
 import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
@@ -98,11 +99,11 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SampleScreen()),
+                            builder: (context) => FeedBackForm()),
                       );
                     },
                     child: const Text(
-                      'Sample Screen',
+                      'FeedBack Form',
                       style: TextStyle(
                           fontSize: 25, fontWeight: FontWeight.bold),
                     ),
