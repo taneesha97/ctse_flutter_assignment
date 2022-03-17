@@ -27,9 +27,6 @@ class QuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
-    // print(QuizID1);
-    // print('questionCard');
-
     onPress(Question question, int selectedIndex, String? questionID) {
 
       final QuizID = storage.getItem('QuizID');
@@ -51,7 +48,8 @@ class QuestionCard extends StatelessWidget {
           children: [
             Text.rich(
               TextSpan(
-                  text: "${question.id}",
+                  text: "${index + 1}",
+                  //text: "${question.id}",
                   style: Theme.of(context).textTheme.headline6,
                   children: [
                     TextSpan(

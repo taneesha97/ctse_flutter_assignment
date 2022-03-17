@@ -47,6 +47,7 @@ dependencies:
   fake_cloud_firestore: ^1.2.1
   localstorage: ^4.0.0+1
   confetti: ^0.6.0
+  reviews_slider: ^2.0.0
 
 
 dev_dependencies:
