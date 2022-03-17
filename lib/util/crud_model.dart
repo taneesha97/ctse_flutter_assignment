@@ -43,7 +43,7 @@ class CrudModel extends ChangeNotifier {
   Future addLibraries(Library library) async {
     final addLibrary = FirebaseFirestore.instance.collection("libraries").doc();
     library.id = addLibrary.id;
-    print(addLibrary.id);
+    print("File Inserted " + addLibrary.id);
     final json = library.toJson();
     await addLibrary.set(json);
   }
@@ -52,6 +52,12 @@ class CrudModel extends ChangeNotifier {
   Stream<List<Library>> get getListOfLibraries {
     return FirebaseFirestore.instance.collection("libraries").snapshots().map(
         (event) => event.docs.map((e) => Library.fromMap(e.data(), e.id)).toList());
+  }
+
+  // Get Movies from a particular library.
+  Stream<List<Library>> get getMoviesFromLibrary {
+    return FirebaseFirestore.instance.collection("library-movies").snapshots().map(
+            (event) => event.docs.map((e) => Library.fromMap(e.data(), e.id)).toList());
   }
 
   // Library Name Update method.
