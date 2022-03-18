@@ -37,13 +37,16 @@ class CrudModel extends ChangeNotifier {
   // Getter for the list of movies (Short hand method.) - Not yet tested.
   Stream<List<Movie>> get getListOfMoviesShort {
     return FirebaseFirestore.instance.collection("movies").snapshots().map(
-            (event) => event.docs.map((e) => Movie.fromMap(e.data())).toList());
+        (event) => event.docs.map((e) => Movie.fromMap(e.data())).toList());
   }
 
   // Getter for the list of movies (Short hand method.) - Not yet tested.
-  Stream<List<SelectedMovieModel>> getListOfMoviesShortSelectable(String libraryId) {
+  Stream<List<SelectedMovieModel>> getListOfMoviesShortSelectable(
+      String libraryId) {
     return FirebaseFirestore.instance.collection("movies").snapshots().map(
-            (event) => event.docs.map((e) => SelectedMovieModel.fromMap(e.data(), e.id, libraryId)).toList());
+        (event) => event.docs
+            .map((e) => SelectedMovieModel.fromMap(e.data(), e.id, libraryId))
+            .toList());
   }
 
   // Method to add libraries to the Firebase.
@@ -58,23 +61,45 @@ class CrudModel extends ChangeNotifier {
   // Get a List of Libraries.
   Stream<List<Library>> get getListOfLibraries {
     return FirebaseFirestore.instance.collection("libraries").snapshots().map(
-        (event) => event.docs.map((e) => Library.fromMap(e.data(), e.id)).toList());
+        (event) =>
+            event.docs.map((e) => Library.fromMap(e.data(), e.id)).toList());
   }
 
   // Get Movies from a particular library.
-  Stream<List<SelectedMovieModel>> getMoviesFromLibrary (String id) {
-    return FirebaseFirestore.instance.collection("library-movies").where("libraryId", isEqualTo: id).snapshots().map(
-            (event) => event.docs.map((e) => SelectedMovieModel.fromMap(e.data(), e.id, "eq18RJ9oVM8LvmdvBayB")).toList());
+  Stream<List<SelectedMovieModel>> getMoviesFromLibrary(String id) {
+    return FirebaseFirestore.instance
+        .collection("library-movies")
+        .where("libraryId", isEqualTo: id)
+        .snapshots()
+        .map((event) => event.docs
+            .map((e) => SelectedMovieModel.fromMap(
+                e.data(), e.id, "eq18RJ9oVM8LvmdvBayB"))
+            .toList());
   }
 
   // Bulk Insert method to insert data to libraries.
 
-
   // Library Name Update method
+  Future libraryNameUpate(String newName, String libraryId) async {
+    final doc =
+        FirebaseFirestore.instance.collection("libraries").doc(libraryId);
+    doc.update({
+      "name": newName,
+    });
+  }
+// Library Home Movies clean up method.
 
-  // Library Home Movies clean up method.
+// Library Home Movie Delete method.
+    Future deleteLibraryMovie(String libraryId) async {
+      final doc =
+      FirebaseFirestore.instance.collection("library-movies").doc(libraryId);
+      doc.delete();
+    }
 
-  // Library Home Movie Delete method.
-
-  // Library Delete method.
+// Library Delete method.
+ Future deleteLibrary(String libraryId) async {
+   final doc =
+   FirebaseFirestore.instance.collection("libraries").doc(libraryId);
+   doc.delete();
+ }
 }
