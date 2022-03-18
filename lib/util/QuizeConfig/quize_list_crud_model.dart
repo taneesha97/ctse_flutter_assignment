@@ -33,7 +33,8 @@ class QuizListCrudModel extends ChangeNotifier {
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           QuizList b = QuizList(
-              id: doc['id'].toString(),
+              id: doc.id,
+              //id: doc['id'].toString(), // issue
               category: doc['category'].toString(),
               time: doc['time'],
               questions: doc['questions']);

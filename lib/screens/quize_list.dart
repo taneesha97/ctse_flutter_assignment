@@ -50,10 +50,10 @@ class _QuizeListState extends State<QuizeList> {
       body: Container(
         color: Colors.black12,
         child: ListView.builder(
-            itemCount: 10,
+            itemCount: docs1.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) =>
-                CardView1(index: index, text1 : category[index] , text2: time[index]),
+                CardView1(index: index, text1 : docs1[index].category.toString() , text2: docs1[index].time.toString()),
         ),
       ),
 
