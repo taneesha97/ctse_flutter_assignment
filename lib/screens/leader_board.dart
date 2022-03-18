@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+
+import '../models/leaderboard_model.dart';
+import '../util/QuizeConfig/leaderboard_crud_model.dart';
 
 class LeaderBoard extends StatefulWidget {
   @override
@@ -8,8 +12,25 @@ class LeaderBoard extends StatefulWidget {
 
 class _LeaderBoardState extends State<LeaderBoard> {
 
+  List<LeaderBoardModel> docs1 = [];
+
   List names = ["Bright vachirawit", "Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit"];
   List place = ["1st place", "1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place"];
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<LeaderBoardCrudModel>(context, listen: false)
+        .readLeaderBoard()
+        .then((value) => {
+      setState(() {
+        docs1 = value;
+      }),
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
