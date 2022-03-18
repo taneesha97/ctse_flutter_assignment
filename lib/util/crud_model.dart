@@ -77,7 +77,23 @@ class CrudModel extends ChangeNotifier {
             .toList());
   }
 
-  // Bulk Insert method to insert data to libraries.
+  // Bulk Insert method to insert data to libraries (Batch).
+  Future addMoviesTotheLibrary (List<SelectedMovieModel> selectedMovieList) async{
+    if(selectedMovieList.isEmpty){
+      print("Selected Movie List is Empty");
+    } else {
+      final movieRef = FirebaseFirestore.instance.collection("library-movies");
+      WriteBatch movieBatch = FirebaseFirestore.instance.batch();
+      for (SelectedMovieModel movie in selectedMovieList){
+        final newLibraryMovie = movieRef.doc();
+        movie.id = newLibraryMovie.id;
+        final json = movie.toJson();
+        movieBatch.set(newLibraryMovie, json);
+      }
+      movieBatch.commit();
+    }
+
+  }
 
   // Library Name Update method
   Future libraryNameUpate(String newName, String libraryId) async {
@@ -87,7 +103,7 @@ class CrudModel extends ChangeNotifier {
       "name": newName,
     });
   }
-// Library Home Movies clean up method.
+// Library Home Movies clean up method (Batch) - Do this after insert.
 
 // Library Home Movie Delete method.
     Future deleteLibraryMovie(String libraryId) async {
