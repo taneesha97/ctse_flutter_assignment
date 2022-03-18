@@ -39,6 +39,7 @@ class QuizListCrudModel extends ChangeNotifier {
 
           docs1.add(b);
         }
+        print(docs1);
         return docs1;
       }
     } catch (e) {

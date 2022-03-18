@@ -26,7 +26,10 @@ class _QuizeListState extends State<QuizeList> {
       setState(() {
         docs1 = value;
       }),
+    print(docs1),
+    print("Quiz list"),
     });
+    print("Quiz list --------------------------------");
   }
 
   Widget deleteItems(){
