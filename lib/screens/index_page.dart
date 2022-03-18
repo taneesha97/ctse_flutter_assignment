@@ -246,6 +246,29 @@ class IndexPage extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
+
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+
+                    onPressed: () {
+                      Provider.of<CrudModel>(context, listen: false)
+                          .cleanUpLibraryUponDelete("library-id");
+                    },
+                    child: const Text(
+                      'Batch Delete',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
                 ],
               ),
             ),
