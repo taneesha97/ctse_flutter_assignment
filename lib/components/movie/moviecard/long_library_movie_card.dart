@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../models/movie.dart';
 import '../../../screens/movie_single.dart';
 import '../../../styles.dart';
+import '../validation_pop.dart';
 
 class LongLibraryMovieCard extends StatelessWidget {
   final int index;
@@ -15,6 +16,17 @@ class LongLibraryMovieCard extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
+          onLongPress: (){
+            showAltertDialog(context, (){
+              // Add the CrudModel Movie Delete Method.
+
+              // Close Dialog.
+              Navigator.pop(context);
+            }, (){
+              // Close Dialog.
+              Navigator.pop(context);
+            });
+          },
           onTap: (){
             Navigator.push(
               context,
