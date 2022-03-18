@@ -92,7 +92,6 @@ class CrudModel extends ChangeNotifier {
       }
       movieBatch.commit();
     }
-
   }
 
   // Library Name Update method
@@ -103,7 +102,18 @@ class CrudModel extends ChangeNotifier {
       "name": newName,
     });
   }
+
 // Library Home Movies clean up method (Batch) - Do this after insert.
+  Future<void> cleanUpLibraryUponDelete(String libraryId) async {
+    Query<Map<String, dynamic>> movies = FirebaseFirestore.instance.collection("library-movies").where("libraryId", isEqualTo: libraryId);
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+    return movies.get().then((query){
+      query.docs.forEach((element) {
+        batch.delete(element.reference);
+      });
+    });
+  }
+
 
 // Library Home Movie Delete method.
     Future deleteLibraryMovie(String libraryId) async {
