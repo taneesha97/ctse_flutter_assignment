@@ -1,8 +1,6 @@
 // Common Style file.
 import 'package:flutter/material.dart';
 
-
-
 class Styles {
 
   // Section Attributes.
@@ -99,6 +97,16 @@ class Styles {
     fontWeight: FontWeight.w600,
     fontSize: 15,
     color: _hexToColor('000000'),
+  );
+
+
+  //styles to font- quiz feedback form
+  static final QuizFeedbackQuestionTitle = TextStyle(
+    fontFamily: "Montserrat",
+    fontWeight: FontWeight.w600,
+    fontSize: 15,
+    fontStyle: FontStyle.normal,
+    color: textColorBright,
   );
 
   static Color _hexToColor(String code) {

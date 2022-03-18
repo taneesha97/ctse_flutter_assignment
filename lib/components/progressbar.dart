@@ -4,8 +4,11 @@ import 'package:get/get.dart';
 import '../Controllers/QuestionController.dart';
 
 class ProgressBar extends StatelessWidget {
-  const ProgressBar({
+
+  int time;
+  ProgressBar({
     Key? key,
+    required this.time
   }) : super(key: key);
 
   @override
@@ -36,7 +39,7 @@ class ProgressBar extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "${(controller.animation.value * 60).round()} sec",
+                          "${(controller.animation.value * time).round()} sec",
                           style: TextStyle(color: Colors.black),
                         ),
 

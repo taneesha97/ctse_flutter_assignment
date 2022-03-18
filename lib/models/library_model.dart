@@ -10,9 +10,9 @@ class Library {
     required this.optional,
   });
 
-  Library.fromMap(Map<String, dynamic> snapshot)
+  Library.fromMap(Map<String, dynamic> snapshot, String id)
       :
-        id = snapshot["id"] ?? '',
+        id = id ?? '',
         name = snapshot['name'] ?? '',
         optional = snapshot['optional'] ?? '';
 
