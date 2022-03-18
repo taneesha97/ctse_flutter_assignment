@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../models/movie.dart';
 import '../../../models/movie_select_model.dart';
 import '../../../screens/movie_single.dart';
 import '../../../styles.dart';
+import '../../../util/crud_model.dart';
 import '../validation_pop.dart';
 
 class LongLibraryMovieCard extends StatelessWidget {
@@ -21,8 +23,10 @@ class LongLibraryMovieCard extends StatelessWidget {
           onLongPress: (){
             showAltertDialog(context, (){
               // Add the CrudModel Movie Delete Method.
-
+              print("Long Delete");
               // Close Dialog.
+              Provider.of<CrudModel>(context, listen: false)
+                  .deleteLibraryMovie(movie.id);
               Navigator.pop(context);
             }, (){
               // Close Dialog.
