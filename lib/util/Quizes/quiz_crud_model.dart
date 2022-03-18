@@ -127,9 +127,7 @@ class QuizCrudModel extends ChangeNotifier {
         'expression': value1 ?? '',
         'Comment': value2 ?? '',
       });
-      // print(value.id);
-      // print('dkks');
-      // return value.id.toString();
+      return value.id.toString();
     } catch (e) {
       print(e);
     }

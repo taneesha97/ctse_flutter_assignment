@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reviews_slider/reviews_slider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../util/Quizes/quiz_crud_model.dart';
 
@@ -13,6 +14,7 @@ class FeedBackForm extends StatefulWidget {
 
 class _FeedBackFormState extends State<FeedBackForm> {
   String? reviewSliderValue, TextFieldValue;
+  final TextEditingController _textController = new TextEditingController();
 
   void onChange1(int value) {
     print(value);
@@ -49,12 +51,27 @@ class _FeedBackFormState extends State<FeedBackForm> {
   void onPress () {
     print(reviewSliderValue);
     print(TextFieldValue);
-    Provider.of<QuizCrudModel>(context, listen: false).insertFeedBack(reviewSliderValue, TextFieldValue);
+    Provider.of<QuizCrudModel>(context, listen: false).insertFeedBack(reviewSliderValue, TextFieldValue)
+        .then((value) {
+      //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
+      print(value);
+      if(value != 0){
+        Alert(
+          context: context,
+          title: "Successfully",
+          desc: "You have Successfully Submitted the Data",
+        ).show();
+      }
+    });
   }
 
 
   @override
   Widget build(BuildContext context) {
+
+
+
+
     return Container(
       color: Colors.white,
       padding: EdgeInsets.all(10),
@@ -65,7 +82,7 @@ class _FeedBackFormState extends State<FeedBackForm> {
           children: <Widget>[
             const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text("Movie Categories",
+              child: Text("FeedBack Form",
 
                   style: TextStyle(
                       fontFamily: "Raleway",
@@ -111,13 +128,14 @@ class _FeedBackFormState extends State<FeedBackForm> {
                             const EdgeInsets.only(right: 20, left: 20, top: 10),
                             child: ReviewSlider(
                                 onChange: onChange1,
+                                initialValue: 2,
                                 circleDiameter: 40,
                                 optionStyle: const TextStyle(
                                     color: Colors.red,
                                     fontWeight: FontWeight.bold,
                                     decoration: TextDecoration.none,
                                     fontSize: 12),
-                                options: ['Worst', 'Worse', 'Bad', 'Good', 'Best']),
+                                options: const ['Worst', 'Worse', 'Bad', 'Good', 'Best']),
                           ),
 
                         ],
@@ -148,6 +166,7 @@ class _FeedBackFormState extends State<FeedBackForm> {
                       child: Material(
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         child: TextFormField(
+                          controller: _textController,
                           onChanged: onTextFieldChange,
                           decoration: const InputDecoration(
                             hintText: 'Yes there',
