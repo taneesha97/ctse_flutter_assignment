@@ -8,8 +8,8 @@ class LeaderBoard extends StatefulWidget {
 
 class _LeaderBoardState extends State<LeaderBoard> {
 
-  List names = ["Bright vachirawit", "Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit"];
-  List place = ["1st place", "1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place"];
+  List names = ["Bright vachirawit", "Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit"];
+  List place = ["1st place", "1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,9 +55,9 @@ class _LeaderBoardState extends State<LeaderBoard> {
                           child: CircleAvatar(
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.green,
-                            // backgroundImage: AssetImage("images/woman.png"),
+                            // backgroundImage: AssetImage("images/bright.jpg"),
                             backgroundImage: NetworkImage
-                              ("https://images.unsplash.com/photo-1457449940276-e8deed18bfff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"),
+                            ("https://images.unsplash.com/photo-1457449940276-e8deed18bfff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"),
                           ),
                         ),
                         SizedBox(width: 5.0),
