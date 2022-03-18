@@ -31,7 +31,7 @@ class QuizCrudModel extends ChangeNotifier {
 
     try {
       querySnapshot = await _db.collection('quizes').get();
-      _quizList = FirebaseFirestore.instance.collection('quizes').snapshots();
+     // _quizList = FirebaseFirestore.instance.collection('quizes').snapshots();
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           Question b = Question(
@@ -127,9 +127,7 @@ class QuizCrudModel extends ChangeNotifier {
         'expression': value1 ?? '',
         'Comment': value2 ?? '',
       });
-      // print(value.id);
-      // print('dkks');
-      // return value.id.toString();
+      return value.id.toString();
     } catch (e) {
       print(e);
     }
