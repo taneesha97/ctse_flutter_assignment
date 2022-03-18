@@ -234,7 +234,7 @@ class IndexPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  LibraryForm(functionValue: 1,)),
+                            builder: (context) =>  LibraryForm(functionValue: 0,libraryId: '-',libraryName: "-",)),
                       );
                     },
                     child: const Text(

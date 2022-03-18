@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../models/library_model.dart';
 import '../styles.dart';
 import '../util/crud_model.dart';
+import 'movie_library_form.dart';
 import 'movie_library_home.dart';
 
 class LibraryList extends StatelessWidget {
@@ -89,7 +90,11 @@ class LibraryList extends StatelessWidget {
           children: [
             InkWell(
               onTap: (){
-                print("Library Edit - PROTO");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>  LibraryForm(libraryId: library.id, functionValue: 1, libraryName: library.name,)),
+                );
               },
               child: Icon(Icons.edit, color: Colors.black,),
             ),

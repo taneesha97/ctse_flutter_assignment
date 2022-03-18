@@ -9,7 +9,9 @@ import 'movie_library_list.dart';
 
 class LibraryForm extends StatefulWidget {
   final int functionValue;
-  LibraryForm({Key? key, required this.functionValue}) : super(key: key);
+  final String libraryId;
+  final String libraryName;
+  LibraryForm({Key? key, required this.functionValue, required this.libraryId, required this.libraryName}) : super(key: key);
 
   @override
   _LibraryFormState createState() => _LibraryFormState();
@@ -66,6 +68,7 @@ class _LibraryFormState extends State<LibraryForm> {
                 ),
 
                 TextFormField(
+                  initialValue: widget.functionValue==0?"":widget.libraryName,
                   onChanged: (val) => setState(() => lname = val),
                   decoration: const InputDecoration(
                       labelText: "Enter the Library Name",
@@ -100,6 +103,7 @@ class _LibraryFormState extends State<LibraryForm> {
                             Provider.of<CrudModel>(context, listen: false).addLibraries(library);
                           } else {
                             print("Updating Item - PROTO");
+                            print(widget.libraryId);
                           }
                         }
                       },
