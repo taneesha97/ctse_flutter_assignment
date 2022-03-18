@@ -282,7 +282,7 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  LibraryForm()),
+                            builder: (context) =>  LibraryForm(functionValue: 0,libraryId: '-',libraryName: "-",)),
                       );
                     },
                     child: const Text(

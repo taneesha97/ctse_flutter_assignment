@@ -60,8 +60,8 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
               flex: 1,
               child: ElevatedButton(
                 onPressed: () {
-                  print(widget.libraryId);
-                  print(selectedMovies.length);
+                  Provider.of<CrudModel>(context, listen: false)
+                      .addMoviesTotheLibrary(selectedMovies);
                 },
                 child: const Text("Add Movies to the Library"),
               ),
