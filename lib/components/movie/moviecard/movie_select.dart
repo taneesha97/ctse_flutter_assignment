@@ -29,7 +29,7 @@ class _SelectableMovieState extends State<SelectableMovie> {
         ),
       ),
       title: Text(
-        widget.selectedMovieModel.title,
+        widget.selectedMovieModel.title, // Change to name.
         style: TextStyle(fontWeight: FontWeight.w600),
       ),
       subtitle: Text(widget.selectedMovieModel.year.toString()),
