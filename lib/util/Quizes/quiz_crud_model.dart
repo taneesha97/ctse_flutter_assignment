@@ -31,7 +31,7 @@ class QuizCrudModel extends ChangeNotifier {
 
     try {
       querySnapshot = await _db.collection('quizes').get();
-      _quizList = FirebaseFirestore.instance.collection('quizes').snapshots();
+     // _quizList = FirebaseFirestore.instance.collection('quizes').snapshots();
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           Question b = Question(
