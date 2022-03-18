@@ -20,7 +20,11 @@ class LibraryList extends StatelessWidget {
         toolbarHeight: 10,
       ),
       body: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(
+              top: 10,
+              left: 10,
+              right: 10,
+            ),
             child: Container(
               child:
                 Column(
@@ -75,9 +79,29 @@ class LibraryList extends StatelessWidget {
             builder: (context) =>   LibraryHome(libraryId: library.id.toString(), libraryName: library.name,)),
       );
     },
-    child: ListTile(
-      leading: const CircleAvatar(child: Text("O")),
-      title: Text(library.name),
+    child: Card(
+      elevation: 6,
+      child: ListTile(
+        leading: const CircleAvatar(child: Text("O")),
+        title: Text(library.name),
+        trailing: Wrap(
+          spacing: 12,
+          children: [
+            InkWell(
+              onTap: (){
+                print("Library Edit - PROTO");
+              },
+              child: Icon(Icons.edit, color: Colors.black,),
+            ),
+            InkWell(
+              onTap: (){
+                print("Library Delete - PROTO");
+              },
+              child: Icon(Icons.delete, color: Colors.redAccent,),
+            ),
+          ],
+        )
+      ),
     ),
   );
 
