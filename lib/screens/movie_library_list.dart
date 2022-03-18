@@ -100,7 +100,8 @@ class LibraryList extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                print("Library Delete - PROTO");
+                Provider.of<CrudModel>(context, listen: false)
+                    .deleteLibrary(library.id);
               },
               child: Icon(Icons.delete, color: Colors.redAccent,),
             ),

@@ -92,4 +92,9 @@ class CrudModel extends ChangeNotifier {
 // Library Home Movie Delete method.
 
 // Library Delete method.
+ Future deleteLibrary(String libraryId) async {
+   final doc =
+   FirebaseFirestore.instance.collection("libraries").doc(libraryId);
+   doc.delete();
+ }
 }
