@@ -29,6 +29,7 @@ class QuizListCrudModel extends ChangeNotifier {
     try {
       querySnapshot = await _db.collection('quice_list').get();
       _quizList = FirebaseFirestore.instance.collection('quice_list').snapshots();
+      
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           QuizList b = QuizList(
@@ -37,8 +38,11 @@ class QuizListCrudModel extends ChangeNotifier {
               time: doc['time'],
               questions: doc['questions']);
 
+          print('inside try ------------------------');
+          print(b);
           docs1.add(b);
         }
+         print("printing-------------------------------");
         print(docs1);
         return docs1;
       }
