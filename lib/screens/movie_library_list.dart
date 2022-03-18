@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../models/library_model.dart';
 import '../styles.dart';
 import '../util/crud_model.dart';
+import 'movie_library_form.dart';
 import 'movie_library_home.dart';
 
 class LibraryList extends StatelessWidget {
@@ -20,7 +21,11 @@ class LibraryList extends StatelessWidget {
         toolbarHeight: 10,
       ),
       body: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(
+              top: 10,
+              left: 10,
+              right: 10,
+            ),
             child: Container(
               child:
                 Column(
@@ -75,9 +80,33 @@ class LibraryList extends StatelessWidget {
             builder: (context) =>   LibraryHome(libraryId: library.id.toString(), libraryName: library.name,)),
       );
     },
-    child: ListTile(
-      leading: const CircleAvatar(child: Text("O")),
-      title: Text(library.name),
+    child: Card(
+      elevation: 6,
+      child: ListTile(
+        leading: const CircleAvatar(child: Text("O")),
+        title: Text(library.name),
+        trailing: Wrap(
+          spacing: 12,
+          children: [
+            InkWell(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>  LibraryForm(libraryId: library.id, functionValue: 1, libraryName: library.name,)),
+                );
+              },
+              child: Icon(Icons.edit, color: Colors.black,),
+            ),
+            InkWell(
+              onTap: (){
+                print("Library Delete - PROTO");
+              },
+              child: Icon(Icons.delete, color: Colors.redAccent,),
+            ),
+          ],
+        )
+      ),
     ),
   );
 

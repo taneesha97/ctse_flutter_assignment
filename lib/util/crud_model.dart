@@ -68,9 +68,13 @@ class CrudModel extends ChangeNotifier {
   }
 
   // Bulk Insert method to insert data to libraries.
-  
 
-  // Library Name Update method.
+
+  // Library Name Update method
+
+  // Library Home Movies clean up method.
+
+  // Library Home Movie Delete method.
 
   // Library Delete method.
 }
