@@ -11,7 +11,13 @@ class LibraryForm extends StatefulWidget {
   final int functionValue;
   final String libraryId;
   final String libraryName;
-  LibraryForm({Key? key, required this.functionValue, required this.libraryId, required this.libraryName}) : super(key: key);
+
+  LibraryForm(
+      {Key? key,
+      required this.functionValue,
+      required this.libraryId,
+      required this.libraryName})
+      : super(key: key);
 
   @override
   _LibraryFormState createState() => _LibraryFormState();
@@ -61,18 +67,22 @@ class _LibraryFormState extends State<LibraryForm> {
                         ],
                       ),
                       MoviesStatusTag(
-                          status: widget.functionValue==0?"Inserting":"Updating",
-                          color: widget.functionValue==0?Colors.green:Colors.deepOrange),
+                          status: widget.functionValue == 0
+                              ? "Inserting"
+                              : "Updating",
+                          color: widget.functionValue == 0
+                              ? Colors.green
+                              : Colors.deepOrange),
                     ],
                   ),
                 ),
-
                 TextFormField(
-                  initialValue: widget.functionValue==0?"":widget.libraryName,
+                  initialValue:
+                      widget.functionValue == 0 ? "" : widget.libraryName,
                   onChanged: (val) => setState(() => lname = val),
                   decoration: const InputDecoration(
                       labelText: "Enter the Library Name",
-                  fillColor: Colors.teal),
+                      fillColor: Colors.teal),
                   validator: (value) {
                     if (value!.isEmpty ||
                         !RegExp(r'^[a-z]+$').hasMatch(value!)) {
@@ -87,11 +97,10 @@ class _LibraryFormState extends State<LibraryForm> {
                 ),
                 Center(
                   child: ElevatedButton(
-                      onPressed: (){
-                        if (formKey.currentState!.validate()){
-
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
                           // Update and Inserting Logic Separation.
-                          if(widget.functionValue == 0){
+                          if (widget.functionValue == 0) {
                             // Create the Library Model.
                             final library = Library(
                               name: lname.toString(),
@@ -100,10 +109,13 @@ class _LibraryFormState extends State<LibraryForm> {
                             );
 
                             // Call the DB method to write to the database.
-                            Provider.of<CrudModel>(context, listen: false).addLibraries(library);
+                            Provider.of<CrudModel>(context, listen: false)
+                                .addLibraries(library);
                           } else {
-                            print("Updating Item - PROTO");
-                            print(widget.libraryId);
+                            // Calling the Database Update Method.
+                            Provider.of<CrudModel>(context, listen: false)
+                                .libraryNameUpate(
+                                    lname.toString(), widget.libraryId);
                           }
                         }
                       },
@@ -113,14 +125,13 @@ class _LibraryFormState extends State<LibraryForm> {
                         style: Styles.navBarTitle,
                       )),
                 ),
-
                 Center(
                   child: ElevatedButton(
-                      onPressed: (){
+                      onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  LibraryList()),
+                              builder: (context) => LibraryList()),
                         );
                       },
                       style: ElevatedButton.styleFrom(primary: Colors.teal),
