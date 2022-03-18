@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../components/movie/validation_pop.dart';
 import '../models/library_model.dart';
 import '../styles.dart';
 import '../util/crud_model.dart';
@@ -100,8 +101,9 @@ class LibraryList extends StatelessWidget {
             ),
             InkWell(
               onTap: (){
-                Provider.of<CrudModel>(context, listen: false)
-                    .deleteLibrary(library.id);
+                // Provider.of<CrudModel>(context, listen: false)
+                //     .deleteLibrary(library.id);
+                showAltertDialog(context, (){print("Delete");}, (){Navigator.pop(context);});
               },
               child: Icon(Icons.delete, color: Colors.redAccent,),
             ),

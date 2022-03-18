@@ -6,14 +6,14 @@ showAltertDialog(BuildContext context, Function function1, Function function2) {
   // Delete Button
   Widget deleteButton = TextButton(
       onPressed: () {
-        function1;
+        function1();
       },
       child: Text("Delete"));
 
   // Cancel Button
   Widget cancelButton = TextButton(
       onPressed: () {
-        function2;
+        function2();
       },
       child: Text("Cancel"));
 
