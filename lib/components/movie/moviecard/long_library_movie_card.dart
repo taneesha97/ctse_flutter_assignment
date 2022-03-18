@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../../models/movie.dart';
+import '../../../models/movie_select_model.dart';
 import '../../../screens/movie_single.dart';
 import '../../../styles.dart';
 import '../validation_pop.dart';
 
 class LongLibraryMovieCard extends StatelessWidget {
   final int index;
-  const LongLibraryMovieCard({Key? key, required this.index}) : super(key: key);
+  final SelectedMovieModel movie;
+  const LongLibraryMovieCard({Key? key, required this.index, required this.movie}) : super(key: key);
 
 
   @override
@@ -44,7 +46,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                 width: 100,
                 decoration:  BoxDecoration(
                   image:   DecorationImage(
-                    image: NetworkImage(movieList[index].imageUrl.toString()),
+                    image: NetworkImage(movie.imageUrl.toString()),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: const BorderRadius.only(
@@ -90,7 +92,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Flexible(
-                              child: Text(movieList[index].title.toString(),
+                              child: Text(movie.title.toString(),
                                 overflow: TextOverflow.ellipsis,
                                 style: Styles.smallCardHeader,
                               ),
@@ -102,7 +104,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                 top: 3,
                               ),
-                              child: Text(movieList[index].year,
+                              child: Text(movie.year,
                                 overflow: TextOverflow.ellipsis,
                                 style: Styles.textSectionBody,
                               ),
