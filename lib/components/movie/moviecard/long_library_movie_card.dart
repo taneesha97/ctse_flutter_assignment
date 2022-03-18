@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../models/movie.dart';
+import '../../../models/movie_select_model.dart';
 import '../../../screens/movie_single.dart';
 import '../../../styles.dart';
+import '../../../util/crud_model.dart';
+import '../validation_pop.dart';
 
 class LongLibraryMovieCard extends StatelessWidget {
   final int index;
-  const LongLibraryMovieCard({Key? key, required this.index}) : super(key: key);
+  final SelectedMovieModel movie;
+  const LongLibraryMovieCard({Key? key, required this.index, required this.movie}) : super(key: key);
 
 
   @override
@@ -15,6 +20,19 @@ class LongLibraryMovieCard extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
+          onLongPress: (){
+            showAltertDialog(context, (){
+              // Add the CrudModel Movie Delete Method.
+              print("Long Delete");
+              // Close Dialog.
+              Provider.of<CrudModel>(context, listen: false)
+                  .deleteLibraryMovie(movie.id);
+              Navigator.pop(context);
+            }, (){
+              // Close Dialog.
+              Navigator.pop(context);
+            });
+          },
           onTap: (){
             Navigator.push(
               context,
@@ -32,7 +50,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                 width: 100,
                 decoration:  BoxDecoration(
                   image:   DecorationImage(
-                    image: NetworkImage(movieList[index].imageUrl.toString()),
+                    image: NetworkImage(movie.imageUrl.toString()),
                     fit: BoxFit.cover,
                   ),
                   borderRadius: const BorderRadius.only(
@@ -78,7 +96,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Flexible(
-                              child: Text(movieList[index].title.toString(),
+                              child: Text(movie.title.toString(),
                                 overflow: TextOverflow.ellipsis,
                                 style: Styles.smallCardHeader,
                               ),
@@ -90,7 +108,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                 top: 3,
                               ),
-                              child: Text(movieList[index].year,
+                              child: Text(movie.year,
                                 overflow: TextOverflow.ellipsis,
                                 style: Styles.textSectionBody,
                               ),

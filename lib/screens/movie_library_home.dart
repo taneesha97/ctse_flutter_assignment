@@ -88,7 +88,7 @@ class _LibraryHomeState extends State<LibraryHome> {
                           return ListView.builder(
                             itemCount: libraries.length,
                             itemBuilder: (BuildContext context, index){
-                              return LongLibraryMovieCard(index: index);
+                              return LongLibraryMovieCard(index: index, movie: libraries[index],);
                             },
                           );
                         } else {
