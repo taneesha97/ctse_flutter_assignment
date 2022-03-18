@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:flutter/cupertino.dart';
 
-class QuizListCrudModel extends ChangeNotifier {
+import '../../models/leaderboard_model.dart';
+
+class LeaderBoardCrudModel extends ChangeNotifier {
   // Steam Data For the Movies.
 
   //QuerySnapshot querySnapshot = FirebaseFirestore.instance.collection('quizes').get() as QuerySnapshot<Object?>;
   final Stream<QuerySnapshot> _quizList =
-  FirebaseFirestore.instance.collection('quice_list').snapshots();
+  FirebaseFirestore.instance.collection('leaderboard').snapshots();
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   // final QuestionController _controller = Get.put(QuestionController());
@@ -20,23 +21,24 @@ class QuizListCrudModel extends ChangeNotifier {
   // int AnsweredQuestions = 0;
   // int noWrongAnswers = 0;
 
-  Future<dynamic> readQuizList() async {
+  Future<dynamic> readLeaderBoard() async {
     QuerySnapshot querySnapshot;
     Stream<QuerySnapshot> _quizList;
     List docs = [];
-    List<QuizList> docs1 = [];
+    List<LeaderBoardModel> docs1 = [];
 
     try {
-      querySnapshot = await _db.collection('quice_list').get();
-      _quizList = FirebaseFirestore.instance.collection('quice_list').snapshots();
+      querySnapshot = await _db.collection('leaderboard').get();
+      _quizList = FirebaseFirestore.instance.collection('leaderboard').snapshots();
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
-          QuizList b = QuizList(
-              id: doc.id,
-              //id: doc['id'].toString(), // issue
-              category: doc['category'].toString(),
-              time: doc['time'],
-              questions: doc['questions']);
+          LeaderBoardModel b = LeaderBoardModel(
+              id: doc['id'].toString(),
+              version: doc['version'].toString(),
+              image: doc['image'],
+              name: doc['name'],
+              place: doc['place'],
+              score: doc['score']);
 
           docs1.add(b);
         }
