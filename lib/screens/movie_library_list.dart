@@ -116,7 +116,7 @@ class LibraryList extends StatelessWidget {
           ),
           child: ListTile(
               leading: const CircleAvatar(child: Text("O")),
-              title: Text(library.name),
+              title: Text(library.name, style: Styles.smallCardHeader,),
               trailing: Wrap(
                 spacing: 12,
                 children: [
@@ -134,7 +134,7 @@ class LibraryList extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.edit,
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
                   ),
                   InkWell(
@@ -149,7 +149,7 @@ class LibraryList extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.delete,
-                      color: Colors.redAccent,
+                      color: Colors.red,
                     ),
                   ),
                 ],

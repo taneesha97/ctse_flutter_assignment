@@ -31,6 +31,7 @@ class _LibraryFormState extends State<LibraryForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.teal,
         elevation: 0,
@@ -39,6 +40,7 @@ class _LibraryFormState extends State<LibraryForm> {
       body: Padding(
         padding: EdgeInsets.all(10),
         child: Container(
+          height: 500,
           child: Form(
             key: formKey,
             child: Column(
@@ -76,69 +78,98 @@ class _LibraryFormState extends State<LibraryForm> {
                     ],
                   ),
                 ),
-                TextFormField(
-                  initialValue:
-                      widget.functionValue == 0 ? "" : widget.libraryName,
-                  onChanged: (val) => setState(() => lname = val),
-                  decoration: const InputDecoration(
-                      labelText: "Enter the Library Name",
-                      fillColor: Colors.teal),
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[a-z]+$').hasMatch(value!)) {
-                      return "Please enter correct library name";
-                    } else {
-                      return null;
-                    }
-                  },
+                SizedBox(
+                  height: 100,
+                ),
+                SizedBox(
+                  width: 400, // Adjust Input Field Width.
+                  child: Center(
+                    child: TextFormField(
+                      initialValue:
+                          widget.functionValue == 0 ? "" : widget.libraryName,
+                      onChanged: (val) => setState(() => lname = val),
+                      decoration: const InputDecoration(
+                          labelText: "Enter the Library Name",
+                          fillColor: Colors.teal),
+                      validator: (value) {
+                        if (value!.isEmpty ||
+                            !RegExp(r'^[a-z]+$').hasMatch(value!)) {
+                          return "Please enter correct library name";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 60,
                 ),
                 Center(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          // Update and Inserting Logic Separation.
-                          if (widget.functionValue == 0) {
-                            // Create the Library Model.
-                            final library = Library(
-                              name: lname.toString(),
-                              optional: "optional",
-                              id: 'default-id',
-                            );
+                  child: SizedBox(
+                    width: 200,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        primary: Colors.teal,
+                        padding: EdgeInsets.all(15)
+                      ),
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            // Update and Inserting Logic Separation.
+                            if (widget.functionValue == 0) {
+                              // Create the Library Model.
+                              final library = Library(
+                                name: lname.toString(),
+                                optional: "optional",
+                                id: 'default-id',
+                              );
 
-                            // Call the DB method to write to the database.
-                            Provider.of<CrudModel>(context, listen: false)
-                                .addLibraries(library);
-                          } else {
-                            // Calling the Database Update Method.
-                            Provider.of<CrudModel>(context, listen: false)
-                                .libraryNameUpate(
-                                    lname.toString(), widget.libraryId);
+                              // Call the DB method to write to the database.
+                              Provider.of<CrudModel>(context, listen: false)
+                                  .addLibraries(library);
+                            } else {
+                              // Calling the Database Update Method.
+                              Provider.of<CrudModel>(context, listen: false)
+                                  .libraryNameUpate(
+                                      lname.toString(), widget.libraryId);
+                            }
                           }
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(primary: Colors.teal),
-                      child: Text(
-                        "Add to the Library",
-                        style: Styles.navBarTitle,
-                      )),
+                        },
+                        child: Text(
+                          "Add to the Library",
+                          style: Styles.navBarTitle,
+                        )),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 Center(
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LibraryList()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(primary: Colors.teal),
-                      child: Text(
-                        "See All Libraries",
-                        style: Styles.navBarTitle,
-                      )),
+                  child: SizedBox(
+                    width: 200,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LibraryList()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            primary: Colors.teal,
+                            padding: EdgeInsets.all(15)
+                        ),
+                        child: Text(
+                          "See All Libraries",
+                          style: Styles.navBarTitle,
+                        )),
+                  ),
                 ),
               ],
             ),
