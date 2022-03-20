@@ -54,7 +54,7 @@ class _LibraryFormState extends State<LibraryForm> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Create a Library",
+                            widget.functionValue==0?"Create Library":"Update Library",
                             style: Styles.textSectionHeader,
                           ),
                           Text(
