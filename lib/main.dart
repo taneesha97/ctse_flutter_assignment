@@ -10,6 +10,7 @@ import 'package:ctse_assignment_1/util/crud_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -50,16 +51,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => QuizCrudModel()),
         ChangeNotifierProvider(create: (context) => QuizListCrudModel()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           backgroundColor: Colors.black,
         ),
-        home: Scaffold(
-            body: NavigationScreen()
-        ),
+        home: IndexPage()
+        
 
       ),
     );

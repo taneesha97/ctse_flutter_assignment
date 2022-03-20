@@ -125,6 +125,7 @@ class QuestionController extends GetxController
 
   void nextQuestion() {
     print(_noOfQuestions);
+    print('next ques');
 
     if (_questionNumber.value != _noOfQuestions) {
       _isAnswered = false;
@@ -139,7 +140,7 @@ class QuestionController extends GetxController
       _animationController.forward().whenComplete(nextQuestion);
     } else {
       //Get package provide us simple way to naviigate another page
-      Get.to(FeedBackForm());
+      Get.to(const FeedBackForm());
     }
   }
 
