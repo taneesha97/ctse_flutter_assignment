@@ -81,9 +81,9 @@ class _LibraryFormState extends State<LibraryForm> {
                 SizedBox(
                   height: 100,
                 ),
-                SizedBox(
-                  width: 400, // Adjust Input Field Width.
-                  child: Center(
+                Center(
+                  child: SizedBox(
+                    width: 270, // Adjust Input Field Width.
                     child: TextFormField(
                       initialValue:
                           widget.functionValue == 0 ? "" : widget.libraryName,
