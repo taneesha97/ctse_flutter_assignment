@@ -257,8 +257,9 @@ class IndexPage extends StatelessWidget {
                     ),
 
                     onPressed: () {
+                      print("Clicking on Batch Delete");
                       Provider.of<CrudModel>(context, listen: false)
-                          .cleanUpLibraryUponDelete("library-id");
+                          .cleanUpLibraryUponDelete("H7qms61MWaRkjiz8imXg");
                     },
                     child: const Text(
                       'Batch Delete',
