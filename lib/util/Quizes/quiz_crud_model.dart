@@ -50,14 +50,14 @@ class QuizCrudModel extends ChangeNotifier {
   }
 
 
-  Future<dynamic> readQuizesByGrouping() async {
+  Future<dynamic> readQuizesByGrouping( String category) async {
     QuerySnapshot querySnapshot;
     Stream<QuerySnapshot> _quizList;
     List docs = [];
     List<Question> docs1 = [];
 
     try {
-      querySnapshot = await _db.collection('quizes').where('category', isEqualTo: 'Horror')
+      querySnapshot = await _db.collection('quizes').where('category', isEqualTo: category)
           .get();
       // _quizList = FirebaseFirestore.instance.collection('quizes').snapshots();
       if (querySnapshot.docs.isNotEmpty) {

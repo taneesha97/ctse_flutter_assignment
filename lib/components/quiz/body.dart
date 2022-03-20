@@ -13,9 +13,10 @@ import 'package:provider/provider.dart';
 class Body extends StatefulWidget {
 
   int time, noOfQuestions;
+  String category;
   Body({
     Key? key,
-    required this.time, required this.noOfQuestions
+    required this.time, required this.noOfQuestions, required this.category
   }) : super(key: key);
 
   @override
@@ -34,7 +35,7 @@ class _BodyState extends State<Body> {
     super.initState();
 
     Provider.of<QuizCrudModel>(context, listen: false)
-        .readQuizesByGrouping()
+        .readQuizesByGrouping(widget.category)
         .then((value) => {
           //print(value),
               setState(() {
