@@ -12,8 +12,9 @@ import 'options.dart';
 
 class QuestionCard extends StatelessWidget {
   final int index;
+  final int itemCount;
 
-  QuestionCard({Key? key, required this.question, required this.index})
+  QuestionCard({Key? key, required this.question, required this.index, required this.itemCount})
       : super(key: key);
   // const QuestionCard({Key? key, required this.index}) : super(key: key);
 
@@ -53,7 +54,7 @@ class QuestionCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                   children: [
                     TextSpan(
-                      text: "/10",
+                      text: "/${itemCount}",
                       style: Theme.of(context).textTheme.headline6,
                     )
                   ]),

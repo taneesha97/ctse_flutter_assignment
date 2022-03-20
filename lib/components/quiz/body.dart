@@ -76,6 +76,7 @@ class _BodyState extends State<Body> {
               itemBuilder: (context, index) => QuestionCard(
                 question: docs1[index],
                 index: index,
+                itemCount: docs1.length,
               ),
             ),
           ),

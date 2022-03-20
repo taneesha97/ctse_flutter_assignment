@@ -180,7 +180,7 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  QuizScreen(noOfQuestions: 4, time: 20, cattegory: 'Horror',)),
+                            builder: (context) =>  QuizScreen(noOfQuestions: 1, time: 20, cattegory: 'Horror',)),
                       );
                     },
                     child: const Text(
