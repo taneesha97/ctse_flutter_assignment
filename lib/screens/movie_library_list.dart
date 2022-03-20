@@ -119,7 +119,7 @@ class LibraryList extends StatelessWidget {
                         Navigator.pop(context);
                       }, () {
                         Navigator.pop(context);
-                      });
+                      }, "Do you want to delete library including all the movies in it?");
                     },
                     child: Icon(
                       Icons.delete,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../styles.dart';
 
-showAltertDialog(BuildContext context, Function function1, Function function2) {
+showAltertDialog(BuildContext context, Function function1, Function function2, String message) {
   // Delete Button
   Widget deleteButton = TextButton(
       onPressed: () {
@@ -21,7 +21,7 @@ showAltertDialog(BuildContext context, Function function1, Function function2) {
   AlertDialog alert = AlertDialog(
     title: Text("Warning!"),
     content: Text(
-      "Would you really want to delete library?",
+      message,
       style: Styles.textSectionSubBody,
     ),
     actions: [

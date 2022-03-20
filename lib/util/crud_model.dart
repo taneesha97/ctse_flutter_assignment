@@ -136,5 +136,8 @@ class CrudModel extends ChangeNotifier {
    final doc =
    FirebaseFirestore.instance.collection("libraries").doc(libraryId);
    doc.delete();
+
+   // Cleaning up the movies inside deleted library.
+   cleanUpLibraryUponDelete(libraryId);
  }
 }
