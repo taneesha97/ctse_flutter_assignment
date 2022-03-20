@@ -140,4 +140,10 @@ class CrudModel extends ChangeNotifier {
    // Cleaning up the movies inside deleted library.
    cleanUpLibraryUponDelete(libraryId);
  }
+
+ // Method to get a list of movies from categories.
+
+ // Method to get actors from a actors of a movie. (When given the movie ID).
+
+
 }
