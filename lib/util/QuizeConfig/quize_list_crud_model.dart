@@ -55,7 +55,7 @@ class QuizListCrudModel extends ChangeNotifier {
   Future<dynamic> insertQuizListData(String? category, int? questions, int? time) async {
     try {
       DocumentReference<Map<String, dynamic>> value =
-      await FirebaseFirestore.instance.collection('Feedback').add({
+      await FirebaseFirestore.instance.collection('quize_config').add({
         'category': category ?? '',
         'questions': questions ?? '',
         'time': time ?? '',
