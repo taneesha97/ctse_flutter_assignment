@@ -42,7 +42,7 @@ class QuestionCard extends StatelessWidget {
       padding: EdgeInsets.all(5),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Color.fromARGB(196, 151, 151, 163),
+          color: const Color.fromARGB(196, 151, 151, 163),
           borderRadius: BorderRadius.circular(25)),
       child: Center(
         child: Column(

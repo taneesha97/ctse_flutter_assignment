@@ -31,7 +31,7 @@ class QuizCrudModel extends ChangeNotifier {
 
     try {
       querySnapshot = await _db.collection('quizes').get();
-     // _quizList = FirebaseFirestore.instance.collection('quizes').snapshots();
+      // _quizList = FirebaseFirestore.instance.collection('quizes').snapshots();
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           Question b = Question(
@@ -49,15 +49,16 @@ class QuizCrudModel extends ChangeNotifier {
     }
   }
 
-
-  Future<dynamic> readQuizesByGrouping( String category) async {
+  Future<dynamic> readQuizesByGrouping(String category) async {
     QuerySnapshot querySnapshot;
     Stream<QuerySnapshot> _quizList;
     List docs = [];
     List<Question> docs1 = [];
 
     try {
-      querySnapshot = await _db.collection('quizes').where('category', isEqualTo: category)
+      querySnapshot = await _db
+          .collection('quizes')
+          .where('category', isEqualTo: category)
           .get();
       // _quizList = FirebaseFirestore.instance.collection('quizes').snapshots();
       if (querySnapshot.docs.isNotEmpty) {
@@ -133,8 +134,7 @@ class QuizCrudModel extends ChangeNotifier {
       int correctAnswer, int wrongAnswer) async {
     try {
       DocumentReference<Map<String, dynamic>> value =
-          await FirebaseFirestore.instance.collection('result-quizes').
-          add({
+          await FirebaseFirestore.instance.collection('result-quizes').add({
         'id': id ?? '',
         'no_questions': noQuestions ?? 0,
         'userId': userId ?? '',
@@ -150,10 +150,21 @@ class QuizCrudModel extends ChangeNotifier {
     }
   }
 
+  Future<dynamic> deleteQuizResult(String id) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('result-quizes')
+          .doc(id)
+          .delete();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<dynamic> insertFeedBack(String? value1, String? value2) async {
     try {
       DocumentReference<Map<String, dynamic>> value =
-      await FirebaseFirestore.instance.collection('Feedback').add({
+          await FirebaseFirestore.instance.collection('Feedback').add({
         'expression': value1 ?? '',
         'Comment': value2 ?? '',
       });
@@ -177,5 +188,4 @@ class QuizCrudModel extends ChangeNotifier {
   Future<String> shareQuizID() async {
     return QuizID;
   }
-
 }
