@@ -99,6 +99,16 @@ class Styles {
     color: _hexToColor('000000'),
   );
 
+
+  //styles to font- quiz feedback form
+  static final QuizFeedbackQuestionTitle = TextStyle(
+    fontFamily: "Montserrat",
+    fontWeight: FontWeight.w600,
+    fontSize: 15,
+    fontStyle: FontStyle.normal,
+    color: textColorBright,
+  );
+
   static Color _hexToColor(String code) {
     return Color(int.parse(code.substring(0, 6), radix: 16) + 0xFF000000);
   }

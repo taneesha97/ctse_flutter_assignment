@@ -1,5 +1,5 @@
 class Question {
-  // final int? ;
+  // final int? ;//id//time//cattegory//noQuestion
   final String? question, imageUri, id, answer;
   final List<dynamic>? options;
 
@@ -11,6 +11,8 @@ class Question {
         answer = snapshot['answer'] ?? '',
         options = snapshot['options'] ?? '',
         imageUri = snapshot['imageUri'] ?? '';
+        //cattegory = snapshot['cattegory'] ?? '';
+        //moviename
 
   toJson() {
     return {
