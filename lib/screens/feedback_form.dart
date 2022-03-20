@@ -51,6 +51,7 @@ class _FeedBackFormState extends State<FeedBackForm> {
   void onPress () {
     print(reviewSliderValue);
     print(TextFieldValue);
+    _textController.clear();
     Provider.of<QuizCrudModel>(context, listen: false)
         .insertFeedBack(reviewSliderValue, TextFieldValue)
         .then((value) {
