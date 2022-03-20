@@ -32,10 +32,11 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     super.initState();
+
     Provider.of<QuizCrudModel>(context, listen: false)
-        .readQuizes()
+        .readQuizesByGrouping()
         .then((value) => {
-          print(value),
+          //print(value),
               setState(() {
                 docs1 = value;
               }),

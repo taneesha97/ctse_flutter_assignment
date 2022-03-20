@@ -49,6 +49,34 @@ class QuizCrudModel extends ChangeNotifier {
     }
   }
 
+
+  Future<dynamic> readQuizesByGrouping() async {
+    QuerySnapshot querySnapshot;
+    Stream<QuerySnapshot> _quizList;
+    List docs = [];
+    List<Question> docs1 = [];
+
+    try {
+      querySnapshot = await _db.collection('quizes').where('category', isEqualTo: 'Horror')
+          .get();
+      // _quizList = FirebaseFirestore.instance.collection('quizes').snapshots();
+      if (querySnapshot.docs.isNotEmpty) {
+        for (var doc in querySnapshot.docs.toList()) {
+          Question b = Question(
+              id: doc['id'].toString(),
+              question: doc['question'].toString(),
+              answer: doc['answer'].toString(),
+              options: doc['options'],
+              imageUri: doc['imageUri'].toString());
+          docs1.add(b);
+        }
+        return docs1;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<dynamic> readQuizes1() async {
     // StreamBuilder<QuerySnapshot>(
     //   stream: _quizList,
@@ -105,7 +133,8 @@ class QuizCrudModel extends ChangeNotifier {
       int correctAnswer, int wrongAnswer) async {
     try {
       DocumentReference<Map<String, dynamic>> value =
-          await FirebaseFirestore.instance.collection('result-quizes').add({
+          await FirebaseFirestore.instance.collection('result-quizes').
+          add({
         'id': id ?? '',
         'no_questions': noQuestions ?? 0,
         'userId': userId ?? '',
