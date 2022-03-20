@@ -2,6 +2,7 @@ import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/movie_library_form.dart';
 
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
+import 'package:ctse_assignment_1/screens/navigation_screen.dart';
 import 'package:ctse_assignment_1/util/QuizeConfig/quize_list_crud_model.dart';
 
 import 'package:ctse_assignment_1/util/Quizes/quiz_crud_model.dart';
@@ -56,7 +57,10 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           backgroundColor: Colors.black,
         ),
-        home: IndexPage(),
+        home: Scaffold(
+            body: NavigationScreen()
+        ),
+
       ),
     );
   }

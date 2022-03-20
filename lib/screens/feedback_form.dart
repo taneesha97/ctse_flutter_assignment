@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reviews_slider/reviews_slider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
+import 'package:get/get.dart';
+import '../Controllers/QuestionController.dart';
 import '../util/Quizes/quiz_crud_model.dart';
 
 class FeedBackForm extends StatefulWidget {
@@ -70,7 +71,7 @@ class _FeedBackFormState extends State<FeedBackForm> {
 
   @override
   Widget build(BuildContext context) {
-
+    QuestionController _controller = Get.put(QuestionController());
 
 
 

@@ -139,7 +139,7 @@ class QuestionController extends GetxController
       _animationController.forward().whenComplete(nextQuestion);
     } else {
       //Get package provide us simple way to naviigate another page
-      Get.to(const FeedBackForm());
+      Get.to(FeedBackForm());
     }
   }
 
