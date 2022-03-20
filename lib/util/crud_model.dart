@@ -105,9 +105,19 @@ class CrudModel extends ChangeNotifier {
 
 // Library Home Movies clean up method (Batch) - Do this after insert. - PROTO
   Future<void> cleanUpLibraryUponDelete(String libraryId) async {
-    final movies = await FirebaseFirestore.instance.collection("library-movies").where(libraryId, isEqualTo: libraryId).get();
+
+    // Method troubleshooting block
+    // - print("Library Id $libraryId");
+
+    final movies = await FirebaseFirestore.instance.collection("library-movies").where("libraryId", isEqualTo: libraryId).get();
+
+    // QuerySnap shot troubleshooting
+    // - print(movies);
+    // - print(movies.size);
+
     WriteBatch batch = FirebaseFirestore.instance.batch();
     for (final doc in movies.docs){
+      // - print(doc.get("title"));
       batch.delete(doc.reference);
     }
     return batch.commit();
