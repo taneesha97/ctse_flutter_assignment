@@ -12,7 +12,7 @@ class LeaderBoard extends StatefulWidget {
 
 class _LeaderBoardState extends State<LeaderBoard> {
 
-  List<LeaderBoardModel> docs1 = [];
+  List<LeaderBoardModel> docs1= [];
 
   List names = ["Bright vachirawit", "Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit"];
   List place = ["1st place", "1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place"];
@@ -61,12 +61,12 @@ class _LeaderBoardState extends State<LeaderBoard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children:<Widget> [
-                        // Container(
-                        //   height: 60.0,
-                        //   width: 5.0,
-                        //   color: Colors.pink,
-                        //   // margin: EdgeInsets.only(right: 0, left: 0),
-                        // ),
+                        Container(
+                          height: 60.0,
+                          width: 5.0,
+                          color: Colors.pink,
+                          // margin: EdgeInsets.only(right: 0, left: 0),
+                        ),
                         SizedBox(width: 5.0),
                         Container(
                           width: 55.0,
