@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/movie/moviecard/movie_select.dart';
+import '../styles.dart';
 import '../util/crud_model.dart';
 
 class MovieMultiSelect extends StatefulWidget {
@@ -46,13 +47,19 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
               child: StreamBuilder<List<SelectedMovieModel>>(
                 stream: movies,
                 builder: (context, snapshot) {
-                  final movies = snapshot.data;
-                  return ListView.builder(
-                    itemCount: movies?.length,
-                    itemBuilder: (BuildContext context, int index){
-                      return SelectableMovie(selectedMovieModel: movies![index], selectedMoviesListRef: selectedMovies);
-                    },
-                  );
+                  if(snapshot.hasError){
+                    return Text("Snapshot contains error!", style: Styles.textSectionSubBody,);
+                  } else if (snapshot.hasData){
+                    final movies = snapshot.data;
+                    return ListView.builder(
+                      itemCount: movies?.length,
+                      itemBuilder: (BuildContext context, int index){
+                        return SelectableMovie(selectedMovieModel: movies![index], selectedMoviesListRef: selectedMovies);
+                      },
+                    );
+                  } else {
+                    return Center(child: CircularProgressIndicator(),);
+                  }
                 }
               ),
             ),
