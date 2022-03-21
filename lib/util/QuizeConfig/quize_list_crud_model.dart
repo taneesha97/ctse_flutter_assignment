@@ -66,8 +66,16 @@ class QuizListCrudModel extends ChangeNotifier {
     }
   }
 
-
-
+  Future<dynamic> deleteQuizList(String id) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('quice_list')
+          .doc(id)
+          .delete();
+    } catch (e) {
+      print(e);
+    }
+  }
 
 
 
