@@ -65,12 +65,22 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
             ),
             Flexible(
               flex: 1,
-              child: ElevatedButton(
-                onPressed: () {
-                  Provider.of<CrudModel>(context, listen: false)
-                      .addMoviesTotheLibrary(selectedMovies);
-                },
-                child: const Text("Add Movies to the Library"),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width - 10,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      primary: Colors.teal,
+                      padding: EdgeInsets.all(15)
+                  ),
+                  onPressed: () {
+                    Provider.of<CrudModel>(context, listen: false)
+                        .addMoviesTotheLibrary(selectedMovies);
+                  },
+                  child: const Text("Add Movies to the Library"),
+                ),
               ),
             )
           ],
