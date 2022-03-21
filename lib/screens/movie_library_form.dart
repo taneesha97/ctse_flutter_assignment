@@ -1,6 +1,7 @@
 import 'package:ctse_assignment_1/components/movie/status_tag.dart';
 import 'package:ctse_assignment_1/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../models/library_model.dart';
@@ -78,7 +79,7 @@ class _LibraryFormState extends State<LibraryForm> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 ),
                 Center(
@@ -93,7 +94,7 @@ class _LibraryFormState extends State<LibraryForm> {
                           fillColor: Colors.teal),
                       validator: (value) {
                         if (value!.isEmpty ||
-                            !RegExp(r'^[a-z]+$').hasMatch(value!)) {
+                            !RegExp(r'^[a-zA-Z]+$').hasMatch(value!)){
                           return "Please enter correct library name";
                         } else {
                           return null;
