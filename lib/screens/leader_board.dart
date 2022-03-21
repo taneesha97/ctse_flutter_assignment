@@ -12,7 +12,7 @@ class LeaderBoard extends StatefulWidget {
 
 class _LeaderBoardState extends State<LeaderBoard> {
 
-  List<LeaderBoardModel> docs1 = [];
+  List<LeaderBoardModel> docs1= [];
 
   List names = ["Bright vachirawit", "Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit"];
   List place = ["1st place", "1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place"];
@@ -28,7 +28,6 @@ class _LeaderBoardState extends State<LeaderBoard> {
       }),
     });
   }
-
 
 
   @override
@@ -77,16 +76,17 @@ class _LeaderBoardState extends State<LeaderBoard> {
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.green,
                             // backgroundImage: AssetImage("images/bright.jpg"),
-                            backgroundImage: NetworkImage
-                            ("https://images.unsplash.com/photo-1457449940276-e8deed18bfff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"),
+                            backgroundImage: NetworkImage(docs1[index].image.toString()),
+                            // ("https://images.unsplash.com/photo-1457449940276-e8deed18bfff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"),
                           ),
                         ),
                         SizedBox(width: 5.0),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children:<Widget> [
-                            Text(names[index], style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold)),
-                            Text(place[index], style: TextStyle(color: Colors.grey)),
+                            Text(docs1[index].name.toString(), style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            Text(docs1[index].place.toString(), style: TextStyle(color: Colors.grey)),
+                            // Text(place[index], style: TextStyle(color: Colors.grey)),
                           ],
                         ),
                       ],
@@ -121,7 +121,8 @@ class _LeaderBoardState extends State<LeaderBoard> {
                       child: Center(
                           child: Text.rich(
                             TextSpan(
-                                text: "76pts",
+                                // text: "76pts",
+                                text: docs1[index].score.toString(),
                                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white )
                             ),
                           )

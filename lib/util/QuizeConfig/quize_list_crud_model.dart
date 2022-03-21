@@ -29,6 +29,7 @@ class QuizListCrudModel extends ChangeNotifier {
     try {
       querySnapshot = await _db.collection('quice_list').get();
       _quizList = FirebaseFirestore.instance.collection('quice_list').snapshots();
+      
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           QuizList b = QuizList(
@@ -38,8 +39,11 @@ class QuizListCrudModel extends ChangeNotifier {
               time: doc['time'],
               questions: doc['questions']);
 
+          print('inside try ------------------------');
+          print(b);
           docs1.add(b);
         }
+         print("printing-------------------------------");
         print(docs1);
         return docs1;
       }
@@ -47,6 +51,26 @@ class QuizListCrudModel extends ChangeNotifier {
       print(e);
     }
   }
+
+  Future<dynamic> insertQuizListData(String? category, int? questions, int? time) async {
+    try {
+      DocumentReference<Map<String, dynamic>> value =
+      await FirebaseFirestore.instance.collection('quize_config').add({
+        'category': category ?? '',
+        'questions': questions ?? '',
+        'time': time ?? '',
+      });
+      return value.id.toString();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+
+
+
+
+
 
 
 
