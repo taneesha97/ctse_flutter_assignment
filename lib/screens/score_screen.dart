@@ -1,5 +1,7 @@
+import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../util/Quizes/quiz_crud_model.dart';
 import 'leader_board.dart';
 
@@ -10,6 +12,75 @@ class ScorePage extends StatefulWidget {
 }
 
 class _ScorePageState extends State<ScorePage> {
+
+  var alertStyle = AlertStyle(
+    overlayColor: const Color.fromARGB(196, 151, 151, 163),
+    animationType: AnimationType.grow,
+    isCloseButton: false,
+    isOverlayTapDismiss: false,
+    descStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+    animationDuration: Duration(milliseconds: 400),
+    alertBorder: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(50.0),
+      side: BorderSide(
+        color: Colors.grey,
+      ),
+    ),
+    titleStyle: const TextStyle(
+      color: Color.fromRGBO(91, 55, 185, 1.0),
+      //fontSize: 10
+    ),
+  );
+
+  void onPress() {
+
+
+    Alert(
+      context: context,
+      style: alertStyle,
+      type: AlertType.error,
+      title: "Are you sure?",
+      desc: "Do you want to delete the record?",
+      buttons: [
+        DialogButton(
+          child: const Text(
+            "Yes",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () {
+
+            Provider.of<QuizCrudModel>(context, listen: false)
+                .deleteQuizResult('yenw6Yrv2qOBHbvfvM34');
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>  const IndexPage()),
+            );
+            // MaterialPageRoute(builder: (context) => const ScorePage());
+
+
+          },
+          color: Color.fromRGBO(91, 55, 185, 1.0),
+          radius: BorderRadius.circular(10.0),
+        ),
+
+        DialogButton(
+          child: const Text(
+            "Cancel",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+
+          },
+          color: Color.fromRGBO(91, 55, 185, 1.0),
+          radius: BorderRadius.circular(10.0),
+        ),
+      ],
+    ).show();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,10 +195,7 @@ class _ScorePageState extends State<ScorePage> {
                         ),
                       ),
                       child: Text('Delete'),
-                      onPressed: () {
-                        Provider.of<QuizCrudModel>(context, listen: false)
-                            .deleteQuizResult('38DurlnqnDUveidHsniS');
-                      })
+                      onPressed: onPress)
                 ],
               )),
             )
