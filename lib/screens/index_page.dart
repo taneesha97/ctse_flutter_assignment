@@ -12,6 +12,7 @@ import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
 import 'package:ctse_assignment_1/screens/movie_multi_select.dart';
 import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
+import 'package:ctse_assignment_1/screens/navigation_screen.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_splash.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
@@ -31,6 +32,9 @@ import 'movie_all.dart';
 import 'movie_library_form.dart';
 
 class IndexPage extends StatefulWidget {
+
+  const IndexPage({Key? key}) : super(key: key);
+
   @override
   _IndexPageState createState() => _IndexPageState();
 }
@@ -180,7 +184,7 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  QuizScreen(noOfQuestions: 4, time: 20,)),
+                            builder: (context) =>  QuizScreen(noOfQuestions: 1, time: 20, cattegory: 'Horror',)),
                       );
                     },
                     child: const Text(
@@ -235,6 +239,30 @@ class _IndexPageState extends State<IndexPage> {
                     },
                     child: const Text(
                       'All Movies Page',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  ScorePage()),
+                      );
+                    },
+                    child: const Text(
+                      'Score page',
                       style:
                       TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
@@ -367,6 +395,32 @@ class _IndexPageState extends State<IndexPage> {
                     },
                     child: const Text(
                       'LeaderBoard',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  NavigationScreen()),
+                      );
+                    },
+                    child: const Text(
+                      'Navigation Screen',
                       style:
                       TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
