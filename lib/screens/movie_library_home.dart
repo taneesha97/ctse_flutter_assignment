@@ -82,13 +82,13 @@ class _LibraryHomeState extends State<LibraryHome> {
                       stream: listMovies,
                       builder: (context, snapshot) {
                         if(snapshot.hasError){
-                          return Text(snapshot.toString());
+                          return Text("Snapshot contains error!", style: Styles.textSectionSubBody,);
                         } else if(snapshot.hasData){
                           final libraries = snapshot.data!;
                           return ListView.builder(
                             itemCount: libraries.length,
                             itemBuilder: (BuildContext context, index){
-                              return LongLibraryMovieCard(index: index);
+                              return LongLibraryMovieCard(index: index, movie: libraries[index],);
                             },
                           );
                         } else {

@@ -125,6 +125,7 @@ class QuestionController extends GetxController
 
   void nextQuestion() {
     print(_noOfQuestions);
+    print('next ques');
 
     if (_questionNumber.value != _noOfQuestions) {
       _isAnswered = false;

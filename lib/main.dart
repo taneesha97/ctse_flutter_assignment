@@ -2,7 +2,11 @@ import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/movie_library_form.dart';
 
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
+
+import 'package:ctse_assignment_1/screens/navigation_screen.dart';
+
 import 'package:ctse_assignment_1/util/QuizeConfig/leaderboard_crud_model.dart';
+
 import 'package:ctse_assignment_1/util/QuizeConfig/quize_list_crud_model.dart';
 
 import 'package:ctse_assignment_1/util/Quizes/quiz_crud_model.dart';
@@ -10,6 +14,7 @@ import 'package:ctse_assignment_1/util/crud_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -51,14 +56,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => QuizListCrudModel()),
         ChangeNotifierProvider(create: (context) => LeaderBoardCrudModel()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           backgroundColor: Colors.black,
         ),
-        home: IndexPage(),
+        home: const IndexPage()
       ),
     );
   }
