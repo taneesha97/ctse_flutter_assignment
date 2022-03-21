@@ -36,12 +36,41 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
 
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Movie Multi Select"),
-      ),
+        appBar: AppBar(
+          backgroundColor: Colors.teal,
+          elevation: 0,
+          toolbarHeight: 10,
+        ),
       body:
-        SafeArea(child: Column(
+        SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 10,
+                right: 10,
+                top: 10,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Select Moives",
+                    style: Styles.textSectionHeader,
+                  ),
+                  Text(
+                    "Add movies to the library",
+                    style: Styles.textSectionSubBody,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
             Flexible(
               flex: 9,
               child: StreamBuilder<List<SelectedMovieModel>>(
@@ -65,21 +94,29 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
             ),
             Flexible(
               flex: 1,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width - 10,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      primary: Colors.teal,
-                      padding: EdgeInsets.all(15)
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                  top: 2,
+                  bottom: 4,
+                  right: 10,
+                ),
+                child: SizedBox(
+                  height: 80,
+                  width: MediaQuery.of(context).size.width - 10,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        primary: Colors.teal,
+                    ),
+                    onPressed: () {
+                      Provider.of<CrudModel>(context, listen: false)
+                          .addMoviesTotheLibrary(selectedMovies);
+                    },
+                    child: const Text("Add Movies to the Library"),
                   ),
-                  onPressed: () {
-                    Provider.of<CrudModel>(context, listen: false)
-                        .addMoviesTotheLibrary(selectedMovies);
-                  },
-                  child: const Text("Add Movies to the Library"),
                 ),
               ),
             )

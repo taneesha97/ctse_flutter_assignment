@@ -22,7 +22,12 @@ class _SelectableMovieState extends State<SelectableMovie> {
   Widget build(BuildContext context) {
     MediaQueryData query = MediaQuery.of(context);
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.only(
+        left: 8,
+        top: 5,
+        right: 8,
+        bottom: 5,
+      ),
       child: InkWell(
         onTap: (){
           setState(() {
@@ -97,7 +102,7 @@ class _SelectableMovieState extends State<SelectableMovie> {
                       widget.selectedMovieModel.isSelected
                           ? Icon(
                         Icons.check_circle,
-                        color: Colors.green[700],
+                        color: Colors.grey,
                       ) : Icon(
                         Icons.check_circle_outline,
                         color: Colors.grey,
