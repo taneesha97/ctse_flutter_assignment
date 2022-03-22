@@ -32,7 +32,7 @@ class _CardView1State extends State<CardView1> {
         builder: (BuildContext ctx) {
           return AlertDialog(
             title: const Text('Please Confirm'),
-            content: const Text('Are you sure to remove the box?'),
+            content: const Text('Are you sure to remove the quiz?'),
             actions: [
               // The "Yes" button
               TextButton(

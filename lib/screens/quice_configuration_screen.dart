@@ -17,7 +17,7 @@ class DropDown extends StatefulWidget {
 }
 List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy"];
 List <String> _list2 =['5',"10","15",'20'];
-List <String> _list3 =['10 Min',"15 Min","20 Min", "30 Min"];
+List <String> _list3 =['10',"15","20", "30"];
 
 class _DropDownState extends State<DropDown> {
   bool isStrechedDropDown = false;
@@ -222,6 +222,13 @@ class _DropDownState extends State<DropDown> {
                                                             setState(() {
                                                               category =
                                                               'Animation';
+                                                              title = _list.elementAt(index);
+                                                            });
+                                                          }
+                                                          else if (val == 4) {
+                                                            setState(() {
+                                                              category =
+                                                              'Comedy';
                                                               title = _list.elementAt(index);
                                                             });
                                                           }
