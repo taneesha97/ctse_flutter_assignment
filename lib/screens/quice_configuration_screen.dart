@@ -1,8 +1,11 @@
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../components/form_dropdown/Scrollbar.dart';
 import '../components/form_dropdown/ExpandedListAnimationWidget.dart';
+import '../util/QuizeConfig/quize_list_crud_model.dart';
 
 
 
@@ -12,7 +15,7 @@ class DropDown extends StatefulWidget {
   @override
   _DropDownState createState() => _DropDownState();
 }
-List <String> _list =['Action',"Romance","Thriller",'Animation'];
+List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy"];
 List <String> _list2 =['5',"10","15",'20'];
 List <String> _list3 =['10 Min',"15 Min","20 Min", "30 Min"];
 
@@ -21,13 +24,57 @@ class _DropDownState extends State<DropDown> {
   bool isStrechedDropDown2 = false;
   bool isStrechedDropDown3 = false;
 
-  int? groupValue;
-  int? groupValue2;
-  int? groupValue3;
+  // int? groupValue;
+  // int? groupValue2;
+  // int? groupValue3;
 
   String title = 'Enter Movie Category';
   String title2 = 'Enter No of questions';
   String title3 = 'Enter time';
+
+  String? category;
+  int? questions, time;
+
+  void onChange1(int value) {
+    print(value);
+    if(value == 0){
+      setState(() {
+        category = 'Action';
+      });
+    } else if(value == 1){
+      setState(() {
+        category = 'Romance';
+      });
+    }
+    else if(value == 2){
+      setState(() {
+        category = 'Thriller';
+      });
+    }
+    else if(value == 3){
+      setState(() {
+        category = 'Animation';
+      });
+    }
+  }
+
+  void onPress () {
+    Provider.of<QuizListCrudModel>(context, listen: false).insertQuizListData(category, questions, time)
+        .then((value) {
+      //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
+      print(value);
+      if(value != 0){
+        Alert(
+          context: context,
+          title: "Successfully",
+          desc: "You have Successfully Submitted the Data",
+        ).show();
+      }
+    });
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +126,7 @@ class _DropDownState extends State<DropDown> {
                           alignment: Alignment.centerLeft,
                           margin: EdgeInsets.only(left: 5.0, bottom: 5.0, top: 5.0),
                           child: Text(
-                            "Quiz Configuration",
+                            "Enter Movie Category",
                              style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -149,13 +196,43 @@ class _DropDownState extends State<DropDown> {
                                                     return RadioListTile(
                                                         title: Text(_list.elementAt(index)),
                                                         value: index,
-                                                        groupValue: groupValue,
+                                                        groupValue: category,
                                                         onChanged: (val) {
-                                                          setState(() {
-                                                            groupValue = val as int;
-                                                            title = _list.elementAt(index);
-                                                          });
-                                                        });
+                                                          if (val == 0) {
+                                                            setState(() {
+                                                              category =
+                                                              'Action';
+                                                              title = _list.elementAt(index);
+                                                            });
+                                                          } else if (val == 1) {
+                                                            setState(() {
+                                                              category =
+                                                              'Romance';
+                                                              title = _list.elementAt(index);
+                                                            });
+                                                          }
+                                                          else if (val == 2) {
+                                                            setState(() {
+                                                              category =
+                                                              'Thriller';
+                                                              title = _list.elementAt(index);
+                                                            });
+                                                          }
+                                                          else if (val == 3) {
+                                                            setState(() {
+                                                              category =
+                                                              'Animation';
+                                                              title = _list.elementAt(index);
+                                                            });
+                                                          }
+                                                        }
+                                                        // onChanged: (val) {
+                                                        //   setState(() {
+                                                        //     category = val as String?;
+                                                        //     title = _list.elementAt(index);
+                                                        //   });
+                                                        // }
+                                                        );
                                                   }),
                                         ),
                                       ),
@@ -243,13 +320,43 @@ class _DropDownState extends State<DropDown> {
                                                   return RadioListTile(
                                                       title: Text(_list2.elementAt(index)),
                                                       value: index,
-                                                      groupValue: groupValue2,
+                                                      groupValue: questions,
                                                       onChanged: (val) {
-                                                        setState(() {
-                                                          groupValue2 = val as int;
-                                                          title2 = _list2.elementAt(index);
-                                                        });
-                                                      });
+                                                        if (val == 0) {
+                                                          setState(() {
+                                                            questions =
+                                                            5;
+                                                            title2 = _list2.elementAt(index);
+                                                          });
+                                                        } else if (val == 1) {
+                                                          setState(() {
+                                                            questions =
+                                                            10;
+                                                            title2 = _list2.elementAt(index);
+                                                          });
+                                                        }
+                                                        else if (val == 2) {
+                                                          setState(() {
+                                                            questions =
+                                                            15;
+                                                            title2 = _list2.elementAt(index);
+                                                          });
+                                                        }
+                                                        else if (val == 3) {
+                                                          setState(() {
+                                                            questions =
+                                                            20;
+                                                            title2 = _list2.elementAt(index);
+                                                          });
+                                                        }
+                                                      }
+                                                      // onChanged: (val) {
+                                                      //   setState(() {
+                                                      //     questions = val as int;
+                                                      //     title2 = _list2.elementAt(index);
+                                                      //   });
+                                                      // }
+                                                      );
                                                 }),
                                       ),
                                     ),
@@ -337,13 +444,45 @@ class _DropDownState extends State<DropDown> {
                                                   return RadioListTile(
                                                       title: Text(_list3.elementAt(index)),
                                                       value: index,
-                                                      groupValue: groupValue3,
+                                                      groupValue: time,
                                                       onChanged: (val) {
-                                                        setState(() {
-                                                          groupValue3 = val as int;
-                                                          title3 = _list3.elementAt(index);
-                                                        });
-                                                      });
+                                                        if (val == 0) {
+                                                          setState(() {
+                                                            time =
+                                                            10;
+                                                            title3 = _list3.elementAt(index);
+                                                          });
+                                                        } else if (val == 1) {
+                                                          setState(() {
+                                                            time =
+                                                            15;
+                                                            title3 = _list3.elementAt(index);
+                                                          });
+                                                        }
+                                                        else if (val == 2) {
+                                                          setState(() {
+                                                            time =
+                                                            20;
+                                                            title3 = _list3.elementAt(index);
+                                                          });
+                                                        }
+                                                        else if (val == 3) {
+                                                          setState(() {
+                                                            time =
+                                                            30;
+                                                            title3 = _list3.elementAt(index);
+                                                          });
+                                                        }
+                                                      }
+
+
+                                                      // onChanged: (val) {
+                                                      //   setState(() {
+                                                      //     time = val as int;
+                                                      //     title3 = _list3.elementAt(index);
+                                                      //   });
+                                                      // }
+                                                      );
                                                 }),
                                       ),
                                     ),
@@ -368,10 +507,11 @@ class _DropDownState extends State<DropDown> {
                             ),
                           ),
                           child: Text('Add Label'),
-                          onPressed: (){
-                            Navigator.push(
-                                context, MaterialPageRoute(builder: (context) => QuizeList()));
-                          }),
+                          onPressed: onPress),
+                          // onPressed: (){
+                          //   Navigator.push(
+                          //       context, MaterialPageRoute(builder: (context) => QuizeList()));
+                          // }
                       SizedBox(height: 20),
                       // ElevatedButton(
                       //     style: ElevatedButton.styleFrom(

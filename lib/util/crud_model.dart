@@ -92,7 +92,6 @@ class CrudModel extends ChangeNotifier {
       }
       movieBatch.commit();
     }
-
   }
 
   // Library Name Update method
@@ -103,7 +102,27 @@ class CrudModel extends ChangeNotifier {
       "name": newName,
     });
   }
-// Library Home Movies clean up method (Batch) - Do this after insert.
+
+// Library Home Movies clean up method (Batch) - Do this after insert. - PROTO
+  Future<void> cleanUpLibraryUponDelete(String libraryId) async {
+
+    // Method troubleshooting block
+    // - print("Library Id $libraryId");
+
+    final movies = await FirebaseFirestore.instance.collection("library-movies").where("libraryId", isEqualTo: libraryId).get();
+
+    // QuerySnap shot troubleshooting
+    // - print(movies);
+    // - print(movies.size);
+
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+    for (final doc in movies.docs){
+      // - print(doc.get("title"));
+      batch.delete(doc.reference);
+    }
+    return batch.commit();
+  }
+
 
 // Library Home Movie Delete method.
     Future deleteLibraryMovie(String libraryId) async {
@@ -117,5 +136,14 @@ class CrudModel extends ChangeNotifier {
    final doc =
    FirebaseFirestore.instance.collection("libraries").doc(libraryId);
    doc.delete();
+
+   // Cleaning up the movies inside deleted library.
+   cleanUpLibraryUponDelete(libraryId);
  }
+
+ // Method to get a list of movies from categories.
+
+ // Method to get actors from a actors of a movie. (When given the movie ID).
+
+
 }
