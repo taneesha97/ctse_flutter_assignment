@@ -8,11 +8,16 @@ import '../util/QuizeConfig/leaderboard_crud_model.dart';
 class LeaderBoard extends StatefulWidget {
   @override
   _LeaderBoardState createState() => _LeaderBoardState();
+
+  const LeaderBoard({Key? key})
+      : super(key: key);
 }
 
 class _LeaderBoardState extends State<LeaderBoard> {
 
   List<LeaderBoardModel> docs1 = [];
+
+
 
   List names = ["Bright vachirawit", "Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit","Bright vachirawit"];
   List place = ["1st place", "1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place","1st place"];

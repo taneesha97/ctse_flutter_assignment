@@ -1,5 +1,6 @@
 import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/score_screen.dart';
+import 'package:ctse_assignment_1/util/FeedBack/feed_back_crud_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reviews_slider/reviews_slider.dart';
@@ -98,7 +99,7 @@ class _FeedBackFormState extends State<FeedBackForm> {
       print(reviewSliderValue);
       print(TextFieldValue);
       _textController.clear();
-      Provider.of<QuizCrudModel>(context, listen: false)
+      Provider.of<FeedBackCrudModel>(context, listen: false)
           .insertFeedBack(reviewSliderValue, TextFieldValue)
           .then((value) {
         //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;

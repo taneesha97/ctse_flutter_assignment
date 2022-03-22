@@ -1,5 +1,8 @@
+import 'package:ctse_assignment_1/models/result_quiz.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
+import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../util/Quizes/quiz_crud_model.dart';
@@ -12,6 +15,9 @@ class ScorePage extends StatefulWidget {
 }
 
 class _ScorePageState extends State<ScorePage> {
+
+  LocalStorage storage = new LocalStorage('localstorage_app');
+  List<ResultQuiz> docs = [];
 
   var alertStyle = AlertStyle(
     overlayColor: const Color.fromARGB(196, 151, 151, 163),
@@ -32,57 +38,125 @@ class _ScorePageState extends State<ScorePage> {
     ),
   );
 
-  void onPress() {
+  @override
+  void initState() {
+    super.initState();
+    String QuizID1 = storage.getItem('QuizID');
+    Provider.of<QuizResultCrudModel>(context, listen: false)
+        .readQuizResultsByID(QuizID1)
+        .then((value) => {
+      print(value),
+      setState(() {
+        docs = value;
+      }),
 
+      // docs1 = value
+    });
+  }
 
-    Alert(
-      context: context,
-      style: alertStyle,
-      type: AlertType.error,
-      title: "Are you sure?",
-      desc: "Do you want to delete the record?",
-      buttons: [
-        DialogButton(
-          child: const Text(
-            "Yes",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          onPressed: () {
-
-            Provider.of<QuizCrudModel>(context, listen: false)
-                .deleteQuizResult('yenw6Yrv2qOBHbvfvM34');
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>  const IndexPage()),
-            );
-            // MaterialPageRoute(builder: (context) => const ScorePage());
-
-
-          },
-          color: Color.fromRGBO(91, 55, 185, 1.0),
-          radius: BorderRadius.circular(10.0),
-        ),
-
-        DialogButton(
-          child: const Text(
-            "Cancel",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-
-          },
-          color: Color.fromRGBO(91, 55, 185, 1.0),
-          radius: BorderRadius.circular(10.0),
-        ),
-      ],
-    ).show();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    String QuizID = storage.getItem('QuizID');
+
+    void onPress() {
+
+
+      Alert(
+        context: context,
+        style: alertStyle,
+        type: AlertType.error,
+        title: "Are you sure?",
+        desc: "Do you want to delete the record?",
+        buttons: [
+          DialogButton(
+            child: const Text(
+              "Yes",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () {
+
+              Provider.of<QuizResultCrudModel>(context, listen: false)
+                  .deleteQuizResult(QuizID);
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>  const IndexPage()),
+              );
+              // MaterialPageRoute(builder: (context) => const ScorePage());
+
+
+            },
+            color: Color.fromRGBO(91, 55, 185, 1.0),
+            radius: BorderRadius.circular(10.0),
+          ),
+
+          DialogButton(
+            child: const Text(
+              "Cancel",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+
+            },
+            color: Color.fromRGBO(91, 55, 185, 1.0),
+            radius: BorderRadius.circular(10.0),
+          ),
+        ],
+      ).show();
+    }
+
+    void onPress1() {
+      Alert(
+        context: context,
+        style: alertStyle,
+        type: AlertType.info,
+        title: "Are you sure?",
+        desc: "Do you want to retry quiz?",
+        buttons: [
+          DialogButton(
+            child: const Text(
+              "Yes",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () {
+              Provider.of<QuizResultCrudModel>(context, listen: false).ReAttemptQuizResult(QuizID);
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>  const IndexPage()),
+              );
+              // MaterialPageRoute(builder: (context) => const ScorePage());
+            },
+            color: Color.fromRGBO(91, 55, 185, 1.0),
+            radius: BorderRadius.circular(10.0),
+          ),
+
+          DialogButton(
+            child: const Text(
+              "Cancel",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+
+            },
+            color: Color.fromRGBO(91, 55, 185, 1.0),
+            radius: BorderRadius.circular(10.0),
+          ),
+        ],
+      ).show();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -124,7 +198,7 @@ class _ScorePageState extends State<ScorePage> {
                     // crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text.rich(
+                      Text.rich(
                         TextSpan(
                             text: "10",
                             style: TextStyle(
@@ -137,12 +211,12 @@ class _ScorePageState extends State<ScorePage> {
                       ),
                       Text.rich(
                         TextSpan(
-                            text: "10",
+                            text: "${docs[0].correct_answer}",
                             //text: "${question.id}",
                             style: Theme.of(context).textTheme.headline6,
                             children: [
                               TextSpan(
-                                text: "/10",
+                                text: "/${docs[0].no_questions}",
                                 style: Theme.of(context).textTheme.headline6,
                               )
                             ]),
@@ -171,7 +245,7 @@ class _ScorePageState extends State<ScorePage> {
                         ),
                       ),
                       child: Text('Retry'),
-                      onPressed: () {}),
+                      onPressed: onPress1),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(100, 40),
@@ -183,7 +257,11 @@ class _ScorePageState extends State<ScorePage> {
                       ),
                       child: Text('OK'),
                       onPressed: () {
-                        MaterialPageRoute(builder: (context) => LeaderBoard());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>  const LeaderBoard()),
+                        );
                       }),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(

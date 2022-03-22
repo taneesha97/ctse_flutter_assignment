@@ -18,6 +18,7 @@ import 'package:ctse_assignment_1/screens/quice_configuration_splash.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:ctse_assignment_1/screens/score_screen.dart';
+import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
 import 'package:ctse_assignment_1/util/crud_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -172,8 +173,8 @@ class _IndexPageState extends State<IndexPage> {
                       // foreground
                     ),
                     onPressed: () {
-                      Provider.of<QuizCrudModel>(context, listen: false)
-                          .insertQuizData('1', 0, 'U001', 0, 0)
+                      Provider.of<QuizResultCrudModel>(context, listen: false)
+                          .insertQuizData(4, 'U001') // here no of quizes are entered, userID are entered
                           .then((value) {
                             //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
                             storage.setItem('QuizID', value.toString());
@@ -184,7 +185,7 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  QuizScreen(noOfQuestions: 1, time: 20, cattegory: 'Horror',)),
+                            builder: (context) =>  QuizScreen(noOfQuestions: 4, time: 20, cattegory: 'Horror',)),
                       );
                     },
                     child: const Text(
