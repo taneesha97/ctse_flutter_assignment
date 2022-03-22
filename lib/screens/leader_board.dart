@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,16 @@ import '../models/leaderboard_model.dart';
 import '../util/QuizeConfig/leaderboard_crud_model.dart';
 
 class LeaderBoard extends StatefulWidget {
+
+  final String id;
+  const LeaderBoard({
+    Key? key,
+    required this.id,
+
+  }) : super(key: key);
+
+
+
   @override
   _LeaderBoardState createState() => _LeaderBoardState();
 }
@@ -17,6 +28,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
   List names = ["Bright vachirawit", "Bright vachirawit","Bright vachirawit","Bright vachirawit"];
   List place = ["1st place", "1st place","1st place","1st place"];
 
+
   @override
   void initState() {
     super.initState();
@@ -27,6 +39,38 @@ class _LeaderBoardState extends State<LeaderBoard> {
         docs1 = value;
       }),
     });
+  }
+
+  bool _isShown = true;
+
+  void _deleteItem(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            title: const Text('Please Confirm'),
+            content: const Text('Are you sure to remove the item?'),
+            actions: [
+              // The "Yes" button
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Provider.of<LeaderBoardCrudModel>(context, listen: false).deleteLeaderboardItem(widget.id);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => QuizeList()));
+                  },
+                  child: const Text('Yes')),
+              TextButton(
+                  onPressed: () {
+                    // Close the dialog
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('No'))
+            ],
+          );
+        });
   }
 
   @override
@@ -119,7 +163,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                                     decoration: ShapeDecoration(
                                     shape: CircleBorder(), color: Colors.white),
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: _isShown == true ? () => _deleteItem(context) : null,
                                   icon: Icon(
                                   Icons.delete,
                                   color: Colors.black,

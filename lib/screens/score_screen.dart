@@ -112,7 +112,7 @@ class _ScorePageState extends State<ScorePage> {
                       ),
                       child: Text('OK'),
                       onPressed: () {
-                        MaterialPageRoute(builder: (context) => LeaderBoard());
+                        MaterialPageRoute(builder: (context) => const LeaderBoard(id: '',));
                       }),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(

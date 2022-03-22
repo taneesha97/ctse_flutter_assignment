@@ -390,7 +390,7 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  LeaderBoard()),
+                            builder: (context) =>  const LeaderBoard(id: '',)),
                       );
                     },
                     child: const Text(
