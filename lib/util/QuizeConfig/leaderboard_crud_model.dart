@@ -33,7 +33,8 @@ class LeaderBoardCrudModel extends ChangeNotifier {
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           LeaderBoardModel b = LeaderBoardModel(
-              id: doc['id'].toString(),
+              // id: doc['id'].toString(),
+              id: doc.id,
               version: doc['version'].toString(),
               image: doc['image'],
               name: doc['name'],

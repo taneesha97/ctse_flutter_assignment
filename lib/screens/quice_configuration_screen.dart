@@ -7,8 +7,6 @@ import '../components/form_dropdown/Scrollbar.dart';
 import '../components/form_dropdown/ExpandedListAnimationWidget.dart';
 import '../util/QuizeConfig/quize_list_crud_model.dart';
 
-
-
 class DropDown extends StatefulWidget {
   const DropDown({Key? key}) : super(key: key);
 
@@ -28,35 +26,35 @@ class _DropDownState extends State<DropDown> {
   // int? groupValue2;
   // int? groupValue3;
 
-  String title = 'Enter Movie Category';
-  String title2 = 'Enter No of questions';
-  String title3 = 'Enter time';
+  String title = 'Select Movie Category';
+  String title2 = 'Select No of questions';
+  String title3 = 'Select time';
 
   String? category;
   int? questions, time;
 
-  void onChange1(int value) {
-    print(value);
-    if(value == 0){
-      setState(() {
-        category = 'Action';
-      });
-    } else if(value == 1){
-      setState(() {
-        category = 'Romance';
-      });
-    }
-    else if(value == 2){
-      setState(() {
-        category = 'Thriller';
-      });
-    }
-    else if(value == 3){
-      setState(() {
-        category = 'Animation';
-      });
-    }
-  }
+  // void onChange1(int value) {
+  //   print(value);
+  //   if(value == 0){
+  //     setState(() {
+  //       category = 'Action';
+  //     });
+  //   } else if(value == 1){
+  //     setState(() {
+  //       category = 'Romance';
+  //     });
+  //   }
+  //   else if(value == 2){
+  //     setState(() {
+  //       category = 'Thriller';
+  //     });
+  //   }
+  //   else if(value == 3){
+  //     setState(() {
+  //       category = 'Animation';
+  //     });
+  //   }
+  // }
 
   void onPress () {
     Provider.of<QuizListCrudModel>(context, listen: false).insertQuizListData(category, questions, time)
@@ -72,9 +70,6 @@ class _DropDownState extends State<DropDown> {
       }
     });
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -258,7 +253,7 @@ class _DropDownState extends State<DropDown> {
                         alignment: Alignment.centerLeft,
                         margin: EdgeInsets.only(left: 5.0, bottom: 5.0, top: 5.0),
                         child: Text(
-                          "Quiz Configuration",
+                          "Enter no of questions",
                           style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -382,7 +377,7 @@ class _DropDownState extends State<DropDown> {
                         alignment: Alignment.centerLeft,
                         margin: EdgeInsets.only(left: 5.0, bottom: 5.0, top: 5.0),
                         child: Text(
-                          "Quiz Configuration",
+                          "Enter Time",
                           style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
                         ),
                       ),
