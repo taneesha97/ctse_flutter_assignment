@@ -1,5 +1,6 @@
 
 
+import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localstorage/localstorage.dart';
@@ -33,7 +34,7 @@ class QuestionCard extends StatelessWidget {
       final QuizID = storage.getItem('QuizID');
       print(QuizID);
       print('questionCard');
-      Provider.of<QuizCrudModel>(context, listen: false).updateValues(question, selectedIndex.toString(), QuizID);
+      Provider.of<QuizResultCrudModel>(context, listen: false).updateValues(question, selectedIndex.toString(), QuizID);
       _controller.checkAns(question, selectedIndex.toString());
     }
 
