@@ -115,7 +115,7 @@ class LibraryList extends StatelessWidget {
             borderRadius: BorderRadius.circular(10)
           ),
           child: ListTile(
-              leading: const CircleAvatar(child: Text("O")),
+              leading: const CircleAvatar(), // Add color here.
               title: Text(library.name, style: Styles.smallCardHeader,),
               trailing: Wrap(
                 spacing: 12,
