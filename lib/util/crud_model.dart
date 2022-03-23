@@ -155,6 +155,16 @@ class CrudModel extends ChangeNotifier {
   }
 
  // Method to get actors from a actors of a movie. (When given the movie ID).
+  Stream<List<SelectedMovieModel>> getActorsFromMovie(String movieId) {
+    return FirebaseFirestore.instance
+        .collection("actors")
+        .where("movieId", isEqualTo: movieId)
+        .snapshots()
+        .map((event) => event.docs
+        .map((e) => SelectedMovieModel.fromMap(
+        e.data(), e.id, "-"))
+        .toList());
+  }
 
 
 }
