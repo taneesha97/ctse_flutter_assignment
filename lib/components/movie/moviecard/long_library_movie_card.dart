@@ -31,7 +31,7 @@ class LongLibraryMovieCard extends StatelessWidget {
             }, (){
               // Close Dialog.
               Navigator.pop(context);
-            });
+            }, "Do you want to delete this movie?");
           },
           onTap: (){
             Navigator.push(

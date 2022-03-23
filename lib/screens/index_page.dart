@@ -323,6 +323,9 @@ class _IndexPageState extends State<IndexPage> {
                   const SizedBox(
                     height: 15,
                   ),
+
+
+
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Styles.indexPurple, // background
@@ -348,6 +351,7 @@ class _IndexPageState extends State<IndexPage> {
                   const SizedBox(
                     height: 15,
                   ),
+
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Styles.indexPurple, // background

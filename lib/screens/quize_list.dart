@@ -23,15 +23,10 @@ class _QuizeListState extends State<QuizeList> {
     Provider.of<QuizListCrudModel>(context, listen: false)
         .readQuizList()
         .then((value) => {
-          print(value),
-          print("printing value-----------------"),
       setState(() {
         docs1 = value;
       }),
-    print(docs1),
-    print("Quiz list"),
     });
-    print("Quiz list --------------------------------");
   }
 
   Widget deleteItems(){
