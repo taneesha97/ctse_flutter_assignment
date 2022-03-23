@@ -113,10 +113,10 @@ class MovieWiki extends StatelessWidget {
                 ),
               ),
               Container(
-                child: MovieCategory(),
+                child: MovieCategory(category: "Action",),
               ),
               Container(
-                child: MovieCategory(),
+                child: MovieCategory(category: "Crime",),
               ),
             ],
           ))),
