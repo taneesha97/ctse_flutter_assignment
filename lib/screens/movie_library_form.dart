@@ -131,7 +131,8 @@ class _LibraryFormState extends State<LibraryForm> {
                                   pickerColor: Colors.red, //default color
                                   onColorChanged: (Color col) {
                                     //on color picked
-                                    setState(() => color = col.toString());
+                                    setState(() => color = col.value.toString());
+                                    Navigator.pop(context);
                                   },
                                 )
                               ],
@@ -176,11 +177,12 @@ class _LibraryFormState extends State<LibraryForm> {
                               // Calling the Database Update Method.
                               Provider.of<CrudModel>(context, listen: false)
                                   .libraryNameUpate(
-                                      lname.toString(), widget.libraryId);
+                                      lname.toString(), widget.libraryId, color.toString());
                             }
                           } else {
                             // Toast Messages are deprecated above Android 11.
                             print("Form Validation Error | Color Not selected");
+                            // Replace the Toast with a Pop up window.
                             // Fluttertoast.showToast(
                             //     msg: "This is Center Short Toast",
                             //     toastLength: Toast.LENGTH_SHORT,
