@@ -131,7 +131,7 @@ class _LibraryFormState extends State<LibraryForm> {
                                   pickerColor: Colors.red, //default color
                                   onColorChanged: (Color col) {
                                     //on color picked
-                                    setState(() => color = col.toString());
+                                    setState(() => color = col.value.toString());
                                   },
                                 )
                               ],
@@ -176,7 +176,7 @@ class _LibraryFormState extends State<LibraryForm> {
                               // Calling the Database Update Method.
                               Provider.of<CrudModel>(context, listen: false)
                                   .libraryNameUpate(
-                                      lname.toString(), widget.libraryId);
+                                      lname.toString(), widget.libraryId, color.toString());
                             }
                           } else {
                             // Toast Messages are deprecated above Android 11.

@@ -95,11 +95,12 @@ class CrudModel extends ChangeNotifier {
   }
 
   // Library Name Update method
-  Future libraryNameUpate(String newName, String libraryId) async {
+  Future libraryNameUpate(String newName, String libraryId, String color) async {
     final doc =
         FirebaseFirestore.instance.collection("libraries").doc(libraryId);
     doc.update({
       "name": newName,
+      "color": color,
     });
   }
 
