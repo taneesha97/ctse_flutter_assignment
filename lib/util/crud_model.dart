@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/cupertino.dart';
+import '../models/actor.dart';
 import '../models/library_model.dart';
 import '../models/movie.dart';
 
@@ -155,14 +156,14 @@ class CrudModel extends ChangeNotifier {
   }
 
  // Method to get actors from a actors of a movie. (When given the movie ID).
-  Stream<List<SelectedMovieModel>> getActorsFromMovie(String movieId) {
+  Stream<List<Actor>> getActorsFromMovie(String movieId) {
     return FirebaseFirestore.instance
         .collection("actors")
         .where("movieId", isEqualTo: movieId)
         .snapshots()
         .map((event) => event.docs
-        .map((e) => SelectedMovieModel.fromMap(
-        e.data(), e.id, "-"))
+        .map((e) => Actor.fromMap(
+        e.data(), e.id))
         .toList());
   }
 
