@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctse_assignment_1/components/movie/moviecard/medium_movie_card.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/movie_category.dart';
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:ctse_assignment_1/screens/movie_all.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +17,8 @@ class MovieWiki extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Provider Movies - Changed to the Appropriate movie list.
-    Stream<QuerySnapshot> movies =
-        Provider.of<CrudModel>(context, listen: false).movies;
+    Stream<List<SelectedMovieModel>> movies =
+        Provider.of<CrudModel>(context, listen: false).getListOfMoviesShort;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -73,9 +74,9 @@ class MovieWiki extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  StreamBuilder<QuerySnapshot>(
+                                  StreamBuilder<List<SelectedMovieModel>>(
                                     stream: movies,
-                                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                                    builder: (BuildContext context, snapshot) {
                                       return LongMovieCategory(category: "All Movies",);
                                     }
                                   )),
@@ -90,9 +91,9 @@ class MovieWiki extends StatelessWidget {
               ),
               SizedBox(
                 height: 200,
-                child: StreamBuilder<QuerySnapshot>(
+                child: StreamBuilder<List<SelectedMovieModel>>(
                   stream: movies,
-                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  builder: (BuildContext context, snapshot) {
                     if (snapshot.hasError) {
                       return Text("There an Error Loading Movies");
                     }
@@ -100,13 +101,12 @@ class MovieWiki extends StatelessWidget {
                       return Text("Loading");
                     }
                     final data = snapshot.requireData;
-                    array_data = data;
 
                     return ListView.builder(
-                      itemCount: data.size,
+                      itemCount: data.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return CustomCard(index: index);
+                        return CustomCard(index: index, movie: data[index],);
                       },
                     );
                   },
