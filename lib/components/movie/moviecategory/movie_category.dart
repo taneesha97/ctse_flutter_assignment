@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../util/crud_model.dart';
 import '../moviecard/small_movie_card.dart';
+import 'long_movie_category.dart';
 
 class MovieCategory extends StatelessWidget {
   final String category;
@@ -35,7 +36,14 @@ class MovieCategory extends StatelessWidget {
               ),
               TextButton(
                 child: const Text("View All"),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => LongMovieCategory(category: category)
+                            ),
+                  );
+                },
               )
             ],
           ),

@@ -85,7 +85,7 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
                   return ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, index) {
-                      return LongMovieCard(index: index);
+                      return LongMovieCard(index: index, movie: data[index],);
                     },
                   );
                 } else {
