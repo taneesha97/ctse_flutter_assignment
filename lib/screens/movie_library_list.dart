@@ -108,7 +108,6 @@ class LibraryList extends StatelessWidget {
 
       // Assign Colors to the Library (Null Safety).
       String colorString;
-      print(library.color);
       if (library.color == ""){
         colorString = 4280391411.toString();
       } else {
