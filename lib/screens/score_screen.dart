@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:ctse_assignment_1/models/result_quiz.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
@@ -14,10 +16,23 @@ class ScorePage extends StatefulWidget {
   _ScorePageState createState() => _ScorePageState();
 }
 
-class _ScorePageState extends State<ScorePage> {
+class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
+
+  late AnimationController controller;
+  late Animation colorAnimation;
+  late Animation sizeAnimation;
 
   LocalStorage storage = new LocalStorage('localstorage_app');
   List<ResultQuiz> docs = [];
+
+  bool isBack = true;
+  double angle = 0;
+
+  void _flip() {
+    setState(() {
+      angle = (angle + pi) % (2 * pi);
+    });
+  }
 
   var alertStyle = AlertStyle(
     overlayColor: const Color.fromARGB(196, 151, 151, 163),
@@ -38,6 +53,8 @@ class _ScorePageState extends State<ScorePage> {
     ),
   );
 
+
+
   @override
   void initState() {
     super.initState();
@@ -52,6 +69,23 @@ class _ScorePageState extends State<ScorePage> {
 
       // docs1 = value
     });
+
+    // Defining controller with animation duration of two seconds
+    controller =  AnimationController(vsync: this, duration: const Duration(seconds: 2));
+
+    // Defining both color and size animations
+    colorAnimation = ColorTween(begin: Colors.blue, end: Colors.yellow).animate(controller);
+    sizeAnimation = Tween<double>(begin: 100.0, end: 200.0).animate(controller);
+
+    // Rebuilding the screen when animation goes ahead
+    controller.addListener(() {
+      setState(() {
+
+      });
+    });
+
+    // Repeat the animation after finish
+    controller.repeat();
   }
 
   @override
@@ -60,10 +94,14 @@ class _ScorePageState extends State<ScorePage> {
     super.dispose();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
 
     String QuizID = storage.getItem('QuizID');
+
+
 
     void onPress() {
 
@@ -157,6 +195,16 @@ class _ScorePageState extends State<ScorePage> {
       ).show();
     }
 
+    void stopAnimation() {
+      controller.stop();
+    }
+
+    void startAnimation() {
+      controller.repeat();
+    }
+
+
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -168,16 +216,22 @@ class _ScorePageState extends State<ScorePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              height: 100,
-              width: 100,
-              margin: EdgeInsets.all(1),
-              // color: Colors.blue,
-              child: Image.asset('assets/images/trophy.png', fit: BoxFit.cover),
+            SizedBox(height: 30),
+            GestureDetector(
+              onTap: stopAnimation,
+              onDoubleTap: startAnimation,
+              child: Container(
+
+                height: sizeAnimation.value,
+                width: sizeAnimation.value,
+                margin: EdgeInsets.all(1),
+                // color: Colors.blue,
+                child: Image.asset('assets/images/trophy.png', fit: BoxFit.cover),
+              ),
             ),
             SizedBox(height: 20),
             Container(
-              height: 200,
+              height: 150,
               width: 300,
               color: Colors.black12,
               child: Center(
@@ -186,9 +240,9 @@ class _ScorePageState extends State<ScorePage> {
                 children: [
                   const Text.rich(
                     TextSpan(
-                        text: "Congratulations",
+                        text: "🎊 Congratulations",
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         )),
                   ),
@@ -198,13 +252,56 @@ class _ScorePageState extends State<ScorePage> {
                     // crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text.rich(
-                        TextSpan(
-                            text: "10",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            )),
+
+                      GestureDetector(
+                        onTap: _flip,
+                        child: TweenAnimationBuilder(
+                            tween: Tween<double>(begin: 0, end: (angle + pi) % (4 * pi)),
+                            duration: Duration(seconds: 1),
+                            builder: (BuildContext context, double val, __) {
+                              //here we will change the isBack val so we can change the content of the card
+                              if (val >= (pi / 2)) {
+                                isBack = false;
+                              } else {
+                                isBack = true;
+                              }
+                              return (Transform(
+                                //let's make the card flip by it's center
+                                alignment: Alignment.center,
+                                transform: Matrix4.identity()
+                                  ..setEntry(3, 2, 0.001)
+                                  ..rotateY(val),
+                                child: Container(
+                                    width: 50,
+                                    height: 50,
+                                    child: isBack
+                                        ? Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10.0),
+                                        image: DecorationImage(
+                                          image: AssetImage("assets/images/clapping.png"),
+                                        ),
+                                      ),
+                                    ) //if it's back we will display here
+                                        : Transform(
+                                      alignment: Alignment.center,
+                                      transform: Matrix4.identity()
+                                        ..rotateY(
+                                            pi), // it will flip horizontally the container
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                          BorderRadius.circular(10.0),
+                                          image: DecorationImage(
+                                            image: AssetImage('assets/images/clapping.png',),//
+                                          ),
+                                        ),
+
+                                      ),
+                                    ) //else we will display it here,
+                                ),
+                              ));
+                            }),
                       ),
                       const SizedBox(
                         width: 10,
@@ -283,4 +380,8 @@ class _ScorePageState extends State<ScorePage> {
     );
     ;
   }
+
+
+
+
 }

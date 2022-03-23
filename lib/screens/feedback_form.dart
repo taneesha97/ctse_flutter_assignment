@@ -95,6 +95,17 @@ class _FeedBackFormState extends State<FeedBackForm> {
 
     }
 
+    void cancel (){
+      // print('hi');
+      // Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const ScorePage()),
+      );
+
+    }
+
     void onPress() {
       print(reviewSliderValue);
       print(TextFieldValue);
@@ -259,7 +270,7 @@ class _FeedBackFormState extends State<FeedBackForm> {
                               ),
                             ),
                             child: Text('Cancel'),
-                            onPressed: () {}),
+                            onPressed: cancel),
                       ],
                     )),
                   ],
