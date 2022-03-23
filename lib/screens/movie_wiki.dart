@@ -76,7 +76,7 @@ class MovieWiki extends StatelessWidget {
                                   StreamBuilder<QuerySnapshot>(
                                     stream: movies,
                                     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                                      return LongMovieCategory();
+                                      return LongMovieCategory(category: "All Movsies",);
                                     }
                                   )),
                         );
