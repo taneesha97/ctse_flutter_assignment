@@ -15,8 +15,8 @@ class Actor {
       :
         id = id ?? '',
         name = snapshot['name'] ?? '',
-        profileUrl = snapshot['optional'] ?? '',
-        character = snapshot['color'] ?? '';
+        profileUrl = snapshot['profileUrl'] ?? '',
+        character = snapshot['character'] ?? '';
 
   toJson() {
     return {
