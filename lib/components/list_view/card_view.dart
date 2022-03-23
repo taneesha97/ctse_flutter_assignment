@@ -1,6 +1,9 @@
+import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../screens/movie_library_form.dart';
+import '../../screens/quice_configuration_screen.dart';
 import '../../screens/quice_configuration_splash.dart';
 import '../../screens/quize_list.dart';
 import '../../util/QuizeConfig/quize_list_crud_model.dart';
@@ -59,6 +62,26 @@ class _CardView1State extends State<CardView1> {
   @override
   Widget build(BuildContext context) {
 
+    onPress() {
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => DropDown(
+
+              // id: quizList.id,
+              // functionValue: 1,
+              // libraryName: library.name,
+            )),
+      );
+
+      // final QuizID = storage.getItem('QuizID');
+      // print(QuizID);
+      // print('questionCard');
+      // Provider.of<QuizCrudModel>(context, listen: false).updateValues(quizList, selectedIndex.toString(), QuizID);
+      // _controller.checkAns(question, selectedIndex.toString());
+    }
+
     return
       Container(
         width: MediaQuery.of(context).size.width,
@@ -101,6 +124,17 @@ class _CardView1State extends State<CardView1> {
                               Navigator.push(
                                   context, MaterialPageRoute(builder: (context) => SplashQuiceConfig()));
                             },
+                            //     () {
+                            //   Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //       builder: (context) => DropDown(
+                            //
+                            //       // libraryId: library.id,
+                            //       // functionValue: 1,
+                            //       // libraryName: library.name,
+                            //   )),
+                            // },
                             icon: Icon(
                               Icons.start,
                               color: Colors.white,
@@ -114,7 +148,7 @@ class _CardView1State extends State<CardView1> {
                         decoration: ShapeDecoration(
                             shape: CircleBorder(), color: Colors.green),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: onPress,
                             icon: Icon(
                               Icons.edit,
                               color: Colors.white,
