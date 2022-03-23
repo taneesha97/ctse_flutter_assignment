@@ -105,6 +105,19 @@ class LibraryList extends StatelessWidget {
   }
 
   Widget buildLibrary(Library library, BuildContext context) {
+
+      // Assign Colors to the Library (Null Safety).
+      String colorString;
+      print(library.color);
+      if (library.color == ""){
+        colorString = 4280391411.toString();
+      } else {
+        colorString = library.color;
+      }
+      int colorInteger = int.parse(colorString);
+      Color newColor = Color(colorInteger);
+
+
        return GestureDetector(
         onTap: () {
           Navigator.push(
@@ -123,8 +136,8 @@ class LibraryList extends StatelessWidget {
               borderRadius: BorderRadius.circular(10)
           ),
           child: ListTile(
-              leading: const CircleAvatar(
-                backgroundColor: Color(4288423856),
+              leading:  CircleAvatar(
+                backgroundColor: newColor,
               ), // Add color here.
               title: Text(library.name, style: Styles.smallCardHeader,),
               trailing: Wrap(
