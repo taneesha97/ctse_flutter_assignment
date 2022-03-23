@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -7,30 +5,31 @@ import '../../models/quiz.dart';
 import '../../models/result_quiz.dart';
 
 class QuizResultCrudModel extends ChangeNotifier {
-
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   int noCorrectAnswers = 0;
+  int CorrectPoints = 0;
   int AnsweredQuestions = 0;
   int noWrongAnswers = 0;
-
 
   Future<dynamic> readQuizResultsByID(String id) async {
     QuerySnapshot querySnapshot;
     List<ResultQuiz> docs1 = [];
     try {
       querySnapshot = await _db
-          .collection('result-quizes').where(FieldPath.documentId, isEqualTo: id).get();
+          .collection('result-quizes')
+          .where(FieldPath.documentId, isEqualTo: id)
+          .get();
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
-
           ResultQuiz b = ResultQuiz(
               id: doc['id'],
-              correct_answer : doc['correct_answer'],
-              no_questions : doc['no_questions'],
-              wrong_answer : doc['wrong_answer'],
-              userId : doc['userId'].toString());
-
+              correct_answer: doc['correct_answer'],
+              no_questions: doc['no_questions'],
+              wrong_answer: doc['wrong_answer'], //correct_points
+              userId: doc['userId'].toString(),
+              correct_points: doc['correct_points']);
+          //
 
           docs1.add(b);
         }
@@ -46,6 +45,7 @@ class QuizResultCrudModel extends ChangeNotifier {
     // valueSet = _controller.checkCorrectWrongAnswers(question, selectedIndex.toString())!;
     if (question.answer! == (int.parse(selectedIndex) + 1).toString()) {
       noCorrectAnswers++;
+      CorrectPoints = CorrectPoints + noCorrectAnswers * 10;
       AnsweredQuestions++;
     } else if (question.answer! != (int.parse(selectedIndex) + 1).toString()) {
       noWrongAnswers++;
@@ -58,6 +58,7 @@ class QuizResultCrudModel extends ChangeNotifier {
           .update({
         'correct_answer': noCorrectAnswers ?? 0,
         'wrong_answer': noWrongAnswers ?? 0,
+        'correct_points': CorrectPoints ?? 0
       });
     } catch (e) {
       print(e);
@@ -65,15 +66,16 @@ class QuizResultCrudModel extends ChangeNotifier {
   }
 
   Future<void> ReAttemptQuizResult(String QuizID1) async {
-
     QuerySnapshot querySnapshot;
 
     try {
       querySnapshot = await _db
-          .collection('result-quizes').where(FieldPath.documentId, isEqualTo: QuizID1).get();
+          .collection('result-quizes')
+          .where(FieldPath.documentId, isEqualTo: QuizID1)
+          .get();
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
-          if(doc['id'] == 0){
+          if (doc['id'] == 0) {
             await FirebaseFirestore.instance
                 .collection('result-quizes')
                 .doc(QuizID1)
@@ -81,8 +83,9 @@ class QuizResultCrudModel extends ChangeNotifier {
               'id': 1 ?? '',
               'correct_answer': 0,
               'wrong_answer': 0,
+              'correct_points': 0
             });
-          }else if(doc['id'] == 1){
+          } else if (doc['id'] == 1) {
             await FirebaseFirestore.instance
                 .collection('result-quizes')
                 .doc(QuizID1)
@@ -90,9 +93,9 @@ class QuizResultCrudModel extends ChangeNotifier {
               'id': 2 ?? '',
               'correct_answer': 0,
               'wrong_answer': 0,
+              'correct_points': 0
             });
-
-          }else if(doc['id'] == 2){
+          } else if (doc['id'] == 2) {
             await FirebaseFirestore.instance
                 .collection('result-quizes')
                 .doc(QuizID1)
@@ -100,6 +103,7 @@ class QuizResultCrudModel extends ChangeNotifier {
               'id': 3 ?? '',
               'correct_answer': 0,
               'wrong_answer': 0,
+              'correct_points': 0
             });
           }
         }
@@ -109,16 +113,16 @@ class QuizResultCrudModel extends ChangeNotifier {
     }
   }
 
-
   Future<dynamic> insertQuizData(int noQuestions, String userId) async {
     try {
       DocumentReference<Map<String, dynamic>> value =
-      await FirebaseFirestore.instance.collection('result-quizes').add({
-        'id': 0,// need to changed to reattempt id
+          await FirebaseFirestore.instance.collection('result-quizes').add({
+        'id': 0, // need to changed to reattempt id
         'no_questions': noQuestions ?? 0,
         'userId': userId ?? '',
         'correct_answer': 0,
         'wrong_answer': 0,
+        'correct_points': 0
       });
       return value.id.toString();
     } catch (e) {
@@ -136,6 +140,4 @@ class QuizResultCrudModel extends ChangeNotifier {
       print(e);
     }
   }
-
-
 }

@@ -93,7 +93,7 @@ class QuestionCard extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 8,
+              height: 15,
             ),
             Expanded(
               child: Column(
