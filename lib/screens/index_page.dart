@@ -13,6 +13,7 @@ import 'package:ctse_assignment_1/screens/movie_multi_select.dart';
 import 'package:ctse_assignment_1/screens/movie_single.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/navigation_screen.dart';
+import 'package:ctse_assignment_1/screens/profile_ui.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_splash.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
@@ -33,12 +34,12 @@ import 'movie_all.dart';
 import 'movie_library_form.dart';
 
 class IndexPage extends StatefulWidget {
-
   const IndexPage({Key? key}) : super(key: key);
 
   @override
   _IndexPageState createState() => _IndexPageState();
 }
+
 class _IndexPageState extends State<IndexPage> {
   final LocalStorage storage = new LocalStorage('localstorage_app');
   late String QuizID = "";
@@ -103,14 +104,13 @@ class _IndexPageState extends State<IndexPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => FeedBackForm()),
+                        MaterialPageRoute(builder: (context) => FeedBackForm()),
                       );
                     },
                     child: const Text(
                       'FeedBack Form',
-                      style: TextStyle(
-                          fontSize: 25, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
@@ -127,14 +127,36 @@ class _IndexPageState extends State<IndexPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => MovieWiki()),
+                        MaterialPageRoute(builder: (context) => ProfileUI()),
+                      );
+                    },
+                    child: const Text(
+                      'Profile',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MovieWiki()),
                       );
                     },
                     child: const Text(
                       'Movie Wiki Page',
-                      style: TextStyle(
-                          fontSize: 25, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
@@ -152,7 +174,9 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  const SingleMoviePage(index: 1,)),
+                            builder: (context) => const SingleMoviePage(
+                                  index: 1,
+                                )),
                       );
                     },
                     child: const Text(
@@ -174,10 +198,11 @@ class _IndexPageState extends State<IndexPage> {
                     ),
                     onPressed: () {
                       Provider.of<QuizResultCrudModel>(context, listen: false)
-                          .insertQuizData(4, 'U001') // here no of quizes are entered, userID are entered
+                          .insertQuizData(4,
+                              'U001') // here no of quizes are entered, userID are entered
                           .then((value) {
-                            //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
-                            storage.setItem('QuizID', value.toString());
+                        //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
+                        storage.setItem('QuizID', value.toString());
                       });
                       // QuizID = id as String;
 
@@ -185,7 +210,11 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  QuizScreen(noOfQuestions: 4, time: 20, cattegory: 'Horror',)),
+                            builder: (context) => QuizScreen(
+                                  noOfQuestions: 4,
+                                  time: 20,
+                                  cattegory: 'Horror',
+                                )),
                       );
                     },
                     child: const Text(
@@ -209,7 +238,9 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  MovieMultiSelect(libraryId: "pWcw0R9HoJSg2QHpj6jU",)),
+                            builder: (context) => MovieMultiSelect(
+                                  libraryId: "pWcw0R9HoJSg2QHpj6jU",
+                                )),
                       );
                     },
                     child: const Text(
@@ -235,13 +266,13 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  AllMovieScreen()),
+                            builder: (context) => AllMovieScreen()),
                       );
                     },
                     child: const Text(
                       'All Movies Page',
                       style:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
@@ -258,14 +289,13 @@ class _IndexPageState extends State<IndexPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>  ScorePage()),
+                        MaterialPageRoute(builder: (context) => ScorePage()),
                       );
                     },
                     child: const Text(
                       'Score page',
                       style:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
@@ -280,18 +310,16 @@ class _IndexPageState extends State<IndexPage> {
                       fixedSize: const Size(640, 70),
                       // foreground
                     ),
-
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>  LibraryList()),
+                        MaterialPageRoute(builder: (context) => LibraryList()),
                       );
                     },
                     child: const Text(
                       'Library List',
                       style:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
@@ -306,25 +334,26 @@ class _IndexPageState extends State<IndexPage> {
                       fixedSize: const Size(640, 70),
                       // foreground
                     ),
-
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  LibraryForm(functionValue: 0,libraryId: '-',libraryName: "-",)),
+                            builder: (context) => LibraryForm(
+                                  functionValue: 0,
+                                  libraryId: '-',
+                                  libraryName: "-",
+                                )),
                       );
                     },
                     child: const Text(
                       'Library Form',
                       style:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-
-
 
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -334,18 +363,16 @@ class _IndexPageState extends State<IndexPage> {
                       fixedSize: const Size(640, 70),
                       // foreground
                     ),
-
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>  QuizeList()),
+                        MaterialPageRoute(builder: (context) => QuizeList()),
                       );
                     },
                     child: const Text(
                       'Quiz List',
                       style:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
@@ -360,18 +387,16 @@ class _IndexPageState extends State<IndexPage> {
                       fixedSize: const Size(640, 70),
                       // foreground
                     ),
-
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>  DropDown()),
+                        MaterialPageRoute(builder: (context) => DropDown()),
                       );
                     },
                     child: const Text(
                       'Quiz configurationForm',
                       style:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
@@ -386,18 +411,16 @@ class _IndexPageState extends State<IndexPage> {
                       fixedSize: const Size(640, 70),
                       // foreground
                     ),
-
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>  LeaderBoard()),
+                        MaterialPageRoute(builder: (context) => LeaderBoard()),
                       );
                     },
                     child: const Text(
                       'LeaderBoard',
                       style:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
@@ -412,18 +435,17 @@ class _IndexPageState extends State<IndexPage> {
                       fixedSize: const Size(640, 70),
                       // foreground
                     ),
-
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  NavigationScreen()),
+                            builder: (context) => NavigationScreen()),
                       );
                     },
                     child: const Text(
                       'Navigation Screen',
                       style:
-                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
