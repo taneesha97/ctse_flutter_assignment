@@ -59,7 +59,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => QuizeList()));
+                            builder: (context) => const LeaderBoard(id: "x8MbVVeKSJtPXkspQPn4",)));
                   },
                   child: const Text('Yes')),
               TextButton(

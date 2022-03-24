@@ -5,7 +5,20 @@ import '../components/form_dropdown/ExpandedListAnimationWidget.dart';
 import '../components/form_dropdown/Scrollbar.dart';
 
 class DropDownNew extends StatefulWidget {
-  const DropDownNew({Key? key}) : super(key: key);
+
+  String? category, id;
+  int? time, questions;
+
+  DropDownNew(
+      {Key? key,
+        required this.id,
+        required this.category,
+        required this.time,
+        required this.questions,
+      })
+      : super(key: key);
+
+  // const DropDownNew({Key? key}) : super(key: key);
 
   @override
   _DropDownNewState createState() => _DropDownNewState();
@@ -27,7 +40,7 @@ class _DropDownNewState extends State<DropDownNew> {
   String title2 = 'Select No of questions';
   String title3 = 'Select time';
 
-  String? category;
+  String? category, id;
   int? questions, time;
 
 
