@@ -56,10 +56,12 @@ class _LeaderBoardState extends State<LeaderBoard> {
                   onPressed: () {
                     Navigator.of(context).pop();
                     Provider.of<LeaderBoardCrudModel>(context, listen: false).deleteLeaderboardItem(widget.id);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LeaderBoard(id: "x8MbVVeKSJtPXkspQPn4",)));
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const LeaderBoard(
+                    //             id: id,
+                    //         )));
                   },
                   child: const Text('Yes')),
               TextButton(

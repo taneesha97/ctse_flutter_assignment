@@ -62,13 +62,7 @@ class _CardView1State extends State<CardView1> {
         });
   }
 
-  
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    onPress(String id, String category, int time, int questions) {   
+  onPress(String id, String category, int time, int questions) {   //hariyanne ne malli
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -80,6 +74,11 @@ class _CardView1State extends State<CardView1> {
           )),
     );
   }
+
+
+  @override
+  Widget build(BuildContext context) {
+
     return
       Container(
         width: MediaQuery.of(context).size.width,
