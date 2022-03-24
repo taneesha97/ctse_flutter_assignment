@@ -414,7 +414,9 @@ class _IndexPageState extends State<IndexPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LeaderBoard()),
+                        MaterialPageRoute(
+                            builder: (context) =>  const LeaderBoard(id: '',)),
+
                       );
                     },
                     child: const Text(

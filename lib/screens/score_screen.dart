@@ -354,11 +354,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                       ),
                       child: Text('OK'),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>  const LeaderBoard()),
-                        );
+                        MaterialPageRoute(builder: (context) => const LeaderBoard(id: '',));
                       }),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
