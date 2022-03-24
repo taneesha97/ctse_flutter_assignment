@@ -228,9 +228,7 @@ class _IndexPageState extends State<IndexPage> {
                         //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
                         storage.setItem('QuizID', value.toString());
                       });
-                      // QuizID = id as String;
 
-                      // Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(QuizID);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -438,7 +436,9 @@ class _IndexPageState extends State<IndexPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LeaderBoard()),
+                        MaterialPageRoute(
+                            builder: (context) =>  const LeaderBoard(id: '',)),
+
                       );
                     },
                     child: const Text(
