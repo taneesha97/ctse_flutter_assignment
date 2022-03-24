@@ -20,8 +20,6 @@ class LeaderBoard extends StatefulWidget {
   @override
   _LeaderBoardState createState() => _LeaderBoardState();
 
-  const LeaderBoard({Key? key})
-      : super(key: key);
 }
 
 class _LeaderBoardState extends State<LeaderBoard> {
