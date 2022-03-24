@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +9,8 @@ import '../../../util/crud_model.dart';
 import '../moviecard/long_movie_card.dart';
 
 class LongMovieCategory extends StatefulWidget {
-  const LongMovieCategory({Key? key}) : super(key: key);
+  final String category;
+  const LongMovieCategory({Key? key, required this.category}) : super(key: key);
 
   @override
   State<LongMovieCategory> createState() => _LongMovieCategoryState();
@@ -22,7 +24,19 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
         Provider.of<CrudModel>(context, listen: false).movies;
 
     // Custom Provider.
-    Stream<List<Movie>> listMovies = Provider.of<CrudModel>(context).getListOfMoviesShort;
+    Stream<List<SelectedMovieModel>> listMovies = Provider.of<CrudModel>(context).getListOfMoviesShort;
+
+
+    // Conditionally select the Provider Method.
+    Stream<List<SelectedMovieModel>> movies1;
+    if (widget.category == "All Movies"){
+      movies1 = Provider.of<CrudModel>(context).getListOfMoviesShort;
+    } else {
+      movies1 = Provider.of<CrudModel>(context).getMoviesFromCategories(widget.category);
+    }
+
+
+
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +59,7 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
               height: 10,
             ),
             Text(
-              "All Libraries",
+              widget.category,
               style: Styles.textSectionHeader,
             ),
             Text(
@@ -56,8 +70,8 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
               height: 10,
             ),
             Flexible(
-                child: StreamBuilder<List<Movie>>(
-              stream: listMovies,
+                child: StreamBuilder<List<SelectedMovieModel>>(
+              stream: movies1,
               builder: (BuildContext context, snapshot) {
                 if (snapshot.hasError) {
                   return Text("There an Error Loading Movies");
@@ -67,12 +81,21 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
                 }
                 final data = snapshot.requireData;
 
-                return ListView.builder(
-                  itemCount: data.length,
-                  itemBuilder: (context, index) {
-                    return LongMovieCard(index: index);
-                  },
-                );
+                if(data.length != 0){
+                  return ListView.builder(
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return LongMovieCard(index: index, movie: data[index],);
+                    },
+                  );
+                } else {
+                  return Center(child: Column(
+                    children: [
+
+                      const Text("No such category in the system!"),
+                    ],
+                  ));
+                }
               },
             )),
           ],

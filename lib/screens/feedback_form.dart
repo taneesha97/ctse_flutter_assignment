@@ -1,4 +1,6 @@
+import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/score_screen.dart';
+import 'package:ctse_assignment_1/util/FeedBack/feed_back_crud_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reviews_slider/reviews_slider.dart';
@@ -76,50 +78,67 @@ class _FeedBackFormState extends State<FeedBackForm> {
     TextFieldValue = value;
   }
 
-  void onPress() {
-    print(reviewSliderValue);
-    print(TextFieldValue);
-    _textController.clear();
-    Provider.of<QuizCrudModel>(context, listen: false)
-        .insertFeedBack(reviewSliderValue, TextFieldValue)
-        .then((value) {
-      //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
-      print(value);
-      if (value != 0) {
-        Alert(
-          context: context,
-          style: alertStyle,
-          type: AlertType.success,
-          //title: "",
-          desc: "Thank You for the feedback",
-          buttons: [
-            DialogButton(
-              child: const Text(
-                "Ok",
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-              onPressed: () {
-                MaterialPageRoute(builder: (context) => const ScorePage());
-                Navigator.pop(context);
 
-              },
-              color: Color.fromRGBO(91, 55, 185, 1.0),
-              radius: BorderRadius.circular(10.0),
-            ),
-          ],
-        ).show();
-        // Alert(
-        //   context: context,
-        //   title: "Successfully",
-        //   desc: "You have Successfully Submitted the Data",
-        // ).show();
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
+
+    void onPressAlert (){
+      print('hi');
+      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const ScorePage()),
+      );
+
+    }
+
+    void cancel (){
+      // print('hi');
+      // Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const ScorePage()),
+      );
+
+    }
+
+    void onPress() {
+      print(reviewSliderValue);
+      print(TextFieldValue);
+      _textController.clear();
+      Provider.of<FeedBackCrudModel>(context, listen: false)
+          .insertFeedBack(reviewSliderValue, TextFieldValue)
+          .then((value) {
+        //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
+        print(value);
+        if (value != 0) {
+          Alert(
+            context: context,
+            style: alertStyle,
+            type: AlertType.success,
+            //title: "",
+            desc: "Thank You for the feedback",
+            buttons: [
+              DialogButton(
+                child: const Text(
+                  "Ok",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: onPressAlert,
+                color: Color.fromRGBO(91, 55, 185, 1.0),
+                radius: BorderRadius.circular(10.0),
+              ),
+            ],
+          ).show();
+        }
+      });
+    }
+
+
 
     return Container(
       color: Colors.white,
@@ -251,7 +270,7 @@ class _FeedBackFormState extends State<FeedBackForm> {
                               ),
                             ),
                             child: Text('Cancel'),
-                            onPressed: () {}),
+                            onPressed: cancel),
                       ],
                     )),
                   ],

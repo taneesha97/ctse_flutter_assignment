@@ -1,9 +1,9 @@
 import 'package:ctse_assignment_1/components/movie/status_tag.dart';
 import 'package:ctse_assignment_1/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-
 import '../models/library_model.dart';
 import '../util/crud_model.dart';
 import 'movie_library_list.dart';
@@ -28,6 +28,7 @@ class _LibraryFormState extends State<LibraryForm> {
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String? lname;
+  String? color;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,9 @@ class _LibraryFormState extends State<LibraryForm> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            widget.functionValue==0?"Create Library":"Update Library",
+                            widget.functionValue == 0
+                                ? "Create Library"
+                                : "Update Library",
                             style: Styles.textSectionHeader,
                           ),
                           Text(
@@ -94,7 +97,7 @@ class _LibraryFormState extends State<LibraryForm> {
                           fillColor: Colors.teal),
                       validator: (value) {
                         if (value!.isEmpty ||
-                            !RegExp(r'^[a-zA-Z]+$').hasMatch(value!)){
+                            !RegExp(r'^[a-zA-Z]+$').hasMatch(value!)) {
                           return "Please enter correct library name";
                         } else {
                           return null;
@@ -104,21 +107,56 @@ class _LibraryFormState extends State<LibraryForm> {
                   ),
                 ),
                 SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: TextButton(
+                    style: ButtonStyle(
+                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.focused))
+                          return Colors.red;
+                        return null; // Defer to the widget's default.
+                      }),
+                    ),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text("Select the Color"),
+                              content: Text("Library Color"),
+                              actions: <Widget>[
+                                BlockPicker(
+                                  pickerColor: Colors.red, //default color
+                                  onColorChanged: (Color col) {
+                                    //on color picked
+                                    setState(() => color = col.value.toString());
+                                    Navigator.pop(context);
+                                  },
+                                )
+                              ],
+                            );
+                          });
+                    },
+                    child: Text('Select Color'),
+                  ),
+                ),
+                SizedBox(
                   height: 60,
                 ),
                 Center(
                   child: SizedBox(
                     width: 200,
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        primary: Colors.teal,
-                        padding: EdgeInsets.all(15)
-                      ),
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            primary: Colors.teal,
+                            padding: EdgeInsets.all(15)),
                         onPressed: () {
-                          if (formKey.currentState!.validate()) {
+                          if (formKey.currentState!.validate() && !(color==null)) {
                             // Update and Inserting Logic Separation.
                             if (widget.functionValue == 0) {
                               // Create the Library Model.
@@ -126,7 +164,11 @@ class _LibraryFormState extends State<LibraryForm> {
                                 name: lname.toString(),
                                 optional: "optional",
                                 id: 'default-id',
+                                color: color.toString(),
                               );
+
+                              // Printing color.
+                              print(color);
 
                               // Call the DB method to write to the database.
                               Provider.of<CrudModel>(context, listen: false)
@@ -135,8 +177,21 @@ class _LibraryFormState extends State<LibraryForm> {
                               // Calling the Database Update Method.
                               Provider.of<CrudModel>(context, listen: false)
                                   .libraryNameUpate(
-                                      lname.toString(), widget.libraryId);
+                                      lname.toString(), widget.libraryId, color.toString());
                             }
+                          } else {
+                            // Toast Messages are deprecated above Android 11.
+                            print("Form Validation Error | Color Not selected");
+                            // Replace the Toast with a Pop up window.
+                            // Fluttertoast.showToast(
+                            //     msg: "This is Center Short Toast",
+                            //     toastLength: Toast.LENGTH_SHORT,
+                            //     gravity: ToastGravity.CENTER,
+                            //     timeInSecForIosWeb: 1,
+                            //     backgroundColor: Colors.red,
+                            //     textColor: Colors.white,
+                            //     fontSize: 16.0
+                            // );
                           }
                         },
                         child: Text(
@@ -164,8 +219,7 @@ class _LibraryFormState extends State<LibraryForm> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             primary: Colors.teal,
-                            padding: EdgeInsets.all(15)
-                        ),
+                            padding: EdgeInsets.all(15)),
                         child: Text(
                           "See All Libraries",
                           style: Styles.navBarTitle,

@@ -19,15 +19,16 @@ class LeaderBoard extends StatefulWidget {
 
   @override
   _LeaderBoardState createState() => _LeaderBoardState();
+
 }
 
 class _LeaderBoardState extends State<LeaderBoard> {
 
   List<LeaderBoardModel> docs1= [];
 
+
   List names = ["Bright vachirawit", "Bright vachirawit","Bright vachirawit","Bright vachirawit"];
   List place = ["1st place", "1st place","1st place","1st place"];
-
 
   @override
   void initState() {
