@@ -52,6 +52,7 @@ class LeaderBoardCrudModel extends ChangeNotifier {
   }
 
   Future<dynamic> deleteLeaderboardItem(String id) async {
+    print(id);
     try {
       await FirebaseFirestore.instance
           .collection('leaderboard')
@@ -61,6 +62,13 @@ class LeaderBoardCrudModel extends ChangeNotifier {
       print(e);
     }
   }
+
+  // Database get Stream Builder.
+  Stream<List<LeaderBoardModel>> get getListOfLeaderBoxes {
+    return FirebaseFirestore.instance.collection("leaderboard").snapshots().map(
+            (event) => event.docs.map((e) => LeaderBoardModel.fromMap(e.data(), e.id,)).toList());
+  }
+
 
 
 
