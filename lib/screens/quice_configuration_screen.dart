@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/screens/quice_configuration_splash.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,9 +67,13 @@ class _DropDownState extends State<DropDown> {
           context: context,
           title: "Successfully",
           desc: "You have Successfully Submitted the Data",
+
         ).show();
       }
     });
+    //should change
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SplashQuiceConfig()));
   }
 
   @override
