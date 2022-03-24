@@ -147,12 +147,14 @@ class LibraryList extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
+
                             builder: (context) =>
                                 LibraryForm(
                                   libraryId: library.id,
                                   functionValue: 1,
                                   libraryName: library.name,
                                 )),
+
                       );
                     },
                     child: Icon(
