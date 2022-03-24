@@ -7,11 +7,10 @@ import '../models/leaderboard_model.dart';
 import '../util/QuizeConfig/leaderboard_crud_model.dart';
 
 class LeaderBoard extends StatefulWidget {
-
   final String id;
   const LeaderBoard({
     Key? key,
-    required this.id,
+    required this.id
 
   }) : super(key: key);
 
@@ -56,11 +55,13 @@ class _LeaderBoardState extends State<LeaderBoard> {
               TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
-                    Provider.of<LeaderBoardCrudModel>(context, listen: false).deleteLeaderboardItem(widget.id);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LeaderBoard(id: "x8MbVVeKSJtPXkspQPn4",)));
+                    print(widget.id);
+                    Provider.of<LeaderBoardCrudModel>(context, listen: false).deleteLeaderboardItem(widget.id.toString());
+                    //initState();
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const LeaderBoard(id: "x8MbVVeKSJtPXkspQPn4",)));
                   },
                   child: const Text('Yes')),
               TextButton(

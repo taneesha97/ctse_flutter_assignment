@@ -52,6 +52,7 @@ class LeaderBoardCrudModel extends ChangeNotifier {
   }
 
   Future<dynamic> deleteLeaderboardItem(String id) async {
+    print(id);
     try {
       await FirebaseFirestore.instance
           .collection('leaderboard')
