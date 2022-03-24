@@ -179,9 +179,7 @@ class _IndexPageState extends State<IndexPage> {
                             //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
                             storage.setItem('QuizID', value.toString());
                       });
-                      // QuizID = id as String;
 
-                      // Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(QuizID);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

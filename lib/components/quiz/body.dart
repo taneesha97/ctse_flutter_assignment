@@ -72,11 +72,11 @@ class _BodyState extends State<Body> {
               physics: NeverScrollableScrollPhysics(),
               controller: _questionController.pageController,
               onPageChanged: _questionController.updateTheQnNum,
-              itemCount: docs1.length,
+              itemCount: widget.noOfQuestions,
               itemBuilder: (context, index) => QuestionCard(
                 question: docs1[index],
                 index: index,
-                itemCount: docs1.length,
+                itemCount: widget.noOfQuestions,
               ),
             ),
           ),
