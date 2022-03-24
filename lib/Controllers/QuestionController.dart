@@ -104,6 +104,7 @@ class QuestionController extends GetxController
 
   void checkAns(Question question, String selectedIndex) {
     // because once user press any option then it will run
+    print('answer');
     print(question.answer!);
     print(selectedIndex);
     print('checkAns');
@@ -129,6 +130,7 @@ class QuestionController extends GetxController
 
     if (_questionNumber.value != _noOfQuestions) {
       _isAnswered = false;
+      print(_isAnswered);
       _pageController.nextPage(
           duration: Duration(milliseconds: 250), curve: Curves.ease);
 
