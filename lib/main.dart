@@ -5,6 +5,9 @@ import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 
 import 'package:ctse_assignment_1/screens/navigation_screen.dart';
 
+import 'package:ctse_assignment_1/util/FeedBack/feed_back_crud_model.dart';
+import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
+
 import 'package:ctse_assignment_1/util/QuizeConfig/leaderboard_crud_model.dart';
 
 import 'package:ctse_assignment_1/util/QuizeConfig/quize_list_crud_model.dart';
@@ -54,7 +57,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => CrudModel()),
         ChangeNotifierProvider(create: (context) => QuizCrudModel()),
         ChangeNotifierProvider(create: (context) => QuizListCrudModel()),
+
+        ChangeNotifierProvider(create: (context) => FeedBackCrudModel()),
+        ChangeNotifierProvider(create: (context) => QuizResultCrudModel()),
+
         ChangeNotifierProvider(create: (context) => LeaderBoardCrudModel()),
+
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

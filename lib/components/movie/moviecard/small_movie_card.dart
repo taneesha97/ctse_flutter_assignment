@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/movie.dart';
@@ -5,7 +6,8 @@ import '../../../styles.dart';
 
 class MovieCard extends StatelessWidget {
   final int index;
-  const MovieCard({Key? key, required this.index}) : super(key: key);
+  final SelectedMovieModel movie;
+  const MovieCard({Key? key, required this.index, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class MovieCard extends StatelessWidget {
                 ),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(movieList[index].imageUrl.toString()),
+                  image: NetworkImage(movie.imageUrl.toString()),
                 )
             ),
           ),
@@ -41,11 +43,11 @@ class MovieCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(movieList[index].title.toString(),
+                    Text(movie.title.toString(),
                       overflow: TextOverflow.ellipsis,
                       style: Styles.smallCardHeader,
                     ),
-                    Text(movieList[index].year,
+                    Text(movie.year,
                       overflow: TextOverflow.ellipsis,
                       style: Styles.textSectionBody,
                     ),
