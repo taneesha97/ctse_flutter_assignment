@@ -63,6 +63,13 @@ class LeaderBoardCrudModel extends ChangeNotifier {
     }
   }
 
+  // Database get Stream Builder.
+  Stream<List<LeaderBoardModel>> get getListOfLeaderBoxes {
+    return FirebaseFirestore.instance.collection("leaderboard").snapshots().map(
+            (event) => event.docs.map((e) => LeaderBoardModel.fromMap(e.data(), e.id,)).toList());
+  }
+
+
 
 
   // Future<void> updateValues(Question question, String selectedIndex, String QuizID1) async {

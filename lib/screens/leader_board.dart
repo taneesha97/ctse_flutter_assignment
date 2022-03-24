@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/components/leaderboard/leaderboard_card.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -32,9 +33,10 @@ class _LeaderBoardState extends State<LeaderBoard> {
   @override
   void initState() {
     super.initState();
+
+    // Previous.
     Provider.of<LeaderBoardCrudModel>(context, listen: false)
-        .readLeaderBoard()
-        .then((value) => {
+        .readLeaderBoard().then((value) => {
       setState(() {
         docs1 = value;
       }),
@@ -77,6 +79,10 @@ class _LeaderBoardState extends State<LeaderBoard> {
 
   @override
   Widget build(BuildContext context) {
+    // Stream Version.
+    Stream<List<LeaderBoardModel>> list = Provider.of<LeaderBoardCrudModel>(context, listen: false)
+        .getListOfLeaderBoxes;
+
     Color getTheRightColor(int index) {
       print(index);
       if (docs1[index].version.toString() == 'Gold') {
@@ -98,105 +104,26 @@ class _LeaderBoardState extends State<LeaderBoard> {
           style: TextStyle(color: Colors.black),
         ),
       ),
-      body: ListView.builder(
-          itemCount: docs1.length,
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) => Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
-            child: Card(
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(0.0),
-              ),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                // padding: EdgeInsets.only()
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children:<Widget> [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children:<Widget> [
-                        Container(
-                          height: 60.0,
-                          width: 5.0,
-                          color: getTheRightColor(index),
-                          // margin: EdgeInsets.only(right: 0, left: 0),
-                        ),
-                        SizedBox(width: 5.0),
-                        Container(
-                          width: 55.0,
-                          height: 55.0,
-                          // color: Colors.green,
-                          child: CircleAvatar(
-                            backgroundColor: Colors.green,
-                            foregroundColor: Colors.green,
-                            // backgroundImage: AssetImage("images/bright.jpg"),
-                            backgroundImage: NetworkImage
-                              (docs1[index].image.toString()),
-                            // ("https://images.unsplash.com/photo-1457449940276-e8deed18bfff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"),
-                          ),
-                        ),
-                        SizedBox(width: 5.0),
-                        Container(
-                          width: 150,
-                          // color: Colors.purple,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:<Widget> [
-                              Text(docs1[index].name.toString(), style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold)),
-                              Text(docs1[index].place.toString() + 'place', style: TextStyle(color: Colors.grey)),
-                              // Text(place[index], style: TextStyle(color: Colors.grey)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-
-                        Container(
-                        margin: EdgeInsets.only(left: 5.0),
-                        // color: Colors.pink,
-                            child: Row(
-                              children: [
-                                  Ink(
-                                    decoration: ShapeDecoration(
-                                    shape: CircleBorder(), color: Colors.white),
-                              child: IconButton(
-                                  onPressed: _isShown == true ? () => _deleteItem(context) : null,
-                                  icon: Icon(
-                                  Icons.delete,
-                                  color: Colors.black,
-                                  size: 20,
-                  )),
-                 ),
-               ]
-            )
-          ),
-                    Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-                      width: 60.0,
-                      height: 60.0,
-                      // margin: EdgeInsets.all(2),
-                      color: Colors.blue,
-                      child: Center(
-                          child: Text.rich(
-                            TextSpan(
-                                // text: "76pts",
-                                text: docs1[index].score.toString() + 'pts',
-                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white )
-                            ),
-                          )
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
+      body: StreamBuilder<List<LeaderBoardModel>>(
+        stream: list,
+        builder: (context, snapshot) {
+          if(snapshot.hasError){
+            return Text("Error");
+          } else if (snapshot.hasData){
+            final data = snapshot.requireData;
+            return ListView.builder(
+                itemCount: data.length,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) => Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 2.0, vertical: 2.0),
+                  child: LeaderBoradCard(index: index, model: data[index]),
+                )
+            );
+          } else {
+            return Center(child: CircularProgressIndicator(),);
+          }
+        }
       ),
     );
   }

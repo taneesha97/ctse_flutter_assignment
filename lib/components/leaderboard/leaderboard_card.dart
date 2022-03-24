@@ -1,11 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/leaderboard_model.dart';
+import '../../util/QuizeConfig/leaderboard_crud_model.dart';
 
 class LeaderBoradCard extends StatelessWidget {
   final int index;
+  final bool _isShown = true;
   final LeaderBoardModel model;
   const LeaderBoradCard({Key? key, required this.model, required this.index}) : super(key: key);
+
+  void _deleteItem(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            title: const Text('Please Confirm'),
+            content: const Text('Are you sure to remove the item?'),
+            actions: [
+              // The "Yes" button
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Provider.of<LeaderBoardCrudModel>(context, listen: false).deleteLeaderboardItem(model.id.toString());
+                  },
+                  child: const Text('Yes')),
+              TextButton(
+                  onPressed: () {
+                    // Close the dialog
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('No'))
+            ],
+          );
+        });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +88,7 @@ class LeaderBoradCard extends StatelessWidget {
                     foregroundColor: Colors.green,
                     // backgroundImage: AssetImage("images/bright.jpg"),
                     backgroundImage: NetworkImage
-                      (docs1[index].image.toString()),
+                      (model.image.toString()),
                     // ("https://images.unsplash.com/photo-1457449940276-e8deed18bfff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"),
                   ),
                 ),
@@ -69,8 +99,8 @@ class LeaderBoradCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:<Widget> [
-                      Text(docs1[index].name.toString(), style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold)),
-                      Text(docs1[index].place.toString() + 'place', style: TextStyle(color: Colors.grey)),
+                      Text(model.name.toString(), style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      Text(model.place.toString() + 'place', style: TextStyle(color: Colors.grey)),
                       // Text(place[index], style: TextStyle(color: Colors.grey)),
                     ],
                   ),
@@ -108,7 +138,7 @@ class LeaderBoradCard extends StatelessWidget {
                   child: Text.rich(
                     TextSpan(
                       // text: "76pts",
-                        text: docs1[index].score.toString() + 'pts',
+                        text: model.score.toString() + 'pts',
                         style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white )
                     ),
                   )
