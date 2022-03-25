@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/cupertino.dart';
+import '../models/actor.dart';
 import '../models/library_model.dart';
 import '../models/movie.dart';
 
@@ -92,18 +93,38 @@ class CrudModel extends ChangeNotifier {
       }
       movieBatch.commit();
     }
-
   }
 
   // Library Name Update method
-  Future libraryNameUpate(String newName, String libraryId) async {
+  Future libraryNameUpate(String newName, String libraryId, String color) async {
     final doc =
         FirebaseFirestore.instance.collection("libraries").doc(libraryId);
     doc.update({
       "name": newName,
+      "color": color,
     });
   }
-// Library Home Movies clean up method (Batch) - Do this after insert.
+
+// Library Home Movies clean up method (Batch) - Do this after insert. - PROTO
+  Future<void> cleanUpLibraryUponDelete(String libraryId) async {
+
+    // Method troubleshooting block
+    // - print("Library Id $libraryId");
+
+    final movies = await FirebaseFirestore.instance.collection("library-movies").where("libraryId", isEqualTo: libraryId).get();
+
+    // QuerySnap shot troubleshooting
+    // - print(movies);
+    // - print(movies.size);
+
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+    for (final doc in movies.docs){
+      // - print(doc.get("title"));
+      batch.delete(doc.reference);
+    }
+    return batch.commit();
+  }
+
 
 // Library Home Movie Delete method.
     Future deleteLibraryMovie(String libraryId) async {
@@ -117,5 +138,34 @@ class CrudModel extends ChangeNotifier {
    final doc =
    FirebaseFirestore.instance.collection("libraries").doc(libraryId);
    doc.delete();
+
+   // Cleaning up the movies inside deleted library.
+   cleanUpLibraryUponDelete(libraryId);
  }
+
+ // Method to get a list of movies from categories.
+  Stream<List<SelectedMovieModel>> getMoviesFromCategories(String category) {
+    return FirebaseFirestore.instance
+        .collection("movies")
+        .where("category", isEqualTo: category)
+        .snapshots()
+        .map((event) => event.docs
+        .map((e) => SelectedMovieModel.fromMap(
+        e.data(), e.id, "-"))
+        .toList());
+  }
+
+ // Method to get actors from a actors of a movie. (When given the movie ID).
+  Stream<List<Actor>> getActorsFromMovie(String movieId) {
+    return FirebaseFirestore.instance
+        .collection("actors")
+        .where("movieId", isEqualTo: movieId)
+        .snapshots()
+        .map((event) => event.docs
+        .map((e) => Actor.fromMap(
+        e.data(), e.id))
+        .toList());
+  }
+
+
 }

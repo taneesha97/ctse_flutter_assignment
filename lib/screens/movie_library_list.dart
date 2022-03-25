@@ -14,7 +14,9 @@ class LibraryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Stream<List<Library>> libraries =
-        Provider.of<CrudModel>(context, listen: false).getListOfLibraries;
+        Provider
+            .of<CrudModel>(context, listen: false)
+            .getListOfLibraries;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.teal,
@@ -35,14 +37,41 @@ class LibraryList extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Text(
-                  "All Libraries",
-                  style: Styles.textSectionHeader,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        right: 10,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "All Libraries",
+                            style: Styles.textSectionHeader,
+                          ),
+                          Text(
+                            "Custom Libraries to Manage Favorite Movies",
+                            style: Styles.textSectionSubBody,
+                          ),
+                        ],
+                      ),
+                    ),
+                    FloatingActionButton.small(onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LibraryForm(functionValue: 0,
+                              libraryId: '-',
+                              libraryName: "-",)),
+                      );
+                    },
+                      child: const Icon(Icons.add),
+                      backgroundColor: Colors.teal,),
+                  ],
                 ),
-                Text(
-                  "Custom Libraries to Manage Favorite Movies",
-                  style: Styles.textSectionSubBody,
-                ),
+
                 const SizedBox(
                   height: 10,
                 ),
@@ -75,12 +104,26 @@ class LibraryList extends StatelessWidget {
         ));
   }
 
-  Widget buildLibrary(Library library, BuildContext context) => GestureDetector(
+  Widget buildLibrary(Library library, BuildContext context) {
+
+      // Assign Colors to the Library (Null Safety).
+      String colorString;
+      if (library.color == ""){
+        colorString = 4280391411.toString();
+      } else {
+        colorString = library.color;
+      }
+      int colorInteger = int.parse(colorString);
+      Color newColor = Color(colorInteger);
+
+
+       return GestureDetector(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => LibraryHome(
+                builder: (context) =>
+                    LibraryHome(
                       libraryId: library.id.toString(),
                       libraryName: library.name,
                     )),
@@ -88,9 +131,14 @@ class LibraryList extends StatelessWidget {
         },
         child: Card(
           elevation: 6,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10)
+          ),
           child: ListTile(
-              leading: const CircleAvatar(child: Text("O")),
-              title: Text(library.name),
+              leading:  CircleAvatar(
+                backgroundColor: newColor,
+              ), // Add color here.
+              title: Text(library.name, style: Styles.smallCardHeader,),
               trailing: Wrap(
                 spacing: 12,
                 children: [
@@ -99,7 +147,8 @@ class LibraryList extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => LibraryForm(
+                            builder: (context) =>
+                                LibraryForm(
                                   libraryId: library.id,
                                   functionValue: 1,
                                   libraryName: library.name,
@@ -108,7 +157,7 @@ class LibraryList extends StatelessWidget {
                     },
                     child: Icon(
                       Icons.edit,
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
                   ),
                   InkWell(
@@ -119,15 +168,17 @@ class LibraryList extends StatelessWidget {
                         Navigator.pop(context);
                       }, () {
                         Navigator.pop(context);
-                      });
+                      },
+                          "Do you want to delete library including all the movies in it?");
                     },
                     child: Icon(
                       Icons.delete,
-                      color: Colors.redAccent,
+                      color: Colors.red,
                     ),
                   ),
                 ],
               )),
         ),
       );
+}
 }
