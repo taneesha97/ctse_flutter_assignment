@@ -36,6 +36,11 @@ class LeaderBoradCard extends StatelessWidget {
         });
   }
 
+  //show place
+
+
+
+  //------------------------------------------------------------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +67,11 @@ class LeaderBoradCard extends StatelessWidget {
 
     }
 
+    // Text getTherightPlace(int index){
+    //   if(index == 0){
+    //     return fff;
+    //   }
+    // }
 
     return Card(
       elevation: 5.0,
