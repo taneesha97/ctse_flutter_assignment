@@ -42,16 +42,23 @@ class LeaderBoradCard extends StatelessWidget {
 
     Color getTheRightColor(int index) {
       print(index);
-      if (model.version.toString() == 'Gold') {
-        return Colors.pink;
-      }
-      else if(model.version.toString() == 'Silver'){
+      // if (model.version.toString() == 'Gold') {
+      //   return Colors.amber;
+      // }
+      // else if(model.version.toString() == 'Silver'){
+      //   return Colors.black38;
+      // }
+      // else if(model.version.toString() == 'Bronze'){
+      //   return Colors.redAccent;
+      // }
+      if(index == 0){
         return Colors.amber;
+      }else if(index == 1){
+        return Colors.black38;
+      }else if(index == 2){
+        return Colors.redAccent;
       }
-      else if(model.version.toString() == 'Bronze'){
-        return Colors.purple;
-      }
-      return const Color.fromARGB(255, 0, 238, 255);
+      return Colors.green;
 
     }
 

@@ -86,15 +86,16 @@ class _LeaderBoardState extends State<LeaderBoard> {
     Color getTheRightColor(int index) {
       print(index);
       if (docs1[index].version.toString() == 'Gold') {
-          return Colors.pink;
+          return Colors.orange;
       }
       else if(docs1[index].version.toString() == 'Silver'){
-          return Colors.amber;
+          return Colors.black38;
+          // return Colors.amber;
       }
       else if(docs1[index].version.toString() == 'Bronze'){
-          return Colors.purple;
+          return Colors.redAccent;
       }
-      return const Color.fromARGB(255, 0, 238, 255);
+      return Colors.green;
 
     }
     return Scaffold(
