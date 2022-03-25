@@ -76,7 +76,7 @@ class _DropDownState extends State<DropDown> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(150),
+          preferredSize: Size.fromHeight(160),
           child: AppBar(
             centerTitle: true,
             flexibleSpace: ClipRRect(
@@ -84,7 +84,7 @@ class _DropDownState extends State<DropDown> {
               child: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/images/p2.jpg"),
+                        image: AssetImage("assets/images/p5.jpg"),
                         fit: BoxFit.fill,
                         // colorFilter: ColorFilter.mode(Colors.blue.withOpacity(0), BlendMode.darken)
                     )
