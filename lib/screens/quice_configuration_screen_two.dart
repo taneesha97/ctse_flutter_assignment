@@ -61,6 +61,13 @@ class _DropDownNewState extends State<DropDownNew> {
 
   @override
   Widget build(BuildContext context) {
+
+    print('values are printing');
+    print(widget.id);
+    print(widget.time);
+    print(widget.category);
+    print(widget.questions);
+    print('is printing');
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
