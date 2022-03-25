@@ -1,6 +1,7 @@
 import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_screen_two.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../screens/movie_library_form.dart';
@@ -62,23 +63,16 @@ class _CardView1State extends State<CardView1> {
         });
   }
 
-  onPress(String id, String category, int time, int questions) {   //hariyanne ne malli
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => DropDownNew(
-              id: id,
-              category:category,
-              time:time,
-              questions:questions,
-          )),
-    );
-  }
+  
 
 
   @override
   Widget build(BuildContext context) {
 
+    onPress(String id, String category, int time, int questions) {
+
+
+  }
     return
       Container(
         width: MediaQuery.of(context).size.width,
@@ -142,16 +136,29 @@ class _CardView1State extends State<CardView1> {
                         width: 10,
                       ),
                       Ink(
-                        decoration: ShapeDecoration(
-                            shape: CircleBorder(), color: Colors.green),
-                        child: IconButton(
-                            onPressed: onPress(widget.id, widget.text1, widget.text2, widget.questions),
-                            icon: Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                              size: 15,
-                            )),
-                      ),
+                          decoration: ShapeDecoration(
+                              shape: CircleBorder(), color: Colors.green),
+                          child: IconButton(
+                              onPressed: (){
+                                SchedulerBinding.instance?.addPostFrameCallback((_) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DropDownNew(
+                                          id: widget.id,
+                                          category:widget.text1,
+                                          time:widget.text2,
+                                          questions:widget.questions,
+                                        )),
+                                  );
+                                });
+                              },
+                              icon: Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                                size: 15,
+                              )),
+                        ),
                       SizedBox(
                         width: 10,
                       ),
