@@ -140,7 +140,7 @@ class LeaderBoradCard extends StatelessWidget {
               width: 60.0,
               height: 60.0,
               // margin: EdgeInsets.all(2),
-              color: Colors.blue,
+              color: Colors.teal,
               child: Center(
                   child: Text.rich(
                     TextSpan(

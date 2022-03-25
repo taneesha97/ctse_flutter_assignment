@@ -100,10 +100,9 @@ class _LeaderBoardState extends State<LeaderBoard> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Leader Board ",
-          style: TextStyle(color: Colors.black),
-        ),
+        backgroundColor: Colors.teal,
+        elevation: 0,
+        toolbarHeight: 10,
       ),
       body: StreamBuilder<List<LeaderBoardModel>>(
         stream: list,
