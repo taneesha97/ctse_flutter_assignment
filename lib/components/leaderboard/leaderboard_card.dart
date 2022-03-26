@@ -67,11 +67,17 @@ class LeaderBoradCard extends StatelessWidget {
 
     }
 
-    // Text getTherightPlace(int index){
-    //   if(index == 0){
-    //     return fff;
-    //   }
-    // }
+    String getRightText(int index) {
+      if(index == 0){
+        return "1st Place";
+      }else if(index == 1){
+        return "2nd Place";
+      }else if(index == 2){
+        return "3rd Place";
+      }
+
+      return "";
+    }
 
     return Card(
       elevation: 5.0,
@@ -117,8 +123,8 @@ class LeaderBoradCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children:<Widget> [
                       Text(model.name.toString(), style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold)),
-                      Text(model.place.toString() + 'place', style: TextStyle(color: Colors.grey)),
-                      // Text(place[index], style: TextStyle(color: Colors.grey)),
+                      // Text(model.place.toString() + 'place', style: TextStyle(color: Colors.grey)),
+                      Text(getRightText(index), style: TextStyle(color: Colors.grey)),
                     ],
                   ),
                 ),

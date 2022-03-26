@@ -46,6 +46,7 @@ class _DropDownNewState extends State<DropDownNew> {
   String? category, id;
   int? questions, time;
 
+  QuizList? quizList;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +61,9 @@ class _DropDownNewState extends State<DropDownNew> {
     onPress (QuizList quizList, int questions, String? category, int time, String? id) {
       Provider.of<QuizListCrudModel>(context, listen: false).updateListValues(quizList, category!, questions, time, id!)
           .then((value) {
+
+          Navigator.push(context, MaterialPageRoute(builder: (context) => QuizeList()));
+
 
         // Provider.of<QuizResultCrudModel>(context, listen: false).updateValues(question, selectedIndex.toString(), QuizID);
         // _controller.checkAns(question, selectedIndex.toString());
@@ -516,25 +520,13 @@ class _DropDownNewState extends State<DropDownNew> {
                             ),
                           ),
                           child: Text('Update'),
-                          // onPressed: onPress(category, questions!, time, id)),
-                      onPressed: (){
-                        Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => QuizeList()));
-                      }),
+                          onPressed: onPress(quizList!, questions!, category, time!, id)),
+                      //QuizList quizList, int questions, String? category, int time, String? id
+                      // onPressed: (){
+                      //   Navigator.push(
+                      //       context, MaterialPageRoute(builder: (context) => QuizeList()));
+                      // }),
                       SizedBox(height: 20),
-                      // ElevatedButton(
-                      //     style: ElevatedButton.styleFrom(
-                      //       minimumSize: Size(105, 45),
-                      //       textStyle: TextStyle(fontSize: 15),
-                      //       primary: Colors.pink,
-                      //       shape: new RoundedRectangleBorder(
-                      //         borderRadius: new BorderRadius.circular(10.0),
-                      //       ),
-                      //     ),
-                      //     child: Text('Delete'),
-                      //     onPressed: (){
-                      //       // Navigator.push(context, MaterialPageRoute(builder: (context) =>  ExampleList(title: 'Exaple List',)));
-                      //   }),
                     ],
                   )
                 ],
