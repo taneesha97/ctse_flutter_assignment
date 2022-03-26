@@ -3,22 +3,15 @@ import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class QuizListCrudModel extends ChangeNotifier {
-  // Steam Data For the Movies.
 
-  //QuerySnapshot querySnapshot = FirebaseFirestore.instance.collection('quizes').get() as QuerySnapshot<Object?>;
   final Stream<QuerySnapshot> _quizList =
   FirebaseFirestore.instance.collection('quice_list').snapshots();
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
-  // final QuestionController _controller = Get.put(QuestionController());
 
   late List<int?> valueSet;
 
   String QuizID = '';
-
-  // int noCorrectAnswers = 0;
-  // int AnsweredQuestions = 0;
-  // int noWrongAnswers = 0;
 
   Future<dynamic> readQuizList() async {
     QuerySnapshot querySnapshot;
@@ -88,10 +81,13 @@ class QuizListCrudModel extends ChangeNotifier {
   }
 
 
-  Future<void> updateListValues(QuizList quizList, String category, int questions, int time, String ListID1) async {
+  Future<dynamic> updateListValues(String? category, int? questions, int? time, String? ListID1) async {
+    print(category);
+    print(questions);
+    print(time);
+    print(ListID1);
     try {
-      await FirebaseFirestore.instance.collection('result-quizes').doc(ListID1).update({
-        'id': quizList.id ?? '',
+      await FirebaseFirestore.instance.collection('quice_list').doc(ListID1).update({
         'category': category ?? 0,
         'questions': questions ?? 0,
         'time': time ?? 0,

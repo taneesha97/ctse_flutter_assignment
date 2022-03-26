@@ -1,4 +1,3 @@
-import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/score_screen.dart';
 import 'package:ctse_assignment_1/util/FeedBack/feed_back_crud_model.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,7 @@ import 'package:reviews_slider/reviews_slider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:get/get.dart';
 import '../Controllers/QuestionController.dart';
-import '../util/Quizes/quiz_crud_model.dart';
+
 
 class FeedBackForm extends StatefulWidget {
   const FeedBackForm({Key? key}) : super(key: key);
@@ -113,7 +112,6 @@ class _FeedBackFormState extends State<FeedBackForm> {
       Provider.of<FeedBackCrudModel>(context, listen: false)
           .insertFeedBack(reviewSliderValue, TextFieldValue)
           .then((value) {
-        //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
         print(value);
         if (value != 0) {
           Alert(

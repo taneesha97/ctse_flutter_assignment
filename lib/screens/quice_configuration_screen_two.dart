@@ -3,6 +3,7 @@ import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../components/form_dropdown/ExpandedListAnimationWidget.dart';
 import '../components/form_dropdown/Scrollbar.dart';
 import '../util/QuizeConfig/quize_list_crud_model.dart';
@@ -43,44 +44,53 @@ class _DropDownNewState extends State<DropDownNew> {
   String title2 = 'Select No of questions';
   String title3 = 'Select time';
 
-  String? category, id;
-  int? questions, time;
+  late String category, id;
+  late int questions, time;
 
-  QuizList? quizList;
 
   @override
   Widget build(BuildContext context) {
 
-    print('values are printing');
-    print(widget.id);
-    print(widget.time);
-    print(widget.category);
-    print(widget.questions);
-    print('is printing');
+    onPress () {
 
-    onPress (QuizList quizList, int questions, String? category, int time, String? id) {
-      Provider.of<QuizListCrudModel>(context, listen: false).updateListValues(quizList, category!, questions, time, id!)
-          .then((value) {
+      print('values are printing');
+      print(widget.id);
+      print(widget.time);
+      print(widget.category);
+      print(widget.questions);
+      print('is printing');
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => QuizeList()));
+      Provider.of<QuizListCrudModel>(context, listen: false).updateListValues(widget.category, widget.questions, widget.time, widget.id);
+       // Alert(
+       //        context: context,
+       //        title: "Successfully",
+       //        desc: "You have Successfully Submitted the Data",
+       //      ).show();
+
+      Alert(
+        context: context,
+        // style: alertStyle,
+        type: AlertType.success,
+        //title: "",
+        desc: "Thank You for the feedback",
+        buttons: [
+          DialogButton(
+            child: const Text(
+              "Ok",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => QuizeList()));
+            },
+            color: Color.fromRGBO(91, 55, 185, 1.0),
+            radius: BorderRadius.circular(10.0),
+          ),
+        ],
+      ).show();
 
 
-        // Provider.of<QuizResultCrudModel>(context, listen: false).updateValues(question, selectedIndex.toString(), QuizID);
-        // _controller.checkAns(question, selectedIndex.toString());
-        //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
-        // print(value);
-        //   if(value != 0){
-        //     Alert(
-        //       context: context,
-        //       title: "Successfully",
-        //       desc: "You have Successfully Submitted the Data",
-        //     ).show();
-        //   }
-      });
+
     }
-
-
-
 
     return Scaffold(
         extendBodyBehindAppBar: true,
@@ -200,9 +210,8 @@ class _DropDownNewState extends State<DropDownNew> {
                                                     return RadioListTile(
                                                         title: Text(_list.elementAt(index)),
                                                         value: index,
-                                                        groupValue: category,
+                                                        groupValue: widget.category,
                                                         onChanged: (val) {
-                                                          widget.category = val.toString();
                                                           if (val == 0) {
                                                             setState(() {
                                                               widget.category =
@@ -520,7 +529,8 @@ class _DropDownNewState extends State<DropDownNew> {
                             ),
                           ),
                           child: Text('Update'),
-                          onPressed: onPress(quizList!, questions!, category, time!, id)),
+                          onPressed: onPress
+                      ),
                       //QuizList quizList, int questions, String? category, int time, String? id
                       // onPressed: (){
                       //   Navigator.push(
