@@ -1,11 +1,7 @@
-import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_screen_two.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-
-import '../../screens/movie_library_form.dart';
-import '../../screens/quice_configuration_screen.dart';
 import '../../screens/quice_configuration_splash.dart';
 import '../../screens/quize_list.dart';
 import '../../util/QuizeConfig/quize_list_crud_model.dart';
