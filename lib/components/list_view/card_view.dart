@@ -1,10 +1,7 @@
-import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_screen_two.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-
-import '../../screens/movie_library_form.dart';
-import '../../screens/quice_configuration_screen.dart';
 import '../../screens/quice_configuration_splash.dart';
 import '../../screens/quize_list.dart';
 import '../../util/QuizeConfig/quize_list_crud_model.dart';
@@ -12,12 +9,14 @@ import '../../util/QuizeConfig/quize_list_crud_model.dart';
 class CardView1 extends StatefulWidget {
 
   final int index;
-  final String text1, text2, id;
+  final String text1, id;
+  final int text2, questions;
   const CardView1({
     Key? key,
     required this.index,
     required this.text1,
     required this.text2,
+    required this.questions,
     required this.id,
 
   }) : super(key: key);
@@ -60,29 +59,16 @@ class _CardView1State extends State<CardView1> {
         });
   }
 
+  
+
+
   @override
   Widget build(BuildContext context) {
 
-    onPress() {
+    onPress(String id, String category, int time, int questions) {
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => DropDownNew(
 
-              // id: quizList.id,
-              // functionValue: 1,
-              // libraryName: library.name,
-            )),
-      );
-
-      // final QuizID = storage.getItem('QuizID');
-      // print(QuizID);
-      // print('questionCard');
-      // Provider.of<QuizCrudModel>(context, listen: false).updateValues(quizList, selectedIndex.toString(), QuizID);
-      // _controller.checkAns(question, selectedIndex.toString());
-    }
-
+  }
     return
       Container(
         width: MediaQuery.of(context).size.width,
@@ -108,7 +94,7 @@ class _CardView1State extends State<CardView1> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:<Widget> [
                         Text(widget.text1, style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(widget.text2, style: TextStyle(color: Colors.grey)),
+                        Text(widget.text2.toString(), style: TextStyle(color: Colors.grey)),
                       ],
                     ),
                   ],
@@ -123,7 +109,11 @@ class _CardView1State extends State<CardView1> {
                         child: IconButton(
                             onPressed: () {
                               Navigator.push(
-                                  context, MaterialPageRoute(builder: (context) => SplashQuiceConfig()));
+                                  context, MaterialPageRoute(builder: (context) => SplashQuiceConfig(
+                                cattegory: widget.text1,
+                                time: widget.text2,
+                                questions: widget.questions,
+                              )));
                             },
                             //     () {
                             //   Navigator.push(
@@ -146,16 +136,29 @@ class _CardView1State extends State<CardView1> {
                         width: 10,
                       ),
                       Ink(
-                        decoration: ShapeDecoration(
-                            shape: CircleBorder(), color: Colors.green),
-                        child: IconButton(
-                            onPressed: onPress,
-                            icon: Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                              size: 15,
-                            )),
-                      ),
+                          decoration: ShapeDecoration(
+                              shape: CircleBorder(), color: Colors.green),
+                          child: IconButton(
+                              onPressed: (){
+                                SchedulerBinding.instance?.addPostFrameCallback((_) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DropDownNew(
+                                          id: widget.id,
+                                          category:widget.text1,
+                                          time:widget.text2,
+                                          questions:widget.questions,
+                                        )),
+                                  );
+                                });
+                              },
+                              icon: Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                                size: 15,
+                              )),
+                        ),
                       SizedBox(
                         width: 10,
                       ),

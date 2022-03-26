@@ -15,7 +15,7 @@ class AllMovieScreen extends StatelessWidget {
         margin: EdgeInsets.only(
           top: 100,
         ),
-        child: LongMovieCategory(),
+        child: LongMovieCategory(category: "All Movies"),
       )
     );
   }

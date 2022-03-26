@@ -2,6 +2,7 @@ import 'package:ctse_assignment_1/components/movie/moviecard/long_library_movie_
 import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
 
 import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
+import 'package:ctse_assignment_1/screens/approching_page.dart';
 
 import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/feedback_form.dart';
@@ -150,6 +151,29 @@ class _IndexPageState extends State<IndexPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
+                        MaterialPageRoute(builder: (context) => ApprochingPage()),
+                      );
+                    },
+                    child: const Text(
+                      'Approching Page',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(builder: (context) => MovieWiki()),
                       );
                     },
@@ -201,12 +225,9 @@ class _IndexPageState extends State<IndexPage> {
                           .insertQuizData(4,
                               'U001') // here no of quizes are entered, userID are entered
                           .then((value) {
-                        //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
                         storage.setItem('QuizID', value.toString());
                       });
-                      // QuizID = id as String;
 
-                      // Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(QuizID);
                       Navigator.push(
                         context,
                         MaterialPageRoute(

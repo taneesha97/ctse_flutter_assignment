@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/screens/quice_configuration_splash.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class DropDown extends StatefulWidget {
   @override
   _DropDownState createState() => _DropDownState();
 }
-List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy"];
+List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy", "Horror"];
 List <String> _list2 =['5',"10","15",'20'];
 List <String> _list3 =['10',"15","20", "30"];
 
@@ -57,6 +58,7 @@ class _DropDownState extends State<DropDown> {
   // }
 
   void onPress () {
+    print(category);
     Provider.of<QuizListCrudModel>(context, listen: false).insertQuizListData(category, questions, time)
         .then((value) {
       //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
@@ -66,9 +68,13 @@ class _DropDownState extends State<DropDown> {
           context: context,
           title: "Successfully",
           desc: "You have Successfully Submitted the Data",
+
         ).show();
       }
     });
+    //should change
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => QuizeList()));
   }
 
   @override
@@ -76,7 +82,7 @@ class _DropDownState extends State<DropDown> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(150),
+          preferredSize: Size.fromHeight(160),
           child: AppBar(
             centerTitle: true,
             flexibleSpace: ClipRRect(
@@ -84,7 +90,7 @@ class _DropDownState extends State<DropDown> {
               child: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/images/p2.jpg"),
+                        image: AssetImage("assets/images/p5.jpg"),
                         fit: BoxFit.fill,
                         // colorFilter: ColorFilter.mode(Colors.blue.withOpacity(0), BlendMode.darken)
                     )
@@ -224,6 +230,13 @@ class _DropDownState extends State<DropDown> {
                                                             setState(() {
                                                               category =
                                                               'Comedy';
+                                                              title = _list.elementAt(index);
+                                                            });
+                                                          }
+                                                          else if (val == 5) {
+                                                            setState(() {
+                                                              category =
+                                                              'Horror';
                                                               title = _list.elementAt(index);
                                                             });
                                                           }

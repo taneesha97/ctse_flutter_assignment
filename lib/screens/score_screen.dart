@@ -75,7 +75,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
 
     // Defining both color and size animations
     colorAnimation = ColorTween(begin: Colors.blue, end: Colors.yellow).animate(controller);
-    sizeAnimation = Tween<double>(begin: 100.0, end: 200.0).animate(controller);
+    sizeAnimation = Tween<double>(begin: 100.0, end: 180.0).animate(controller);
 
     // Rebuilding the screen when animation goes ahead
     controller.addListener(() {
@@ -207,6 +207,15 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
 
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Column(
+          children: [
+            Container(
+              color: Colors.teal,
+              height: 10,
+
+            ),
+          ],
+        ),
         title: const Text(
           "Score Page ",
           style: TextStyle(color: Colors.black),

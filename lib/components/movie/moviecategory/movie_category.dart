@@ -1,16 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../util/crud_model.dart';
 import '../moviecard/small_movie_card.dart';
+import 'long_movie_category.dart';
 
 class MovieCategory extends StatelessWidget {
-  const MovieCategory({Key? key}) : super(key: key);
+  final String category;
+  const MovieCategory({Key? key, required this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+
     // Later Changed this to relevant category of movies.
     Stream<QuerySnapshot> movies = Provider.of<CrudModel>(context, listen: false).movies;
+
+    // Call the specific category based filtering method.
+    Stream<List<SelectedMovieModel>> categoryMovies = Provider.of<CrudModel>(context, listen: false).getMoviesFromCategories(category);
+
     return Column(
       children: <Widget>[
         Padding(
@@ -18,25 +27,32 @@ class MovieCategory extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              const Text(
-                "Recommended",
-                style: TextStyle(
+               Text(
+                category,
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               TextButton(
                 child: const Text("View All"),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => LongMovieCategory(category: category)
+                            ),
+                  );
+                },
               )
             ],
           ),
         ),
         Container(
           height: 230,
-          child: StreamBuilder<QuerySnapshot>(
-            stream: movies,
-            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+          child: StreamBuilder<List<SelectedMovieModel>>(
+            stream: categoryMovies,
+            builder: (BuildContext context, snapshot){
               if(snapshot.hasError){
                 return Text("There an Error Loading Movies");
               }
@@ -44,13 +60,12 @@ class MovieCategory extends StatelessWidget {
                 return Text("Loading");
               }
               final data = snapshot.requireData;
-              data.docs.map((e) => print(e));
 
               return ListView.builder(
-                itemCount: data.size,
+                itemCount: data.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index){
-                  return MovieCard(index: index);
+                  return MovieCard(index: index, movie: data[index],);
                 },
               );
             },

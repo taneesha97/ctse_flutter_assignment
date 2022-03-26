@@ -1,11 +1,27 @@
 
+import 'package:ctse_assignment_1/models/quize_list_model.dart';
+import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../components/form_dropdown/ExpandedListAnimationWidget.dart';
 import '../components/form_dropdown/Scrollbar.dart';
+import '../util/QuizeConfig/quize_list_crud_model.dart';
 
 class DropDownNew extends StatefulWidget {
-  const DropDownNew({Key? key}) : super(key: key);
+
+  String? category, id;
+  int? time, questions;
+
+  DropDownNew(
+      {Key? key,
+        required this.id,
+        required this.category,
+        required this.time,
+        required this.questions,
+      })
+      : super(key: key);
+
+  // const DropDownNew({Key? key}) : super(key: key);
 
   @override
   _DropDownNewState createState() => _DropDownNewState();
@@ -27,27 +43,41 @@ class _DropDownNewState extends State<DropDownNew> {
   String title2 = 'Select No of questions';
   String title3 = 'Select time';
 
-  String? category;
+  String? category, id;
   int? questions, time;
 
 
-  void onPress () {
-    // Provider.of<QuizListCrudModel>(context, listen: false).insertQuizListData(category, questions, time)
-    //     .then((value) {
-    //   //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
-    //   print(value);
-    //   if(value != 0){
-    //     Alert(
-    //       context: context,
-    //       title: "Successfully",
-    //       desc: "You have Successfully Submitted the Data",
-    //     ).show();
-    //   }
-    // });
-  }
-
   @override
   Widget build(BuildContext context) {
+
+    print('values are printing');
+    print(widget.id);
+    print(widget.time);
+    print(widget.category);
+    print(widget.questions);
+    print('is printing');
+
+    onPress (QuizList quizList, int questions, String? category, int time, String? id) {
+      Provider.of<QuizListCrudModel>(context, listen: false).updateListValues(quizList, category!, questions, time, id!)
+          .then((value) {
+
+        // Provider.of<QuizResultCrudModel>(context, listen: false).updateValues(question, selectedIndex.toString(), QuizID);
+        // _controller.checkAns(question, selectedIndex.toString());
+        //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
+        // print(value);
+        //   if(value != 0){
+        //     Alert(
+        //       context: context,
+        //       title: "Successfully",
+        //       desc: "You have Successfully Submitted the Data",
+        //     ).show();
+        //   }
+      });
+    }
+
+
+
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
@@ -135,7 +165,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                       horizontal: 20, vertical: 10),
                                                   child:
                                                   Text(
-                                                    title,
+                                                    widget.category.toString(),
                                                     style: TextStyle(color: Colors.black45),
                                                   ),
                                                 ),
@@ -168,36 +198,37 @@ class _DropDownNewState extends State<DropDownNew> {
                                                         value: index,
                                                         groupValue: category,
                                                         onChanged: (val) {
+                                                          widget.category = val.toString();
                                                           if (val == 0) {
                                                             setState(() {
-                                                              category =
+                                                              widget.category =
                                                               'Action';
                                                               title = _list.elementAt(index);
                                                             });
                                                           } else if (val == 1) {
                                                             setState(() {
-                                                              category =
+                                                              widget.category =
                                                               'Romance';
                                                               title = _list.elementAt(index);
                                                             });
                                                           }
                                                           else if (val == 2) {
                                                             setState(() {
-                                                              category =
+                                                              widget.category =
                                                               'Thriller';
                                                               title = _list.elementAt(index);
                                                             });
                                                           }
                                                           else if (val == 3) {
                                                             setState(() {
-                                                              category =
+                                                              widget.category =
                                                               'Animation';
                                                               title = _list.elementAt(index);
                                                             });
                                                           }
                                                           else if (val == 4) {
                                                             setState(() {
-                                                              category =
+                                                              widget.category =
                                                               'Comedy';
                                                               title = _list.elementAt(index);
                                                             });
@@ -215,7 +246,8 @@ class _DropDownNewState extends State<DropDownNew> {
                                       ),
                                     ],
                                   ),
-                                )),
+                                )
+                                ),
                           ],
                         ),
                       ],
@@ -266,7 +298,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                 padding: const EdgeInsets.symmetric(
                                                     horizontal: 20, vertical: 10),
                                                 child: Text(
-                                                  title2,
+                                                  widget.questions.toString(),
                                                   style: TextStyle(color: Colors.black45),
                                                 ),
                                               ),
@@ -297,31 +329,31 @@ class _DropDownNewState extends State<DropDownNew> {
                                                   return RadioListTile(
                                                       title: Text(_list2.elementAt(index)),
                                                       value: index,
-                                                      groupValue: questions,
+                                                      groupValue: widget.questions,
                                                       onChanged: (val) {
                                                         if (val == 0) {
                                                           setState(() {
-                                                            questions =
+                                                            widget.questions =
                                                             5;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         } else if (val == 1) {
                                                           setState(() {
-                                                            questions =
+                                                            widget.questions =
                                                             10;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         }
                                                         else if (val == 2) {
                                                           setState(() {
-                                                            questions =
+                                                            widget.questions =
                                                             15;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         }
                                                         else if (val == 3) {
                                                           setState(() {
-                                                            questions =
+                                                            widget.questions =
                                                             20;
                                                             title2 = _list2.elementAt(index);
                                                           });
@@ -390,7 +422,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                 padding: const EdgeInsets.symmetric(
                                                     horizontal: 20, vertical: 10),
                                                 child: Text(
-                                                  title3,
+                                                  widget.time.toString(),
                                                   style: TextStyle(color: Colors.black45),
                                                 ),
                                               ),
@@ -421,31 +453,31 @@ class _DropDownNewState extends State<DropDownNew> {
                                                   return RadioListTile(
                                                       title: Text(_list3.elementAt(index)),
                                                       value: index,
-                                                      groupValue: time,
+                                                      groupValue: widget.time,
                                                       onChanged: (val) {
                                                         if (val == 0) {
                                                           setState(() {
-                                                            time =
+                                                            widget.time =
                                                             10;
                                                             title3 = _list3.elementAt(index);
                                                           });
                                                         } else if (val == 1) {
                                                           setState(() {
-                                                            time =
+                                                            widget.time =
                                                             15;
                                                             title3 = _list3.elementAt(index);
                                                           });
                                                         }
                                                         else if (val == 2) {
                                                           setState(() {
-                                                            time =
+                                                            widget.time =
                                                             20;
                                                             title3 = _list3.elementAt(index);
                                                           });
                                                         }
                                                         else if (val == 3) {
                                                           setState(() {
-                                                            time =
+                                                            widget.time =
                                                             30;
                                                             title3 = _list3.elementAt(index);
                                                           });
@@ -484,11 +516,11 @@ class _DropDownNewState extends State<DropDownNew> {
                             ),
                           ),
                           child: Text('Update'),
-                          onPressed: onPress),
-                      // onPressed: (){
-                      //   Navigator.push(
-                      //       context, MaterialPageRoute(builder: (context) => QuizeList()));
-                      // }
+                          // onPressed: onPress(category, questions!, time, id)),
+                      onPressed: (){
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => QuizeList()));
+                      }),
                       SizedBox(height: 20),
                       // ElevatedButton(
                       //     style: ElevatedButton.styleFrom(
