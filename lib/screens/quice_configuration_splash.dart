@@ -14,10 +14,9 @@ class _SplashQuiceConfigState extends State<SplashQuiceConfig> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Splash",
-          style: TextStyle(color: Colors.black),
-        ),
+        backgroundColor: Colors.teal,
+        elevation: 0,
+        toolbarHeight: 10,
       ),
       body: Container(
         color: Colors.black,
@@ -32,7 +31,7 @@ class _SplashQuiceConfigState extends State<SplashQuiceConfig> {
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(90, 45),
                     textStyle: TextStyle(fontSize: 15),
-                    primary: Colors.blue,
+                    primary: Colors.teal,
                     shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(10.0),
                     ),
