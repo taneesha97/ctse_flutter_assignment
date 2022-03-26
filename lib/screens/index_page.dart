@@ -225,7 +225,6 @@ class _IndexPageState extends State<IndexPage> {
                           .insertQuizData(4,
                               'U001') // here no of quizes are entered, userID are entered
                           .then((value) {
-                        //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
                         storage.setItem('QuizID', value.toString());
                       });
 
