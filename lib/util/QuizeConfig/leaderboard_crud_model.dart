@@ -65,7 +65,9 @@ class LeaderBoardCrudModel extends ChangeNotifier {
 
   // Database get Stream Builder.
   Stream<List<LeaderBoardModel>> get getListOfLeaderBoxes {
-    return FirebaseFirestore.instance.collection("leaderboard").snapshots().map(
+    return FirebaseFirestore.instance
+        .collection("leaderboard").orderBy('score', descending: true)
+        .snapshots().map(
             (event) => event.docs.map((e) => LeaderBoardModel.fromMap(e.data(), e.id,)).toList());
   }
 
