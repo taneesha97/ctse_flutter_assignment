@@ -73,7 +73,7 @@ class _DropDownState extends State<DropDown> {
     });
     //should change
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SplashQuiceConfig()));
+        context, MaterialPageRoute(builder: (context) => QuizeList()));
   }
 
   @override
