@@ -14,7 +14,7 @@ class DropDown extends StatefulWidget {
   @override
   _DropDownState createState() => _DropDownState();
 }
-List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy"];
+List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy", "Horror"];
 List <String> _list2 =['5',"10","15",'20'];
 List <String> _list3 =['10',"15","20", "30"];
 
@@ -58,6 +58,7 @@ class _DropDownState extends State<DropDown> {
   // }
 
   void onPress () {
+    print(category);
     Provider.of<QuizListCrudModel>(context, listen: false).insertQuizListData(category, questions, time)
         .then((value) {
       //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
@@ -229,6 +230,13 @@ class _DropDownState extends State<DropDown> {
                                                             setState(() {
                                                               category =
                                                               'Comedy';
+                                                              title = _list.elementAt(index);
+                                                            });
+                                                          }
+                                                          else if (val == 5) {
+                                                            setState(() {
+                                                              category =
+                                                              'Horror';
                                                               title = _list.elementAt(index);
                                                             });
                                                           }
