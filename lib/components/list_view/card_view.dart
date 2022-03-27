@@ -29,6 +29,7 @@ class _CardView1State extends State<CardView1> {
 
   bool _isShown = true;
 
+  //delete one quiz list item
   void _deleteQuizList(BuildContext context) {
     showDialog(
         context: context,
@@ -59,16 +60,9 @@ class _CardView1State extends State<CardView1> {
         });
   }
 
-  
-
 
   @override
   Widget build(BuildContext context) {
-
-    onPress(String id, String category, int time, int questions) {
-
-
-  }
     return
       Container(
         width: MediaQuery.of(context).size.width,
@@ -111,17 +105,6 @@ class _CardView1State extends State<CardView1> {
                               Navigator.push(
                                   context, MaterialPageRoute(builder: (context) => SplashQuiceConfig()));
                             },
-                            //     () {
-                            //   Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //       builder: (context) => DropDown(
-                            //
-                            //       // libraryId: library.id,
-                            //       // functionValue: 1,
-                            //       // libraryName: library.name,
-                            //   )),
-                            // },
                             icon: Icon(
                               Icons.start,
                               color: Colors.white,
