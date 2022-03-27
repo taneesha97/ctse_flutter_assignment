@@ -60,7 +60,6 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider(create: (context) => FeedBackCrudModel()),
         ChangeNotifierProvider(create: (context) => QuizResultCrudModel()),
-
         ChangeNotifierProvider(create: (context) => LeaderBoardCrudModel()),
 
       ],
@@ -71,7 +70,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           backgroundColor: Colors.black,
         ),
-        home: const IndexPage()
+        home: NavigationScreen(),
       ),
     );
   }

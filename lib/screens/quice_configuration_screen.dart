@@ -469,6 +469,27 @@ class _DropDownState extends State<DropDown> {
                           onPressed: onPress
                         ),
                       SizedBox(height: 20),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: Size(90, 45),
+                          textStyle: TextStyle(fontSize: 15),
+                          primary: Colors.blue,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => QuizeList()),
+                          );
+                        },
+                        child: const Text(
+                          'Quiz List',
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ],
                   )
                 ],

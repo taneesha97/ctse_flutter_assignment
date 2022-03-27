@@ -10,9 +10,9 @@ import '../styles.dart';
 import '../util/crud_model.dart';
 
 class MovieWiki extends StatelessWidget {
-  late QuerySnapshot<Object?> array_data;
+  //late QuerySnapshot<Object?> array_data;
 
-  MovieWiki({Key? key}) : super(key: key);
+  const MovieWiki({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
