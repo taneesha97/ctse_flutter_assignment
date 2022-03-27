@@ -1,7 +1,14 @@
 import 'package:ctse_assignment_1/components/profile/background.dart';
+import 'package:ctse_assignment_1/screens/leader_board.dart';
+import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
+import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/material.dart';
 
+import 'movie_library_list.dart';
+
 class ProfileUI extends StatefulWidget {
+  const ProfileUI({Key? key}) : super(key: key);
+
   @override
   _ProfileUIState createState() => _ProfileUIState();
 }
@@ -115,10 +122,10 @@ class _ProfileUIState extends State<ProfileUI> {
                                 // foreground
                               ),
                               onPressed: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(builder: (context) => ProfileUI()),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => LibraryList()),
+                                );
                               },
                               child: const Text(
                                 'My Library',
@@ -299,24 +306,75 @@ class _ProfileUIState extends State<ProfileUI> {
               const SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red, // background
-                  onPrimary: Colors.white,
-                  padding: const EdgeInsets.all(10.0),
-                  //fixedSize: const Size(640, 70),
-                  // foreground
-                ),
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => ProfileUI()),
-                  // );
-                },
-                child: const Text(
-                  'Clear',
-                  style: TextStyle(
-                      fontSize: 12, fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red, // background
+                        onPrimary: Colors.white,
+                        padding: const EdgeInsets.all(10.0),
+                        //fixedSize: const Size(640, 70),
+                        // foreground
+                      ),
+                      onPressed: () {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => ProfileUI()),
+                        // );
+                      },
+                      child: const Text(
+                        'Clear',
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red, // background
+                        onPrimary: Colors.white,
+                        padding: const EdgeInsets.all(10.0),
+                        //fixedSize: const Size(640, 70),
+                        // foreground
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LeaderBoard()),
+                        );
+                      },
+                      child: const Text(
+                        'Leaderboard',
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+
+
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red, // background
+                        onPrimary: Colors.white,
+                        padding: const EdgeInsets.all(10.0),
+                        //fixedSize: const Size(640, 70),
+                        // foreground
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => DropDown()),
+                        );
+                      },
+                      child: const Text(
+                        'Quiz configuration',
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
