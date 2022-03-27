@@ -22,23 +22,17 @@ class DropDownNew extends StatefulWidget {
       })
       : super(key: key);
 
-  // const DropDownNew({Key? key}) : super(key: key);
-
   @override
   _DropDownNewState createState() => _DropDownNewState();
 }
-List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy"];
-List <String> _list2 =['5',"10","15",'20'];
-List <String> _list3 =['10',"15","20", "30"];
+  List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy"];
+  List <String> _list2 =['5',"10","15",'20'];
+  List <String> _list3 =['10',"15","20", "30"];
 
 class _DropDownNewState extends State<DropDownNew> {
   bool isStrechedDropDown = false;
   bool isStrechedDropDown2 = false;
   bool isStrechedDropDown3 = false;
-
-  // int? groupValue;
-  // int? groupValue2;
-  // int? groupValue3;
 
   String title = 'Select Movie Category';
   String title2 = 'Select No of questions';
@@ -61,18 +55,10 @@ class _DropDownNewState extends State<DropDownNew> {
       print('is printing');
 
       Provider.of<QuizListCrudModel>(context, listen: false).updateListValues(widget.category, widget.questions, widget.time, widget.id);
-       // Alert(
-       //        context: context,
-       //        title: "Successfully",
-       //        desc: "You have Successfully Submitted the Data",
-       //      ).show();
-
       Alert(
         context: context,
-        // style: alertStyle,
         type: AlertType.success,
-        //title: "",
-        desc: "Thank You for the feedback",
+        desc: "Successfully updated data",
         buttons: [
           DialogButton(
             child: const Text(
@@ -87,9 +73,6 @@ class _DropDownNewState extends State<DropDownNew> {
           ),
         ],
       ).show();
-
-
-
     }
 
     return Scaffold(
@@ -105,7 +88,6 @@ class _DropDownNewState extends State<DropDownNew> {
                     image: DecorationImage(
                       image: AssetImage("assets/images/p4.jpg"),
                       fit: BoxFit.fill,
-                      // colorFilter: ColorFilter.mode(Colors.blue.withOpacity(0), BlendMode.darken)
                     )
                 ),
               ),
@@ -121,10 +103,6 @@ class _DropDownNewState extends State<DropDownNew> {
                 borderRadius: BorderRadius.only(bottomRight: Radius.circular(50), bottomLeft: Radius.circular(50))
             ),
           ),
-          // title: Text(
-          //   "Quiz Configuration",
-          //   style: TextStyle(color: Colors.black),
-          // ),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -133,7 +111,6 @@ class _DropDownNewState extends State<DropDownNew> {
               child: Column(
                 children: [
                   Container(
-                    // color: Colors.lightGreenAccent,
                     child: Column(
                       children: [
                         Container(
@@ -155,7 +132,6 @@ class _DropDownNewState extends State<DropDownNew> {
                                   child: Column(
                                     children: [
                                       Container(
-                                        // height: 45,
                                           width: double.infinity,
                                           padding: EdgeInsets.only(right: 10),
                                           decoration: BoxDecoration(
@@ -247,12 +223,6 @@ class _DropDownNewState extends State<DropDownNew> {
                                                             });
                                                           }
                                                         }
-                                                      // onChanged: (val) {
-                                                      //   setState(() {
-                                                      //     category = val as String?;
-                                                      //     title = _list.elementAt(index);
-                                                      //   });
-                                                      // }
                                                     );
                                                   }),
                                         ),
@@ -372,12 +342,6 @@ class _DropDownNewState extends State<DropDownNew> {
                                                           });
                                                         }
                                                       }
-                                                    // onChanged: (val) {
-                                                    //   setState(() {
-                                                    //     questions = val as int;
-                                                    //     title2 = _list2.elementAt(index);
-                                                    //   });
-                                                    // }
                                                   );
                                                 }),
                                       ),
@@ -496,14 +460,6 @@ class _DropDownNewState extends State<DropDownNew> {
                                                           });
                                                         }
                                                       }
-
-
-                                                    // onChanged: (val) {
-                                                    //   setState(() {
-                                                    //     time = val as int;
-                                                    //     title3 = _list3.elementAt(index);
-                                                    //   });
-                                                    // }
                                                   );
                                                 }),
                                       ),
@@ -531,11 +487,6 @@ class _DropDownNewState extends State<DropDownNew> {
                           child: Text('Update'),
                           onPressed: onPress
                       ),
-                      //QuizList quizList, int questions, String? category, int time, String? id
-                      // onPressed: (){
-                      //   Navigator.push(
-                      //       context, MaterialPageRoute(builder: (context) => QuizeList()));
-                      // }),
                       SizedBox(height: 20),
                     ],
                   )
