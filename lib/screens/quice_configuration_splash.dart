@@ -56,6 +56,7 @@ class _SplashQuiceConfigState extends State<SplashQuiceConfig> {
                         .then((value) {
                       storage.setItem('QuizID', value.toString());
                     });
+                    Provider.of<QuizResultCrudModel>(context, listen: false).setdefultValues();
 
                     Navigator.push(
                       context,
