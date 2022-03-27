@@ -17,21 +17,6 @@ class LongMovieCategory extends StatefulWidget {
 }
 
 class _LongMovieCategoryState extends State<LongMovieCategory> {
-  TextEditingController _searchController = TextEditingController();
-
-  @override
-  void initState(){
-    super.initState();
-    _searchController.addListener(_onSearchChange);
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  _onSearchChange(){
-    print(_searchController.text);
-  }
-
-
   @override
   Widget build(BuildContext context) {
     // Provider to the fetch all the movies.
@@ -46,12 +31,13 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
     Stream<List<SelectedMovieModel>> movies1;
     if (widget.category == "All Movies"){
       movies1 = Provider.of<CrudModel>(context).getListOfMoviesShort;
+      // Refactored Get Method for Searching.
+
     } else {
       movies1 = Provider.of<CrudModel>(context).getMoviesFromCategories(widget.category);
+      // Refactored Get Method for Searching.
+
     }
-
-
-
 
     return Scaffold(
       appBar: AppBar(
@@ -84,16 +70,6 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
             SizedBox(
               height: 10,
             ),
-
-            // Search Bar for the All Movies.
-            TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search);
-              ),
-            ),
-
-
 
             Flexible(
                 child: StreamBuilder<List<SelectedMovieModel>>(

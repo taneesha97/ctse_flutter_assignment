@@ -42,6 +42,12 @@ class CrudModel extends ChangeNotifier {
   }
 
   // Getter for the list of movies (Short hand method.) - Not yet tested.
+  Stream<List<SelectedMovieModel>>  getListOfMoviesShortSearch(String search) {
+    return FirebaseFirestore.instance.collection("movies").where("title", isGreaterThanOrEqualTo: search ).where('title', isLessThan: search + "z").snapshots().map(
+            (event) => event.docs.map((e) => SelectedMovieModel.fromMap(e.data(), e.id, "")).toList());
+  }
+
+  // Getter for the list of movies (Short hand method.) - Not yet tested.
   Stream<List<SelectedMovieModel>> getListOfMoviesShortSelectable(
       String libraryId) {
     return FirebaseFirestore.instance.collection("movies").snapshots().map(
