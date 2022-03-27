@@ -13,6 +13,7 @@ class QuizListCrudModel extends ChangeNotifier {
 
   String QuizID = '';
 
+  //get data to the quiz list
   Future<dynamic> readQuizList() async {
     QuerySnapshot querySnapshot;
     Stream<QuerySnapshot> _quizList;
@@ -27,16 +28,11 @@ class QuizListCrudModel extends ChangeNotifier {
         for (var doc in querySnapshot.docs.toList()) {
           QuizList b = QuizList(
               id: doc.id,
-              //id: doc['id'].toString(), // issue
               category: doc['category'].toString(),
               time: doc['time'],
               questions: doc['questions']);
-
-          print('inside try ------------------------');
-          print(b);
           docs1.add(b);
         }
-         print("printing-------------------------------");
         print(docs1);
         return docs1;
       }
@@ -45,6 +41,7 @@ class QuizListCrudModel extends ChangeNotifier {
     }
   }
 
+  //insert data to the quiz list
   Future<dynamic> insertQuizListData(String? category, int? questions, int? time) async {
     try {
       DocumentReference<Map<String, dynamic>> value =
@@ -59,6 +56,7 @@ class QuizListCrudModel extends ChangeNotifier {
     }
   }
 
+  //delete quiz list item
   Future<dynamic> deleteQuizList(String id) async {
     try {
       await FirebaseFirestore.instance
@@ -80,7 +78,7 @@ class QuizListCrudModel extends ChangeNotifier {
     });
   }
 
-
+  //update list view items
   Future<dynamic> updateListValues(String? category, int? questions, int? time, String? ListID1) async {
     print(category);
     print(questions);
@@ -109,7 +107,6 @@ class QuizListCrudModel extends ChangeNotifier {
   }
 
   Future<String> shareQuizID() async {
-
     return QuizID;
   }
 
