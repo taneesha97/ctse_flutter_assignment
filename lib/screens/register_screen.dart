@@ -7,5 +7,11 @@ class RegisterScreen extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => RegisterScreen();
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
+  }
+
+  // @override
+  // State<RegisterScreen> createState() => RegisterScreen();
 }
