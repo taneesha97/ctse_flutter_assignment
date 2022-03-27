@@ -38,6 +38,18 @@ class Styles {
     color: textColorBright,
   );
 
+  static final mainWelcomeText = TextStyle(
+    fontFamily: "Roboto",
+    fontSize: LargeTextSize,
+    color: _hexToColor('FFFFFF'),
+  );
+
+  static final subWelcomeText = TextStyle(
+    fontFamily: "Roboto",
+    fontSize: BodyTextSize,
+    color: _hexToColor('FFFFFF'),
+  );
+
   static final textSectionHeader = TextStyle(
     fontFamily: "Montserrat",
     fontWeight: FontWeight.w600,
