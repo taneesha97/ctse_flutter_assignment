@@ -1,7 +1,12 @@
 import 'package:ctse_assignment_1/bottom_navigation/page1.dart';
 import 'package:ctse_assignment_1/bottom_navigation/page2.dart';
 import 'package:ctse_assignment_1/bottom_navigation/page3.dart';
+import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/movie_library_list.dart';
+import '../screens/movie_wiki.dart';
+import '../screens/profile_ui.dart';
 
 
 class TabNavigatorRoutes {
@@ -18,12 +23,12 @@ class TabNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
 
     late Widget child;
-    if(tabItem == "Page1")
-      child = Page1();
-    else if(tabItem == "Page2")
-      child = Page2();
+    if(tabItem == "Page1") {
+      child = MovieWiki();
+    } else if(tabItem == "Page2")
+      child = LibraryList();
     else if(tabItem == "Page3")
-      child = Page3();
+      child = ProfileUI();
 
     return Navigator(
       key: navigatorKey,
