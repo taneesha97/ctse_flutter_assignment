@@ -1,5 +1,3 @@
-
-import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
