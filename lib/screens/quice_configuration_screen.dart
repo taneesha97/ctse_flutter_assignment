@@ -1,4 +1,3 @@
-import 'package:ctse_assignment_1/screens/quice_configuration_splash.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,39 +22,12 @@ class _DropDownState extends State<DropDown> {
   bool isStrechedDropDown2 = false;
   bool isStrechedDropDown3 = false;
 
-  // int? groupValue;
-  // int? groupValue2;
-  // int? groupValue3;
-
   String title = 'Select Movie Category';
   String title2 = 'Select No of questions';
   String title3 = 'Select time';
 
   String? category;
   int? questions, time;
-
-  // void onChange1(int value) {
-  //   print(value);
-  //   if(value == 0){
-  //     setState(() {
-  //       category = 'Action';
-  //     });
-  //   } else if(value == 1){
-  //     setState(() {
-  //       category = 'Romance';
-  //     });
-  //   }
-  //   else if(value == 2){
-  //     setState(() {
-  //       category = 'Thriller';
-  //     });
-  //   }
-  //   else if(value == 3){
-  //     setState(() {
-  //       category = 'Animation';
-  //     });
-  //   }
-  // }
 
   void onPress () {
     print(category);
@@ -92,12 +64,10 @@ class _DropDownState extends State<DropDown> {
                     image: DecorationImage(
                         image: AssetImage("assets/images/p5.jpg"),
                         fit: BoxFit.fill,
-                        // colorFilter: ColorFilter.mode(Colors.blue.withOpacity(0), BlendMode.darken)
                     )
                 ),
               ),
             ),
-
             title: Text(
               "Quice Configuration",
               style: TextStyle(
@@ -108,10 +78,6 @@ class _DropDownState extends State<DropDown> {
               borderRadius: BorderRadius.only(bottomRight: Radius.circular(50), bottomLeft: Radius.circular(50))
             ),
           ),
-          // title: Text(
-          //   "Quiz Configuration",
-          //   style: TextStyle(color: Colors.black),
-          // ),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -120,7 +86,6 @@ class _DropDownState extends State<DropDown> {
               child: Column(
                 children: [
                   Container(
-                    // color: Colors.lightGreenAccent,
                     child: Column(
                       children: [
                         Container(
@@ -142,7 +107,6 @@ class _DropDownState extends State<DropDown> {
                                   child: Column(
                                     children: [
                                       Container(
-                                        // height: 45,
                                           width: double.infinity,
                                           padding: EdgeInsets.only(right: 10),
                                           decoration: BoxDecoration(
@@ -241,12 +205,6 @@ class _DropDownState extends State<DropDown> {
                                                             });
                                                           }
                                                         }
-                                                        // onChanged: (val) {
-                                                        //   setState(() {
-                                                        //     category = val as String?;
-                                                        //     title = _list.elementAt(index);
-                                                        //   });
-                                                        // }
                                                         );
                                                   }),
                                         ),
@@ -365,12 +323,6 @@ class _DropDownState extends State<DropDown> {
                                                           });
                                                         }
                                                       }
-                                                      // onChanged: (val) {
-                                                      //   setState(() {
-                                                      //     questions = val as int;
-                                                      //     title2 = _list2.elementAt(index);
-                                                      //   });
-                                                      // }
                                                       );
                                                 }),
                                       ),
@@ -489,14 +441,6 @@ class _DropDownState extends State<DropDown> {
                                                           });
                                                         }
                                                       }
-
-
-                                                      // onChanged: (val) {
-                                                      //   setState(() {
-                                                      //     time = val as int;
-                                                      //     title3 = _list3.elementAt(index);
-                                                      //   });
-                                                      // }
                                                       );
                                                 }),
                                       ),
@@ -522,25 +466,9 @@ class _DropDownState extends State<DropDown> {
                             ),
                           ),
                           child: Text('Add Label'),
-                          onPressed: onPress),
-                          // onPressed: (){
-                          //   Navigator.push(
-                          //       context, MaterialPageRoute(builder: (context) => QuizeList()));
-                          // }
+                          onPressed: onPress
+                        ),
                       SizedBox(height: 20),
-                      // ElevatedButton(
-                      //     style: ElevatedButton.styleFrom(
-                      //       minimumSize: Size(105, 45),
-                      //       textStyle: TextStyle(fontSize: 15),
-                      //       primary: Colors.pink,
-                      //       shape: new RoundedRectangleBorder(
-                      //         borderRadius: new BorderRadius.circular(10.0),
-                      //       ),
-                      //     ),
-                      //     child: Text('Delete'),
-                      //     onPressed: (){
-                      //       // Navigator.push(context, MaterialPageRoute(builder: (context) =>  ExampleList(title: 'Exaple List',)));
-                      //   }),
                     ],
                   )
                 ],
