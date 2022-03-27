@@ -40,25 +40,44 @@ class QuestionCard extends StatelessWidget {
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
       width: double.infinity,
+      height: double.infinity,
       decoration: BoxDecoration(
-          color: const Color.fromARGB(196, 151, 151, 163),
-          borderRadius: BorderRadius.circular(25)),
+          borderRadius: BorderRadius.circular(10),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(196, 151, 151, 163),
+              Colors.white,
+            ],
+          )
+      ),
       child: Center(
         child: Column(
           children: [
-            Text.rich(
-              TextSpan(
-                  text: "${index + 1}",
-                  //text: "${question.id}",
-                  style: Theme.of(context).textTheme.headline6,
-                  children: [
-                    TextSpan(
-                      text: "/${itemCount}",
-                      style: Theme.of(context).textTheme.headline6,
-                    )
-                  ]),
+            // SizedBox(
+            //   height: 4,
+            // ),
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: Colors.lightBlueAccent,
+                  shape: BoxShape.circle
+              ),
+              child: Text.rich(
+                TextSpan(
+                    text: "${index + 1}",
+                    //text: "${question.id}",
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                    children: [
+                      TextSpan(
+                        text: "/${itemCount}",
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      )
+                    ]),
+              ),
             ),
             SizedBox(
               height: 8,
@@ -67,10 +86,7 @@ class QuestionCard extends StatelessWidget {
               child: Text(
                 //movieList[index].title.toString()
                 question.question.toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6!
-                    .copyWith(color: Colors.blueGrey),
+                style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -93,9 +109,9 @@ class QuestionCard extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 15,
+              height: 20,
             ),
-            Expanded(
+            SingleChildScrollView(
               child: Column(
                 children: [
                   ListView.builder(

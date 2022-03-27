@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../models/quiz.dart';
+import '../../styles.dart';
 import '../../util/Quizes/quiz_crud_model.dart';
 import '../progressbar.dart';
 import 'questioncard.dart';
@@ -43,7 +44,7 @@ class _BodyState extends State<Body> {
               }),
               // docs1 = value
             });
-    _questionController = Get.put(QuestionController(ti: widget.time));
+    _questionController = Get.put(QuestionController());
     
     _questionController.setQuestionParameter(widget.noOfQuestions, widget.time);
   }
@@ -60,11 +61,16 @@ class _BodyState extends State<Body> {
 
     return SafeArea(
         child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8),
+      padding: EdgeInsets.symmetric(horizontal: 12),
       child: Column(
         children: [
           SizedBox(
-            height: 8,
+            height: 10,
+          ),
+          Text("Movie Categories",
+              style: Styles.textSectionHeader),
+          SizedBox(
+            height: 10,
           ),
           Flexible(
             child: PageView.builder(
