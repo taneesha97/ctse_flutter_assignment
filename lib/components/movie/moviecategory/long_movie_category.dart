@@ -37,10 +37,10 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
     Stream<List<SelectedMovieModel>> movies1;
     if (widget.category == "All Movies"){
       if(widget.searchTerm != ""){
-        print(widget.searchTerm.toString() + "Search 1");
+        //print(widget.searchTerm.toString() + "Search 1");
         movies1 = Provider.of<CrudModel>(context).getListOfMoviesShortSearch(widget.searchTerm.toString());
       } else {
-        print(widget.searchTerm.toString() + "Search 2");
+        //print(widget.searchTerm.toString() + "Search 2");
         movies1 = Provider.of<CrudModel>(context).getListOfMoviesShort;
       }
 
@@ -82,7 +82,7 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
 
             TextFormField(
               style: TextStyle(color: Colors.blueAccent),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Search Movies",
                 contentPadding: EdgeInsets.only(
                   left: 10,
@@ -120,7 +120,6 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
                 } else {
                   return Center(child: Column(
                     children: [
-
                       const Text("No such category in the system!"),
                     ],
                   ));
