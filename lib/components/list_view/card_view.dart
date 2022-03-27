@@ -1,22 +1,85 @@
+import 'package:ctse_assignment_1/models/quize_list_model.dart';
+import 'package:ctse_assignment_1/screens/quice_configuration_screen_two.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../screens/movie_library_form.dart';
+import '../../screens/quice_configuration_screen.dart';
 import '../../screens/quice_configuration_splash.dart';
+import '../../screens/quize_list.dart';
+import '../../util/QuizeConfig/quize_list_crud_model.dart';
 
-class CardView1 extends StatelessWidget {
+class CardView1 extends StatefulWidget {
 
   final int index;
-  final String text1, text2;
+  final String text1, id;
+  final int text2, questions;
   const CardView1({
     Key? key,
     required this.index,
     required this.text1,
     required this.text2,
+    required this.questions,
+    required this.id,
 
   }) : super(key: key);
 
   @override
+  State<CardView1> createState() => _CardView1State();
+}
+
+class _CardView1State extends State<CardView1> {
+
+  bool _isShown = true;
+
+  void _deleteQuizList(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            title: const Text('Please Confirm'),
+            content: const Text('Are you sure to remove the quiz?'),
+            actions: [
+              // The "Yes" button
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Provider.of<QuizListCrudModel>(context, listen: false).deleteQuizList(widget.id);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => QuizeList()));
+                  },
+                  child: const Text('Yes')),
+              TextButton(
+                  onPressed: () {
+                    // Close the dialog
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('No'))
+            ],
+          );
+        });
+  }
+
+  
+
+
+  @override
   Widget build(BuildContext context) {
 
+    onPress(String id, String category, int time, int questions) {   
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => DropDownNew(
+              id: id,
+              category:category,
+              time:time,
+              questions:questions,
+          )),
+    );
+  }
     return
       Container(
         width: MediaQuery.of(context).size.width,
@@ -41,8 +104,8 @@ class CardView1 extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:<Widget> [
-                        Text(text1, style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(text2, style: TextStyle(color: Colors.grey)),
+                        Text(widget.text1, style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold)),
+                        Text(widget.text2.toString(), style: TextStyle(color: Colors.grey)),
                       ],
                     ),
                   ],
@@ -59,6 +122,17 @@ class CardView1 extends StatelessWidget {
                               Navigator.push(
                                   context, MaterialPageRoute(builder: (context) => SplashQuiceConfig()));
                             },
+                            //     () {
+                            //   Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //       builder: (context) => DropDown(
+                            //
+                            //       // libraryId: library.id,
+                            //       // functionValue: 1,
+                            //       // libraryName: library.name,
+                            //   )),
+                            // },
                             icon: Icon(
                               Icons.start,
                               color: Colors.white,
@@ -72,7 +146,7 @@ class CardView1 extends StatelessWidget {
                         decoration: ShapeDecoration(
                             shape: CircleBorder(), color: Colors.green),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: onPress(widget.id, widget.text1, widget.text2, widget.questions),
                             icon: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -86,7 +160,7 @@ class CardView1 extends StatelessWidget {
                         decoration: ShapeDecoration(
                             shape: CircleBorder(), color: Colors.red),
                         child: IconButton(
-                            onPressed: () {},
+                            onPressed: _isShown == true ? () => _deleteQuizList(context) : null,
                             icon: Icon(
                               Icons.delete,
                               color: Colors.white,

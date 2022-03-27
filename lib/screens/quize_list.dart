@@ -23,15 +23,10 @@ class _QuizeListState extends State<QuizeList> {
     Provider.of<QuizListCrudModel>(context, listen: false)
         .readQuizList()
         .then((value) => {
-          print(value),
-          print("printing value-----------------"),
       setState(() {
         docs1 = value;
       }),
-    print(docs1),
-    print("Quiz list"),
     });
-    print("Quiz list --------------------------------");
   }
 
   Widget deleteItems(){
@@ -58,7 +53,7 @@ class _QuizeListState extends State<QuizeList> {
             itemCount: docs1.length,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, int index) =>
-                CardView1(index: index, text1 : docs1[index].category.toString() , text2: docs1[index].time.toString()),
+                CardView1(index: index, text1 : docs1[index].category.toString() , text2: int.parse(docs1[index].time.toString()), id: docs1[index].id.toString(), questions: int.parse(docs1[index].questions.toString())),
         ),
       ),
 

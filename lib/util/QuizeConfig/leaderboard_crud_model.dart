@@ -33,7 +33,8 @@ class LeaderBoardCrudModel extends ChangeNotifier {
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           LeaderBoardModel b = LeaderBoardModel(
-              id: doc['id'].toString(),
+              // id: doc['id'].toString(),
+              id: doc.id,
               version: doc['version'].toString(),
               image: doc['image'],
               name: doc['name'],
@@ -48,6 +49,24 @@ class LeaderBoardCrudModel extends ChangeNotifier {
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<dynamic> deleteLeaderboardItem(String id) async {
+    print(id);
+    try {
+      await FirebaseFirestore.instance
+          .collection('leaderboard')
+          .doc(id)
+          .delete();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  // Database get Stream Builder.
+  Stream<List<LeaderBoardModel>> get getListOfLeaderBoxes {
+    return FirebaseFirestore.instance.collection("leaderboard").snapshots().map(
+            (event) => event.docs.map((e) => LeaderBoardModel.fromMap(e.data(), e.id,)).toList());
   }
 
 

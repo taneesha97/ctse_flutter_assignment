@@ -29,6 +29,7 @@ class QuizListCrudModel extends ChangeNotifier {
     try {
       querySnapshot = await _db.collection('quice_list').get();
       _quizList = FirebaseFirestore.instance.collection('quice_list').snapshots();
+      
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           QuizList b = QuizList(
@@ -38,8 +39,11 @@ class QuizListCrudModel extends ChangeNotifier {
               time: doc['time'],
               questions: doc['questions']);
 
+          print('inside try ------------------------');
+          print(b);
           docs1.add(b);
         }
+         print("printing-------------------------------");
         print(docs1);
         return docs1;
       }
@@ -48,47 +52,54 @@ class QuizListCrudModel extends ChangeNotifier {
     }
   }
 
+  Future<dynamic> insertQuizListData(String? category, int? questions, int? time) async {
+    try {
+      DocumentReference<Map<String, dynamic>> value =
+      await FirebaseFirestore.instance.collection('quize_config').add({
+        'category': category ?? '',
+        'questions': questions ?? '',
+        'time': time ?? '',
+      });
+      return value.id.toString();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<dynamic> deleteQuizList(String id) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('quice_list')
+          .doc(id)
+          .delete();
+    } catch (e) {
+      print(e);
+    }
+  }
 
 
+  // Library Name Update method
+  Future libraryNameUpate(String newName, String libraryId) async {
+    final doc =
+    FirebaseFirestore.instance.collection("libraries").doc(libraryId);
+    doc.update({
+      "name": newName,
+    });
+  }
 
-  // Future<void> updateValues(Question question, String selectedIndex, String QuizID1) async {
-  //   // valueSet = _controller.checkCorrectWrongAnswers(question, selectedIndex.toString())!;
-  //   if(question.answer! == (int.parse(selectedIndex) + 1).toString()){
-  //     noCorrectAnswers++;
-  //     AnsweredQuestions++;
-  //   }else if(question.answer! != (int.parse(selectedIndex) + 1).toString()){
-  //     noWrongAnswers++;
-  //     AnsweredQuestions++;
-  //   }
-  //   try {
-  //     await FirebaseFirestore.instance.collection('result-quizes').doc(QuizID1).update({
-  //       'id': question.id ?? '',
-  //       'no_questions': AnsweredQuestions ?? 0,
-  //       'userId': 1 ?? '',
-  //       'correct_answer': noCorrectAnswers ?? 0,
-  //       'wrong_answer': noWrongAnswers ?? 0,
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
 
-  // Future<dynamic> insertQuizData(String id, int noQuestions, String userId, int correctAnswer, int wrongAnswer) async {
-  //   try {
-  //     DocumentReference<Map<String, dynamic>> value = await FirebaseFirestore.instance.collection('result-quizes').add({
-  //       'id': id ?? '',
-  //       'no_questions': noQuestions ?? 0,
-  //       'userId': userId ?? '',
-  //       'correct_answer': correctAnswer ?? 0,
-  //       'wrong_answer': wrongAnswer ?? 0,
-  //     });
-  //     // print(value.id);
-  //     // print('dkks');
-  //     return value.id.toString();
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+  Future<void> updateListValues(QuizList quizList, String category, int questions, int time, String ListID1) async {
+    try {
+      await FirebaseFirestore.instance.collection('result-quizes').doc(ListID1).update({
+        'id': quizList.id ?? '',
+        'category': category ?? 0,
+        'questions': questions ?? 0,
+        'time': time ?? 0,
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   // Getter for the User Steam.
   Stream<QuerySnapshot> get quizesList {

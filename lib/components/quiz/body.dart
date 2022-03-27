@@ -13,9 +13,10 @@ import 'package:provider/provider.dart';
 class Body extends StatefulWidget {
 
   int time, noOfQuestions;
+  String category;
   Body({
     Key? key,
-    required this.time, required this.noOfQuestions
+    required this.time, required this.noOfQuestions, required this.category
   }) : super(key: key);
 
   @override
@@ -32,10 +33,11 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     super.initState();
+
     Provider.of<QuizCrudModel>(context, listen: false)
-        .readQuizes()
+        .readQuizesByGrouping(widget.category)
         .then((value) => {
-          print(value),
+          //print(value),
               setState(() {
                 docs1 = value;
               }),
@@ -70,10 +72,11 @@ class _BodyState extends State<Body> {
               physics: NeverScrollableScrollPhysics(),
               controller: _questionController.pageController,
               onPageChanged: _questionController.updateTheQnNum,
-              itemCount: docs1.length,
+              itemCount: widget.noOfQuestions,
               itemBuilder: (context, index) => QuestionCard(
                 question: docs1[index],
                 index: index,
+                itemCount: widget.noOfQuestions,
               ),
             ),
           ),
