@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +8,13 @@ import 'package:provider/provider.dart';
 import '../../../models/movie.dart';
 import '../../../styles.dart';
 import '../../../util/crud_model.dart';
+import '../../../util/debouncer.dart';
 import '../moviecard/long_movie_card.dart';
 
 class LongMovieCategory extends StatefulWidget {
   final String category;
-  const LongMovieCategory({Key? key, required this.category}) : super(key: key);
+  String? searchTerm = "";
+  LongMovieCategory({Key? key, required this.category}) : super(key: key);
 
   @override
   State<LongMovieCategory> createState() => _LongMovieCategoryState();
@@ -26,17 +30,22 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
     // Custom Provider.
     Stream<List<SelectedMovieModel>> listMovies = Provider.of<CrudModel>(context).getListOfMoviesShort;
 
+    // Debouncer instance.
+    final _debouncer = Debouncer(milliseconds: 500);
 
     // Conditionally select the Provider Method.
     Stream<List<SelectedMovieModel>> movies1;
     if (widget.category == "All Movies"){
-      movies1 = Provider.of<CrudModel>(context).getListOfMoviesShort;
-      // Refactored Get Method for Searching.
+      if(widget.searchTerm != ""){
+        print(widget.searchTerm.toString() + "Search 1");
+        movies1 = Provider.of<CrudModel>(context).getListOfMoviesShortSearch(widget.searchTerm.toString());
+      } else {
+        print(widget.searchTerm.toString() + "Search 2");
+        movies1 = Provider.of<CrudModel>(context).getListOfMoviesShort;
+      }
 
     } else {
       movies1 = Provider.of<CrudModel>(context).getMoviesFromCategories(widget.category);
-      // Refactored Get Method for Searching.
-
     }
 
     return Scaffold(
@@ -69,6 +78,24 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
             ),
             SizedBox(
               height: 10,
+            ),
+
+            TextFormField(
+              style: TextStyle(color: Colors.blueAccent),
+              decoration: InputDecoration(
+                hintText: "Search Movies",
+                contentPadding: EdgeInsets.only(
+                  left: 10,
+                ),
+                border: InputBorder.none,
+              ),
+              onChanged: (value) {
+                setState(() {
+                  _debouncer.run((){
+                    widget.searchTerm = value;
+                  });
+                });
+              },
             ),
 
             Flexible(

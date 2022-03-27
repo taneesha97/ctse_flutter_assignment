@@ -38,13 +38,21 @@ class CrudModel extends ChangeNotifier {
   // Getter for the list of movies (Short hand method.) - Not yet tested.
   Stream<List<SelectedMovieModel>> get getListOfMoviesShort {
     return FirebaseFirestore.instance.collection("movies").snapshots().map(
-        (event) => event.docs.map((e) => SelectedMovieModel.fromMap(e.data(), e.id, "")).toList());
+        (event) => event.docs
+            .map((e) => SelectedMovieModel.fromMap(e.data(), e.id, ""))
+            .toList());
   }
 
   // Getter for the list of movies (Short hand method.) - Not yet tested.
-  Stream<List<SelectedMovieModel>>  getListOfMoviesShortSearch(String search) {
-    return FirebaseFirestore.instance.collection("movies").where("title", isGreaterThanOrEqualTo: search ).where('title', isLessThan: search + "z").snapshots().map(
-            (event) => event.docs.map((e) => SelectedMovieModel.fromMap(e.data(), e.id, "")).toList());
+  Stream<List<SelectedMovieModel>> getListOfMoviesShortSearch(String search) {
+    return FirebaseFirestore.instance
+        .collection("movies")
+        .where("title", isGreaterThanOrEqualTo: search)
+        .where('title', isLessThan: search + 'z')
+        .snapshots()
+        .map((event) => event.docs
+            .map((e) => SelectedMovieModel.fromMap(e.data(), e.id, ""))
+            .toList());
   }
 
   // Getter for the list of movies (Short hand method.) - Not yet tested.
@@ -85,13 +93,14 @@ class CrudModel extends ChangeNotifier {
   }
 
   // Bulk Insert method to insert data to libraries (Batch).
-  Future addMoviesTotheLibrary (List<SelectedMovieModel> selectedMovieList) async{
-    if(selectedMovieList.isEmpty){
+  Future addMoviesTotheLibrary(
+      List<SelectedMovieModel> selectedMovieList) async {
+    if (selectedMovieList.isEmpty) {
       print("Selected Movie List is Empty");
     } else {
       final movieRef = FirebaseFirestore.instance.collection("library-movies");
       WriteBatch movieBatch = FirebaseFirestore.instance.batch();
-      for (SelectedMovieModel movie in selectedMovieList){
+      for (SelectedMovieModel movie in selectedMovieList) {
         final newLibraryMovie = movieRef.doc();
         movie.id = newLibraryMovie.id;
         final json = movie.toJson();
@@ -102,7 +111,8 @@ class CrudModel extends ChangeNotifier {
   }
 
   // Library Name Update method
-  Future libraryNameUpate(String newName, String libraryId, String color) async {
+  Future libraryNameUpate(
+      String newName, String libraryId, String color) async {
     final doc =
         FirebaseFirestore.instance.collection("libraries").doc(libraryId);
     doc.update({
@@ -113,65 +123,61 @@ class CrudModel extends ChangeNotifier {
 
 // Library Home Movies clean up method (Batch) - Do this after insert. - PROTO
   Future<void> cleanUpLibraryUponDelete(String libraryId) async {
-
     // Method troubleshooting block
     // - print("Library Id $libraryId");
 
-    final movies = await FirebaseFirestore.instance.collection("library-movies").where("libraryId", isEqualTo: libraryId).get();
+    final movies = await FirebaseFirestore.instance
+        .collection("library-movies")
+        .where("libraryId", isEqualTo: libraryId)
+        .get();
 
     // QuerySnap shot troubleshooting
     // - print(movies);
     // - print(movies.size);
 
     WriteBatch batch = FirebaseFirestore.instance.batch();
-    for (final doc in movies.docs){
+    for (final doc in movies.docs) {
       // - print(doc.get("title"));
       batch.delete(doc.reference);
     }
     return batch.commit();
   }
 
-
 // Library Home Movie Delete method.
-    Future deleteLibraryMovie(String libraryId) async {
-      final doc =
-      FirebaseFirestore.instance.collection("library-movies").doc(libraryId);
-      doc.delete();
-    }
+  Future deleteLibraryMovie(String libraryId) async {
+    final doc =
+        FirebaseFirestore.instance.collection("library-movies").doc(libraryId);
+    doc.delete();
+  }
 
 // Library Delete method.
- Future deleteLibrary(String libraryId) async {
-   final doc =
-   FirebaseFirestore.instance.collection("libraries").doc(libraryId);
-   doc.delete();
+  Future deleteLibrary(String libraryId) async {
+    final doc =
+        FirebaseFirestore.instance.collection("libraries").doc(libraryId);
+    doc.delete();
 
-   // Cleaning up the movies inside deleted library.
-   cleanUpLibraryUponDelete(libraryId);
- }
+    // Cleaning up the movies inside deleted library.
+    cleanUpLibraryUponDelete(libraryId);
+  }
 
- // Method to get a list of movies from categories.
+  // Method to get a list of movies from categories.
   Stream<List<SelectedMovieModel>> getMoviesFromCategories(String category) {
     return FirebaseFirestore.instance
         .collection("movies")
         .where("category", isEqualTo: category)
         .snapshots()
         .map((event) => event.docs
-        .map((e) => SelectedMovieModel.fromMap(
-        e.data(), e.id, "-"))
-        .toList());
+            .map((e) => SelectedMovieModel.fromMap(e.data(), e.id, "-"))
+            .toList());
   }
 
- // Method to get actors from a actors of a movie. (When given the movie ID).
+  // Method to get actors from a actors of a movie. (When given the movie ID).
   Stream<List<Actor>> getActorsFromMovie(String movieId) {
     return FirebaseFirestore.instance
         .collection("actors")
         .where("movieId", isEqualTo: movieId)
         .snapshots()
-        .map((event) => event.docs
-        .map((e) => Actor.fromMap(
-        e.data(), e.id))
-        .toList());
+        .map((event) =>
+            event.docs.map((e) => Actor.fromMap(e.data(), e.id)).toList());
   }
-
-
 }
