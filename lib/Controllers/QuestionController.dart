@@ -21,6 +21,7 @@ class QuestionController extends GetxController
   String get correctAns => this._correctAns;
 
   int _noOfQuestions = 10;
+  String _cattegory = '';
 
   int get noOfQuestions => this._noOfQuestions;
 
@@ -38,9 +39,10 @@ class QuestionController extends GetxController
 
   List<int?>? valueSet;
 
-  void setQuestionParameter(int No, int time) {
+  void setQuestionParameter(int No, int time, String category) {
     _noOfQuestions = No;
     _time = time;
+    _cattegory = category;
 
     _animationController =
         AnimationController(duration: Duration(seconds: _time), vsync: this);
@@ -81,23 +83,23 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  List<int?>? checkCorrectWrongAnswers(
-      Question question, String selectedIndex) {
-    int noCorrectAnswers = 0;
-    int AnsweredQuestions = 0;
-    int noWrongAnswers = 0;
-    if (question.answer! == selectedIndex) {
-      noCorrectAnswers++;
-      AnsweredQuestions++;
-    } else if (question.answer! != selectedIndex) {
-      noWrongAnswers++;
-      AnsweredQuestions++;
-    }
-    valueSet?.add(AnsweredQuestions);
-    valueSet?.add(noCorrectAnswers);
-    valueSet?.add(noWrongAnswers);
-    return valueSet;
-  }
+  // List<int?>? checkCorrectWrongAnswers(
+  //     Question question, String selectedIndex) {
+  //   int noCorrectAnswers = 0;
+  //   int AnsweredQuestions = 0;
+  //   int noWrongAnswers = 0;
+  //   if (question.answer! == selectedIndex) {
+  //     noCorrectAnswers++;
+  //     AnsweredQuestions++;
+  //   } else if (question.answer! != selectedIndex) {
+  //     noWrongAnswers++;
+  //     AnsweredQuestions++;
+  //   }
+  //   valueSet?.add(AnsweredQuestions);
+  //   valueSet?.add(noCorrectAnswers);
+  //   valueSet?.add(noWrongAnswers);
+  //   return valueSet;
+  // }
 
   void checkAns(Question question, String selectedIndex) {
     // because once user press any option then it will run
@@ -149,5 +151,9 @@ class QuestionController extends GetxController
 
   void setQuizNumber() {
     _questionNumber.value = 1;
+  }
+
+  List<Object> getQuizDetails(){
+    return [_noOfQuestions, _time, _cattegory];
   }
 }

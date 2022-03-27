@@ -46,7 +46,7 @@ class _BodyState extends State<Body> {
             });
     _questionController = Get.put(QuestionController());
     
-    _questionController.setQuestionParameter(widget.noOfQuestions, widget.time);
+    _questionController.setQuestionParameter(widget.noOfQuestions, widget.time, widget.category);
   }
 
   @override
@@ -80,7 +80,7 @@ class _BodyState extends State<Body> {
               onPageChanged: _questionController.updateTheQnNum,
               itemCount: widget.noOfQuestions,
               itemBuilder: (context, index) => QuestionCard(
-                question: docs1[index],
+                question: docs1[index]!,
                 index: index,
                 itemCount: widget.noOfQuestions,
               ),

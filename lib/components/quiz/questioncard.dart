@@ -14,12 +14,13 @@ import 'options.dart';
 class QuestionCard extends StatelessWidget {
   final int index;
   final int itemCount;
+  final Question question;
 
   QuestionCard({Key? key, required this.question, required this.index, required this.itemCount})
       : super(key: key);
   // const QuestionCard({Key? key, required this.index}) : super(key: key);
 
-  final Question question;
+
   final LocalStorage storage = new LocalStorage('localstorage_app');
 
 

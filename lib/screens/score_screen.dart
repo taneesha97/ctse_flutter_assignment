@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:ctse_assignment_1/models/result_quiz.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
+import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,8 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation colorAnimation;
   late Animation sizeAnimation;
+  late QuestionController _questionController;
+  List<Object>? quizList;
 
   LocalStorage storage = new LocalStorage('localstorage_app');
   List<ResultQuiz> docs = [];
@@ -101,6 +104,9 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     String QuizID = storage.getItem('QuizID');
     QuestionController _questionController = Get.put(QuestionController());
+    print('chedck');
+    quizList = _questionController.getQuizDetails();
+    print(quizList);
 
     void onPress() {
       Alert(
@@ -118,6 +124,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
             onPressed: () {
               Provider.of<QuizResultCrudModel>(context, listen: false)
                   .deleteQuizResult(QuizID);
+              Provider.of<QuizResultCrudModel>(context, listen: false).setdefultValues();
               _questionController.setQuizNumber();
               Navigator.pop(context);
               Navigator.push(
@@ -158,14 +165,19 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             onPressed: () {
+              print(quizList);
               Provider.of<QuizResultCrudModel>(context, listen: false)
                   .ReAttemptQuizResult(QuizID);
+              _questionController.setQuizNumber();
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const IndexPage()),
+                MaterialPageRoute(
+                    builder: (context) => QuizScreen(
+                        time: int.parse(quizList![1].toString()),
+                        noOfQuestions: int.parse(quizList![0].toString()),
+                        cattegory: quizList![2].toString())),
               );
-              // MaterialPageRoute(builder: (context) => const ScorePage());
             },
             color: Color.fromRGBO(91, 55, 185, 1.0),
             radius: BorderRadius.circular(10.0),
@@ -240,87 +252,94 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    if (docs[0].correct_answer == 0) ...[
+                    if (docs[0]?.correct_answer == 0) ...[
                       Center(
                           child: Row(
-                            // crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 80,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/images/sad.png"),
-                                  ),
-                                ),
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 80,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/sad.png"),
                               ),
-
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              Text.rich(
-                                TextSpan(
-                                    text: "${docs[0].correct_answer}",
-                                    //text: "${question.id}",
-                                    style: Theme.of(context).textTheme.headline4?.copyWith(color: Colors.white),
-                                    children: [
-                                      TextSpan(
-                                        text: "/${docs[0].no_questions}",
-                                        style: Theme.of(context).textTheme.headline4?.copyWith(color: Colors.white),
-                                      )
-                                    ]),
-                              ),
-                            ],
-                          )),
-
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Text.rich(
+                            TextSpan(
+                                text: "${docs[0].correct_answer}",
+                                //text: "${question.id}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline4
+                                    ?.copyWith(color: Colors.white),
+                                children: [
+                                  TextSpan(
+                                    text: "/${docs[0].no_questions}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline4
+                                        ?.copyWith(color: Colors.white),
+                                  )
+                                ]),
+                          ),
+                        ],
+                      )),
                     ] else ...[
                       const Text.rich(
                         TextSpan(
                             text: "🎊 Congratulations",
                             style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white
-                            )),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
                       ),
                       const SizedBox(height: 20),
                       Center(
                           child: Row(
-                            // crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/images/clapping.png"),
-                                  ),
-                                ),
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/clapping.png"),
                               ),
-
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text.rich(
-                                TextSpan(
-                                    text: "${docs[0].correct_answer}",
-                                    //text: "${question.id}",
-                                    style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.white),
-                                    children: [
-                                      TextSpan(
-                                        text: "/${docs[0].no_questions}",
-                                        style: Theme.of(context).textTheme.headline6?.copyWith(color: Colors.white),
-                                      )
-                                    ]),
-                              ),
-                            ],
-                          )),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text.rich(
+                            TextSpan(
+                                text: "${docs[0].correct_answer}",
+                                //text: "${question.id}",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6
+                                    ?.copyWith(color: Colors.white),
+                                children: [
+                                  TextSpan(
+                                    text: "/${docs[0].no_questions}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6
+                                        ?.copyWith(color: Colors.white),
+                                  )
+                                ]),
+                          ),
+                        ],
+                      )),
                     ],
-
                   ],
                 )),
               ),
@@ -357,9 +376,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                       child: Text('OK'),
                       onPressed: () {
                         MaterialPageRoute(
-                            builder: (context) => const LeaderBoard(
-                                  id: '',
-                                ));
+                            builder: (context) => const IndexPage());
                       }),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
