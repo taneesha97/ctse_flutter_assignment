@@ -71,7 +71,7 @@ class _DropDownState extends State<DropDown> {
               child: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/images/h1.jpg"),
+                        image: AssetImage("assets/images/h2.jpg"),
                         fit: BoxFit.fill,
                     )
                 ),
@@ -80,7 +80,7 @@ class _DropDownState extends State<DropDown> {
             title: Text(
               "Quice Configuration",
               style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
+                color: Colors.black45, fontWeight: FontWeight.bold, fontSize: 25),
             ),
             backgroundColor: Colors.pink,
             shape: RoundedRectangleBorder(
@@ -111,7 +111,7 @@ class _DropDownState extends State<DropDown> {
                             Expanded(
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      border: Border.all(color: Color(0xff1e88e5)),
+                                      border: Border.all(color: Colors.teal),
                                       borderRadius: BorderRadius.all(Radius.circular(12))),
                                   child: Column(
                                     children: [
@@ -120,7 +120,7 @@ class _DropDownState extends State<DropDown> {
                                           padding: EdgeInsets.only(right: 10),
                                           decoration: BoxDecoration(
                                               border: Border.all(
-                                                color: Color(0xff1e88e5),
+                                                color: Colors.teal,
                                               ),
                                               borderRadius:
                                               BorderRadius.all(Radius.circular(10))),
@@ -236,7 +236,7 @@ class _DropDownState extends State<DropDown> {
                           Expanded(
                               child: Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: Color(0xff1e88e5)),
+                                    border: Border.all(color: Colors.teal),
                                     borderRadius: BorderRadius.all(Radius.circular(12))),
                                 child: Column(
                                   children: [
@@ -246,7 +246,7 @@ class _DropDownState extends State<DropDown> {
                                         padding: EdgeInsets.only(right: 10),
                                         decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: Color(0xff1e88e5),
+                                              color: Colors.teal,
                                             ),
                                             borderRadius:
                                             BorderRadius.all(Radius.circular(10))),
@@ -354,7 +354,7 @@ class _DropDownState extends State<DropDown> {
                           Expanded(
                               child: Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: Color(0xff1e88e5)),
+                                    border: Border.all(color: Colors.teal),
                                     borderRadius: BorderRadius.all(Radius.circular(12))),
                                 child: Column(
                                   children: [
@@ -364,7 +364,7 @@ class _DropDownState extends State<DropDown> {
                                         padding: EdgeInsets.only(right: 10),
                                         decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: Color(0xff1e88e5),
+                                              color: Colors.teal,
                                             ),
                                             borderRadius:
                                             BorderRadius.all(Radius.circular(10))),
@@ -462,7 +462,7 @@ class _DropDownState extends State<DropDown> {
                           style: ElevatedButton.styleFrom(
                             minimumSize: Size(90, 45),
                             textStyle: TextStyle(fontSize: 15),
-                            primary: Colors.blue,
+                            primary: Colors.teal,
                             shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(10.0),
                             ),
