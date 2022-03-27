@@ -54,7 +54,7 @@ dependencies:
   rflutter_alert: ^2.0.4
   flutter_colorpicker: ^1.0.3
   fluttertoast: ^8.0.9
-  persistent_bottom_nav_bar: ^4.0.2
+  firebase_auth: ^3.3.11
 
 dev_dependencies:
   flutter_test:

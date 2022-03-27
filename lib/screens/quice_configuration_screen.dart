@@ -35,18 +35,28 @@ class _DropDownState extends State<DropDown> {
         .then((value) {
       //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
       print(value);
+
       if(value != 0){
         Alert(
           context: context,
-          title: "Successfully",
-          desc: "You have Successfully Submitted the Data",
-
+          type: AlertType.success,
+          desc: "Successfully added data",
+          buttons: [
+            DialogButton(
+              child: const Text(
+                "Ok",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => QuizeList()));
+              },
+              color: Color.fromRGBO(91, 55, 185, 1.0),
+              radius: BorderRadius.circular(10.0),
+            ),
+          ],
         ).show();
       }
     });
-    //should change
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => QuizeList()));
   }
 
   @override
@@ -469,6 +479,27 @@ class _DropDownState extends State<DropDown> {
                           onPressed: onPress
                         ),
                       SizedBox(height: 20),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: Size(90, 45),
+                          textStyle: TextStyle(fontSize: 15),
+                          primary: Colors.blue,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => QuizeList()),
+                          );
+                        },
+                        child: const Text(
+                          'Quiz List',
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ],
                   )
                 ],
