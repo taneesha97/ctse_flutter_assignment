@@ -1,8 +1,6 @@
 class LeaderBoardModel {
-  // final int? ;
   final String? id, version, place, name, image;
   final int? score;
-  // final List<dynamic>? options;
 
   LeaderBoardModel({this.id, this.version, this.place, this.name, this.image, this.score});
 

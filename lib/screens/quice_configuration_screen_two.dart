@@ -1,8 +1,7 @@
-
-import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../components/form_dropdown/ExpandedListAnimationWidget.dart';
 import '../components/form_dropdown/Scrollbar.dart';
 import '../util/QuizeConfig/quize_list_crud_model.dart';
@@ -21,62 +20,58 @@ class DropDownNew extends StatefulWidget {
       })
       : super(key: key);
 
-  // const DropDownNew({Key? key}) : super(key: key);
-
   @override
   _DropDownNewState createState() => _DropDownNewState();
 }
-List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy"];
-List <String> _list2 =['5',"10","15",'20'];
-List <String> _list3 =['10',"15","20", "30"];
+  List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy"];
+  List <String> _list2 =['5',"10","15",'20'];
+  List <String> _list3 =['10',"15","20", "30"];
 
 class _DropDownNewState extends State<DropDownNew> {
   bool isStrechedDropDown = false;
   bool isStrechedDropDown2 = false;
   bool isStrechedDropDown3 = false;
 
-  // int? groupValue;
-  // int? groupValue2;
-  // int? groupValue3;
-
   String title = 'Select Movie Category';
   String title2 = 'Select No of questions';
   String title3 = 'Select time';
 
-  String? category, id;
-  int? questions, time;
+  late String category, id;
+  late int questions, time;
 
 
   @override
   Widget build(BuildContext context) {
 
-    print('values are printing');
-    print(widget.id);
-    print(widget.time);
-    print(widget.category);
-    print(widget.questions);
-    print('is printing');
+    onPress () {
 
-    onPress (QuizList quizList, int questions, String? category, int time, String? id) {
-      Provider.of<QuizListCrudModel>(context, listen: false).updateListValues(quizList, category!, questions, time, id!)
-          .then((value) {
+      print('values are printing');
+      print(widget.id);
+      print(widget.time);
+      print(widget.category);
+      print(widget.questions);
+      print('is printing');
 
-        // Provider.of<QuizResultCrudModel>(context, listen: false).updateValues(question, selectedIndex.toString(), QuizID);
-        // _controller.checkAns(question, selectedIndex.toString());
-        //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
-        // print(value);
-        //   if(value != 0){
-        //     Alert(
-        //       context: context,
-        //       title: "Successfully",
-        //       desc: "You have Successfully Submitted the Data",
-        //     ).show();
-        //   }
-      });
+      Provider.of<QuizListCrudModel>(context, listen: false).updateListValues(widget.category, widget.questions, widget.time, widget.id);
+      Alert(
+        context: context,
+        type: AlertType.success,
+        desc: "Successfully updated data",
+        buttons: [
+          DialogButton(
+            child: const Text(
+              "Ok",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => QuizeList()));
+            },
+            color: Color.fromRGBO(91, 55, 185, 1.0),
+            radius: BorderRadius.circular(10.0),
+          ),
+        ],
+      ).show();
     }
-
-
-
 
     return Scaffold(
         extendBodyBehindAppBar: true,
@@ -91,7 +86,6 @@ class _DropDownNewState extends State<DropDownNew> {
                     image: DecorationImage(
                       image: AssetImage("assets/images/p4.jpg"),
                       fit: BoxFit.fill,
-                      // colorFilter: ColorFilter.mode(Colors.blue.withOpacity(0), BlendMode.darken)
                     )
                 ),
               ),
@@ -107,10 +101,6 @@ class _DropDownNewState extends State<DropDownNew> {
                 borderRadius: BorderRadius.only(bottomRight: Radius.circular(50), bottomLeft: Radius.circular(50))
             ),
           ),
-          // title: Text(
-          //   "Quiz Configuration",
-          //   style: TextStyle(color: Colors.black),
-          // ),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -119,7 +109,6 @@ class _DropDownNewState extends State<DropDownNew> {
               child: Column(
                 children: [
                   Container(
-                    // color: Colors.lightGreenAccent,
                     child: Column(
                       children: [
                         Container(
@@ -141,7 +130,6 @@ class _DropDownNewState extends State<DropDownNew> {
                                   child: Column(
                                     children: [
                                       Container(
-                                        // height: 45,
                                           width: double.infinity,
                                           padding: EdgeInsets.only(right: 10),
                                           decoration: BoxDecoration(
@@ -196,9 +184,8 @@ class _DropDownNewState extends State<DropDownNew> {
                                                     return RadioListTile(
                                                         title: Text(_list.elementAt(index)),
                                                         value: index,
-                                                        groupValue: category,
+                                                        groupValue: widget.category,
                                                         onChanged: (val) {
-                                                          widget.category = val.toString();
                                                           if (val == 0) {
                                                             setState(() {
                                                               widget.category =
@@ -234,12 +221,6 @@ class _DropDownNewState extends State<DropDownNew> {
                                                             });
                                                           }
                                                         }
-                                                      // onChanged: (val) {
-                                                      //   setState(() {
-                                                      //     category = val as String?;
-                                                      //     title = _list.elementAt(index);
-                                                      //   });
-                                                      // }
                                                     );
                                                   }),
                                         ),
@@ -359,12 +340,6 @@ class _DropDownNewState extends State<DropDownNew> {
                                                           });
                                                         }
                                                       }
-                                                    // onChanged: (val) {
-                                                    //   setState(() {
-                                                    //     questions = val as int;
-                                                    //     title2 = _list2.elementAt(index);
-                                                    //   });
-                                                    // }
                                                   );
                                                 }),
                                       ),
@@ -483,14 +458,6 @@ class _DropDownNewState extends State<DropDownNew> {
                                                           });
                                                         }
                                                       }
-
-
-                                                    // onChanged: (val) {
-                                                    //   setState(() {
-                                                    //     time = val as int;
-                                                    //     title3 = _list3.elementAt(index);
-                                                    //   });
-                                                    // }
                                                   );
                                                 }),
                                       ),
@@ -516,25 +483,9 @@ class _DropDownNewState extends State<DropDownNew> {
                             ),
                           ),
                           child: Text('Update'),
-                          // onPressed: onPress(category, questions!, time, id)),
-                      onPressed: (){
-                        Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => QuizeList()));
-                      }),
+                          onPressed: onPress
+                      ),
                       SizedBox(height: 20),
-                      // ElevatedButton(
-                      //     style: ElevatedButton.styleFrom(
-                      //       minimumSize: Size(105, 45),
-                      //       textStyle: TextStyle(fontSize: 15),
-                      //       primary: Colors.pink,
-                      //       shape: new RoundedRectangleBorder(
-                      //         borderRadius: new BorderRadius.circular(10.0),
-                      //       ),
-                      //     ),
-                      //     child: Text('Delete'),
-                      //     onPressed: (){
-                      //       // Navigator.push(context, MaterialPageRoute(builder: (context) =>  ExampleList(title: 'Exaple List',)));
-                      //   }),
                     ],
                   )
                 ],
