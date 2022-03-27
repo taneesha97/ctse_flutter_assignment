@@ -23,6 +23,8 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
   void initState(){
     super.initState();
     _searchController.addListener(_onSearchChange);
+    _searchController.dispose();
+    super.dispose();
   }
 
   _onSearchChange(){
