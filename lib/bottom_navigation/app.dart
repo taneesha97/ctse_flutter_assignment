@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../util/userAuth/userauthentication.dart';
 import 'live_view_page.dart';
 
 class App extends StatefulWidget {
@@ -42,15 +43,18 @@ class AppState extends State<App> {
   }
 
   void loginValidation() {
-    final firebaseUser = context.watch<User>();
-    print('firebaseUser $firebaseUser');
-    if(firebaseUser == null){
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => RegisterScreen()),
-      );
-    }
+    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+    val.listen((event) {
+      print('============================== event email $event');
+      if(event == null){
+        //if the user object is null. will forward to Register page
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => RegisterScreen()),
+        );
+      }
+    });
   }
 
   @override
