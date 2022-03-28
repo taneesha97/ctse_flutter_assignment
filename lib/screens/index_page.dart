@@ -19,6 +19,7 @@ import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_splash.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
+import 'package:ctse_assignment_1/screens/register_screen.dart';
 import 'package:ctse_assignment_1/screens/score_screen.dart';
 import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
 import 'package:ctse_assignment_1/util/crud_model.dart';
@@ -479,6 +480,31 @@ class _IndexPageState extends State<IndexPage> {
                       'Navigation Screen',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterScreen(userName: '', password: '')),
+                      );
+                    },
+                    child: const Text(
+                      'Register screen',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
