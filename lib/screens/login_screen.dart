@@ -1,4 +1,5 @@
 import 'package:ctse_assignment_1/bottom_navigation/app.dart';
+import 'package:ctse_assignment_1/screens/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -63,17 +64,36 @@ class _LoginScreen extends State<LoginScreen> {
                         primary: Styles.primaryThemeColor,
                         padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5)),
                     onPressed: () {
-                      Provider.of<UserAuthentication>(context, listen: false).logInUser(emailadd!, password! ); //'hello1234'
-                      final firebaseUser = context.watch<User>();
-                      print('firebaseUser $firebaseUser');
-                      if(firebaseUser != null){
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => App()),
-                        );
-                      }
+                      Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+                      val.listen((event) {
+                        print('event email $event.email');
+                        if(event != null){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => App()),
+                          );
+                      }else{
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterScreen()),
+                          );
+                        }
+                      });
+                      print(val.first);
 
+                      // if(firebaseUser != null){
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => App()),
+                      //   );
+                          // .logInUser(emailadd!, password! ); //'hello1234'
+                      // final firebaseUser = context.watch<User>();
+                      // print('firebaseUser $firebaseUser');
+
+                      // }
                     },
                     child: const Text('Login'),
                   )

@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
           create: (context) => context.read<UserAuthentication>().authStateChanges, initialData: null,
         ),
         ChangeNotifierProvider(create: (context) => CrudModel()),
+        ChangeNotifierProvider(create: (context) => UserAuthentication(FirebaseAuth.instance)),
         ChangeNotifierProvider(create: (context) => QuizCrudModel()),
         ChangeNotifierProvider(create: (context) => QuizListCrudModel()),
         ChangeNotifierProvider(create: (context) => FeedBackCrudModel()),
