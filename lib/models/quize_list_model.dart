@@ -1,8 +1,6 @@
 class QuizList {
-  // final int? ;
   final String? category,id;
   final int? time, questions;
-  // final List<dynamic>? options;
 
   QuizList({this.id, this.category, this.time, this.questions});
 
