@@ -1,4 +1,8 @@
+import 'package:ctse_assignment_1/components/movie/moviecategory/long_movie_category.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
+import 'package:ctse_assignment_1/screens/leader_board.dart';
+import 'package:ctse_assignment_1/screens/movie_library_list.dart';
+import 'package:ctse_assignment_1/screens/profile_ui.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +21,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    IndexPage(),
-    DropDown(),
-    AllMovieScreen(),
+    MovieWiki(),
+    ProfileUI(),
+    LibraryList(),
+    LeaderBoard(),
   ];
 
   void _onItemTapped(int index) {
@@ -40,6 +45,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.black,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -52,6 +58,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
             label: 'UI3',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'UI4',
           ),
         ],
         currentIndex: _selectedIndex,

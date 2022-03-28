@@ -3,23 +3,17 @@ import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:flutter/cupertino.dart';
 
 class QuizListCrudModel extends ChangeNotifier {
-  // Steam Data For the Movies.
 
-  //QuerySnapshot querySnapshot = FirebaseFirestore.instance.collection('quizes').get() as QuerySnapshot<Object?>;
   final Stream<QuerySnapshot> _quizList =
   FirebaseFirestore.instance.collection('quice_list').snapshots();
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
-  // final QuestionController _controller = Get.put(QuestionController());
 
   late List<int?> valueSet;
 
   String QuizID = '';
 
-  // int noCorrectAnswers = 0;
-  // int AnsweredQuestions = 0;
-  // int noWrongAnswers = 0;
-
+  //get data to the quiz list
   Future<dynamic> readQuizList() async {
     QuerySnapshot querySnapshot;
     Stream<QuerySnapshot> _quizList;
@@ -34,16 +28,11 @@ class QuizListCrudModel extends ChangeNotifier {
         for (var doc in querySnapshot.docs.toList()) {
           QuizList b = QuizList(
               id: doc.id,
-              //id: doc['id'].toString(), // issue
               category: doc['category'].toString(),
               time: doc['time'],
               questions: doc['questions']);
-
-          print('inside try ------------------------');
-          print(b);
           docs1.add(b);
         }
-         print("printing-------------------------------");
         print(docs1);
         return docs1;
       }
@@ -52,6 +41,7 @@ class QuizListCrudModel extends ChangeNotifier {
     }
   }
 
+  //insert data to the quiz list
   Future<dynamic> insertQuizListData(String? category, int? questions, int? time) async {
     try {
       DocumentReference<Map<String, dynamic>> value =
@@ -66,6 +56,7 @@ class QuizListCrudModel extends ChangeNotifier {
     }
   }
 
+  //delete quiz list item
   Future<dynamic> deleteQuizList(String id) async {
     try {
       await FirebaseFirestore.instance
@@ -87,11 +78,14 @@ class QuizListCrudModel extends ChangeNotifier {
     });
   }
 
-
-  Future<void> updateListValues(QuizList quizList, String category, int questions, int time, String ListID1) async {
+  //update list view items
+  Future<dynamic> updateListValues(String? category, int? questions, int? time, String? ListID1) async {
+    print(category);
+    print(questions);
+    print(time);
+    print(ListID1);
     try {
-      await FirebaseFirestore.instance.collection('result-quizes').doc(ListID1).update({
-        'id': quizList.id ?? '',
+      await FirebaseFirestore.instance.collection('quice_list').doc(ListID1).update({
         'category': category ?? 0,
         'questions': questions ?? 0,
         'time': time ?? 0,
@@ -113,7 +107,6 @@ class QuizListCrudModel extends ChangeNotifier {
   }
 
   Future<String> shareQuizID() async {
-
     return QuizID;
   }
 

@@ -6,10 +6,6 @@ import '../screens/feedback_form.dart';
 
 class QuestionController extends GetxController
     with SingleGetTickerProviderMixin {
-  final int? ti;
-  QuestionController({
-    this.ti,
-  });
   late AnimationController _animationController;
 
   late Animation _animation;
@@ -25,6 +21,7 @@ class QuestionController extends GetxController
   String get correctAns => this._correctAns;
 
   int _noOfQuestions = 10;
+  String _cattegory = '';
 
   int get noOfQuestions => this._noOfQuestions;
 
@@ -42,9 +39,10 @@ class QuestionController extends GetxController
 
   List<int?>? valueSet;
 
-  void setQuestionParameter(int No, int time) {
+  void setQuestionParameter(int No, int time, String category) {
     _noOfQuestions = No;
     _time = time;
+    _cattegory = category;
 
     _animationController =
         AnimationController(duration: Duration(seconds: _time), vsync: this);
@@ -53,9 +51,9 @@ class QuestionController extends GetxController
         // update like setState
         update();
       });
-
-    _animationController.forward().whenComplete(nextQuestion);
-    _pageController = PageController();
+    print('calling2');
+   _animationController.forward().whenComplete(nextQuestion);
+   _pageController = PageController();
   }
 
   @override
@@ -73,6 +71,7 @@ class QuestionController extends GetxController
 
     // start our animation
     // Once 60s is completed go to the next qn
+    print('calling');
     _animationController.forward().whenComplete(nextQuestion);
     _pageController = PageController();
   }
@@ -84,30 +83,26 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  List<int?>? checkCorrectWrongAnswers(
-      Question question, String selectedIndex) {
-    int noCorrectAnswers = 0;
-    int AnsweredQuestions = 0;
-    int noWrongAnswers = 0;
-    if (question.answer! == selectedIndex) {
-      noCorrectAnswers++;
-      AnsweredQuestions++;
-    } else if (question.answer! != selectedIndex) {
-      noWrongAnswers++;
-      AnsweredQuestions++;
-    }
-    valueSet?.add(AnsweredQuestions);
-    valueSet?.add(noCorrectAnswers);
-    valueSet?.add(noWrongAnswers);
-    return valueSet;
-  }
+  // List<int?>? checkCorrectWrongAnswers(
+  //     Question question, String selectedIndex) {
+  //   int noCorrectAnswers = 0;
+  //   int AnsweredQuestions = 0;
+  //   int noWrongAnswers = 0;
+  //   if (question.answer! == selectedIndex) {
+  //     noCorrectAnswers++;
+  //     AnsweredQuestions++;
+  //   } else if (question.answer! != selectedIndex) {
+  //     noWrongAnswers++;
+  //     AnsweredQuestions++;
+  //   }
+  //   valueSet?.add(AnsweredQuestions);
+  //   valueSet?.add(noCorrectAnswers);
+  //   valueSet?.add(noWrongAnswers);
+  //   return valueSet;
+  // }
 
   void checkAns(Question question, String selectedIndex) {
     // because once user press any option then it will run
-    print('answer');
-    print(question.answer!);
-    print(selectedIndex);
-    print('checkAns');
     _isAnswered = true;
     _correctAns = question.answer!;
     _selectedAns = selectedIndex;
@@ -120,13 +115,16 @@ class QuestionController extends GetxController
 
     // Once user select an ans after 3s it will go to the next qn
     Future.delayed(Duration(seconds: 3), () {
+      print('calling3');
       nextQuestion();
     });
   }
 
+
   void nextQuestion() {
     print(_noOfQuestions);
     print('next ques');
+    print(_questionNumber.value);
 
     if (_questionNumber.value != _noOfQuestions) {
       _isAnswered = false;
@@ -139,14 +137,23 @@ class QuestionController extends GetxController
 
       // Then start it again
       // Once timer is finish go to the next qn
+      print('calling4');
       _animationController.forward().whenComplete(nextQuestion);
     } else {
       //Get package provide us simple way to naviigate another page
-      Get.to(const FeedBackForm());
+      Get.to(() => const FeedBackForm());
     }
   }
 
   void updateTheQnNum(int index) {
     _questionNumber.value = index + 1;
+  }
+
+  void setQuizNumber() {
+    _questionNumber.value = 1;
+  }
+
+  List<Object> getQuizDetails(){
+    return [_noOfQuestions, _time, _cattegory];
   }
 }
