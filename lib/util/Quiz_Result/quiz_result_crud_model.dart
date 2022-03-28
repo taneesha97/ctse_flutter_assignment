@@ -7,10 +7,11 @@ import '../../models/result_quiz.dart';
 class QuizResultCrudModel extends ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  int noCorrectAnswers = 0;
-  int CorrectPoints = 0;
-  int AnsweredQuestions = 0;
-  int noWrongAnswers = 0;
+
+  late int noCorrectAnswers;
+  late int CorrectPoints;
+  late int AnsweredQuestions;
+  late int noWrongAnswers;
 
   Future<dynamic> readQuizResultsByID(String id) async {
     QuerySnapshot querySnapshot;
@@ -40,10 +41,20 @@ class QuizResultCrudModel extends ChangeNotifier {
     }
   }
 
+  Future<void> setdefultValues() async{
+    noCorrectAnswers = 0;
+    CorrectPoints = 0;
+    AnsweredQuestions = 0;
+    noWrongAnswers = 0;
+  }
+
   Future<void> updateValues(
       Question question, String selectedIndex, String QuizID1) async {
+
     // valueSet = _controller.checkCorrectWrongAnswers(question, selectedIndex.toString())!;
     if (question.answer! == (int.parse(selectedIndex) + 1).toString()) {
+      print(noCorrectAnswers);
+      print('no of corrects');
       noCorrectAnswers++;
       CorrectPoints = CorrectPoints + noCorrectAnswers * 10;
       AnsweredQuestions++;

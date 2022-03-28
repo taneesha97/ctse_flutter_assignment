@@ -44,7 +44,6 @@ class UserAuthentication {
     try{
       await _firebaseAuth.signOut();
     }on FirebaseAuthException catch (e) {
-
     }
   }
 

@@ -44,8 +44,18 @@ class IndexPage extends StatefulWidget {
 class _IndexPageState extends State<IndexPage> {
   final LocalStorage storage = new LocalStorage('localstorage_app');
   late String QuizID = "";
+  late QuestionController _questionController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _questionController = Get.put(QuestionController());
+  }
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.black,
