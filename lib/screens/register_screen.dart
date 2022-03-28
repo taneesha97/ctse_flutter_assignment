@@ -116,25 +116,24 @@ class _RegisterScreen  extends State<RegisterScreen>{
                                 // border: Border.all(color: Colors.black, width: 4),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                              child: Material(
-                                borderRadius: BorderRadius.circular(12),
-                                child:TextFormField(
-                                  decoration: const InputDecoration(
+                              child: SizedBox(
+
+                                child:TextField(
+                                  // decoration: const InputDecoration(
+                                  //   labelText: "Enter Email Address",
+                                  //   filled: true,
+                                  //   fillColor: Color(0xffffffff),
+                                  //   border:  InputBorder.none,
+                                  // ),
+                                  decoration: InputDecoration(
                                     labelText: "Enter Email Address",
                                     filled: true,
-                                    fillColor: Color(0xffffffff),
-                                    border:  InputBorder.none,
+                                      fillColor: Color(0xffffffff),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
                                   ),
-                                  initialValue:'',
                                   onChanged: (val) => setState(() => uname = val),
-                                  validator: (value) {
-                                    if (value!.isEmpty ||
-                                        !RegExp(_regxPattern).hasMatch(value!)) {
-                                      return "Please enter correct Email Address";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
                                 ),
                               )
                             ),
@@ -184,15 +183,15 @@ class _RegisterScreen  extends State<RegisterScreen>{
                             primary: Styles.primaryThemeColor,
                             padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5)),
 
-                        onPressed: () {},
+                        onPressed: () {
+
+                        },
                         child: const Text('Start'),
                       ),
                     ),
                   ],
-
                 ),
               ),
-
           )
         )
     );
