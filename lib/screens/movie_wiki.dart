@@ -73,13 +73,8 @@ class MovieWiki extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  StreamBuilder<List<SelectedMovieModel>>(
-                                    stream: movies,
-                                    builder: (BuildContext context, snapshot) {
-                                      return LongMovieCategory(category: "All Movies",);
-                                    }
-                                  )),
+                              builder: (context) => LongMovieCategory(category: "All Movies",)
+                                  ),
                         );
                       },
                     ),
@@ -97,18 +92,21 @@ class MovieWiki extends StatelessWidget {
                     if (snapshot.hasError) {
                       return Text("There an Error Loading Movies");
                     }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Text("Loading");
+                    else if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator(),);
                     }
-                    final data = snapshot.requireData;
-
-                    return ListView.builder(
-                      itemCount: data.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return CustomCard(index: index, movie: data[index],);
-                      },
-                    );
+                    else if (snapshot.hasData){
+                      final data = snapshot.requireData;
+                      return ListView.builder(
+                        itemCount: data.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return CustomCard(index: index, movie: data[index],);
+                        },
+                      );
+                    } else {
+                      return Center(child: CircularProgressIndicator(),);
+                    }
                   },
                 ),
               ),

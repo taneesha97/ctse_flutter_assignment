@@ -5,6 +5,7 @@ import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
 
 import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/feedback_form.dart';
+import 'package:ctse_assignment_1/screens/movie_error_page.dart';
 
 import 'package:ctse_assignment_1/screens/movie_library_list.dart';
 import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
@@ -446,6 +447,31 @@ class _IndexPageState extends State<IndexPage> {
                       'Navigation Screen',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MovieErrorPage()),
+                      );
+                    },
+                    child: const Text(
+                      'Movie Error Page',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
