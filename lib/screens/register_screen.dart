@@ -1,14 +1,15 @@
+import 'package:ctse_assignment_1/util/userAuth/userauthentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:provider/provider.dart';
 
 import '../styles.dart';
 
 class RegisterScreen extends StatefulWidget {
 
-  String userName, password;
-  RegisterScreen({Key? key, required this.userName, required this.password})
+  String? userName, password;
+  RegisterScreen({Key? key,  this.userName,  this.password})
       : super(key: key);
-
   @override
   _RegisterScreen createState() => _RegisterScreen();
 }
@@ -18,7 +19,7 @@ class _RegisterScreen  extends State<RegisterScreen>{
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String? uname;
-  String? password;
+  String? emailadd;
   final String _regxPattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
   int initialValue = 1;
   var itemList = new List<int>.generate(100, (i) => i + 1);
@@ -133,7 +134,7 @@ class _RegisterScreen  extends State<RegisterScreen>{
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),
-                                  onChanged: (val) => setState(() => uname = val),
+                                  onChanged: (val) => setState(() => emailadd = val),
                                 ),
                               )
                             ),
@@ -184,7 +185,7 @@ class _RegisterScreen  extends State<RegisterScreen>{
                             padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5)),
 
                         onPressed: () {
-
+                          Provider.of<UserAuthentication>(context, listen: false).registerUser(emailadd!, 'hello1234');
                         },
                         child: const Text('Start'),
                       ),
