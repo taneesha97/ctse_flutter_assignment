@@ -45,7 +45,6 @@ class AppState extends State<App> {
   void loginValidation() {
     Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
     val.listen((event) {
-      print('============================== event email $event');
       if(event == null){
         //if the user object is null. will forward to Register page
         Navigator.push(
@@ -59,7 +58,7 @@ class AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    loginValidation();
+    loginValidation(); // checking is the user is logged in
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =

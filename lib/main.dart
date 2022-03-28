@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
         ),
         home:
         // RegisterScreen()
-        LoginScreen()
+        App()
       ),
     );
   }
