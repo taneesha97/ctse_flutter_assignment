@@ -97,6 +97,17 @@ class _LoginScreen extends State<LoginScreen> {
                     },
                     child: const Text('Login'),
                   )
+              ), SizedBox(
+                child: ElevatedButton(
+                  child: const Text('Register Here'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegisterScreen()),
+                    );
+                  },
+                ),
               )
             ],
 
