@@ -2,12 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctse_assignment_1/components/movie/moviecard/medium_movie_card.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/movie_category.dart';
 import 'package:ctse_assignment_1/models/movie_select_model.dart';
+import 'package:ctse_assignment_1/screens/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/movie/moviecategory/long_movie_category.dart';
 import '../styles.dart';
 import '../util/crud_model.dart';
+import '../util/userAuth/userauthentication.dart';
 
 class MovieWiki extends StatefulWidget {
 
@@ -24,9 +26,23 @@ class _MovieWikiState extends State<MovieWiki> {
     super.initState();
   }
 
+  void loginValidation() {
+    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+    val.listen((event) {
+      if(event == null){
+        //if the user object is null. will forward to Register page
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => RegisterScreen()),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final fireBaseUser = context.watch<User?>();
+    loginValidation();
     // Provider Movies - Changed to the Appropriate movie list.
     Stream<List<SelectedMovieModel>> movies =
         Provider.of<CrudModel>(context, listen: false).getListOfMoviesShort;
