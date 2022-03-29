@@ -11,9 +11,7 @@ import '../util/crud_model.dart';
 import 'movie_error_page.dart';
 
 class MovieWiki extends StatelessWidget {
-  late QuerySnapshot<Object?> array_data;
-
-  MovieWiki({Key? key}) : super(key: key);
+  const MovieWiki({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
