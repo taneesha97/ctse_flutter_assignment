@@ -1,4 +1,13 @@
 import 'package:ctse_assignment_1/screens/index_page.dart';
+
+import 'package:ctse_assignment_1/screens/login_screen.dart';
+import 'package:ctse_assignment_1/screens/movie_library_form.dart';
+
+import 'package:ctse_assignment_1/screens/movie_wiki.dart';
+
+import 'package:ctse_assignment_1/screens/navigation_screen.dart';
+import 'package:ctse_assignment_1/screens/register_screen.dart';
+
 import 'package:ctse_assignment_1/util/FeedBack/feed_back_crud_model.dart';
 import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
 import 'package:ctse_assignment_1/util/QuizeConfig/leaderboard_crud_model.dart';
@@ -52,8 +61,10 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               context.read<UserAuthentication>().authStateChanges,
           initialData: null,
+
         ),
         ChangeNotifierProvider(create: (context) => CrudModel()),
+        ChangeNotifierProvider(create: (context) => UserAuthentication(FirebaseAuth.instance)),
         ChangeNotifierProvider(create: (context) => QuizCrudModel()),
         ChangeNotifierProvider(create: (context) => QuizListCrudModel()),
         ChangeNotifierProvider(create: (context) => FeedBackCrudModel()),
@@ -67,7 +78,11 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           backgroundColor: Colors.black,
         ),
-        home: App(),
+
+        home:
+        // RegisterScreen()
+        LoginScreen()
+
       ),
     );
   }

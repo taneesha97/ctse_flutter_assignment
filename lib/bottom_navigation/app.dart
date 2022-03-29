@@ -1,17 +1,23 @@
 import 'package:ctse_assignment_1/bottom_navigation/tab_navigator.dart';
+import 'package:ctse_assignment_1/screens/register_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'live_view_page.dart';
 
 class App extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => AppState();
+
 }
 
 class AppState extends State<App> {
   String _currentPage = "Page1";
   List<String> pageKeys = ["Page1", "Page2", "Page3"];
+
   final Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
+
     "Page1": GlobalKey<NavigatorState>(),
     "Page2": GlobalKey<NavigatorState>(),
     "Page3": GlobalKey<NavigatorState>(),
@@ -31,7 +37,26 @@ class AppState extends State<App> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    print("Init State");
+  }
+
+  void loginValidation() {
+    final firebaseUser = context.watch<User>();
+    print('firebaseUser $firebaseUser');
+    if(firebaseUser == null){
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => RegisterScreen()),
+      );
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    loginValidation();
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =
