@@ -114,6 +114,7 @@ class _MovieMultiSelectState extends State<MovieMultiSelect> {
                     onPressed: () {
                       Provider.of<CrudModel>(context, listen: false)
                           .addMoviesTotheLibrary(selectedMovies);
+                      Navigator.pop(context);
                     },
                     child: const Text("Add Movies to the Library"),
                   ),

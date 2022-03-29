@@ -7,29 +7,36 @@ import '../../../styles.dart';
 import '../../../util/crud_model.dart';
 import '../validation_pop.dart';
 
-class LongLibraryMovieCard extends StatelessWidget {
+class LongLibraryMovieCard extends StatefulWidget {
   final int index;
   final SelectedMovieModel movie;
   const LongLibraryMovieCard({Key? key, required this.index, required this.movie}) : super(key: key);
 
+  @override
+  State<LongLibraryMovieCard> createState() => _LongLibraryMovieCardState();
+}
 
+class _LongLibraryMovieCardState extends State<LongLibraryMovieCard> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
     return Dismissible(
-      key: Key(movie.id.toString()),
-      onDismissed: (direction) {
+      key: Key(widget.movie.id.toString()),
+      confirmDismiss: (direction) async {
         showAltertDialog(context, (){
-          // Add the CrudModel Movie Delete Method.
-          print("Long Delete");
           // Close Dialog.
           Provider.of<CrudModel>(context, listen: false)
-              .deleteLibraryMovie(movie.id);
-          Navigator.pop(context);
+              .deleteLibraryMovie(widget.movie.id);
+          Navigator.of(context, rootNavigator: true).pop();
         }, (){
           // Close Dialog.
-          Navigator.pop(context);
+          Navigator.of(context, rootNavigator: true).pop();
         }, "Do you want to delete this movie?");
       },
       child: Padding(
@@ -55,7 +62,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                   width: 100,
                   decoration:  BoxDecoration(
                     image:   DecorationImage(
-                      image: NetworkImage(movie.imageUrl.toString()),
+                      image: NetworkImage(widget.movie.imageUrl.toString()),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: const BorderRadius.only(
@@ -101,7 +108,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Flexible(
-                                child: Text(movie.title.toString(),
+                                child: Text(widget.movie.title.toString(),
                                   overflow: TextOverflow.ellipsis,
                                   style: Styles.smallCardHeader,
                                 ),
@@ -113,7 +120,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                                 padding: const EdgeInsets.only(
                                   top: 3,
                                 ),
-                                child: Text(movie.year,
+                                child: Text(widget.movie.year,
                                   overflow: TextOverflow.ellipsis,
                                   style: Styles.textSectionBody,
                                 ),
@@ -124,7 +131,7 @@ class LongLibraryMovieCard extends StatelessWidget {
                             height: 6,
                           ),
                           Flexible(
-                            child: Text(movieList[index].description.toString(),
+                            child: Text(movieList[widget.index].description.toString(),
                               style: Styles.textSectionSubBody,
                             ),
                           ),
