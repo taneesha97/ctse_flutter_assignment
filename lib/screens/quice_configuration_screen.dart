@@ -32,9 +32,7 @@ class _DropDownState extends State<DropDown> {
   void onPress () {
     Provider.of<QuizListCrudModel>(context, listen: false).insertQuizListData(category, questions, time)
         .then((value) {
-      //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
-      print(value);
-
+          
       if(value != 0){
         Alert(
           context: context,

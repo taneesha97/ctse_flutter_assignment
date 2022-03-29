@@ -44,14 +44,6 @@ class _DropDownNewState extends State<DropDownNew> {
   Widget build(BuildContext context) {
 
     onPress () {
-
-      print('values are printing');
-      print(widget.id);
-      print(widget.time);
-      print(widget.category);
-      print(widget.questions);
-      print('is printing');
-
       Provider.of<QuizListCrudModel>(context, listen: false).updateListValues(widget.category, widget.questions, widget.time, widget.id);
       Alert(
         context: context,
