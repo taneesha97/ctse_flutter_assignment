@@ -6,6 +6,7 @@ import 'package:ctse_assignment_1/screens/approching_page.dart';
 
 import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/feedback_form.dart';
+import 'package:ctse_assignment_1/screens/movie_error_page.dart';
 
 import 'package:ctse_assignment_1/screens/movie_library_list.dart';
 import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
@@ -19,6 +20,7 @@ import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_splash.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
+import 'package:ctse_assignment_1/screens/register_screen.dart';
 import 'package:ctse_assignment_1/screens/score_screen.dart';
 import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
 import 'package:ctse_assignment_1/util/crud_model.dart';
@@ -44,8 +46,18 @@ class IndexPage extends StatefulWidget {
 class _IndexPageState extends State<IndexPage> {
   final LocalStorage storage = new LocalStorage('localstorage_app');
   late String QuizID = "";
+  late QuestionController _questionController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _questionController = Get.put(QuestionController());
+  }
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.black,
@@ -225,7 +237,6 @@ class _IndexPageState extends State<IndexPage> {
                           .insertQuizData(4,
                               'U001') // here no of quizes are entered, userID are entered
                           .then((value) {
-                        //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
                         storage.setItem('QuizID', value.toString());
                       });
 
@@ -470,6 +481,31 @@ class _IndexPageState extends State<IndexPage> {
                       'Navigation Screen',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Styles.indexPurple, // background
+                      onPrimary: Colors.white,
+                      padding: const EdgeInsets.all(20.0),
+                      fixedSize: const Size(640, 70),
+                      // foreground
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterScreen(userName: '', password: '')),
+                      );
+                    },
+                    child: const Text(
+                      'Register screen',
+                      style:
+                      TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

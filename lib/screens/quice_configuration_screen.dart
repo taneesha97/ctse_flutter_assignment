@@ -13,7 +13,7 @@ class DropDown extends StatefulWidget {
   @override
   _DropDownState createState() => _DropDownState();
 }
-List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy"];
+List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy", "Horror"];
 List <String> _list2 =['5',"10","15",'20'];
 List <String> _list3 =['10',"15","20", "30"];
 
@@ -30,6 +30,7 @@ class _DropDownState extends State<DropDown> {
   int? questions, time;
 
   void onPress () {
+    print(category);
     Provider.of<QuizListCrudModel>(context, listen: false).insertQuizListData(category, questions, time)
         .then((value) {
           
@@ -201,6 +202,13 @@ class _DropDownState extends State<DropDown> {
                                                             setState(() {
                                                               category =
                                                               'Comedy';
+                                                              title = _list.elementAt(index);
+                                                            });
+                                                          }
+                                                          else if (val == 5) {
+                                                            setState(() {
+                                                              category =
+                                                              'Horror';
                                                               title = _list.elementAt(index);
                                                             });
                                                           }
@@ -469,6 +477,27 @@ class _DropDownState extends State<DropDown> {
                           onPressed: onPress
                         ),
                       SizedBox(height: 20),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: Size(90, 45),
+                          textStyle: TextStyle(fontSize: 15),
+                          primary: Colors.blue,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => QuizeList()),
+                          );
+                        },
+                        child: const Text(
+                          'Quiz List',
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ],
                   )
                 ],

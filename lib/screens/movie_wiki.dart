@@ -8,14 +8,16 @@ import 'package:provider/provider.dart';
 import '../components/movie/moviecategory/long_movie_category.dart';
 import '../styles.dart';
 import '../util/crud_model.dart';
+import 'movie_error_page.dart';
 
 class MovieWiki extends StatelessWidget {
-  late QuerySnapshot<Object?> array_data;
-
-  MovieWiki({Key? key}) : super(key: key);
+  const MovieWiki({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Hard Attributes.
+    String warningImage =
+        "https://www.pngall.com/wp-content/uploads/8/Warning-PNG-Picture.png";
     // Provider Movies - Changed to the Appropriate movie list.
     Stream<List<SelectedMovieModel>> movies =
         Provider.of<CrudModel>(context, listen: false).getListOfMoviesShort;
@@ -32,7 +34,7 @@ class MovieWiki extends StatelessWidget {
           child: SingleChildScrollView(
               child: Column(
             children: [
-               Padding(
+              Padding(
                 padding: EdgeInsets.only(
                   left: 9,
                 ),
@@ -41,7 +43,7 @@ class MovieWiki extends StatelessWidget {
                     child: Text("Movie Categories",
                         style: Styles.textSectionHeader)),
               ),
-               Padding(
+              Padding(
                 padding: EdgeInsets.only(
                   left: 9,
                 ),
@@ -73,12 +75,8 @@ class MovieWiki extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  StreamBuilder<List<SelectedMovieModel>>(
-                                    stream: movies,
-                                    builder: (BuildContext context, snapshot) {
-                                      return LongMovieCategory(category: "All Movies",);
-                                    }
+                              builder: (context) => LongMovieCategory(
+                                    category: "All Movies",
                                   )),
                         );
                       },
@@ -95,28 +93,55 @@ class MovieWiki extends StatelessWidget {
                   stream: movies,
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.hasError) {
-                      return Text("There an Error Loading Movies");
+                      return MovieErrorPage(
+                        imageUrl: warningImage,
+                        name: "Error retrieving movie data!",
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasData) {
+                      final data = snapshot.requireData;
+                      return ListView.builder(
+                        itemCount: data.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return CustomCard(
+                            index: index,
+                            movie: data[index],
+                          );
+                        },
+                      );
+                    } else {
+                      return MovieErrorPage(
+                        imageUrl: warningImage,
+                        name: "Movie data not found in database!",
+                      );
                     }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Text("Loading");
-                    }
-                    final data = snapshot.requireData;
-
-                    return ListView.builder(
-                      itemCount: data.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return CustomCard(index: index, movie: data[index],);
-                      },
-                    );
                   },
                 ),
               ),
               Container(
-                child: MovieCategory(category: "Action",),
+                child: MovieCategory(
+                  category: "Action",
+                ),
               ),
               Container(
-                child: MovieCategory(category: "Crime",),
+                child: MovieCategory(
+                  category: "Comedy",
+                ),
+              ),
+              Container(
+                child: MovieCategory(
+                  category: "Animation",
+                ),
+              ),
+              Container(
+                child: MovieCategory(
+                  category: "Crime",
+                ),
               ),
             ],
           ))),

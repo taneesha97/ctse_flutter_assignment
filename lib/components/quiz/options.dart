@@ -58,10 +58,11 @@ class Options extends StatelessWidget {
                   onTap: press,
                   borderRadius: BorderRadius.circular(25),
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 7),
+                    //margin: EdgeInsets.only(bottom: 7),
                     padding: EdgeInsets.only(top: 7, bottom: 7),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(left: 10),

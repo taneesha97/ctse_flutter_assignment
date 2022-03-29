@@ -103,7 +103,11 @@ class _CardView1State extends State<CardView1> {
                         child: IconButton(
                             onPressed: () {
                               Navigator.push(
-                                  context, MaterialPageRoute(builder: (context) => SplashQuiceConfig()));
+                                  context, MaterialPageRoute(builder: (context) => SplashQuiceConfig(
+                                cattegory: widget.text1,
+                                time: widget.text2,
+                                questions: widget.questions,
+                              )));
                             },
                             icon: Icon(
                               Icons.start,
