@@ -15,11 +15,10 @@ import '../styles.dart';
 import '../util/crud_model.dart';
 
 import '../util/userAuth/userauthentication.dart';
-
 import 'movie_error_page.dart';
 
+class MovieWiki extends StatefulWidget {
 
-class MovieWiki extends StatelessWidget {
   const MovieWiki({Key? key}) : super(key: key);
 
   @override
