@@ -41,7 +41,7 @@ class _CardView1State extends State<CardView1> {
               // The "Yes" button
               TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context, rootNavigator: true).pop(); // New Pop Method.
                     Provider.of<QuizListCrudModel>(context, listen: false).deleteQuizList(widget.id);
                     Navigator.push(
                         context,
