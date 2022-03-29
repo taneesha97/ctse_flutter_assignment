@@ -11,7 +11,7 @@ class App extends StatefulWidget {
 class AppState extends State<App> {
   String _currentPage = "Page1";
   List<String> pageKeys = ["Page1", "Page2", "Page3"];
-  Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
+  final Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
     "Page1": GlobalKey<NavigatorState>(),
     "Page2": GlobalKey<NavigatorState>(),
     "Page3": GlobalKey<NavigatorState>(),
@@ -61,17 +61,17 @@ class AppState extends State<App> {
           items: [
             BottomNavigationBarItem(
               icon: new Icon(Icons.looks_one),
-              label: 'Page1'
+              label: 'Home'
               //title: const Text('Page1'),
             ),
             BottomNavigationBarItem(
               icon: new Icon(Icons.looks_two),
-                label: 'Page2'
+                label: 'Library'
               //title: new Text('Page2'),
             ),
             BottomNavigationBarItem(
               icon: new Icon(Icons.looks_3),
-                label: 'Page3'
+                label: 'Profile'
               //title: new Text('Page3'),
             ),
           ],
