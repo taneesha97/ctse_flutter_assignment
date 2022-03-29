@@ -21,7 +21,6 @@ class LongMovieCategory extends StatefulWidget {
 }
 
 class _LongMovieCategoryState extends State<LongMovieCategory> {
-
   TextEditingController _searchController = TextEditingController();
 
   Future? resultsLoaded;
@@ -48,28 +47,42 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
   }
 
   _onSearchChanged() {
-    print(_searchController.text);
+   print(_searchController.text); // Listener working.
   }
 
   searchResultsList() {
     var showResults = [];
-    if(_searchController.text != ""){
-     for(var movie in _allResults){
-       var title = SelectedMovieModel.fromMap(movie, movie.id, "");
-       if(title.title.contains(_searchController.text.toLowerCase())){
-         showResults.add(movie);
-       }
-     }
+    if (_searchController.text != "") {
+      for (var movie in _allResults) {
+        var title = SelectedMovieModel.fromMap(movie, movie.id, "");
+        if (title.title.contains(_searchController.text.toLowerCase())) {
+          showResults.add(movie);
+        }
+      }
     }
   }
 
-  getMovieDetailsStreamSnapsShots(){
+  getMovieDetailsStreamSnapsShots() async {
+    // User Authentication comes here.
+    FirebaseFirestore.instance
+        .collection('users')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        var movie = SelectedMovieModel(doc.id, doc["title"], doc["imageUrl"], "", doc["description"], doc["rating"], doc["duration"], false, doc["year"]);
+        setState(() {
+            _allResults.add(movie);
+        });
+      });
+    });
 
+    searchResultsList();
+    return "complete";
   }
-
 
   @override
   Widget build(BuildContext context) {
+
     // Provider to the fetch all the movies.
     Stream<QuerySnapshot> movies =
         Provider.of<CrudModel>(context, listen: false).movies;
@@ -84,8 +97,14 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
     // Conditionally select the Provider Method.
     Stream<List<SelectedMovieModel>> movies1;
     if (widget.category == "All Movies") {
+      if (widget.searchTerm != "") {
+        //print(widget.searchTerm.toString() + "Search 1");
+        movies1 = Provider.of<CrudModel>(context)
+            .getListOfMoviesShortSearch(widget.searchTerm.toString());
+      } else {
         //print(widget.searchTerm.toString() + "Search 2");
         movies1 = Provider.of<CrudModel>(context).getListOfMoviesShort;
+      }
     } else {
       movies1 = Provider.of<CrudModel>(context)
           .getMoviesFromCategories(widget.category);
@@ -129,63 +148,73 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
                 contentPadding: EdgeInsets.only(
                   left: 10,
                 ),
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.search),
               ),
               controller: _searchController,
-              // onChanged: (value) {
-              //   setState(() {
-              //     _debouncer.run(() {
-              //       widget.searchTerm = value;
-              //     });
-              //   });
-              // },
+              onChanged: (value) {
+                setState(() {
+                  _debouncer.run(() {
+                    widget.searchTerm = value;
+                  });
+                });
+              },
             ),
             Flexible(
                 child: StreamBuilder<List<SelectedMovieModel>>(
-              stream: listMovies,
-              builder: (BuildContext context, snapshot) {
-                if (snapshot.hasError) {
-                  return const MovieErrorPage(
-                    imageUrl:
-                        "https://www.pngall.com/wp-content/uploads/8/Warning-PNG-Picture.png",
-                    name: "Error!",
-                  );
-                }
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Text("Loading");
-                }
-                final data = snapshot.requireData;
-                print("Length of Movies" + data.length.toString());
-                if (data.length != 0) {
-                  return ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return LongMovieCard(
-                        index: index,
-                        movie: data[index],
-                      );
-                    },
-                  );
-                } else {
-                  return Center(
-                      child: Column(
-                    children: const [
-                      MovieErrorPage(
+                  stream: movies1,
+                  builder: (BuildContext context, snapshot) {
+                    if (snapshot.hasError) {
+                      return const MovieErrorPage(
                         imageUrl:
-                            "https://www.pngall.com/wp-content/uploads/8/Warning-PNG-Picture.png",
-                        name: "No Such Movie In the System!",
-                      ),
-                    ],
-                  ));
-                }
-              },
-            )),
+                        "https://www.pngall.com/wp-content/uploads/8/Warning-PNG-Picture.png",
+                        name: "Error!",
+                      );
+
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator(),);
+                    }
+                    final data = snapshot.requireData;
+                    if (data.length != 0) {
+                      return ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          return LongMovieCard(
+                            index: index,
+                            movie: data[index],
+                          );
+                        },
+                      );
+                    } else {
+                      return Center(
+                          child: Column(
+                            children:  [
+                              SizedBox(
+                                height: 100,
+                              ),
+                              Container(
+                                height: 100,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: const Radius.circular(10.0),
+                                      topRight: const Radius.circular(10.0),
+                                    ),
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage("https://cdn-icons-png.flaticon.com/512/2748/2748558.png"),
+                                    )
+                                ),
+                              ),
+                            ],
+                          ));
+                    }
+                  },
+                ))
           ],
         )),
       ),
     );
   }
 }
-
-

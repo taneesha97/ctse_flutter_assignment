@@ -19,9 +19,6 @@ class MovieErrorPage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            SizedBox(
-              height: 100,
-            ),
             Container(
               height: 200,
               width: 200,
