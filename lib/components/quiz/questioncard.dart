@@ -55,78 +55,83 @@ class QuestionCard extends StatelessWidget {
             ],
           )
       ),
-      child: Center(
-        child: Column(
-          children: [
-            // SizedBox(
-            //   height: 4,
-            // ),
-            Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: Colors.lightBlueAccent,
-                  shape: BoxShape.circle
-              ),
-              child: Text.rich(
-                TextSpan(
-                    text: "${index + 1}",
-                    //text: "${question.id}",
-                    style: TextStyle(color: Colors.white, fontSize: 12),
-                    children: [
-                      TextSpan(
-                        text: "/${itemCount}",
-                        style: TextStyle(color: Colors.white, fontSize: 12),
-                      )
-                    ]),
-              ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Center(
-              child: Text(
-                //movieList[index].title.toString()
-                question.question.toString(),
-                style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Column(
-              children: [
-                if (question.imageUri.toString() != "") ...[
-                  Image.network(
-                    question.imageUri.toString(),
-                    height: 170,
-                    width: 150,
-                  ),
-                ] else ...[
-                  SizedBox(
-                    height: 2,
-                  ),
-                ],
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            SingleChildScrollView(
-              child: Column(
+      child: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              // SizedBox(
+              //   height: 4,
+              // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ListView.builder(
-                      itemCount: 4,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index1) => Options(
-                            index: index1,
-                            text: question.options![index1],
-                            press: () => onPress(question, index1, question.id),
-                          )),
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        color: Colors.lightBlueAccent,
+                        shape: BoxShape.circle
+                    ),
+                    child: Text.rich(
+                      TextSpan(
+                          text: "${index + 1}",
+                          //text: "${question.id}",
+                          style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                      //movieList[index].title.toString()
+                      question.question.toString(),
+                      style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
                 ],
               ),
-            ),
-          ],
+
+              // SizedBox(
+              //   height: 8,
+              // ),
+
+              SizedBox(
+                height: 8,
+              ),
+              Column(
+                children: [
+                  if (question.imageUri.toString() != "") ...[
+                    Image.network(
+                      question.imageUri.toString(),
+                      height: 170,
+                      width: 150,
+                    ),
+                  ] else ...[
+                    SizedBox(
+                      height: 2,
+                    ),
+                  ],
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ListView.builder(
+                        itemCount: 4,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index1) => Options(
+                              index: index1,
+                              text: question.options![index1],
+                              press: () => onPress(question, index1, question.id),
+                            )),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
