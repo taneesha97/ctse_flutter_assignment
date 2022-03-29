@@ -20,7 +20,7 @@ class LeaderBoradCard extends StatelessWidget {
               // The "Yes" button
               TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context, rootNavigator: true).pop(); // New Pop Method.
                     Provider.of<LeaderBoardCrudModel>(context, listen: false).deleteLeaderboardItem(model.id.toString());
                   },
                   child: const Text('Yes')),

@@ -56,6 +56,7 @@ class _DropDownNewState extends State<DropDownNew> {
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             onPressed: (){
+              Navigator.of(context, rootNavigator: true).pop(); // New Pop Method.
               Navigator.push(context, MaterialPageRoute(builder: (context) => QuizeList()));
             },
             color: Color.fromRGBO(91, 55, 185, 1.0),
