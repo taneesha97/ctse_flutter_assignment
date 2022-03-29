@@ -20,37 +20,101 @@ class SelectableMovie extends StatefulWidget {
 class _SelectableMovieState extends State<SelectableMovie> {
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: Colors.green[700],
-        child: Icon(
-          Icons.person_outline_outlined,
-          color: Colors.white,
-        ),
+    MediaQueryData query = MediaQuery.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 8,
+        top: 5,
+        right: 8,
+        bottom: 5,
       ),
-      title: Text(
-        widget.selectedMovieModel.title,
-        style: TextStyle(fontWeight: FontWeight.w600),
-      ),
-      subtitle: Text(widget.selectedMovieModel.year.toString()),
-      trailing: widget.selectedMovieModel.isSelected
-          ? Icon(
-        Icons.check_circle,
-        color: Colors.green[700],
-      ) : Icon(
-        Icons.check_circle_outline,
-        color: Colors.grey,
-      ),
-      onTap:((){
-        setState(() {
+      child: InkWell(
+        onTap: (){
+          setState(() {
             widget.selectedMovieModel.isSelected = !widget.selectedMovieModel.isSelected;
             if(widget.selectedMovieModel.isSelected == true){
               widget.selectedMoviesListRef.add(widget.selectedMovieModel);
             } else if (widget.selectedMovieModel.isSelected == false){
               widget.selectedMoviesListRef.removeWhere((element) =>element.title == widget.selectedMovieModel.title);
             }
-        });
-      }),
+          });
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 60,
+              width: 60,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(widget.selectedMovieModel.imageUrl),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.4),
+                    spreadRadius: 2,
+                    blurRadius: 8,
+                  ),
+                ]
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                height: 60,
+                width: query.size.width * (77/100),
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.4),
+                      spreadRadius: 2,
+                      blurRadius: 8,
+                    ),
+                  ],
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.selectedMovieModel.title, // Change to name.
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                          Text(widget.selectedMovieModel.year.toString()),
+                        ],
+                      ),
+                      widget.selectedMovieModel.isSelected
+                          ? Icon(
+                        Icons.check_circle,
+                        color: Colors.grey,
+                      ) : Icon(
+                        Icons.check_circle_outline,
+                        color: Colors.grey,
+                      ),
+                    ],
+                  )
+                ),
+              ),
+            )
+          ],
+        )
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/material.dart';
 import '../../../models/movie.dart';
 import '../../../screens/movie_single.dart';
@@ -5,7 +6,8 @@ import '../../../styles.dart';
 
 class LongMovieCard extends StatelessWidget {
   final int index;
-  const LongMovieCard({Key? key, required this.index}) : super(key: key);
+  final SelectedMovieModel movie;
+  const LongMovieCard({Key? key, required this.index, required this.movie}) : super(key: key);
 
 
   @override
@@ -32,7 +34,7 @@ class LongMovieCard extends StatelessWidget {
               width: 100,
               decoration:  BoxDecoration(
                 image:   DecorationImage(
-                  image: NetworkImage(movieList[index].imageUrl.toString()),
+                  image: NetworkImage(movie.imageUrl.toString()),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: const BorderRadius.only(
@@ -78,7 +80,7 @@ class LongMovieCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Flexible(
-                            child: Text(movieList[index].title.toString(),
+                            child: Text(movie.title.toString(),
                               overflow: TextOverflow.ellipsis,
                               style: Styles.smallCardHeader,
                             ),
@@ -90,7 +92,7 @@ class LongMovieCard extends StatelessWidget {
                             padding: const EdgeInsets.only(
                               top: 3,
                             ),
-                            child: Text(movieList[index].year,
+                            child: Text(movie.year,
                               overflow: TextOverflow.ellipsis,
                               style: Styles.textSectionBody,
                             ),

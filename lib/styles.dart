@@ -1,8 +1,6 @@
 // Common Style file.
 import 'package:flutter/material.dart';
 
-
-
 class Styles {
 
   // Section Attributes.
@@ -38,6 +36,18 @@ class Styles {
     fontWeight: FontWeight.w800,
     fontSize: MediumTextSize,
     color: textColorBright,
+  );
+
+  static final mainWelcomeText = TextStyle(
+    fontFamily: "Roboto",
+    fontSize: LargeTextSize,
+    color: _hexToColor('FFFFFF'),
+  );
+
+  static final subWelcomeText = TextStyle(
+    fontFamily: "Roboto",
+    fontSize: BodyTextSize,
+    color: _hexToColor('FFFFFF'),
   );
 
   static final textSectionHeader = TextStyle(
@@ -100,6 +110,8 @@ class Styles {
     fontSize: 15,
     color: _hexToColor('000000'),
   );
+
+
 
 
   //styles to font- quiz feedback form

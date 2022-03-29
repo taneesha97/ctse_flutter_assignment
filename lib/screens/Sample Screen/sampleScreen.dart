@@ -10,21 +10,48 @@ class SampleScreen extends StatefulWidget {
 }
 
 class _SampleScreenState extends State<SampleScreen> {
-  int? selectedValue1;
-  int? selectedValue2;
+  String? reviewSliderValue, TextFieldValue;
 
   void onChange1(int value) {
     print(value);
-    setState(() {
-      selectedValue1 = value;
-    });
+    if(value == 0){
+      setState(() {
+        reviewSliderValue = 'Worst';
+      });
+    } else if(value == 1){
+      setState(() {
+        reviewSliderValue = 'Worse';
+      });
+    }
+    else if(value == 2){
+      setState(() {
+        reviewSliderValue = 'Bad';
+      });
+    }
+    else if(value == 3){
+      setState(() {
+        reviewSliderValue = 'Good';
+      });
+    }
+    else if(value == 4){
+      setState(() {
+        reviewSliderValue = 'Best';
+      });
+    }
+
   }
 
-  void onChange2(int value) {
-    setState(() {
-      selectedValue2 = value;
-    });
+
+
+  void onTextFieldChange ( String value) {
+    print(value);
+    TextFieldValue = value;
   }
+  void onPress () {
+    print(reviewSliderValue);
+    print(TextFieldValue);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +66,17 @@ class _SampleScreenState extends State<SampleScreen> {
             const Padding(
               padding: EdgeInsets.all(8.0),
               child: Text("Movie Categories",
+
               style: TextStyle(
                 fontFamily: "Raleway",
                 fontWeight: FontWeight.w600,
                 color: Colors.black,
                 fontSize: 30,
-              )),
+                decoration: TextDecoration.none
+
+              )
+
+              ),
             ),
             Container(
                 margin: EdgeInsets.all(10),
@@ -70,6 +102,7 @@ class _SampleScreenState extends State<SampleScreen> {
                             fontSize: 15,
                             fontStyle: FontStyle.normal,
                             color: Colors.black,
+                              decoration: TextDecoration.none
                           ),
                         ),
                       ),
@@ -79,9 +112,10 @@ class _SampleScreenState extends State<SampleScreen> {
                         child: ReviewSlider(
                             onChange: onChange1,
                             circleDiameter: 40,
-                            optionStyle: TextStyle(
+                            optionStyle: const TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.none,
                                 fontSize: 12),
                             options: ['Worst', 'Worse', 'Bad', 'Good', 'Best']),
                       ),
@@ -102,21 +136,24 @@ class _SampleScreenState extends State<SampleScreen> {
                       fontSize: 15,
                       fontStyle: FontStyle.normal,
                       color: Colors.black,
+                        decoration: TextDecoration.none
+
                     ),
                   ),
                 ),
 
                 SizedBox(
                   width: double.infinity,
-                  height: 200,
+                  height: 150,
                   child: Material(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     child: TextFormField(
-                      //onChanged: onChanged,
+                      onChanged: onTextFieldChange,
                       decoration: const InputDecoration(
                         hintText: 'Yes there',
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+
                       ),
                     ),
                   ),
@@ -138,9 +175,7 @@ class _SampleScreenState extends State<SampleScreen> {
                               ),
                             ),
                             child: Text('Submit'),
-                            onPressed: (){
-
-                            }),
+                            onPressed: onPress),
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               minimumSize: Size(100, 40),
@@ -154,7 +189,6 @@ class _SampleScreenState extends State<SampleScreen> {
                             onPressed: (){
 
                             }),
-
                       ],
 
                     )

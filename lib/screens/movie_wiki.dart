@@ -1,23 +1,51 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctse_assignment_1/components/movie/moviecard/medium_movie_card.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/movie_category.dart';
-import 'package:ctse_assignment_1/screens/movie_all.dart';
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
+import 'package:ctse_assignment_1/screens/register_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/movie/moviecategory/long_movie_category.dart';
 import '../styles.dart';
 import '../util/crud_model.dart';
+import '../util/userAuth/userauthentication.dart';
 
-class MovieWiki extends StatelessWidget {
-  late QuerySnapshot<Object?> array_data;
+class MovieWiki extends StatefulWidget {
 
-  MovieWiki({Key? key}) : super(key: key);
+  const MovieWiki({Key? key}) : super(key: key);
+
+  @override
+  State<MovieWiki> createState() => _MovieWikiState();
+}
+
+class _MovieWikiState extends State<MovieWiki> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void loginValidation() {
+    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+    val.listen((event) {
+      if(event == null){
+        //if the user object is null. will forward to Register page
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => RegisterScreen()),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    loginValidation();
     // Provider Movies - Changed to the Appropriate movie list.
-    Stream<QuerySnapshot> movies =
-        Provider.of<CrudModel>(context, listen: false).movies;
+    Stream<List<SelectedMovieModel>> movies =
+        Provider.of<CrudModel>(context, listen: false).getListOfMoviesShort;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -25,14 +53,14 @@ class MovieWiki extends StatelessWidget {
         toolbarHeight: 10,
       ),
       body: Container(
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             top: 10,
           ),
           child: SingleChildScrollView(
               child: Column(
             children: [
                Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 9,
                 ),
                 child: Align(
@@ -41,7 +69,7 @@ class MovieWiki extends StatelessWidget {
                         style: Styles.textSectionHeader)),
               ),
                Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 9,
                 ),
                 child: Align(
@@ -73,12 +101,13 @@ class MovieWiki extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  StreamBuilder<QuerySnapshot>(
+                                  StreamBuilder<List<SelectedMovieModel>>(
                                     stream: movies,
-                                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                                      return LongMovieCategory();
+                                    builder: (BuildContext context, snapshot) {
+                                      return LongMovieCategory(category: "All Movies",);
                                     }
-                                  )),
+                                  )
+                          ),
                         );
                       },
                     ),
@@ -90,9 +119,9 @@ class MovieWiki extends StatelessWidget {
               ),
               SizedBox(
                 height: 200,
-                child: StreamBuilder<QuerySnapshot>(
+                child: StreamBuilder<List<SelectedMovieModel>>(
                   stream: movies,
-                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  builder: (BuildContext context, snapshot) {
                     if (snapshot.hasError) {
                       return Text("There an Error Loading Movies");
                     }
@@ -100,23 +129,22 @@ class MovieWiki extends StatelessWidget {
                       return Text("Loading");
                     }
                     final data = snapshot.requireData;
-                    array_data = data;
 
                     return ListView.builder(
-                      itemCount: data.size,
+                      itemCount: data.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return CustomCard(index: index);
+                        return CustomCard(index: index, movie: data[index],);
                       },
                     );
                   },
                 ),
               ),
               Container(
-                child: MovieCategory(),
+                child: MovieCategory(category: "Action",),
               ),
               Container(
-                child: MovieCategory(),
+                child: MovieCategory(category: "Crime",),
               ),
             ],
           ))),
