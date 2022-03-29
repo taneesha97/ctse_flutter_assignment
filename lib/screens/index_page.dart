@@ -20,6 +20,7 @@ import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_splash.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
+import 'package:ctse_assignment_1/screens/register_screen.dart';
 import 'package:ctse_assignment_1/screens/score_screen.dart';
 import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
 import 'package:ctse_assignment_1/util/crud_model.dart';
@@ -498,11 +499,11 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MovieErrorPage(imageUrl:"https://www.pngall.com/wp-content/uploads/8/Warning-PNG-Picture.png" ,name: "Movie Data Not Found!",)),
+                            builder: (context) => RegisterScreen(userName: '', password: '')),
                       );
                     },
                     child: const Text(
-                      'Movie Error Page',
+                      'Register screen',
                       style:
                       TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
