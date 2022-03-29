@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import '../styles.dart';
 
 class MovieErrorPage extends StatelessWidget {
-  const MovieErrorPage({Key? key}) : super(key: key);
+  final String name;
+  final String imageUrl;
+  const MovieErrorPage({Key? key, required this.name, required this.imageUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +26,18 @@ class MovieErrorPage extends StatelessWidget {
               height: 200,
               width: 200,
               decoration: BoxDecoration(
-                  borderRadius: new BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     topLeft: const Radius.circular(10.0),
                     topRight: const Radius.circular(10.0),
                   ),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage("https://www.pngall.com/wp-content/uploads/8/Warning-PNG-Picture.png"),
+                    image: NetworkImage(imageUrl),
                   )
               ),
             ),
 
-            Text("Something is wrong!", style: Styles.smallCardHeader),
+            Text(name, style: Styles.smallCardHeader),
           ],
         ),
       ),

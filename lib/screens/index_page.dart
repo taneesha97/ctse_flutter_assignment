@@ -465,7 +465,7 @@ class _IndexPageState extends State<IndexPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MovieErrorPage()),
+                            builder: (context) => MovieErrorPage(imageUrl:"https://www.pngall.com/wp-content/uploads/8/Warning-PNG-Picture.png" ,name: "Movie Data Not Found!",)),
                       );
                     },
                     child: const Text(
