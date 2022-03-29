@@ -13,7 +13,7 @@ class DropDown extends StatefulWidget {
   @override
   _DropDownState createState() => _DropDownState();
 }
-List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy"];
+List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy", "Horror"];
 List <String> _list2 =['5',"10","15",'20'];
 List <String> _list3 =['10',"15","20", "30"];
 
@@ -22,10 +22,6 @@ class _DropDownState extends State<DropDown> {
   bool isStrechedDropDown2 = false;
   bool isStrechedDropDown3 = false;
 
-  // int? groupValue;
-  // int? groupValue2;
-  // int? groupValue3;
-
   String title = 'Select Movie Category';
   String title2 = 'Select No of questions';
   String title3 = 'Select time';
@@ -33,39 +29,31 @@ class _DropDownState extends State<DropDown> {
   String? category;
   int? questions, time;
 
-  // void onChange1(int value) {
-  //   print(value);
-  //   if(value == 0){
-  //     setState(() {
-  //       category = 'Action';
-  //     });
-  //   } else if(value == 1){
-  //     setState(() {
-  //       category = 'Romance';
-  //     });
-  //   }
-  //   else if(value == 2){
-  //     setState(() {
-  //       category = 'Thriller';
-  //     });
-  //   }
-  //   else if(value == 3){
-  //     setState(() {
-  //       category = 'Animation';
-  //     });
-  //   }
-  // }
-
   void onPress () {
+    print(category);
     Provider.of<QuizListCrudModel>(context, listen: false).insertQuizListData(category, questions, time)
         .then((value) {
       //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
       print(value);
+
       if(value != 0){
         Alert(
           context: context,
-          title: "Successfully",
-          desc: "You have Successfully Submitted the Data",
+          type: AlertType.success,
+          desc: "Successfully added data",
+          buttons: [
+            DialogButton(
+              child: const Text(
+                "Ok",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => QuizeList()));
+              },
+              color: Color.fromRGBO(91, 55, 185, 1.0),
+              radius: BorderRadius.circular(10.0),
+            ),
+          ],
         ).show();
       }
     });
@@ -86,12 +74,10 @@ class _DropDownState extends State<DropDown> {
                     image: DecorationImage(
                         image: AssetImage("assets/images/p5.jpg"),
                         fit: BoxFit.fill,
-                        // colorFilter: ColorFilter.mode(Colors.blue.withOpacity(0), BlendMode.darken)
                     )
                 ),
               ),
             ),
-
             title: Text(
               "Quice Configuration",
               style: TextStyle(
@@ -102,10 +88,6 @@ class _DropDownState extends State<DropDown> {
               borderRadius: BorderRadius.only(bottomRight: Radius.circular(50), bottomLeft: Radius.circular(50))
             ),
           ),
-          // title: Text(
-          //   "Quiz Configuration",
-          //   style: TextStyle(color: Colors.black),
-          // ),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -114,7 +96,6 @@ class _DropDownState extends State<DropDown> {
               child: Column(
                 children: [
                   Container(
-                    // color: Colors.lightGreenAccent,
                     child: Column(
                       children: [
                         Container(
@@ -136,7 +117,6 @@ class _DropDownState extends State<DropDown> {
                                   child: Column(
                                     children: [
                                       Container(
-                                        // height: 45,
                                           width: double.infinity,
                                           padding: EdgeInsets.only(right: 10),
                                           decoration: BoxDecoration(
@@ -227,13 +207,14 @@ class _DropDownState extends State<DropDown> {
                                                               title = _list.elementAt(index);
                                                             });
                                                           }
+                                                          else if (val == 5) {
+                                                            setState(() {
+                                                              category =
+                                                              'Horror';
+                                                              title = _list.elementAt(index);
+                                                            });
+                                                          }
                                                         }
-                                                        // onChanged: (val) {
-                                                        //   setState(() {
-                                                        //     category = val as String?;
-                                                        //     title = _list.elementAt(index);
-                                                        //   });
-                                                        // }
                                                         );
                                                   }),
                                         ),
@@ -352,12 +333,6 @@ class _DropDownState extends State<DropDown> {
                                                           });
                                                         }
                                                       }
-                                                      // onChanged: (val) {
-                                                      //   setState(() {
-                                                      //     questions = val as int;
-                                                      //     title2 = _list2.elementAt(index);
-                                                      //   });
-                                                      // }
                                                       );
                                                 }),
                                       ),
@@ -476,14 +451,6 @@ class _DropDownState extends State<DropDown> {
                                                           });
                                                         }
                                                       }
-
-
-                                                      // onChanged: (val) {
-                                                      //   setState(() {
-                                                      //     time = val as int;
-                                                      //     title3 = _list3.elementAt(index);
-                                                      //   });
-                                                      // }
                                                       );
                                                 }),
                                       ),
@@ -509,25 +476,30 @@ class _DropDownState extends State<DropDown> {
                             ),
                           ),
                           child: Text('Add Label'),
-                          onPressed: onPress),
-                          // onPressed: (){
-                          //   Navigator.push(
-                          //       context, MaterialPageRoute(builder: (context) => QuizeList()));
-                          // }
+                          onPressed: onPress
+                        ),
                       SizedBox(height: 20),
-                      // ElevatedButton(
-                      //     style: ElevatedButton.styleFrom(
-                      //       minimumSize: Size(105, 45),
-                      //       textStyle: TextStyle(fontSize: 15),
-                      //       primary: Colors.pink,
-                      //       shape: new RoundedRectangleBorder(
-                      //         borderRadius: new BorderRadius.circular(10.0),
-                      //       ),
-                      //     ),
-                      //     child: Text('Delete'),
-                      //     onPressed: (){
-                      //       // Navigator.push(context, MaterialPageRoute(builder: (context) =>  ExampleList(title: 'Exaple List',)));
-                      //   }),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: Size(90, 45),
+                          textStyle: TextStyle(fontSize: 15),
+                          primary: Colors.blue,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => QuizeList()),
+                          );
+                        },
+                        child: const Text(
+                          'Quiz List',
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ],
                   )
                 ],

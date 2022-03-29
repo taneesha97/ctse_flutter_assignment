@@ -20,6 +20,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 
+import 'bottom_navigation/app.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -60,7 +62,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => FeedBackCrudModel()),
         ChangeNotifierProvider(create: (context) => QuizResultCrudModel()),
         ChangeNotifierProvider(create: (context) => LeaderBoardCrudModel()),
-
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           backgroundColor: Colors.black,
         ),
-        home: const IndexPage()
+        home: App()
       ),
     );
   }

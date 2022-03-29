@@ -4,22 +4,14 @@ import 'package:flutter/cupertino.dart';
 import '../../models/leaderboard_model.dart';
 
 class LeaderBoardCrudModel extends ChangeNotifier {
-  // Steam Data For the Movies.
-
-  //QuerySnapshot querySnapshot = FirebaseFirestore.instance.collection('quizes').get() as QuerySnapshot<Object?>;
+  // Steam Data For the Leader board.
   final Stream<QuerySnapshot> _quizList =
   FirebaseFirestore.instance.collection('leaderboard').snapshots();
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
-  // final QuestionController _controller = Get.put(QuestionController());
 
   late List<int?> valueSet;
-
   String QuizID = '';
-
-  // int noCorrectAnswers = 0;
-  // int AnsweredQuestions = 0;
-  // int noWrongAnswers = 0;
 
   Future<dynamic> readLeaderBoard() async {
     QuerySnapshot querySnapshot;
@@ -65,51 +57,11 @@ class LeaderBoardCrudModel extends ChangeNotifier {
 
   // Database get Stream Builder.
   Stream<List<LeaderBoardModel>> get getListOfLeaderBoxes {
-    return FirebaseFirestore.instance.collection("leaderboard").snapshots().map(
+    return FirebaseFirestore.instance
+        .collection("leaderboard").orderBy('score', descending: true)
+        .snapshots().map(
             (event) => event.docs.map((e) => LeaderBoardModel.fromMap(e.data(), e.id,)).toList());
   }
-
-
-
-
-  // Future<void> updateValues(Question question, String selectedIndex, String QuizID1) async {
-  //   // valueSet = _controller.checkCorrectWrongAnswers(question, selectedIndex.toString())!;
-  //   if(question.answer! == (int.parse(selectedIndex) + 1).toString()){
-  //     noCorrectAnswers++;
-  //     AnsweredQuestions++;
-  //   }else if(question.answer! != (int.parse(selectedIndex) + 1).toString()){
-  //     noWrongAnswers++;
-  //     AnsweredQuestions++;
-  //   }
-  //   try {
-  //     await FirebaseFirestore.instance.collection('result-quizes').doc(QuizID1).update({
-  //       'id': question.id ?? '',
-  //       'no_questions': AnsweredQuestions ?? 0,
-  //       'userId': 1 ?? '',
-  //       'correct_answer': noCorrectAnswers ?? 0,
-  //       'wrong_answer': noWrongAnswers ?? 0,
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
-  // Future<dynamic> insertQuizData(String id, int noQuestions, String userId, int correctAnswer, int wrongAnswer) async {
-  //   try {
-  //     DocumentReference<Map<String, dynamic>> value = await FirebaseFirestore.instance.collection('result-quizes').add({
-  //       'id': id ?? '',
-  //       'no_questions': noQuestions ?? 0,
-  //       'userId': userId ?? '',
-  //       'correct_answer': correctAnswer ?? 0,
-  //       'wrong_answer': wrongAnswer ?? 0,
-  //     });
-  //     // print(value.id);
-  //     // print('dkks');
-  //     return value.id.toString();
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
 
   // Getter for the User Steam.
   Stream<QuerySnapshot> get quizesList {
@@ -123,7 +75,6 @@ class LeaderBoardCrudModel extends ChangeNotifier {
   }
 
   Future<String> shareQuizID() async {
-
     return QuizID;
   }
 
