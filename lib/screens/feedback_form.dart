@@ -155,12 +155,6 @@ class _FeedBackFormState extends State<FeedBackForm> {
               ),
             ),
           ),
-
-          // title: const Text(
-          //   "FeedBack Form",
-          //   style: TextStyle(
-          //       color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
-          // ),
           backgroundColor: Colors.pink,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(bottomRight: Radius.circular(50), bottomLeft: Radius.circular(50))
