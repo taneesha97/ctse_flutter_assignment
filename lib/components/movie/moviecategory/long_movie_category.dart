@@ -21,6 +21,20 @@ class LongMovieCategory extends StatefulWidget {
 }
 
 class _LongMovieCategoryState extends State<LongMovieCategory> {
+
+  TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  _onSearchChanged() {
+    print(_searchController.text);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     // Provider to the fetch all the movies.
@@ -37,14 +51,8 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
     // Conditionally select the Provider Method.
     Stream<List<SelectedMovieModel>> movies1;
     if (widget.category == "All Movies") {
-      if (widget.searchTerm != "") {
-        //print(widget.searchTerm.toString() + "Search 1");
-        movies1 = Provider.of<CrudModel>(context)
-            .getListOfMoviesShortSearch(widget.searchTerm.toString());
-      } else {
         //print(widget.searchTerm.toString() + "Search 2");
         movies1 = Provider.of<CrudModel>(context).getListOfMoviesShort;
-      }
     } else {
       movies1 = Provider.of<CrudModel>(context)
           .getMoviesFromCategories(widget.category);
@@ -81,7 +89,7 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
             const SizedBox(
               height: 10,
             ),
-            TextFormField(
+            TextField(
               style: const TextStyle(color: Colors.blueAccent),
               decoration: const InputDecoration(
                 hintText: "Enter movie name...",
@@ -91,17 +99,18 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.search),
               ),
-              onChanged: (value) {
-                setState(() {
-                  _debouncer.run(() {
-                    widget.searchTerm = value;
-                  });
-                });
-              },
+              controller: _searchController,
+              // onChanged: (value) {
+              //   setState(() {
+              //     _debouncer.run(() {
+              //       widget.searchTerm = value;
+              //     });
+              //   });
+              // },
             ),
             Flexible(
                 child: StreamBuilder<List<SelectedMovieModel>>(
-              stream: movies1,
+              stream: listMovies,
               builder: (BuildContext context, snapshot) {
                 if (snapshot.hasError) {
                   return const MovieErrorPage(
@@ -145,3 +154,5 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
     );
   }
 }
+
+
