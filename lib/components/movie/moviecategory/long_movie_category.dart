@@ -24,14 +24,47 @@ class _LongMovieCategoryState extends State<LongMovieCategory> {
 
   TextEditingController _searchController = TextEditingController();
 
+  Future? resultsLoaded;
+  List _allResults = [];
+  List _resultsList = [];
+
   @override
   void initState() {
     super.initState();
     _searchController.addListener(_onSearchChanged);
   }
 
+  @override
+  void dispose() {
+    _searchController.removeListener(_onSearchChanged);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    resultsLoaded = getMovieDetailsStreamSnapsShots();
+  }
+
   _onSearchChanged() {
     print(_searchController.text);
+  }
+
+  searchResultsList() {
+    var showResults = [];
+    if(_searchController.text != ""){
+     for(var movie in _allResults){
+       var title = SelectedMovieModel.fromMap(movie, movie.id, "");
+       if(title.title.contains(_searchController.text.toLowerCase())){
+         showResults.add(movie);
+       }
+     }
+    }
+  }
+
+  getMovieDetailsStreamSnapsShots(){
+
   }
 
 
