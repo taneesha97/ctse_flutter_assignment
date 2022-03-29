@@ -56,7 +56,7 @@ class AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    loginValidation();
+    //loginValidation();
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =

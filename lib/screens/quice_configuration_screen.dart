@@ -46,6 +46,7 @@ class _DropDownState extends State<DropDown> {
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               onPressed: (){
+                Navigator.of(context, rootNavigator: true).pop(); // New Pop Method.
                 Navigator.push(context, MaterialPageRoute(builder: (context) => QuizeList()));
               },
               color: Color.fromRGBO(91, 55, 185, 1.0),
@@ -461,7 +462,7 @@ class _DropDownState extends State<DropDown> {
                     ],
                   ),
 
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   Column(
                     children: [
                       ElevatedButton(
@@ -476,12 +477,12 @@ class _DropDownState extends State<DropDown> {
                           child: Text('Add Label'),
                           onPressed: onPress
                         ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 10),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           minimumSize: Size(90, 45),
                           textStyle: TextStyle(fontSize: 15),
-                          primary: Colors.blue,
+                          primary: Colors.teal,
                           shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(10.0),
                           ),
