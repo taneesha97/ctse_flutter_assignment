@@ -13,6 +13,7 @@ import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
 import 'package:ctse_assignment_1/util/QuizeConfig/leaderboard_crud_model.dart';
 import 'package:ctse_assignment_1/util/QuizeConfig/quize_list_crud_model.dart';
 import 'package:ctse_assignment_1/util/Quizes/quiz_crud_model.dart';
+import 'package:ctse_assignment_1/util/UserHistory/user_history_crud_model.dart';
 import 'package:ctse_assignment_1/util/crud_model.dart';
 import 'package:ctse_assignment_1/util/userAuth/userauthentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => FeedBackCrudModel()),
         ChangeNotifierProvider(create: (context) => QuizResultCrudModel()),
         ChangeNotifierProvider(create: (context) => LeaderBoardCrudModel()),
+        ChangeNotifierProvider(create: (context) => UserHistoryCrudModel()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

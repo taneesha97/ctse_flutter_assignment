@@ -43,23 +43,23 @@ class AppState extends State<App> {
     print("Init State");
   }
 
-  void loginValidation() {
-    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
-    val.listen((event) {
-      if(event == null){
-        //if the user object is null. will forward to Register page
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => RegisterScreen()),
-        );
-      }
-    });
-  }
+  // void loginValidation() {
+  //   Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+  //   val.listen((event) {
+  //     if(event == null){
+  //       //if the user object is null. will forward to Register page
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //             builder: (context) => RegisterScreen()),
+  //       );
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
-    loginValidation(); // checking is the user is logged in
+    //loginValidation(); // checking is the user is logged in
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =
