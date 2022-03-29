@@ -103,7 +103,7 @@ class LongMovieCard extends StatelessWidget {
                         height: 6,
                       ),
                       Flexible(
-                        child: Text(movieList[index].description.toString(),
+                        child: Text(movie.description.toString(),
                             style: Styles.textSectionSubBody,
                           ),
                         ),

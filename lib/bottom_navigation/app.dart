@@ -88,17 +88,17 @@ class AppState extends State<App> {
           currentIndex: _selectedIndex,
           items: [
             BottomNavigationBarItem(
-              icon: new Icon(Icons.looks_one),
+              icon: new Icon(Icons.home_filled),
               label: 'Home'
               //title: const Text('Page1'),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.looks_two),
+              icon: new Icon(Icons.library_books),
                 label: 'Library'
               //title: new Text('Page2'),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.looks_3),
+              icon: new Icon(Icons.people),
                 label: 'Profile'
               //title: new Text('Page3'),
             ),

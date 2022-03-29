@@ -6,6 +6,7 @@ import 'package:ctse_assignment_1/screens/approching_page.dart';
 
 import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/feedback_form.dart';
+import 'package:ctse_assignment_1/screens/movie_error_page.dart';
 
 import 'package:ctse_assignment_1/screens/movie_library_list.dart';
 import 'package:ctse_assignment_1/screens/Sample%20Screen/sampleScreen.dart';
