@@ -1,8 +1,6 @@
 // Common Style file.
 import 'package:flutter/material.dart';
 
-
-
 class Styles {
 
   // Section Attributes.
@@ -24,6 +22,15 @@ class Styles {
   static final Color accentColor = _hexToColor('FF0000');
   static final Color indexPurple = _hexToColor('7F26FDFF');
 
+  /// Card Layout - Small Card.
+  static final smallCardHeader = TextStyle(
+    fontFamily: "Montserrat",
+    fontWeight: FontWeight.w600,
+    fontSize: MediumTextSize,
+    color: _hexToColor('000000'),
+  );
+
+
   static final navBarTitle = TextStyle(
     fontFamily: "Montserrat",
     fontWeight: FontWeight.w800,
@@ -34,7 +41,7 @@ class Styles {
   static final textSectionHeader = TextStyle(
     fontFamily: "Montserrat",
     fontWeight: FontWeight.w600,
-    fontSize: MediumTextSize,
+    fontSize: LargeTextSize,
     color: _hexToColor('000000'),
   );
 
@@ -90,6 +97,18 @@ class Styles {
     fontWeight: FontWeight.w600,
     fontSize: 15,
     color: _hexToColor('000000'),
+  );
+
+
+
+
+  //styles to font- quiz feedback form
+  static final QuizFeedbackQuestionTitle = TextStyle(
+    fontFamily: "Montserrat",
+    fontWeight: FontWeight.w600,
+    fontSize: 15,
+    fontStyle: FontStyle.normal,
+    color: textColorBright,
   );
 
   static Color _hexToColor(String code) {

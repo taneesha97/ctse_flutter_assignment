@@ -2,27 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/quiz.dart';
+import '../screens/feedback_form.dart';
 
 class QuestionController extends GetxController
     with SingleGetTickerProviderMixin {
   late AnimationController _animationController;
-  late Animation _animation;
 
+  late Animation _animation;
   Animation get animation => this._animation;
 
   late PageController _pageController;
   PageController get pageController => this._pageController;
-
-  //List<Question> _questions = QuizList;
-  //Provider.of<QuizCrudModel>(context, listen: false).readQuizes()
-
-  //List<Question> get questions => this._questions;
 
   bool _isAnswered = false;
   bool get isAnswered => this._isAnswered;
 
   late String _correctAns;
   String get correctAns => this._correctAns;
+
+  int _noOfQuestions = 10;
+  String _cattegory = '';
+
+  int get noOfQuestions => this._noOfQuestions;
 
   late String _selectedAns;
   String get selectedAns => this._selectedAns;
@@ -34,15 +35,34 @@ class QuestionController extends GetxController
   int _numOfCorrectAns = 0;
   int get numOfCorrectAns => this._numOfCorrectAns;
 
+  int _time = 10;
+
   List<int?>? valueSet;
+
+  void setQuestionParameter(int No, int time, String category) {
+    _noOfQuestions = No;
+    _time = time;
+    _cattegory = category;
+
+    _animationController =
+        AnimationController(duration: Duration(seconds: _time), vsync: this);
+    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
+      ..addListener(() {
+        // update like setState
+        update();
+      });
+    print('calling2');
+   _animationController.forward().whenComplete(nextQuestion);
+   _pageController = PageController();
+  }
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-
+    print(_time);
     _animationController =
-        AnimationController(duration: Duration(seconds: 10), vsync: this);
+        AnimationController(duration: Duration(seconds: _time), vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
       ..addListener(() {
         // update like setState
@@ -51,6 +71,7 @@ class QuestionController extends GetxController
 
     // start our animation
     // Once 60s is completed go to the next qn
+    print('calling');
     _animationController.forward().whenComplete(nextQuestion);
     _pageController = PageController();
   }
@@ -62,23 +83,23 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  List<int?>? checkCorrectWrongAnswers(Question question, String selectedIndex) {
-
-    int noCorrectAnswers = 0;
-    int AnsweredQuestions = 0;
-    int noWrongAnswers = 0;
-    if(question.answer! == selectedIndex){
-      noCorrectAnswers++;
-      AnsweredQuestions++;
-    }else if(question.answer! != selectedIndex){
-      noWrongAnswers++;
-      AnsweredQuestions++;
-    }
-    valueSet?.add(AnsweredQuestions);
-    valueSet?.add(noCorrectAnswers);
-    valueSet?.add(noWrongAnswers);
-    return valueSet;
-  }
+  // List<int?>? checkCorrectWrongAnswers(
+  //     Question question, String selectedIndex) {
+  //   int noCorrectAnswers = 0;
+  //   int AnsweredQuestions = 0;
+  //   int noWrongAnswers = 0;
+  //   if (question.answer! == selectedIndex) {
+  //     noCorrectAnswers++;
+  //     AnsweredQuestions++;
+  //   } else if (question.answer! != selectedIndex) {
+  //     noWrongAnswers++;
+  //     AnsweredQuestions++;
+  //   }
+  //   valueSet?.add(AnsweredQuestions);
+  //   valueSet?.add(noCorrectAnswers);
+  //   valueSet?.add(noWrongAnswers);
+  //   return valueSet;
+  // }
 
   void checkAns(Question question, String selectedIndex) {
     // because once user press any option then it will run
@@ -94,15 +115,20 @@ class QuestionController extends GetxController
 
     // Once user select an ans after 3s it will go to the next qn
     Future.delayed(Duration(seconds: 3), () {
+      print('calling3');
       nextQuestion();
     });
   }
 
+
   void nextQuestion() {
-    // if (_questionNumber.value != _questions.length) {
-    if (_questionNumber.value != 4) {
-      // have to chnage
+    print(_noOfQuestions);
+    print('next ques');
+    print(_questionNumber.value);
+
+    if (_questionNumber.value != _noOfQuestions) {
       _isAnswered = false;
+      print(_isAnswered);
       _pageController.nextPage(
           duration: Duration(milliseconds: 250), curve: Curves.ease);
 
@@ -111,14 +137,23 @@ class QuestionController extends GetxController
 
       // Then start it again
       // Once timer is finish go to the next qn
+      print('calling4');
       _animationController.forward().whenComplete(nextQuestion);
     } else {
-      // Get package provide us simple way to naviigate another page
-      //Get.to(ScoreScreen());
+      //Get package provide us simple way to naviigate another page
+      Get.to(() => const FeedBackForm());
     }
   }
 
   void updateTheQnNum(int index) {
     _questionNumber.value = index + 1;
+  }
+
+  void setQuizNumber() {
+    _questionNumber.value = 1;
+  }
+
+  List<Object> getQuizDetails(){
+    return [_noOfQuestions, _time, _cattegory];
   }
 }

@@ -1,5 +1,6 @@
 
 
+import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:localstorage/localstorage.dart';
@@ -12,12 +13,14 @@ import 'options.dart';
 
 class QuestionCard extends StatelessWidget {
   final int index;
+  final int itemCount;
+  final Question question;
 
-  QuestionCard({Key? key, required this.question, required this.index})
+  QuestionCard({Key? key, required this.question, required this.index, required this.itemCount})
       : super(key: key);
   // const QuestionCard({Key? key, required this.index}) : super(key: key);
 
-  final Question question;
+
   final LocalStorage storage = new LocalStorage('localstorage_app');
 
 
@@ -27,38 +30,55 @@ class QuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
-    // print(QuizID1);
-    // print('questionCard');
-
     onPress(Question question, int selectedIndex, String? questionID) {
 
       final QuizID = storage.getItem('QuizID');
       print(QuizID);
       print('questionCard');
-      Provider.of<QuizCrudModel>(context, listen: false).updateValues(question, selectedIndex.toString(), QuizID);
+      Provider.of<QuizResultCrudModel>(context, listen: false).updateValues(question, selectedIndex.toString(), QuizID);
       _controller.checkAns(question, selectedIndex.toString());
     }
 
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
       width: double.infinity,
+      height: double.infinity,
       decoration: BoxDecoration(
-          color: Color.fromARGB(196, 151, 151, 163),
-          borderRadius: BorderRadius.circular(25)),
+          borderRadius: BorderRadius.circular(10),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(196, 151, 151, 163),
+              Colors.white,
+            ],
+          )
+      ),
       child: Center(
         child: Column(
           children: [
-            Text.rich(
-              TextSpan(
-                  text: "${question.id}",
-                  style: Theme.of(context).textTheme.headline6,
-                  children: [
-                    TextSpan(
-                      text: "/10",
-                      style: Theme.of(context).textTheme.headline6,
-                    )
-                  ]),
+            // SizedBox(
+            //   height: 4,
+            // ),
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: Colors.lightBlueAccent,
+                  shape: BoxShape.circle
+              ),
+              child: Text.rich(
+                TextSpan(
+                    text: "${index + 1}",
+                    //text: "${question.id}",
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                    children: [
+                      TextSpan(
+                        text: "/${itemCount}",
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      )
+                    ]),
+              ),
             ),
             SizedBox(
               height: 8,
@@ -67,10 +87,7 @@ class QuestionCard extends StatelessWidget {
               child: Text(
                 //movieList[index].title.toString()
                 question.question.toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6!
-                    .copyWith(color: Colors.blueGrey),
+                style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -93,9 +110,9 @@ class QuestionCard extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 8,
+              height: 20,
             ),
-            Expanded(
+            SingleChildScrollView(
               child: Column(
                 children: [
                   ListView.builder(

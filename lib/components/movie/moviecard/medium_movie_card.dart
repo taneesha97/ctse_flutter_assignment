@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
@@ -7,13 +8,14 @@ import '../../../styles.dart';
 
 class CustomCard extends StatelessWidget {
   final int index;
+  final SelectedMovieModel movie;
   const CustomCard({
     // Input Parameters.
     Key? key,
     this.image,
     this.title,
     this.year,
-    this.press, required this.index,
+    this.press, required this.index, required this.movie,
 
   }) : super(key: key);
 
@@ -60,7 +62,7 @@ class CustomCard extends StatelessWidget {
                   image:  DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        movieList[index].imageUrl.toString()),
+                        movie.imageUrl.toString()),
                   )
               ),
             ),
@@ -71,11 +73,11 @@ class CustomCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(movieList[index].title.toString(),
+                      Text(movie.title.toString(),
                         overflow: TextOverflow.ellipsis,
-                        style: Styles.textSectionHeader,
+                        style: Styles.smallCardHeader,
                       ),
-                      Text(movieList[index].year,
+                      Text(movie.year,
                         overflow: TextOverflow.ellipsis,
                         style: Styles.textSectionBody,
                       ),

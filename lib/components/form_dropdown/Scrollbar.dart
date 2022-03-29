@@ -47,7 +47,7 @@ class _MyScrollbarState extends State<MyScrollbar> {
   ScrollbarPainter _buildMaterialScrollbarPainter() {
     return ScrollbarPainter(
 
-      color: Colors.blue,
+      color: Color(0xff1a237e),
       textDirection: Directionality.of(context),
       thickness: _kScrollbarThickness,
       radius: Radius.circular(20),

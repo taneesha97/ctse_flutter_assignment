@@ -18,7 +18,7 @@ class SinglePageHeader extends StatelessWidget {
               left: 10,
               top: 10,
             ),
-            child: Text(header, style: Styles.textSectionHeader,),
+            child: Text(header, style: Styles.smallCardHeader,),
           ),
           Divider(
             color: Styles.primaryThemeColor,

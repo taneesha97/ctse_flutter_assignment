@@ -1,52 +1,66 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctse_assignment_1/components/movie/moviecard/medium_movie_card.dart';
 import 'package:ctse_assignment_1/components/movie/moviecategory/movie_category.dart';
-import 'package:ctse_assignment_1/screens/movie_all.dart';
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../components/movie/moviecategory/long_movie_category.dart';
+import '../styles.dart';
 import '../util/crud_model.dart';
 
-class MovieWiki extends StatelessWidget {
-  late QuerySnapshot<Object?> array_data;
+class MovieWiki extends StatefulWidget {
 
-  MovieWiki({Key? key}) : super(key: key);
+  const MovieWiki({Key? key}) : super(key: key);
+
+  @override
+  State<MovieWiki> createState() => _MovieWikiState();
+}
+
+class _MovieWikiState extends State<MovieWiki> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final fireBaseUser = context.watch<User?>();
     // Provider Movies - Changed to the Appropriate movie list.
-    Stream<QuerySnapshot> movies =
-        Provider.of<CrudModel>(context, listen: false).movies;
+    Stream<List<SelectedMovieModel>> movies =
+        Provider.of<CrudModel>(context, listen: false).getListOfMoviesShort;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.teal,
+        elevation: 0,
+        toolbarHeight: 10,
+      ),
       body: Container(
-          margin: EdgeInsets.only(
-            top: 24,
+          margin: const EdgeInsets.only(
+            top: 10,
           ),
           child: SingleChildScrollView(
               child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(
+               Padding(
+                padding: const EdgeInsets.only(
                   left: 9,
-                  top: 7,
                 ),
                 child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text("Movie Categories",
-                        style: TextStyle(
-                          fontFamily: "Raleway",
-                          fontWeight: FontWeight.w600,
-                          fontSize: 30,
-                        ))),
+                        style: Styles.textSectionHeader)),
               ),
-              const Padding(
-                padding: EdgeInsets.only(
+               Padding(
+                padding: const EdgeInsets.only(
                   left: 9,
                 ),
                 child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "Categories",
-                      style: TextStyle(fontFamily: "Raleway", fontSize: 20),
+                      style: Styles.textSectionSubBody,
                     )),
               ),
               Padding(
@@ -71,12 +85,13 @@ class MovieWiki extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  StreamBuilder<QuerySnapshot>(
+                                  StreamBuilder<List<SelectedMovieModel>>(
                                     stream: movies,
-                                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                                      return AllMovieScreen();
+                                    builder: (BuildContext context, snapshot) {
+                                      return LongMovieCategory(category: "All Movies",);
                                     }
-                                  )),
+                                  )
+                          ),
                         );
                       },
                     ),
@@ -88,9 +103,9 @@ class MovieWiki extends StatelessWidget {
               ),
               SizedBox(
                 height: 200,
-                child: StreamBuilder<QuerySnapshot>(
+                child: StreamBuilder<List<SelectedMovieModel>>(
                   stream: movies,
-                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  builder: (BuildContext context, snapshot) {
                     if (snapshot.hasError) {
                       return Text("There an Error Loading Movies");
                     }
@@ -98,23 +113,22 @@ class MovieWiki extends StatelessWidget {
                       return Text("Loading");
                     }
                     final data = snapshot.requireData;
-                    array_data = data;
 
                     return ListView.builder(
-                      itemCount: data.size,
+                      itemCount: data.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        return CustomCard(index: index);
+                        return CustomCard(index: index, movie: data[index],);
                       },
                     );
                   },
                 ),
               ),
               Container(
-                child: MovieCategory(),
+                child: MovieCategory(category: "Action",),
               ),
               Container(
-                child: MovieCategory(),
+                child: MovieCategory(category: "Crime",),
               ),
             ],
           ))),

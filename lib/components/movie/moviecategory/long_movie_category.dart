@@ -1,80 +1,135 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/movie.dart';
+import '../../../styles.dart';
 import '../../../util/crud_model.dart';
+import '../../../util/debouncer.dart';
 import '../moviecard/long_movie_card.dart';
 
 class LongMovieCategory extends StatefulWidget {
-  const LongMovieCategory({Key? key}) : super(key: key);
+  final String category;
+  String? searchTerm = "";
+  LongMovieCategory({Key? key, required this.category}) : super(key: key);
 
   @override
   State<LongMovieCategory> createState() => _LongMovieCategoryState();
 }
 
 class _LongMovieCategoryState extends State<LongMovieCategory> {
-
   @override
   Widget build(BuildContext context) {
     // Provider to the fetch all the movies.
-    Stream<QuerySnapshot> movies = Provider.of<CrudModel>(context, listen: false).movies;
-    return Container(
-        child: Column(
+    Stream<QuerySnapshot> movies =
+        Provider.of<CrudModel>(context, listen: false).movies;
+
+    // Custom Provider.
+    Stream<List<SelectedMovieModel>> listMovies = Provider.of<CrudModel>(context).getListOfMoviesShort;
+
+    // Debouncer instance.
+    final _debouncer = Debouncer(milliseconds: 500);
+
+    // Conditionally select the Provider Method.
+    Stream<List<SelectedMovieModel>> movies1;
+    if (widget.category == "All Movies"){
+      if(widget.searchTerm != ""){
+        print(widget.searchTerm.toString() + "Search 1");
+        movies1 = Provider.of<CrudModel>(context).getListOfMoviesShortSearch(widget.searchTerm.toString());
+      } else {
+        print(widget.searchTerm.toString() + "Search 2");
+        movies1 = Provider.of<CrudModel>(context).getListOfMoviesShort;
+      }
+
+    } else {
+      movies1 = Provider.of<CrudModel>(context).getMoviesFromCategories(widget.category);
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.teal,
+        elevation: 0,
+        toolbarHeight: 10,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          top: 10,
+          left: 10,
+          right: 10,
+        ),
+        child: Container(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 10,
-                right: 10,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                   const Text(
-                    "Recommended",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextButton(
-                    child: const Text("View All"),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              widget.category,
+              style: Styles.textSectionHeader,
+            ),
+            Text(
+              "Custom Libraries to Manage Favorite Movies",
+              style: Styles.textSectionSubBody,
+            ),
+            SizedBox(
+              height: 10,
             ),
 
-            Container(
-              height: MediaQuery.of(context).size.height - 128,
-              child: StreamBuilder<QuerySnapshot>(
-                stream: movies,
-                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-                  if(snapshot.hasError){
-                    return Text("There an Error Loading Movies");
-                  }
-                  if(snapshot.connectionState == ConnectionState.waiting){
-                    return Text("Loading");
-                  }
-                  final data = snapshot.requireData;
+            TextFormField(
+              style: TextStyle(color: Colors.blueAccent),
+              decoration: InputDecoration(
+                hintText: "Search Movies",
+                contentPadding: EdgeInsets.only(
+                  left: 10,
+                ),
+                border: InputBorder.none,
+              ),
+              onChanged: (value) {
+                setState(() {
+                  _debouncer.run((){
+                    widget.searchTerm = value;
+                  });
+                });
+              },
+            ),
 
+            Flexible(
+                child: StreamBuilder<List<SelectedMovieModel>>(
+              stream: movies1,
+              builder: (BuildContext context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text("There an Error Loading Movies");
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Text("Loading");
+                }
+                final data = snapshot.requireData;
+
+                if(data.length != 0){
                   return ListView.builder(
-                    itemCount: data.size,
-                    itemBuilder: (context, index){
-                      return LongMovieCard(index: index);
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return LongMovieCard(index: index, movie: data[index],);
                     },
                   );
-                },
-              )
-            ),
-            // Flexible(
-            //   child: ListView.builder(
-            //       itemCount: 4,
-            //       itemBuilder: (context, index){
-            //         return LongMovieCard(index: index);
-            //       }),
-            // )
+                } else {
+                  return Center(child: Column(
+                    children: [
+
+                      const Text("No such category in the system!"),
+                    ],
+                  ));
+                }
+              },
+            )),
           ],
-        ));
+        )),
+      ),
+    );
   }
 }
