@@ -20,20 +20,6 @@ class Options extends StatelessWidget {
     return GetBuilder<QuestionController>(
         init: QuestionController(),
         builder: (qnController) {
-          // Color getTheRightColor() {
-          //   if (qnController.isAnswered) {
-          //     if (index.toString() == qnController.correctAns) {
-          //       return Colors.green;
-          //     }
-          //     else if (index == qnController.selectedAns &&
-          //         qnController.selectedAns != qnController.correctAns) {
-          //       return Colors.red;
-          //     }
-          //   }else{
-          //     return const Color.fromARGB(255, 0, 238, 255);
-          //   }
-          //   return const Color.fromARGB(255, 0, 238, 255);
-          // }
 
           Color getTheRightColor() {
             if (qnController.isAnswered) {

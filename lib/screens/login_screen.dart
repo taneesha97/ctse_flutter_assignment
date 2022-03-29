@@ -1,4 +1,5 @@
 import 'package:ctse_assignment_1/bottom_navigation/app.dart';
+import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class _LoginScreen extends State<LoginScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RegisterScreen()),
+                                builder: (context) => MovieWiki()),
                           );
                         }
                       });
@@ -97,6 +98,17 @@ class _LoginScreen extends State<LoginScreen> {
                     },
                     child: const Text('Login'),
                   )
+              ), SizedBox(
+                child: ElevatedButton(
+                  child: const Text('Register Here'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegisterScreen()),
+                    );
+                  },
+                ),
               )
             ],
 
