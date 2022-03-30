@@ -86,7 +86,8 @@ class _FeedBackFormState extends State<FeedBackForm> {
 
     void onPressAlert (){
       print('hi');
-      Navigator.pop(context);
+      //Navigator.pop(context);
+      Navigator.of(context, rootNavigator: true).pop();
       Navigator.push(
         context,
         MaterialPageRoute(

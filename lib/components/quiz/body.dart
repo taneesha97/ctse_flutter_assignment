@@ -30,6 +30,7 @@ class _BodyState extends State<Body> {
   //late AnimationController controller;
 
   List<Question> docs = [];
+  BuildContext? context1;
 
   @override
   void initState() {
@@ -65,10 +66,11 @@ class _BodyState extends State<Body> {
       padding: EdgeInsets.symmetric(horizontal: 12),
       child: Column(
         children: [
-          SizedBox(
-            height: 10,
-          ),
-          Text("Movie Categories", style: Styles.textSectionHeader),
+          // SizedBox(
+          //   height: 10,
+          // ),
+          // Text("Movie Categories", style: Styles.textSectionHeader),
+
           SizedBox(
             height: 10,
           ),

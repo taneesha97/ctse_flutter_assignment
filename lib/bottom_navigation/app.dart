@@ -1,11 +1,7 @@
 import 'package:ctse_assignment_1/bottom_navigation/tab_navigator.dart';
-import 'package:ctse_assignment_1/screens/register_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../util/userAuth/userauthentication.dart';
-import 'live_view_page.dart';
+
 
 class App extends StatefulWidget {
   @override

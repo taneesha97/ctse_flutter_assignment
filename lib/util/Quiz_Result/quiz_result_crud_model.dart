@@ -67,9 +67,9 @@ class QuizResultCrudModel extends ChangeNotifier {
           .collection('result-quizes')
           .doc(QuizID1)
           .update({
-        'correct_answer': noCorrectAnswers ?? 0,
-        'wrong_answer': noWrongAnswers ?? 0,
-        'correct_points': CorrectPoints ?? 0
+        'correct_answer': noCorrectAnswers,
+        'wrong_answer': noWrongAnswers,
+        'correct_points': CorrectPoints
       });
     } catch (e) {
       print(e);
@@ -91,7 +91,7 @@ class QuizResultCrudModel extends ChangeNotifier {
                 .collection('result-quizes')
                 .doc(QuizID1)
                 .update({
-              'id': 1 ?? '',
+              'id': 1 ,
               'correct_answer': 0,
               'wrong_answer': 0,
               'correct_points': 0
@@ -129,8 +129,8 @@ class QuizResultCrudModel extends ChangeNotifier {
       DocumentReference<Map<String, dynamic>> value =
           await FirebaseFirestore.instance.collection('result-quizes').add({
         'id': 0, // need to changed to reattempt id
-        'no_questions': noQuestions ?? 0,
-        'userId': userId ?? '',
+        'no_questions': noQuestions,
+        'userId': userId,
         'correct_answer': 0,
         'wrong_answer': 0,
         'correct_points': 0
