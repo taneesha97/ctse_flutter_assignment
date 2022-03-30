@@ -39,6 +39,16 @@ class Options extends StatelessWidget {
             // };
           }
 
+          Color getTheRightColor1() {
+            if (qnController.isAnswered) {
+              if (index == (int.parse(qnController.correctAns) - 1)) {
+                return Colors.white;
+              }
+            }
+            return Colors.black;
+            // };
+          }
+
           return Center(
             child: Padding(
               padding: EdgeInsets.only(bottom: 10),
@@ -59,7 +69,8 @@ class Options extends StatelessWidget {
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
                             "$text",
-                            style: TextStyle(color: Colors.black, fontSize: 14),
+                            style: TextStyle(
+                                color: getTheRightColor1(), fontSize: 14),
                           ),
                         ),
                       ],

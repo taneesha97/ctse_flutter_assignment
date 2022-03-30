@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:ctse_assignment_1/components/scorepage/background.dart';
 import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:ctse_assignment_1/models/result_quiz.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
@@ -251,8 +252,8 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          Color.fromARGB(235, 0, 11, 94),
-                          Colors.white,
+                          Color.fromARGB(235, 0, 255, 255),
+                          Color.fromARGB(255, 1, 168, 140),
                         ],
                       )),
                   child: Center(
@@ -280,7 +281,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                             ),
                             Text.rich(
                               TextSpan(
-                                  text: "${docs[0].correct_answer}",
+                                  text: "${docs[0].correct_answer * 10}",
                                   //text: "${question.id}",
                                   style: Theme.of(context)
                                       .textTheme
@@ -288,10 +289,59 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                                       ?.copyWith(color: Colors.white),
                                   children: [
                                     TextSpan(
-                                      text: "/${docs[0].no_questions}",
+                                      text: "/${docs[0].no_questions * 10}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline4
+                                          ?.copyWith(color: Colors.white),
+                                    )
+                                  ]),
+                            ),
+                          ],
+                        )),
+                      ] else if (docs[0]?.correct_answer ==
+                          docs[0]?.no_questions) ...[
+                        const Text.rich(
+                          TextSpan(
+                              text: "🎊 Congratulations",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                        ),
+                        const SizedBox(height: 20),
+                        Center(
+                            child: Row(
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/happy.png"),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text.rich(
+                              TextSpan(
+                                  text: "${docs[0].correct_answer * 10}",
+                                  //text: "${question.id}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6
+                                      ?.copyWith(color: Colors.white),
+                                  children: [
+                                    TextSpan(
+                                      text: "/${docs[0].no_questions * 10}",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline6
                                           ?.copyWith(color: Colors.white),
                                     )
                                   ]),
@@ -329,7 +379,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                             ),
                             Text.rich(
                               TextSpan(
-                                  text: "${docs[0].correct_answer}",
+                                  text: "${docs[0].correct_answer * 10}",
                                   //text: "${question.id}",
                                   style: Theme.of(context)
                                       .textTheme
@@ -337,7 +387,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                                       ?.copyWith(color: Colors.white),
                                   children: [
                                     TextSpan(
-                                      text: "/${docs[0].no_questions}",
+                                      text: "/${docs[0].no_questions * 10}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6
