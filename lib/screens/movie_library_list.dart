@@ -163,9 +163,9 @@ class LibraryList extends StatelessWidget {
                     showAltertDialog(context, () {
                       Provider.of<CrudModel>(context, listen: false)
                           .deleteLibrary(library.id);
-                      Navigator.pop(context);
+                      Navigator.of(context, rootNavigator: true).pop();
                     }, () {
-                      Navigator.pop(context);
+                      Navigator.of(context, rootNavigator: true).pop();
                     }, "Do you want to delete library including all the movies in it?");
                   },
                   child: Icon(

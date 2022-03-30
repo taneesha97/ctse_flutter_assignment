@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../../models/actor.dart';
 import '../../../models/movie.dart';
 import '../../../styles.dart';
 
 class ActorCard extends StatelessWidget {
-  const ActorCard({Key? key}) : super(key: key);
+  final Actor actor;
+  const ActorCard({Key? key, required this.actor}) : super(key: key);
   final String imageUrl = "https://nettv4u.com/imagine/t/e/l/u/g/u/telugu-actress-eesha-hot-pictures-68.jpg";
 
   @override
   Widget build(BuildContext context) {
+    print(actor);
     return Container(
       margin: EdgeInsets.all(6),
       decoration: BoxDecoration(
@@ -42,7 +45,7 @@ class ActorCard extends StatelessWidget {
                       borderRadius: new BorderRadius.circular(100),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(imageUrl),
+                        image: NetworkImage(actor.imageUrl),
                       )
                   ),
               ),
@@ -51,8 +54,8 @@ class ActorCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Actor Name", style: Styles.actorCardHeader, overflow: TextOverflow.ellipsis,),
-                    Text("Character Name", style: TextStyle(fontSize: 12),),
+                    Text(actor.name, style: Styles.actorCardHeader, overflow: TextOverflow.ellipsis,),
+                    Text(actor.character, style: TextStyle(fontSize: 12),),
                   ],
                 ),
               )

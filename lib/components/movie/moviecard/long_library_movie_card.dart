@@ -49,7 +49,7 @@ class _LongLibraryMovieCardState extends State<LongLibraryMovieCard> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>  SingleMoviePage(index: 1,)
+                    builder: (context) =>  SingleMoviePage(index: 1,movie: widget.movie,)
                 ),
               );
             },
