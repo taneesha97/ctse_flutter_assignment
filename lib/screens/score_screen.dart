@@ -104,9 +104,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     String QuizID = storage.getItem('QuizID');
     QuestionController _questionController = Get.put(QuestionController());
-    print('chedck');
     quizList = _questionController.getQuizDetails();
-    print(quizList);
 
     void onPress() {
       Alert(
@@ -124,7 +122,8 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
             onPressed: () {
               Provider.of<QuizResultCrudModel>(context, listen: false)
                   .deleteQuizResult(QuizID);
-              Provider.of<QuizResultCrudModel>(context, listen: false).setdefultValues();
+              Provider.of<QuizResultCrudModel>(context, listen: false)
+                  .setdefultValues();
               _questionController.setQuizNumber();
               //Navigator.pop(context);
               Navigator.of(context, rootNavigator: true).pop();
@@ -170,6 +169,8 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
               print(quizList);
               _questionController.setisAnsweredFalse();
               Provider.of<QuizResultCrudModel>(context, listen: false)
+                  .setdefultValues();
+              Provider.of<QuizResultCrudModel>(context, listen: false)
                   .ReAttemptQuizResult(QuizID);
               _questionController.setQuizNumber();
               //Navigator.pop(context);
@@ -192,7 +193,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             onPressed: () {
-             // Navigator.pop(context);
+              // Navigator.pop(context);
               Navigator.of(context, rootNavigator: true).pop();
             },
             color: Color.fromRGBO(91, 55, 185, 1.0),
@@ -219,7 +220,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
       body: Center(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment. center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 height: 10,
@@ -234,8 +235,8 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                   width: sizeAnimation.value,
                   margin: EdgeInsets.all(1),
                   // color: Colors.blue,
-                  child:
-                      Image.asset('assets/images/trophy.png', fit: BoxFit.cover),
+                  child: Image.asset('assets/images/trophy.png',
+                      fit: BoxFit.cover),
                 ),
               ),
               SizedBox(height: 20),
@@ -318,7 +319,8 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
                                 image: DecorationImage(
-                                  image: AssetImage("assets/images/clapping.png"),
+                                  image:
+                                      AssetImage("assets/images/clapping.png"),
                                 ),
                               ),
                             ),

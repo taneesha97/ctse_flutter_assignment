@@ -8,10 +8,10 @@ class QuizResultCrudModel extends ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
 
-  late int noCorrectAnswers;
-  late int CorrectPoints;
-  late int AnsweredQuestions;
-  late int noWrongAnswers;
+  late int noCorrectAnswers = 0;
+  late int CorrectPoints = 0;
+  late int AnsweredQuestions = 0;
+  late int noWrongAnswers = 0;
 
   Future<dynamic> readQuizResultsByID(String id) async {
     QuerySnapshot querySnapshot;
@@ -56,7 +56,7 @@ class QuizResultCrudModel extends ChangeNotifier {
       print(noCorrectAnswers);
       print('no of corrects');
       noCorrectAnswers++;
-      CorrectPoints = CorrectPoints + noCorrectAnswers * 10;
+      CorrectPoints = CorrectPoints + 10;
       AnsweredQuestions++;
     } else if (question.answer! != (int.parse(selectedIndex) + 1).toString()) {
       noWrongAnswers++;
