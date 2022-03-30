@@ -28,7 +28,23 @@ class _LibraryFormState extends State<LibraryForm> {
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String? lname;
-  String? color;
+  String? color = "4280391411";
+
+  void getColor(){
+    int colorInteger = int.parse(color.toString());
+    Color newColor = Color(colorInteger);
+  }
+
+  // Creating a common navigation method.
+  void navigatorMethod() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>  LibraryList()),
+
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +122,7 @@ class _LibraryFormState extends State<LibraryForm> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Center(
