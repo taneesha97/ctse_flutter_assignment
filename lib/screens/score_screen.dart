@@ -4,6 +4,7 @@ import 'package:ctse_assignment_1/components/scorepage/background.dart';
 import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:ctse_assignment_1/models/result_quiz.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
+import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
@@ -435,7 +436,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                         onPressed: () {
                           _questionController.setisAnsweredFalse();
                           MaterialPageRoute(
-                              builder: (context) => const IndexPage());
+                              builder: (context) => const MovieWiki());
                         }),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
