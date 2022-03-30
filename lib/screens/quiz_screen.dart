@@ -1,4 +1,3 @@
-import 'package:ctse_assignment_1/components/audio_quizes/audio_quiz_body.dart';
 import 'package:ctse_assignment_1/components/quiz/body.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,14 +15,17 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    QuestionController _controller = Get.put(QuestionController());
+    _controller.saveContext(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Center(
-      //     child: Text("Movie Categories"),
-      //   ),
-      // ),
       appBar: AppBar(
         backgroundColor: Colors.teal,
         elevation: 0,

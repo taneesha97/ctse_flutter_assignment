@@ -33,9 +33,7 @@ class _DropDownState extends State<DropDown> {
     print(category);
     Provider.of<QuizListCrudModel>(context, listen: false).insertQuizListData(category, questions, time)
         .then((value) {
-      //Provider.of<QuizCrudModel>(context, listen: false).saveQuizID(value.toString()).;
-      print(value);
-
+          
       if(value != 0){
         Alert(
           context: context,
@@ -48,6 +46,7 @@ class _DropDownState extends State<DropDown> {
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               onPressed: (){
+                Navigator.of(context, rootNavigator: true).pop(); // New Pop Method.
                 Navigator.push(context, MaterialPageRoute(builder: (context) => QuizeList()));
               },
               color: Color.fromRGBO(91, 55, 185, 1.0),
@@ -72,7 +71,7 @@ class _DropDownState extends State<DropDown> {
               child: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/images/p5.jpg"),
+                        image: AssetImage("assets/images/h2.jpg"),
                         fit: BoxFit.fill,
                     )
                 ),
@@ -81,7 +80,7 @@ class _DropDownState extends State<DropDown> {
             title: Text(
               "Quice Configuration",
               style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
+                color: Colors.black45, fontWeight: FontWeight.bold, fontSize: 25),
             ),
             backgroundColor: Colors.pink,
             shape: RoundedRectangleBorder(
@@ -112,7 +111,7 @@ class _DropDownState extends State<DropDown> {
                             Expanded(
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      border: Border.all(color: Color(0xff1e88e5)),
+                                      border: Border.all(color: Colors.teal),
                                       borderRadius: BorderRadius.all(Radius.circular(12))),
                                   child: Column(
                                     children: [
@@ -121,7 +120,7 @@ class _DropDownState extends State<DropDown> {
                                           padding: EdgeInsets.only(right: 10),
                                           decoration: BoxDecoration(
                                               border: Border.all(
-                                                color: Color(0xff1e88e5),
+                                                color: Colors.teal,
                                               ),
                                               borderRadius:
                                               BorderRadius.all(Radius.circular(10))),
@@ -244,7 +243,7 @@ class _DropDownState extends State<DropDown> {
                           Expanded(
                               child: Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: Color(0xff1e88e5)),
+                                    border: Border.all(color: Colors.teal),
                                     borderRadius: BorderRadius.all(Radius.circular(12))),
                                 child: Column(
                                   children: [
@@ -254,7 +253,7 @@ class _DropDownState extends State<DropDown> {
                                         padding: EdgeInsets.only(right: 10),
                                         decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: Color(0xff1e88e5),
+                                              color: Colors.teal,
                                             ),
                                             borderRadius:
                                             BorderRadius.all(Radius.circular(10))),
@@ -362,7 +361,7 @@ class _DropDownState extends State<DropDown> {
                           Expanded(
                               child: Container(
                                 decoration: BoxDecoration(
-                                    border: Border.all(color: Color(0xff1e88e5)),
+                                    border: Border.all(color: Colors.teal),
                                     borderRadius: BorderRadius.all(Radius.circular(12))),
                                 child: Column(
                                   children: [
@@ -372,7 +371,7 @@ class _DropDownState extends State<DropDown> {
                                         padding: EdgeInsets.only(right: 10),
                                         decoration: BoxDecoration(
                                             border: Border.all(
-                                              color: Color(0xff1e88e5),
+                                              color: Colors.teal,
                                             ),
                                             borderRadius:
                                             BorderRadius.all(Radius.circular(10))),
@@ -463,14 +462,14 @@ class _DropDownState extends State<DropDown> {
                     ],
                   ),
 
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   Column(
                     children: [
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             minimumSize: Size(90, 45),
                             textStyle: TextStyle(fontSize: 15),
-                            primary: Colors.blue,
+                            primary: Colors.teal,
                             shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(10.0),
                             ),
@@ -478,12 +477,12 @@ class _DropDownState extends State<DropDown> {
                           child: Text('Add Label'),
                           onPressed: onPress
                         ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 10),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           minimumSize: Size(90, 45),
                           textStyle: TextStyle(fontSize: 15),
-                          primary: Colors.blue,
+                          primary: Colors.teal,
                           shape: new RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(10.0),
                           ),
