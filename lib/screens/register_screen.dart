@@ -1,3 +1,5 @@
+import 'package:ctse_assignment_1/models/user.dart';
+import 'package:ctse_assignment_1/screens/login_screen.dart';
 import 'package:ctse_assignment_1/util/userAuth/userauthentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -24,6 +26,11 @@ class _RegisterScreen  extends State<RegisterScreen>{
   int initialValue = 1;
   var itemList = new List<int>.generate(100, (i) => i + 1);
 
+  void AddUserToDB(String emailadd, String uname, String id, String age, String profileUrl  ){
+    User user =  new User(id: id, email: emailadd, userName: uname, profileUrl: profileUrl, age: age);
+
+  }
+
 
 
   @override
@@ -46,7 +53,7 @@ class _RegisterScreen  extends State<RegisterScreen>{
                   children: [
                     Container(
                       color:  Color(0xff0DD6E3),
-                      height: 350,
+                      height: 400,
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.vertical(top: Radius.zero, bottom: Radius.zero),
                       // ),
@@ -61,15 +68,17 @@ class _RegisterScreen  extends State<RegisterScreen>{
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Container(
-                                    // decoration: const BoxDecoration(
-                                    //   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                    // ),
-                                    color: Color(0xffffffff),
-                                    child: FlutterLogo(
-                                      size: 60,
+                                Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                          color: Color(0xffffffff),
+                                          borderRadius: BorderRadius.all(Radius.circular(10))
+                                      ),
+                                      child: const FlutterLogo(
+                                        size: 60,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -97,14 +106,17 @@ class _RegisterScreen  extends State<RegisterScreen>{
                               margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
                               width: 300,
                               height: 50,
-                              child: TextFormField(
-                                initialValue:'',
+                              child: TextField(
                                 onChanged: (val) => setState(() => uname = val),
-                                decoration: const InputDecoration(
+
+                                decoration: InputDecoration(
                                   labelText: "Enter Username",
                                   filled: true,
                                   fillColor: Color(0xffffffff),
-                                  border:  InputBorder.none,
+                                  border: OutlineInputBorder(
+                                    borderSide: new BorderSide(color: Colors.red),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
                                 ),
                               ),
                             ),
@@ -171,12 +183,31 @@ class _RegisterScreen  extends State<RegisterScreen>{
                               )
                               )
                             ),
+                          ),
+                          Center(
+                            child: Container(
+                              margin: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: GestureDetector(
+                                  onTap: (){
+                                    Navigator.push(context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginScreen()
+                                      ),
+                                    );
+                                  },
+                                  child: Text('Or Login',
+                                    style: Styles.subWelcomeText),
+                                ),
+                              ),
+                            ),
                           )
                         ],
                       ),
                     ),
                     const SizedBox(
-                      height: 100,
+                      height: 50,
                     ),
                     Center(
                       child: ElevatedButton(
@@ -185,7 +216,9 @@ class _RegisterScreen  extends State<RegisterScreen>{
                             padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5)),
 
                         onPressed: () {
-                          Provider.of<UserAuthentication>(context, listen: false).registerUser(emailadd!, 'hello1234');
+                          var value = Provider.of<UserAuthentication>(context, listen: false).registerUser(emailadd!, 'hello1234');
+                          // AddUserToDB(String? emailadd );
+
                         },
                         child: const Text('Start'),
                       ),
