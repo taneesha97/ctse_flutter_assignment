@@ -6,6 +6,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:provider/provider.dart';
 
 import '../styles.dart';
+import '../util/User/UserCRUDModel.dart';
 
 class RegisterScreen extends StatefulWidget {
 
@@ -21,13 +22,29 @@ class _RegisterScreen  extends State<RegisterScreen>{
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String? uname;
+  String? passwordVal;
   String? emailadd;
   final String _regxPattern = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-  int initialValue = 1;
+  int initialAgeValue = 1;
   var itemList = new List<int>.generate(100, (i) => i + 1);
 
-  void AddUserToDB(String emailadd, String uname, String id, String age, String profileUrl  ){
-    User user =  new User(id: id, email: emailadd, userName: uname, profileUrl: profileUrl, age: age);
+  void AddUserToDB(String emailadd ,String uname , int  initialAgeValue, String  passwordVal){
+
+    var value = Provider.of<UserAuthentication>(context, listen: false).registerUser(emailadd!, passwordVal!);
+    print('________________________ $value');
+    UserAuthentication val = Provider.of<UserAuthentication>(context, listen: false);
+    // val.listen((event) {
+    //   print('___________In_____________ $value');
+    // };
+  print(' $val._firebaseAuth');
+  print('___');
+
+    User user =  new User(id: '', email: emailadd!, userName: uname!, profileUrl: '', age: initialAgeValue.toString());
+    Provider.of<UserCRUDModel>(context, listen: false).insertUserData(user).then((value) =>
+    {
+      print(value)
+    });
+
 
   }
 
@@ -53,7 +70,7 @@ class _RegisterScreen  extends State<RegisterScreen>{
                   children: [
                     Container(
                       color:  Color(0xff0DD6E3),
-                      height: 400,
+                      height: 420,
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.vertical(top: Radius.zero, bottom: Radius.zero),
                       // ),
@@ -103,7 +120,7 @@ class _RegisterScreen  extends State<RegisterScreen>{
                           ),
                           Center(
                             child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                              margin: EdgeInsets.symmetric(horizontal: 0, vertical: 2),
                               width: 300,
                               height: 50,
                               child: TextField(
@@ -123,6 +140,7 @@ class _RegisterScreen  extends State<RegisterScreen>{
                           ),
                           Center(
                             child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 0, vertical: 2),
                                 width: 300,
                                 height: 50,
                                 decoration: BoxDecoration(
@@ -130,7 +148,35 @@ class _RegisterScreen  extends State<RegisterScreen>{
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                               child: SizedBox(
-
+                                child:TextField(
+                                  // decoration: const InputDecoration(
+                                  //   labelText: "Enter Email Address",
+                                  //   filled: true,
+                                  //   fillColor: Color(0xffffffff),
+                                  //   border:  InputBorder.none,
+                                  // ),
+                                  decoration: InputDecoration(
+                                    labelText: "Enter Password",
+                                    filled: true,
+                                      fillColor: Color(0xffffffff),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  onChanged: (val) => setState(() => passwordVal = val),
+                                ),
+                              )
+                            ),
+                          ),Center(
+                            child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 0, vertical: 2),
+                                width: 300,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                // border: Border.all(color: Colors.black, width: 4),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              child: SizedBox(
                                 child:TextField(
                                   // decoration: const InputDecoration(
                                   //   labelText: "Enter Email Address",
@@ -153,7 +199,7 @@ class _RegisterScreen  extends State<RegisterScreen>{
                           ),
                           Center(
                             child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
+                              margin: EdgeInsets.symmetric(horizontal: 0, vertical: 2),
                               padding: EdgeInsets.symmetric(horizontal: 14,vertical: 1),
                               width: 300, // Adjust Input Field Width.
                                 decoration: BoxDecoration(
@@ -176,10 +222,10 @@ class _RegisterScreen  extends State<RegisterScreen>{
                                 }).toList(),
                                 onChanged: (int? newValue) {
                                   setState(() {
-                                    initialValue = newValue!;
+                                    initialAgeValue = newValue!;
                                   });
                                 },
-                                value: initialValue,
+                                value: initialAgeValue,
                               )
                               )
                             ),
@@ -207,7 +253,7 @@ class _RegisterScreen  extends State<RegisterScreen>{
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 20,
                     ),
                     Center(
                       child: ElevatedButton(
@@ -215,10 +261,8 @@ class _RegisterScreen  extends State<RegisterScreen>{
                             primary: Styles.primaryThemeColor,
                             padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5)),
 
-                        onPressed: () {
-                          var value = Provider.of<UserAuthentication>(context, listen: false).registerUser(emailadd!, 'hello1234');
-                          // AddUserToDB(String? emailadd );
-
+                        onPressed: (){
+                          AddUserToDB(emailadd! ,uname! , initialAgeValue,  passwordVal! );
                         },
                         child: const Text('Start'),
                       ),
