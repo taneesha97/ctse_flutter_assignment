@@ -1,6 +1,6 @@
 # Movie Quiz Flutter Application - CTSE Assignment - 1
 
-
+![GitHub Logo](readme-image.png)
 
 Movie Quiz Application.
 
