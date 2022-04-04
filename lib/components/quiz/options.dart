@@ -20,31 +20,32 @@ class Options extends StatelessWidget {
     return GetBuilder<QuestionController>(
         init: QuestionController(),
         builder: (qnController) {
-          // Color getTheRightColor() {
-          //   if (qnController.isAnswered) {
-          //     if (index.toString() == qnController.correctAns) {
-          //       return Colors.green;
-          //     }
-          //     else if (index == qnController.selectedAns &&
-          //         qnController.selectedAns != qnController.correctAns) {
-          //       return Colors.red;
-          //     }
-          //   }else{
-          //     return const Color.fromARGB(255, 0, 238, 255);
-          //   }
-          //   return const Color.fromARGB(255, 0, 238, 255);
-          // }
-
           Color getTheRightColor() {
             if (qnController.isAnswered) {
               if (index == (int.parse(qnController.correctAns) - 1)) {
+                print('is it calling');
                 return Colors.green;
               } else if (index.toString() == qnController.selectedAns &&
-                  qnController.selectedAns != (int.parse(qnController.correctAns) - 1).toString()) {
+                  qnController.selectedAns !=
+                      (int.parse(qnController.correctAns) - 1).toString()) {
                 return Colors.red;
+              } else {
+                return Color.fromARGB(255, 0, 238, 255);
+              }
+            } else {
+              return Color.fromARGB(255, 0, 238, 255);
+            }
+            //return Color.fromARGB(255, 0, 238, 255);
+            // };
+          }
+
+          Color getTheRightColor1() {
+            if (qnController.isAnswered) {
+              if (index == (int.parse(qnController.correctAns) - 1)) {
+                return Colors.white;
               }
             }
-            return Color.fromARGB(255, 0, 238, 255);
+            return Colors.black;
             // };
           }
 
@@ -68,8 +69,8 @@ class Options extends StatelessWidget {
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
                             "$text",
-                            style:
-                                TextStyle(color: Colors.black, fontSize: 14),
+                            style: TextStyle(
+                                color: getTheRightColor1(), fontSize: 14),
                           ),
                         ),
                       ],

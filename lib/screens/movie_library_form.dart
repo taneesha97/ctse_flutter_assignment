@@ -28,7 +28,23 @@ class _LibraryFormState extends State<LibraryForm> {
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String? lname;
-  String? color;
+  String? color = "4280391411";
+
+  void getColor(){
+    int colorInteger = int.parse(color.toString());
+    Color newColor = Color(colorInteger);
+  }
+
+  // Creating a common navigation method.
+  void navigatorMethod() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>  LibraryList()),
+
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +122,7 @@ class _LibraryFormState extends State<LibraryForm> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Center(
@@ -173,11 +189,13 @@ class _LibraryFormState extends State<LibraryForm> {
                               // Call the DB method to write to the database.
                               Provider.of<CrudModel>(context, listen: false)
                                   .addLibraries(library);
+                              Navigator.of(context).pop();
                             } else {
                               // Calling the Database Update Method.
                               Provider.of<CrudModel>(context, listen: false)
                                   .libraryNameUpate(
                                       lname.toString(), widget.libraryId, color.toString());
+                              Navigator.of(context).pop();
                             }
                           } else {
                             // Toast Messages are deprecated above Android 11.
@@ -195,7 +213,7 @@ class _LibraryFormState extends State<LibraryForm> {
                           }
                         },
                         child: Text(
-                          "Add to the Library",
+                          widget.functionValue==0?"Insert the Libraries":"Update the Library",
                           style: Styles.navBarTitle,
                         )),
                   ),

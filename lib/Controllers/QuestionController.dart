@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../models/quiz.dart';
 import '../screens/feedback_form.dart';
+import '../screens/quiz_screen.dart';
 
 class QuestionController extends GetxController
     with SingleGetTickerProviderMixin {
@@ -19,6 +20,8 @@ class QuestionController extends GetxController
 
   late String _correctAns;
   String get correctAns => this._correctAns;
+
+  late BuildContext context;
 
   int _noOfQuestions = 10;
   String _cattegory = '';
@@ -52,8 +55,8 @@ class QuestionController extends GetxController
         update();
       });
     print('calling2');
-   _animationController.forward().whenComplete(nextQuestion);
-   _pageController = PageController();
+    _animationController.forward().whenComplete(nextQuestion);
+    _pageController = PageController();
   }
 
   @override
@@ -101,6 +104,11 @@ class QuestionController extends GetxController
   //   return valueSet;
   // }
 
+  void saveContext(BuildContext buildContext) {
+    print(buildContext);
+    context = buildContext;
+  }
+
   void checkAns(Question question, String selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
@@ -120,11 +128,8 @@ class QuestionController extends GetxController
     });
   }
 
-
   void nextQuestion() {
-    print(_noOfQuestions);
-    print('next ques');
-    print(_questionNumber.value);
+    _isAnswered = false;
 
     if (_questionNumber.value != _noOfQuestions) {
       _isAnswered = false;
@@ -141,7 +146,13 @@ class QuestionController extends GetxController
       _animationController.forward().whenComplete(nextQuestion);
     } else {
       //Get package provide us simple way to naviigate another page
-      Get.to(() => const FeedBackForm());
+      //Get.to(() => const FeedBackForm());
+      _isAnswered = false;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const FeedBackForm()),
+      );
     }
   }
 
@@ -153,7 +164,11 @@ class QuestionController extends GetxController
     _questionNumber.value = 1;
   }
 
-  List<Object> getQuizDetails(){
+  List<Object> getQuizDetails() {
     return [_noOfQuestions, _time, _cattegory];
+  }
+
+  void setisAnsweredFalse(){
+    _isAnswered = false;
   }
 }
