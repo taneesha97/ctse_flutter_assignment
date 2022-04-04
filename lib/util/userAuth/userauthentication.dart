@@ -42,7 +42,25 @@ class UserAuthentication extends ChangeNotifier {
     try{
       await _firebaseAuth.signOut();
     }on FirebaseAuthException catch (e) {
+      print('exception $e');
     }
   }
+  //Delete User Method from Firebase
+  Future<void> deleteUserAccount() async {
+    try{
+      await _firebaseAuth.currentUser?.delete();
+    }on FirebaseAuthException catch (e) {
+      print('exception $e');
+    }
+  }
+  //UserPasswordChange method
+  Future<void> changeUserPassword(String newPwd) async {
+    try{
+      await _firebaseAuth.currentUser?.updatePassword(newPwd);
+    }on FirebaseAuthException catch (e) {
+      print('exception $e');
+    }
+  }
+
 
 }
