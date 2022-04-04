@@ -29,26 +29,14 @@ class _RegisterScreen  extends State<RegisterScreen>{
   var itemList = new List<int>.generate(100, (i) => i + 1);
 
   void AddUserToDB(String emailadd ,String uname , int  initialAgeValue, String  passwordVal){
-
     var value = Provider.of<UserAuthentication>(context, listen: false).registerUser(emailadd!, passwordVal!);
-    print('________________________ $value');
     UserAuthentication val = Provider.of<UserAuthentication>(context, listen: false);
-    // val.listen((event) {
-    //   print('___________In_____________ $value');
-    // };
-  print(' $val._firebaseAuth');
-  print('___');
-
     User user =  new User(id: '', email: emailadd!, userName: uname!, profileUrl: '', age: initialAgeValue.toString());
     Provider.of<UserCRUDModel>(context, listen: false).insertUserData(user).then((value) =>
     {
       print(value)
     });
-
-
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +250,7 @@ class _RegisterScreen  extends State<RegisterScreen>{
                             padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5)),
 
                         onPressed: (){
-                          AddUserToDB(emailadd! ,uname! , initialAgeValue,  passwordVal! );
+                           AddUserToDB(emailadd! ,uname! , initialAgeValue,  passwordVal! );
                         },
                         child: const Text('Start'),
                       ),

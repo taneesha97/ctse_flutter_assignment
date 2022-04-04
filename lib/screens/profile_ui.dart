@@ -3,7 +3,9 @@ import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../util/userAuth/userauthentication.dart';
 import 'movie_library_list.dart';
 
 class ProfileUI extends StatefulWidget {
@@ -148,6 +150,7 @@ class _ProfileUIState extends State<ProfileUI> {
                                 // foreground
                               ),
                               onPressed: () {
+                                Provider.of<UserAuthentication>(context, listen: false).signoutUser();
                                 // Navigator.push(
                                 //   context,
                                 //   MaterialPageRoute(builder: (context) => ProfileUI()),
