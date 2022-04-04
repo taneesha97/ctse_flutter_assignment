@@ -1,5 +1,7 @@
+import 'package:ctse_assignment_1/screens/register_screen.dart';
 import 'package:ctse_assignment_1/screens/score_screen.dart';
 import 'package:ctse_assignment_1/util/FeedBack/feed_back_crud_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +9,7 @@ import 'package:reviews_slider/reviews_slider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:get/get.dart';
 import '../Controllers/QuestionController.dart';
-
+import '../util/userAuth/userauthentication.dart';
 
 class FeedBackForm extends StatefulWidget {
   const FeedBackForm({Key? key}) : super(key: key);
@@ -78,38 +80,44 @@ class _FeedBackFormState extends State<FeedBackForm> {
     TextFieldValue = value;
   }
 
-
+  void loginValidation() {
+    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+    val.listen((event) {
+      if(event == null){
+        //if the user object is null. will forward to Register page
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => RegisterScreen()),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
-
-    void onPressAlert (){
+    //loginValidation();
+    void onPressAlert() {
       print('hi');
       //Navigator.pop(context);
       Navigator.of(context, rootNavigator: true).pop();
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => const ScorePage()),
+        MaterialPageRoute(builder: (context) => const ScorePage()),
       );
-
     }
 
-    void cancel (){
+    void cancel() {
       // print('hi');
       // Navigator.pop(context);
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => const ScorePage()),
+        MaterialPageRoute(builder: (context) => const ScorePage()),
       );
-
     }
 
     void onPress() {
-      print(reviewSliderValue);
-      print(TextFieldValue);
       _textController.clear();
       Provider.of<FeedBackCrudModel>(context, listen: false)
           .insertFeedBack(reviewSliderValue, TextFieldValue)
@@ -145,21 +153,23 @@ class _FeedBackFormState extends State<FeedBackForm> {
         child: AppBar(
           centerTitle: true,
           flexibleSpace: ClipRRect(
-            borderRadius: BorderRadius.only(bottomRight: Radius.circular(30), bottomLeft: Radius.circular(30)),
+            borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(30),
+                bottomLeft: Radius.circular(30)),
             child: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/feedback.jpg"),
-                    fit: BoxFit.fill,
-                    // colorFilter: ColorFilter.mode(Colors.blue.withOpacity(0), BlendMode.darken)
-                  )
-              ),
+                image: AssetImage("assets/images/feedback.jpg"),
+                fit: BoxFit.fill,
+                // colorFilter: ColorFilter.mode(Colors.blue.withOpacity(0), BlendMode.darken)
+              )),
             ),
           ),
           backgroundColor: Colors.pink,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(bottomRight: Radius.circular(50), bottomLeft: Radius.circular(50))
-          ),
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(50),
+                  bottomLeft: Radius.circular(50))),
         ),
         // title: Text(
         //   "Quiz Configuration",
@@ -190,8 +200,8 @@ class _FeedBackFormState extends State<FeedBackForm> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Padding(
-                                padding:
-                                    EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                                padding: EdgeInsets.only(
+                                    left: 20, top: 10, bottom: 10),
                                 child: Text(
                                   'What do you think of this app?',
                                   style: TextStyle(
@@ -230,7 +240,8 @@ class _FeedBackFormState extends State<FeedBackForm> {
                           height: 8,
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                          padding:
+                              EdgeInsets.only(left: 10, top: 10, bottom: 10),
                           child: Text(
                             'Do you have any thoughts of you would like to share?',
                             style: TextStyle(
@@ -272,7 +283,8 @@ class _FeedBackFormState extends State<FeedBackForm> {
                                   textStyle: TextStyle(fontSize: 15),
                                   primary: Colors.blueGrey,
                                   shape: new RoundedRectangleBorder(
-                                    borderRadius: new BorderRadius.circular(10.0),
+                                    borderRadius:
+                                        new BorderRadius.circular(10.0),
                                   ),
                                 ),
                                 child: Text('Submit'),
@@ -283,7 +295,8 @@ class _FeedBackFormState extends State<FeedBackForm> {
                                   textStyle: TextStyle(fontSize: 15),
                                   primary: Colors.blueGrey,
                                   shape: new RoundedRectangleBorder(
-                                    borderRadius: new BorderRadius.circular(10.0),
+                                    borderRadius:
+                                        new BorderRadius.circular(10.0),
                                   ),
                                 ),
                                 child: Text('Cancel'),
@@ -292,25 +305,6 @@ class _FeedBackFormState extends State<FeedBackForm> {
                         )),
                       ],
                     )),
-                // Text(
-                //     selectedValue1.toString(),
-                //   style: TextStyle(fontSize: 1),
-                // ),
-                // SizedBox(height: 20),
-                // Text(
-                //   '¿Cómo fue la ayuda que recibiste?',
-                //   style: TextStyle(color: Color(0xFF6f7478), fontSize: 18),
-                // ),
-                // SizedBox(height: 20),
-                // ReviewSlider(
-                //     optionStyle: TextStyle(
-                //       color: Colors.red,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //     onChange: onChange2,
-                //     initialValue: 1,
-                //     options: ['Terrible', 'Malo', 'Bien', 'Vale', 'Genial']),
-                // Text(selectedValue2.toString()),
               ],
             ),
           ),

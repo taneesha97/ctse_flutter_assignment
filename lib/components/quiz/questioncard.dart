@@ -24,7 +24,7 @@ class QuestionCard extends StatelessWidget {
 
   final LocalStorage storage = new LocalStorage('localstorage_app');
 
-  final String image = 'assets/images/movie1.jpg';
+  //final String image = 'assets/images/movie1.jpg';
   //comment
 
   @override

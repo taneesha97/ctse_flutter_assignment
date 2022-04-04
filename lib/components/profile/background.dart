@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 class Background extends StatefulWidget {
   final Widget child;
@@ -20,20 +21,37 @@ class _BackgroundState extends State<Background> {
         alignment: Alignment.center,
         children: [
           Positioned(
-              top: 0,
-              //left: 0,
-              child: Image.asset(
-                "assets/images/Rectangle 64.png",
-                height: size.height * 0.3,
-                width: size.width,
-              )),
-          Positioned(
-              bottom: 0,
-              left: 0,
-              child: Image.asset(
-                "assets/images/Rectangle 63.png",
-                width: size.width * 0.3,
-              )),
+            top: 0,
+            child: Container(
+              //color: Colors.red,
+              width: size.width,
+              height: size.height * 0.27,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50), bottomRight: Radius.circular(50)),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromARGB(235, 141, 141, 141),
+                      Color.fromARGB(235, 141, 141, 141),
+                    ],
+                  )),
+            ),
+          ),
+
+          // child: Image.asset(
+          //   "assets/images/Rectangle 64.png",
+          //   height: size.height * 0.3,
+          //   width: size.width,
+          // )
+
+          // Positioned(
+          //     bottom: 0,
+          //     left: 0,
+          //     child: Image.asset(
+          //       "assets/images/Rectangle 63.png",
+          //       width: size.width * 0.3,
+          //     )),
           widget.child
         ],
       ),

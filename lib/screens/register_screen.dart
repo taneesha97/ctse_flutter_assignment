@@ -31,7 +31,7 @@ class _RegisterScreen  extends State<RegisterScreen>{
   void AddUserToDB(String emailadd ,String uname , int  initialAgeValue, String  passwordVal){
     var value = Provider.of<UserAuthentication>(context, listen: false).registerUser(emailadd!, passwordVal!);
     UserAuthentication val = Provider.of<UserAuthentication>(context, listen: false);
-    User user =  new User(id: '', email: emailadd!, userName: uname!, profileUrl: '', age: initialAgeValue.toString());
+    Users user =  new Users(id: '', email: emailadd!, userName: uname!, profileUrl: '', age: initialAgeValue.toString());
     Provider.of<UserCRUDModel>(context, listen: false).insertUserData(user).then((value) =>
     {
       print(value)

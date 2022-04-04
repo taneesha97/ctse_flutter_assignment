@@ -35,8 +35,8 @@ class QuestionController extends GetxController
   RxInt _questionNumber = 1.obs;
   RxInt get questionNumber => this._questionNumber;
 
-  int _numOfCorrectAns = 0;
-  int get numOfCorrectAns => this._numOfCorrectAns;
+  // int _numOfCorrectAns = 0;
+  // int get numOfCorrectAns => this._numOfCorrectAns;
 
   int _time = 10;
 
@@ -86,23 +86,6 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  // List<int?>? checkCorrectWrongAnswers(
-  //     Question question, String selectedIndex) {
-  //   int noCorrectAnswers = 0;
-  //   int AnsweredQuestions = 0;
-  //   int noWrongAnswers = 0;
-  //   if (question.answer! == selectedIndex) {
-  //     noCorrectAnswers++;
-  //     AnsweredQuestions++;
-  //   } else if (question.answer! != selectedIndex) {
-  //     noWrongAnswers++;
-  //     AnsweredQuestions++;
-  //   }
-  //   valueSet?.add(AnsweredQuestions);
-  //   valueSet?.add(noCorrectAnswers);
-  //   valueSet?.add(noWrongAnswers);
-  //   return valueSet;
-  // }
 
   void saveContext(BuildContext buildContext) {
     print(buildContext);
@@ -114,8 +97,6 @@ class QuestionController extends GetxController
     _isAnswered = true;
     _correctAns = question.answer!;
     _selectedAns = selectedIndex;
-
-    if (_correctAns == _selectedAns) _numOfCorrectAns++;
 
     // It will stop the counter
     _animationController.stop();
@@ -133,19 +114,15 @@ class QuestionController extends GetxController
 
     if (_questionNumber.value != _noOfQuestions) {
       _isAnswered = false;
-      print(_isAnswered);
       _pageController.nextPage(
           duration: Duration(milliseconds: 250), curve: Curves.ease);
 
-      // Reset the counter
       _animationController.reset();
 
-      // Then start it again
-      // Once timer is finish go to the next qn
       print('calling4');
       _animationController.forward().whenComplete(nextQuestion);
     } else {
-      //Get package provide us simple way to naviigate another page
+
       //Get.to(() => const FeedBackForm());
       _isAnswered = false;
       Navigator.push(

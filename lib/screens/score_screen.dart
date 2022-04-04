@@ -7,7 +7,9 @@ import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
+import 'package:ctse_assignment_1/screens/register_screen.dart';
 import 'package:ctse_assignment_1/util/Quiz_Result/quiz_result_crud_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -17,6 +19,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../Controllers/QuestionController.dart';
 import '../styles.dart';
 import '../util/Quizes/quiz_crud_model.dart';
+import '../util/userAuth/userauthentication.dart';
 import 'leader_board.dart';
 
 class ScorePage extends StatefulWidget {
@@ -102,8 +105,23 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  void loginValidation() {
+    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+    val.listen((event) {
+      if(event == null){
+        //if the user object is null. will forward to Register page
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => RegisterScreen()),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    //loginValidation();
     String QuizID = storage.getItem('QuizID');
     QuestionController _questionController = Get.put(QuestionController());
     quizList = _questionController.getQuizDetails();
