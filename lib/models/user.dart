@@ -1,11 +1,11 @@
-class User {
+class Users {
   String id;
   String email;
   String userName;
   String profileUrl;
   String age;
 
-  User({
+  Users({
     required this.id,
     required this.email,
     required this.userName,
@@ -13,7 +13,7 @@ class User {
     required this.age,
   });
 
-  User.fromMap(Map<String, dynamic> snapshot, String id)
+  Users.fromMap(Map<String, dynamic> snapshot, String id)
       :
         id = id ?? '',
         userName = snapshot['userName'] ?? '',
