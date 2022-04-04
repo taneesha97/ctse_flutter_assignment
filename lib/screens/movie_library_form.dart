@@ -213,7 +213,7 @@ class _LibraryFormState extends State<LibraryForm> {
                           }
                         },
                         child: Text(
-                          "Add to the Library",
+                          widget.functionValue==0?"Insert the Libraries":"Update the Library",
                           style: Styles.navBarTitle,
                         )),
                   ),
