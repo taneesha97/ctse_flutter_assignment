@@ -22,6 +22,7 @@ class _LongLibraryMovieCardState extends State<LongLibraryMovieCard> {
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData queryData;
@@ -39,6 +40,7 @@ class _LongLibraryMovieCardState extends State<LongLibraryMovieCard> {
           Navigator.of(context, rootNavigator: true).pop();
         }, "Do you want to delete this movie?");
       },
+
       child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
@@ -49,10 +51,11 @@ class _LongLibraryMovieCardState extends State<LongLibraryMovieCard> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>  SingleMoviePage(index: 1,)
+                    builder: (context) =>  SingleMoviePage(index: 1,movie: widget.movie,)
                 ),
               );
             },
+
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,

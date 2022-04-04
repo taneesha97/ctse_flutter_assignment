@@ -21,7 +21,7 @@ class LongMovieCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>  SingleMoviePage(index: 1,)
+                builder: (context) =>  SingleMoviePage(index: 1,movie: movie,)
             ),
           );
         },
