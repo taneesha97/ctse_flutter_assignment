@@ -21,7 +21,7 @@ class LongMovieCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>  SingleMoviePage(index: 1,)
+                builder: (context) =>  SingleMoviePage(index: 1,movie: movie,)
             ),
           );
         },
@@ -103,7 +103,7 @@ class LongMovieCard extends StatelessWidget {
                         height: 6,
                       ),
                       Flexible(
-                        child: Text(movieList[index].description.toString(),
+                        child: Text(movie.description.toString(),
                             style: Styles.textSectionSubBody,
                           ),
                         ),

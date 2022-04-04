@@ -1,11 +1,7 @@
 import 'package:ctse_assignment_1/bottom_navigation/tab_navigator.dart';
-import 'package:ctse_assignment_1/screens/register_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../util/userAuth/userauthentication.dart';
-import 'live_view_page.dart';
+
 
 class App extends StatefulWidget {
   @override
@@ -17,7 +13,8 @@ class AppState extends State<App> {
   String _currentPage = "Page1";
   List<String> pageKeys = ["Page1", "Page2", "Page3"];
 
-  Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
+  final Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
+
     "Page1": GlobalKey<NavigatorState>(),
     "Page2": GlobalKey<NavigatorState>(),
     "Page3": GlobalKey<NavigatorState>(),
@@ -42,23 +39,25 @@ class AppState extends State<App> {
     print("Init State");
   }
 
-  void loginValidation() {
-    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
-    val.listen((event) {
-      if(event == null){
-        //if the user object is null. will forward to Register page
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => RegisterScreen()),
-        );
-      }
-    });
-  }
+  // void loginValidation() {
+  //   Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+  //   val.listen((event) {
+  //     if(event == null){
+  //       //if the user object is null. will forward to Register page
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //             builder: (context) => RegisterScreen()),
+  //       );
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
-    loginValidation(); // checking is the user is logged in
+
+    //loginValidation(); // checking is the user is logged in
+
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =
@@ -87,18 +86,18 @@ class AppState extends State<App> {
           currentIndex: _selectedIndex,
           items: [
             BottomNavigationBarItem(
-              icon: new Icon(Icons.looks_one),
-              label: 'Page1'
+              icon: new Icon(Icons.home_filled),
+              label: 'Home'
               //title: const Text('Page1'),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.looks_two),
-                label: 'Page2'
+              icon: new Icon(Icons.library_books),
+                label: 'Library'
               //title: new Text('Page2'),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.looks_3),
-                label: 'Page3'
+              icon: new Icon(Icons.people),
+                label: 'Profile'
               //title: new Text('Page3'),
             ),
           ],

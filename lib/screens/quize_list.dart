@@ -74,13 +74,15 @@ class _QuizeListState extends State<QuizeList> {
           ],
         ),
       ),
-            Container(
-              color: Colors.black12,
-              child: ListView.builder(
-                itemCount: docs1.length,
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) =>
-                    CardView1(index: index, text1 : docs1[index].category.toString() , text2: int.parse(docs1[index].time.toString()), id: docs1[index].id.toString(), questions: int.parse(docs1[index].questions.toString())),
+            Flexible(
+              child: Container(
+                color: Colors.black12,
+                child: ListView.builder(
+                  itemCount: docs1.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) =>
+                      CardView1(index: index, text1 : docs1[index].category.toString() , text2: int.parse(docs1[index].time.toString()), id: docs1[index].id.toString(), questions: int.parse(docs1[index].questions.toString())),
+                ),
               ),
             ),
       ]

@@ -44,14 +44,6 @@ class _DropDownNewState extends State<DropDownNew> {
   Widget build(BuildContext context) {
 
     onPress () {
-
-      print('values are printing');
-      print(widget.id);
-      print(widget.time);
-      print(widget.category);
-      print(widget.questions);
-      print('is printing');
-
       Provider.of<QuizListCrudModel>(context, listen: false).updateListValues(widget.category, widget.questions, widget.time, widget.id);
       Alert(
         context: context,
@@ -64,6 +56,7 @@ class _DropDownNewState extends State<DropDownNew> {
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             onPressed: (){
+              Navigator.of(context, rootNavigator: true).pop(); // New Pop Method.
               Navigator.push(context, MaterialPageRoute(builder: (context) => QuizeList()));
             },
             color: Color.fromRGBO(91, 55, 185, 1.0),
