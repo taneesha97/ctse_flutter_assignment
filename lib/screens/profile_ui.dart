@@ -2,6 +2,7 @@ import 'package:ctse_assignment_1/components/profile/background.dart';
 import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
+import 'package:ctse_assignment_1/screens/user_history.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -351,6 +352,25 @@ class _ProfileUIState extends State<ProfileUI> {
                       },
                       child: const Text(
                         'Leaderboard',
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                    ),ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red, // background
+                        onPrimary: Colors.white,
+                        padding: const EdgeInsets.all(10.0),
+                        //fixedSize: const Size(640, 70),
+                        // foreground
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => UserHistory()),
+                        );
+                      },
+                      child: const Text(
+                        'UserHistory',
                         style: TextStyle(
                             fontSize: 12, fontWeight: FontWeight.bold),
                       ),
