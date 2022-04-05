@@ -98,7 +98,7 @@ class _SingleMoviePageState extends State<SingleMoviePage> {
                 ],
               ),
               SinglePageHeader(
-                  header: "Heading Movie",
+                  header: widget.movie.year,
                   reusableWidget: Text(
                     widget.movie.description.toString(),
                     style: Styles.textSectionBody,
