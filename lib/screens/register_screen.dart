@@ -1,6 +1,7 @@
 import 'package:ctse_assignment_1/models/user.dart';
 import 'package:ctse_assignment_1/screens/login_screen.dart';
 import 'package:ctse_assignment_1/util/userAuth/userauthentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:provider/provider.dart';
@@ -31,11 +32,20 @@ class _RegisterScreen  extends State<RegisterScreen>{
   void AddUserToDB(String emailadd ,String uname , int  initialAgeValue, String  passwordVal){
     var value = Provider.of<UserAuthentication>(context, listen: false).registerUser(emailadd!, passwordVal!);
     UserAuthentication val = Provider.of<UserAuthentication>(context, listen: false);
-    Users user =  new Users(id: '', email: emailadd!, userName: uname!, profileUrl: '', age: initialAgeValue.toString());
-    Provider.of<UserCRUDModel>(context, listen: false).insertUserData(user).then((value) =>
-    {
-      print(value)
-    });
+    Stream<User?> val1 = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+    if(val1 != null){
+      val1.listen((event) {
+        print(event?.uid);
+        setState(() {
+          Users user =  new Users(id: event!.uid.toString(), email: emailadd!, userName: uname!, profileUrl: '', age: initialAgeValue.toString());
+          Provider.of<UserCRUDModel>(context, listen: false).insertUserData(user).then((value) =>
+          {
+            print(value)
+          });
+        });
+      });
+    }
+
   }
 
   @override
