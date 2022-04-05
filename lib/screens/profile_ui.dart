@@ -24,6 +24,8 @@ class _ProfileUIState extends State<ProfileUI> {
 
   String uid = '';
   List<Users> docs = [];
+  String correctCount = '';
+  String wrongCount = '';
 
   @override
   void initState() {
@@ -31,18 +33,43 @@ class _ProfileUIState extends State<ProfileUI> {
     Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
 
     val.listen((event) {
-      print(event?.uid);
+     // print(event?.uid);
       setState(() {
         uid = event!.uid.toString();
         Provider.of<UserCRUDModel>(context, listen: false)
             .getLoginUser(event!.uid.toString())
             .then((value) => {
-          print(value),
+          //print(value),
           setState(() {
             docs = value;
           }),
 
         });
+        Provider.of<UserCRUDModel>(context, listen: false)
+            .getCorrectAnswers(event!.uid.toString())
+            .then((value) => {
+          //print(value),
+          setState(() {
+            correctCount = value.toString();
+            // print('correctCount');
+            // print(correctCount);
+          }),
+
+        });
+
+        Provider.of<UserCRUDModel>(context, listen: false)
+            .getWrongAnswers(event!.uid.toString())
+            .then((value) => {
+          print(value),
+          setState(() {
+            wrongCount = value.toString();
+            // print('wrongCount');
+            // print(wrongCount);
+          }),
+
+        });
+        // Provider.of<UserCRUDModel>(context, listen: false)
+        //     .getWrongAnswers1(event!.uid.toString());
       });
     });
 
@@ -204,9 +231,9 @@ class _ProfileUIState extends State<ProfileUI> {
                             const SizedBox(
                               width: 5,
                             ),
-                            const Text(
-                              "98",
-                              style: TextStyle(
+                            Text(
+                              correctCount,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30,
                                   color: Colors.yellow),
@@ -231,9 +258,9 @@ class _ProfileUIState extends State<ProfileUI> {
                             const SizedBox(
                               width: 5,
                             ),
-                            const Text(
-                              "98",
-                              style: TextStyle(
+                            Text(
+                              wrongCount,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30,
                                   color: Colors.yellow),

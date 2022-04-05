@@ -56,11 +56,8 @@ class UserCRUDModel extends ChangeNotifier {
   }
 
   Future<dynamic> getCorrectAnswers(String id) async {
-    print(id);
     QuerySnapshot querySnapshot;
     Stream<QuerySnapshot> _quizList;
-    List docs = [];
-    List<Users> docs1 = [];
 
     try {
       querySnapshot = await _db
@@ -70,21 +67,52 @@ class UserCRUDModel extends ChangeNotifier {
 
       // _quizList = FirebaseFirestore.instance.collection('quizes').snapshots();
       if (querySnapshot.docs.isNotEmpty) {
+        int? correctAns = 0;
         for (var doc in querySnapshot.docs.toList()) {
-          print(doc['correct_answer']);
-          // Users b = Users(
-          //     id: doc.id,
-          //     age: doc['age'].toString(),
-          //     email: doc['email'].toString(),
-          //     profileUrl: doc['profileUrl'].toString(),
-          //     userName: doc['userName'].toString());
-          // docs1.add(b);
+          correctAns = (correctAns! + doc['correct_answer']) as int?;
         }
-        //return docs1;
+        return correctAns;
       }
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<dynamic> getWrongAnswers(String id) async {
+    QuerySnapshot querySnapshot;
+    Stream<QuerySnapshot> _quizList;
+
+    try {
+      querySnapshot = await _db
+          .collection('result-quizes')
+          .where('userId', isEqualTo: id.toString())
+          .get();
+
+      // _quizList = FirebaseFirestore.instance.collection('quizes').snapshots();
+      if (querySnapshot.docs.isNotEmpty) {
+        int? wrong_answer = 0;
+        for (var doc in querySnapshot.docs.toList()) {
+          wrong_answer = (wrong_answer! + doc['wrong_answer']) as int?;
+        }
+        return wrong_answer;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  int getWrongAnswers1(String id) {
+    int? wrong_answer = 0;
+    FirebaseFirestore.instance
+        .collection('result-quizes')
+        .where('userId', isEqualTo: id.toString())
+        .snapshots()
+        .map((event) => event.docs
+        .map((e) => {
+          print('wrongCount'),
+          print(e['wrong_answer']),
+    }));
+    return wrong_answer;
   }
 
 }
