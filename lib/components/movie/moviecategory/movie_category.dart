@@ -57,7 +57,7 @@ class MovieCategory extends StatelessWidget {
                 return Text("There an Error Loading Movies");
               }
               if(snapshot.connectionState == ConnectionState.waiting){
-                return Text("Loading");
+                return Center(child: CircularProgressIndicator(),);
               }
               final data = snapshot.requireData;
 
