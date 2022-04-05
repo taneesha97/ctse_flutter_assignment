@@ -21,59 +21,80 @@ class ProfileUI extends StatefulWidget {
 }
 
 class _ProfileUIState extends State<ProfileUI> {
-
   String uid = '';
   List<Users> docs = [];
   String correctCount = '';
   String wrongCount = '';
+  String noQuestionCount = '';
+  String highestScore = '';
+
+  //Stream<Object>? count;
+  int count = 0;
 
   @override
   void initState() {
     super.initState();
-    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false)
+        .authStateChanges;
 
     val.listen((event) {
-     // print(event?.uid);
+      // print(event?.uid);
       setState(() {
         uid = event!.uid.toString();
         Provider.of<UserCRUDModel>(context, listen: false)
             .getLoginUser(event!.uid.toString())
             .then((value) => {
-          //print(value),
-          setState(() {
-            docs = value;
-          }),
+                  //print(value),
+                  setState(() {
+                    docs = value;
+                  }),
+                });
 
-        });
         Provider.of<UserCRUDModel>(context, listen: false)
             .getCorrectAnswers(event!.uid.toString())
             .then((value) => {
-          //print(value),
-          setState(() {
-            correctCount = value.toString();
-            // print('correctCount');
-            // print(correctCount);
-          }),
-
-        });
+                  //print(value),
+                  setState(() {
+                    correctCount = value.toString();
+                    // print('correctCount');
+                    // print(correctCount);
+                  }),
+                });
 
         Provider.of<UserCRUDModel>(context, listen: false)
             .getWrongAnswers(event!.uid.toString())
             .then((value) => {
-          print(value),
+                  //print(value),
+                  setState(() {
+                    wrongCount = value.toString();
+                    // print('wrongCount');
+                    // print(wrongCount);
+                  }),
+                });
+        Provider.of<UserCRUDModel>(context, listen: false)
+            .getNoOfQuestions(event!.uid.toString())
+            .then((value) => {
+          //print(value),
           setState(() {
-            wrongCount = value.toString();
+            noQuestionCount = value.toString();
             // print('wrongCount');
             // print(wrongCount);
           }),
-
         });
-        // Provider.of<UserCRUDModel>(context, listen: false)
+        Provider.of<UserCRUDModel>(context, listen: false)
+            .getHighestScore(event!.uid.toString())
+            .then((value) => {
+          //print(value),
+          setState(() {
+            highestScore = value.toString();
+            // print('wrongCount');
+            // print(wrongCount);
+          }),
+        });
+        // count = Provider.of<UserCRUDModel>(context, listen: false)
         //     .getWrongAnswers1(event!.uid.toString());
       });
     });
-
-
   }
 
   @override
@@ -82,12 +103,10 @@ class _ProfileUIState extends State<ProfileUI> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-
-
     Size size = MediaQuery.of(context).size;
+
 
     return Scaffold(
         body: Background(
@@ -116,14 +135,28 @@ class _ProfileUIState extends State<ProfileUI> {
             const SizedBox(
               width: 10,
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(docs[0].userName.toString(), style: TextStyle(fontSize: 16, color: Colors.white),),
-                Text(docs[0].email.toString(), style: TextStyle(fontSize: 16, color: Colors.white),),
-                Text(docs[0].age.toString(), style: TextStyle(fontSize: 16, color: Colors.white),),
-              ],
+            StreamBuilder<Object>(
+              stream: null,
+              builder: (context, snapshot) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      docs[0].userName.toString(),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    Text(
+                      docs[0].email.toString(),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    Text(
+                      docs[0].age.toString(),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ],
+                );
+              }
             )
           ],
         ),
@@ -166,7 +199,7 @@ class _ProfileUIState extends State<ProfileUI> {
                               decoration: const BoxDecoration(
                                 color: Colors.white,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                               ),
                               child: const Text(
                                 "High Score",
@@ -177,8 +210,8 @@ class _ProfileUIState extends State<ProfileUI> {
                             const SizedBox(
                               width: 5,
                             ),
-                            const Text(
-                              "98",
+                            Text(
+                              highestScore,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30,
@@ -193,7 +226,7 @@ class _ProfileUIState extends State<ProfileUI> {
                               decoration: const BoxDecoration(
                                 color: Colors.white,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                               ),
                               child: const Text(
                                 "Quizes",
@@ -204,8 +237,8 @@ class _ProfileUIState extends State<ProfileUI> {
                             const SizedBox(
                               width: 5,
                             ),
-                            const Text(
-                              "98",
+                            Text(
+                              noQuestionCount,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30,
@@ -220,7 +253,7 @@ class _ProfileUIState extends State<ProfileUI> {
                               decoration: const BoxDecoration(
                                 color: Colors.white,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                               ),
                               child: const Text(
                                 "Correct",
@@ -231,13 +264,31 @@ class _ProfileUIState extends State<ProfileUI> {
                             const SizedBox(
                               width: 5,
                             ),
-                            Text(
-                              correctCount,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30,
-                                  color: Colors.yellow),
-                            )
+                            Text(correctCount,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30,
+                                    color: Colors.yellow)),
+                            // StreamBuilder(
+                            //     stream: count,
+                            //     builder: (BuildContext context, snapshot) {
+                            //       if(snapshot.hasData){
+                            //         final data = snapshot.requireData;
+                            //         return Text(data.toString(),
+                            //             style: const TextStyle(
+                            //                 fontWeight: FontWeight.bold,
+                            //                 fontSize: 30,
+                            //                 color: Colors.yellow));
+                            //       }else{
+                            //         return const Text("",
+                            //             style: TextStyle(
+                            //                 fontWeight: FontWeight.bold,
+                            //                 fontSize: 30,
+                            //                 color: Colors.yellow));
+                            //       }
+                            //
+                            //     }
+                            // ),
                           ],
                         ),
                         Column(
@@ -247,7 +298,7 @@ class _ProfileUIState extends State<ProfileUI> {
                               decoration: const BoxDecoration(
                                 color: Colors.white,
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
+                                    BorderRadius.all(Radius.circular(10.0)),
                               ),
                               child: const Text(
                                 "Wrong",
@@ -277,9 +328,7 @@ class _ProfileUIState extends State<ProfileUI> {
                     direction: Axis.horizontal,
                     spacing: 40,
                     runSpacing: 10,
-
                     children: [
-
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           primary: Colors.red, // background
@@ -333,7 +382,9 @@ class _ProfileUIState extends State<ProfileUI> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => UserHistory(id: uid,)),
+                                builder: (context) => UserHistory(
+                                      id: uid,
+                                    )),
                           );
                         },
                         child: const Text(
@@ -353,8 +404,7 @@ class _ProfileUIState extends State<ProfileUI> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => DropDown()),
+                            MaterialPageRoute(builder: (context) => DropDown()),
                           );
                         },
                         child: const Text(
@@ -375,7 +425,9 @@ class _ProfileUIState extends State<ProfileUI> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => UserHistory(id: uid,)),
+                                builder: (context) => UserHistory(
+                                      id: uid,
+                                    )),
                           );
                         },
                         child: const Text(
@@ -614,7 +666,6 @@ class _ProfileUIState extends State<ProfileUI> {
               const SizedBox(
                 height: 20,
               ),
-
             ],
           ),
         ),
