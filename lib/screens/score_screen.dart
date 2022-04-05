@@ -453,6 +453,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                         child: Text('OK'),
                         onPressed: () {
                           _questionController.setisAnsweredFalse();
+                          _questionController.setQuizNumber();
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => MovieWiki()),
