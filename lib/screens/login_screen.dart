@@ -1,5 +1,4 @@
 import 'package:ctse_assignment_1/bottom_navigation/app.dart';
-import 'package:ctse_assignment_1/screens/movie_wiki.dart';
 import 'package:ctse_assignment_1/screens/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 
+
 class _LoginScreen extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
   String? emailadd, password;
@@ -24,6 +24,26 @@ class _LoginScreen extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    void loginUserMethod(Stream<User?> val) {
+      val.listen((event) {
+        print('event email $event.email');
+        if(event != null){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => App()),
+          );
+        }else{
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RegisterScreen()),
+          );
+        }
+      });
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -66,23 +86,9 @@ class _LoginScreen extends State<LoginScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5)),
                     onPressed: () {
                       Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
-                      val.listen((event) {
-                        print('event email $event.email');
-                        if(event != null){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => App()),
-                          );
-                      }else{
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MovieWiki()),
-                          );
-                        }
-                      });
+                      print('111111111111111111111111111111111111111111');
                       print(val.first);
+                      loginUserMethod(val);
 
                       // if(firebaseUser != null){
                       //   Navigator.push(

@@ -1,10 +1,7 @@
 class ResultQuiz{
-  // final int? ;//id//time//cattegory//noQuestion
-  final String userId;
-  // ignore: non_constant_identifier_names
-  final int correct_answer, no_questions, wrong_answer, id,correct_points;
+  final String? userId, id;
+  final int? correct_answer, no_questions, wrong_answer, correct_points;
 
-  // ignore: non_constant_identifier_names
   ResultQuiz({required this.id, required this.userId, required this.correct_answer, required this.no_questions, required this.wrong_answer, required this.correct_points});
 
   ResultQuiz.fromMap(Map snapshot, String id)
