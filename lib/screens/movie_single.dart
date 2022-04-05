@@ -24,8 +24,9 @@ class _SingleMoviePageState extends State<SingleMoviePage> {
   @override
   Widget build(BuildContext context) {
     // Call the Provider method to get actors details.
+    print(widget.movie.id);
     Stream<List<MovieActor>> listOfActors = Provider.of<CrudModel>(context).getActorsFromMovie(widget.movie.id);
-    print(listOfActors.isEmpty.toString());
+    Stream<List<MovieActor>> exceptionActorList = Provider.of<CrudModel>(context).getActorsFromMovie("error-movie");
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -98,47 +99,42 @@ class _SingleMoviePageState extends State<SingleMoviePage> {
                 ],
               ),
               SinglePageHeader(
-                  header: "Heading Movie",
+                  header: widget.movie.title,
                   reusableWidget: Text(
                     widget.movie.description.toString(),
                     style: Styles.textSectionBody,
                   )),
               SinglePageHeader(
                   header: "Cast and Crew",
-                  reusableWidget: Column(
-                    children:  [
-                      Container(
-                        width: 400,
-                        height: 90,
-                        child: StreamBuilder<List<MovieActor>>(
-                          stream: listOfActors,
-                          builder: (context, snapshot) {
-                            if(snapshot.hasData){
-                              final data = snapshot.requireData;
-                              if(data.first == null){
-                                return Center(child: CircularProgressIndicator(),);
-                              } else {
-                                return ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: data.first.actors?.length,
-                                  itemBuilder: (ctx,i) => Padding(
-                                    padding: const EdgeInsets.only(
-                                        bottom: 10
-                                    ),
-                                    child:  ActorCard(actor: Actor.fromMap(data.first.actors?[(i+1).toString()], "")),
-                                  ),
-                                );
-                              }
-                            } else if (snapshot.hasError){
-                              return Text("Error");
-                            } else {
-                              return Text("Something Else Happens");
-                            }
-
+                  reusableWidget: Container(
+                    width: 400,
+                    height: 90,
+                    child: StreamBuilder<List<MovieActor>>(
+                      stream: listOfActors,
+                      builder: (BuildContext context, snapshot) {
+                        if(snapshot.hasError){
+                          return Text("Error");
+                        } else if (snapshot.hasData){
+                          final data = snapshot.requireData;
+                          int? length = 0;
+                          if(data.length != 0){
+                            length = data.first.actors?.length;
                           }
-                        ),
-                      ),
-                    ],
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: length,
+                            itemBuilder: (ctx,i) => Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 10
+                              ),
+                              child:  ActorCard(actor: Actor.fromMap(data.first.actors?[(i+1).toString()], "")),
+                            ),
+                          );
+                        } else {
+                          return Text("Something Else Happens");
+                        }
+                      }
+                    ),
                   )),
               SinglePageHeader(
                   header: "Quiz information",
