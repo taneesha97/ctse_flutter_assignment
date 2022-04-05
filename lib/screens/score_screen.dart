@@ -5,6 +5,7 @@ import 'package:ctse_assignment_1/models/quize_list_model.dart';
 import 'package:ctse_assignment_1/models/result_quiz.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/movie_wiki.dart';
+import 'package:ctse_assignment_1/screens/profile_ui.dart';
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
 import 'package:ctse_assignment_1/screens/register_screen.dart';
@@ -460,7 +461,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MovieWiki()),
+                                builder: (context) => ProfileUI()),
                           );
                         }),
                     ElevatedButton(

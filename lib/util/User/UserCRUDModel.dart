@@ -156,9 +156,10 @@ class UserCRUDModel extends ChangeNotifier {
       if (querySnapshot.docs.isNotEmpty) {
         int highest = 0;
         for (var doc in querySnapshot.docs.toList()) {
-          print(doc['correct_points']);
+          print('correct_points');
+          print(doc['correct_points'] >= highest);
           if(doc['correct_points'] >= highest){
-            highest = int.parse(doc['correct_points']);
+            highest = doc['correct_points'];
           }
           //questions = (questions! + doc['no_questions']) as int?;
         }

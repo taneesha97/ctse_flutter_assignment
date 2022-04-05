@@ -87,8 +87,8 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.black,
           ),
           home:
-              //RegisterScreen()
-              EditUserForm()
+              RegisterScreen()
+             // EditUserForm()
           // App()
           ),
     );

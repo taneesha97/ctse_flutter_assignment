@@ -27,6 +27,7 @@ class _ProfileUIState extends State<ProfileUI> {
   String wrongCount = '';
   String noQuestionCount = '';
   String highestScore = '';
+  Stream<List<Users>>? listUser;
 
   //Stream<Object>? count;
   int count = 0;
@@ -41,15 +42,17 @@ class _ProfileUIState extends State<ProfileUI> {
       // print(event?.uid);
       setState(() {
         uid = event!.uid.toString();
+        print('user ud $uid');
         Provider.of<UserCRUDModel>(context, listen: false)
             .getLoginUser(event!.uid.toString())
             .then((value) => {
                   //print(value),
+                print('user ud $value'),
                   setState(() {
                     docs = value;
                   }),
                 });
-
+       // listUser = Provider.of<UserCRUDModel>(context).getUserDetails(event!.uid.toString());
         Provider.of<UserCRUDModel>(context, listen: false)
             .getCorrectAnswers(event!.uid.toString())
             .then((value) => {
@@ -74,23 +77,24 @@ class _ProfileUIState extends State<ProfileUI> {
         Provider.of<UserCRUDModel>(context, listen: false)
             .getNoOfQuestions(event!.uid.toString())
             .then((value) => {
-          //print(value),
-          setState(() {
-            noQuestionCount = value.toString();
-            // print('wrongCount');
-            // print(wrongCount);
-          }),
-        });
+                  print('error occured'),
+                  print(value),
+                  setState(() {
+                    noQuestionCount = value.toString();
+                    // print('wrongCount');
+                    // print(wrongCount);
+                  }),
+                });
         Provider.of<UserCRUDModel>(context, listen: false)
             .getHighestScore(event!.uid.toString())
             .then((value) => {
-          //print(value),
-          setState(() {
-            highestScore = value.toString();
-            // print('wrongCount');
-            // print(wrongCount);
-          }),
-        });
+                  //print(value),
+                  setState(() {
+                    highestScore = value.toString();
+                    // print('wrongCount');
+                    // print(wrongCount);
+                  }),
+                });
         // count = Provider.of<UserCRUDModel>(context, listen: false)
         //     .getWrongAnswers1(event!.uid.toString());
       });
@@ -107,18 +111,17 @@ class _ProfileUIState extends State<ProfileUI> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-
     return Scaffold(
         body: Background(
       child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
         SizedBox(
-          height: 80,
+          height: 75,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(
-              width: 30,
+              width: 50,
             ),
             Container(
               width: 70,
@@ -133,30 +136,54 @@ class _ProfileUIState extends State<ProfileUI> {
               ),
             ),
             const SizedBox(
-              width: 10,
+              width: 30,
             ),
-            StreamBuilder<Object>(
-              stream: null,
-              builder: (context, snapshot) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      docs[0].userName.toString(),
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                    Text(
-                      docs[0].email.toString(),
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                    Text(
-                      docs[0].age.toString(),
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                  ],
-                );
-              }
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  docs[0].userName.toString(),
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+                Text(
+                  docs[0].email.toString(),
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+                Text(
+                  docs[0].age.toString(),
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+                // StreamBuilder<List<Users>>(
+                //     stream: null,
+                //     builder: (context, snapshot) {
+                //      // final usersList = snapshot.requireData;
+                //       return Text(
+                //         docs[0].userName.toString(),
+                //         style: TextStyle(fontSize: 16, color: Colors.white),
+                //       );
+                //     }),
+                // StreamBuilder<List<Users>>(
+                //     stream: null,
+                //   builder: (context, snapshot) {
+                //     //final usersList = snapshot.requireData;
+                //     return Text(
+                //       docs[0].email.toString(),
+                //       style: TextStyle(fontSize: 16, color: Colors.white),
+                //     );
+                //   }
+                // ),
+                // StreamBuilder<List<Users>>(
+                //     stream: null,
+                //   builder: (context, snapshot) {
+                //     //final usersList = snapshot.requireData;
+                //     return Text(
+                //       docs[0].age.toString(),
+                //       style: TextStyle(fontSize: 16, color: Colors.white),
+                //     );
+                //   }
+                // ),
+              ],
             )
           ],
         ),
@@ -324,119 +351,133 @@ class _ProfileUIState extends State<ProfileUI> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Wrap(
-                    direction: Axis.horizontal,
-                    spacing: 40,
-                    runSpacing: 10,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red, // background
-                          onPrimary: Colors.white,
-                          padding: const EdgeInsets.all(10.0),
-                          //fixedSize: const Size(640, 70),
-                          // foreground
+                  Container(
+                    padding: EdgeInsets.all(15),
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromARGB(235, 141, 141, 141),
+                            Color.fromARGB(235, 141, 141, 141),
+                          ],
+                        )),
+                    child: Wrap(
+                      direction: Axis.horizontal,
+                      spacing: 30,
+                      runSpacing: 10,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white, // background
+                            onPrimary: Colors.black,
+                            padding: const EdgeInsets.all(10.0),
+                            //fixedSize: const Size(640, 70),
+                            // foreground
+                          ),
+                          onPressed: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(builder: (context) => ProfileUI()),
+                            // );
+                          },
+                          child: const Text(
+                            'Clear',
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => ProfileUI()),
-                          // );
-                        },
-                        child: const Text(
-                          'Clear',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white, // background
+                            onPrimary: Colors.black,
+                            padding: const EdgeInsets.all(10.0),
+                            //fixedSize: const Size(640, 70),
+                            // foreground
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LeaderBoard()),
+                            );
+                          },
+                          child: const Text(
+                            'Leaderboard',
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red, // background
-                          onPrimary: Colors.white,
-                          padding: const EdgeInsets.all(10.0),
-                          //fixedSize: const Size(640, 70),
-                          // foreground
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white, // background
+                            onPrimary: Colors.black,
+                            padding: const EdgeInsets.all(10.0),
+                            //fixedSize: const Size(640, 70),
+                            // foreground
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UserHistory(
+                                        id: uid,
+                                      )),
+                            );
+                          },
+                          child: const Text(
+                            'UserHistory',
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LeaderBoard()),
-                          );
-                        },
-                        child: const Text(
-                          'Leaderboard',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white, // background
+                            onPrimary: Colors.black,
+                            padding: const EdgeInsets.all(10.0),
+                            //fixedSize: const Size(640, 70),
+                            // foreground
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DropDown()),
+                            );
+                          },
+                          child: const Text(
+                            'Quiz configuration',
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red, // background
-                          onPrimary: Colors.white,
-                          padding: const EdgeInsets.all(10.0),
-                          //fixedSize: const Size(640, 70),
-                          // foreground
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white, // background
+                            onPrimary: Colors.black,
+                            padding: const EdgeInsets.all(10.0),
+                            //fixedSize: const Size(640, 70),
+                            // foreground
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UserHistory(
+                                        id: uid,
+                                      )),
+                            );
+                          },
+                          child: const Text(
+                            'User History',
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => UserHistory(
-                                      id: uid,
-                                    )),
-                          );
-                        },
-                        child: const Text(
-                          'UserHistory',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red, // background
-                          onPrimary: Colors.white,
-                          padding: const EdgeInsets.all(10.0),
-                          //fixedSize: const Size(640, 70),
-                          // foreground
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => DropDown()),
-                          );
-                        },
-                        child: const Text(
-                          'Quiz configuration',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.red, // background
-                          onPrimary: Colors.white,
-                          padding: const EdgeInsets.all(10.0),
-                          //fixedSize: const Size(640, 70),
-                          // foreground
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => UserHistory(
-                                      id: uid,
-                                    )),
-                          );
-                        },
-                        child: const Text(
-                          'User History',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   )
                   // Padding(
                   //   padding: const EdgeInsets.all(10.0),
