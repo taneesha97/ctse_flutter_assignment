@@ -41,7 +41,7 @@ class UserCRUDModel extends ChangeNotifier {
         for (var doc in querySnapshot.docs.toList()) {
           print(doc['id'].toString());
           Users b = Users(
-              id: doc.id,
+              id: doc['id'].toString(),
               age: doc['age'].toString(),
               email: doc['email'].toString(),
               profileUrl: doc['profileUrl'].toString(),

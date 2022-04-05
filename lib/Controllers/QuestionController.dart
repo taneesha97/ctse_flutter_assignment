@@ -122,6 +122,9 @@ class QuestionController extends GetxController
       print('calling4');
       _animationController.forward().whenComplete(nextQuestion);
     } else {
+      print('error');
+      print(_noOfQuestions);
+      print(_questionNumber.value);
 
       //Get.to(() => const FeedBackForm());
       _isAnswered = false;

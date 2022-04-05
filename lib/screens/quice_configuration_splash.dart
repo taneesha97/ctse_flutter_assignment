@@ -1,4 +1,5 @@
 import 'package:ctse_assignment_1/screens/quiz_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
@@ -6,6 +7,8 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 import '../util/Quiz_Result/quiz_result_crud_model.dart';
+import '../util/User/UserCRUDModel.dart';
+import '../util/userAuth/userauthentication.dart';
 
 class SplashQuiceConfig extends StatefulWidget {
 
@@ -20,6 +23,22 @@ class SplashQuiceConfig extends StatefulWidget {
 
 class _SplashQuiceConfigState extends State<SplashQuiceConfig> {
   final LocalStorage storage = new LocalStorage('localstorage_app');
+  String uid = '';
+
+  @override
+  void initState() {
+    super.initState();
+    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+
+    val.listen((event) {
+      print(event?.uid);
+      setState(() {
+        uid = event!.uid.toString();
+      });
+    });
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +70,7 @@ class _SplashQuiceConfigState extends State<SplashQuiceConfig> {
                   onPressed: (){
                     Provider.of<QuizResultCrudModel>(context, listen: false)
                         .insertQuizData(widget.questions,
-                        'U001') // here no of quizes are entered, userID are entered
+                        uid) // here no of quizes are entered, userID are entered
                         .then((value) {
                       storage.setItem('QuizID', value.toString());
                     });

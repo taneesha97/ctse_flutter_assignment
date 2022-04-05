@@ -300,7 +300,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                             ),
                             Text.rich(
                               TextSpan(
-                                  text: "${docs[0].correct_answer * 10}",
+                                  text: "${docs[0].correct_answer! * 10}",
                                   //text: "${question.id}",
                                   style: Theme.of(context)
                                       .textTheme
@@ -308,7 +308,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                                       ?.copyWith(color: Colors.white),
                                   children: [
                                     TextSpan(
-                                      text: "/${docs[0].no_questions * 10}",
+                                      text: "/${docs[0].no_questions! * 10}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline4
@@ -349,7 +349,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                             ),
                             Text.rich(
                               TextSpan(
-                                  text: "${docs[0].correct_answer * 10}",
+                                  text: "${docs[0].correct_answer! * 10}",
                                   //text: "${question.id}",
                                   style: Theme.of(context)
                                       .textTheme
@@ -357,7 +357,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                                       ?.copyWith(color: Colors.white),
                                   children: [
                                     TextSpan(
-                                      text: "/${docs[0].no_questions * 10}",
+                                      text: "/${docs[0].no_questions! * 10}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6
@@ -398,7 +398,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                             ),
                             Text.rich(
                               TextSpan(
-                                  text: "${docs[0].correct_answer * 10}",
+                                  text: "${docs[0].correct_answer! * 10}",
                                   //text: "${question.id}",
                                   style: Theme.of(context)
                                       .textTheme
@@ -406,7 +406,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                                       ?.copyWith(color: Colors.white),
                                   children: [
                                     TextSpan(
-                                      text: "/${docs[0].no_questions * 10}",
+                                      text: "/${docs[0].no_questions! * 10}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6
@@ -453,6 +453,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
                         child: Text('OK'),
                         onPressed: () {
                           _questionController.setisAnsweredFalse();
+                          _questionController.setQuizNumber();
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => MovieWiki()),

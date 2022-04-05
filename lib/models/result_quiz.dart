@@ -1,6 +1,6 @@
 class ResultQuiz{
-  final String userId;
-  final int correct_answer, no_questions, wrong_answer, id,correct_points;
+  final String? userId, id;
+  final int? correct_answer, no_questions, wrong_answer, correct_points;
 
   ResultQuiz({required this.id, required this.userId, required this.correct_answer, required this.no_questions, required this.wrong_answer, required this.correct_points});
 
