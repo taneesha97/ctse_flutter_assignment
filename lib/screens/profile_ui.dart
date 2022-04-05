@@ -42,20 +42,7 @@ class _ProfileUIState extends State<ProfileUI> {
             docs = value;
           }),
 
-
-          // docs1 = value
         });
-        // Provider.of<UserCRUDModel>(context, listen: false)
-        //     .getCorrectAnswers(event!.uid.toString());
-        //     .then((value) => {
-        //   print(value),
-        //   setState(() {
-        //     docs = value;
-        //   }),
-        //
-        //
-        //   // docs1 = value
-        // });
       });
     });
 
