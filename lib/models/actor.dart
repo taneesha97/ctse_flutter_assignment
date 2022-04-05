@@ -1,13 +1,13 @@
 class Actor {
   String id;
   String name;
-  String profileUrl;
+  String imageUrl;
   String character;
 
   Actor({
     required this.id,
     required this.name,
-    required this.profileUrl,
+    required this.imageUrl,
     required this.character,
   });
 
@@ -15,13 +15,13 @@ class Actor {
       :
         id = id ?? '',
         name = snapshot['name'] ?? '',
-        profileUrl = snapshot['profileUrl'] ?? '',
+        imageUrl = snapshot['imageUrl'] ?? '',
         character = snapshot['character'] ?? '';
 
   toJson() {
     return {
       "name": name,
-      "optional": profileUrl,
+      "optional": imageUrl,
       "color": character,
     };
   }

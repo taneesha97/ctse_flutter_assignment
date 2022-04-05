@@ -1,5 +1,6 @@
 import 'package:ctse_assignment_1/components/UserHistory/userHistoryCard.dart';
 import 'package:ctse_assignment_1/components/leaderboard/leaderboard_card.dart';
+import 'package:ctse_assignment_1/models/result_quiz.dart';
 import 'package:ctse_assignment_1/models/user_history_model.dart';
 import 'package:ctse_assignment_1/util/UserHistory/user_history_crud_model.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,11 @@ import '../styles.dart';
 import '../util/QuizeConfig/leaderboard_crud_model.dart';
 
 class UserHistory extends StatefulWidget {
-  const UserHistory({
+
+  String id;
+  UserHistory({
     Key? key,
+    required this.id,
   }) : super(key: key);
 
   @override
@@ -19,15 +23,16 @@ class UserHistory extends StatefulWidget {
 }
 
 class _UserHistoryState extends State<UserHistory> {
-  List<UserHistoryModel> docs1 = [];
+  List<ResultQuiz> docs1 = [];
 
   @override
   void initState() {
     super.initState();
 
     Provider.of<UserHistoryCrudModel>(context, listen: false)
-        .readUserHistory()
+        .readUserHistoryDetails(widget.id)
         .then((value) => {
+          print(value),
       setState(() {
         docs1 = value;
       }),
@@ -75,7 +80,7 @@ class _UserHistoryState extends State<UserHistory> {
                 child: Container(
                   color: Colors.black12,
                   child: ListView.builder(
-                    itemCount: docs1.length,
+                    itemCount: docs1?.length,
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) =>
                         UserHistoryCard(index: index, model: docs1[index])

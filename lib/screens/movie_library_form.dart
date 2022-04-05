@@ -189,18 +189,13 @@ class _LibraryFormState extends State<LibraryForm> {
                               // Call the DB method to write to the database.
                               Provider.of<CrudModel>(context, listen: false)
                                   .addLibraries(library);
-
-                              //Navigation method.
-                              navigatorMethod();
-
+                              Navigator.of(context).pop();
                             } else {
                               // Calling the Database Update Method.
                               Provider.of<CrudModel>(context, listen: false)
                                   .libraryNameUpate(
                                       lname.toString(), widget.libraryId, color.toString());
-
-                              //Navigation method.
-                              navigatorMethod();
+                              Navigator.of(context).pop();
                             }
                           } else {
                             // Toast Messages are deprecated above Android 11.

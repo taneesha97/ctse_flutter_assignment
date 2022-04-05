@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/models/result_quiz.dart';
 import 'package:ctse_assignment_1/models/user_history_model.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +6,7 @@ class UserHistoryCard extends StatelessWidget {
 
   final int index;
   //final bool _isShown = true;
-  final UserHistoryModel model;
+  final ResultQuiz model;
   const UserHistoryCard({Key? key, required this.model, required this.index}) : super(key: key);
 
 
@@ -28,8 +29,16 @@ class UserHistoryCard extends StatelessWidget {
               children:<Widget> [
                 SizedBox(width: 5.0),
                 Container(
-                  width: 150,
-                  child: Text(model.Quiz_ID.toString(), style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold)),
+                  width: 220,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                    children:<Widget> [
+                      Text('Quiz ID: ' + model.id.toString(), style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 5),
+                      Text('Total Points: ' + (model.no_questions! * 10).toString(), style: TextStyle(color: Colors.grey,fontSize: 16.0,)),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -42,7 +51,7 @@ class UserHistoryCard extends StatelessWidget {
               child: Center(
                   child: Text.rich(
                     TextSpan(
-                        text: model.score.toString() + 'pts',
+                        text: model.correct_points.toString() + 'pts',
                         style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white )
                     ),
                   )

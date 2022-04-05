@@ -1,16 +1,32 @@
+import 'package:ctse_assignment_1/models/movie_select_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../components/movie/moviecard/actor_card.dart';
 import '../components/movie/moviecategory/singel_page_header.dart';
+import '../models/actor.dart';
 import '../models/movie.dart';
+import '../models/movie_actor.dart';
 import '../styles.dart';
+import '../util/crud_model.dart';
 
-class SingleMoviePage extends StatelessWidget {
-  const SingleMoviePage({Key? key,  required this.index}) : super(key: key);
+class SingleMoviePage extends StatefulWidget {
+  const SingleMoviePage({Key? key,  required this.index, required this.movie}) : super(key: key);
   final int index;
+  final SelectedMovieModel movie;
+
+  @override
+  State<SingleMoviePage> createState() => _SingleMoviePageState();
+}
+
+class _SingleMoviePageState extends State<SingleMoviePage> {
   final String imageURL = "https://i.ytimg.com/vi/yy8rTU-QSTM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBvdUVP-UfTIKERUpCUIcCWVwK-5A";
 
   @override
   Widget build(BuildContext context) {
+    // Call the Provider method to get actors details.
+    print(widget.movie.id);
+    Stream<List<MovieActor>> listOfActors = Provider.of<CrudModel>(context).getActorsFromMovie(widget.movie.id);
+    Stream<List<MovieActor>> exceptionActorList = Provider.of<CrudModel>(context).getActorsFromMovie("error-movie");
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -25,7 +41,7 @@ class SingleMoviePage extends StatelessWidget {
                     decoration:  BoxDecoration(
                       image: DecorationImage(
                         image: NetworkImage(
-                            imageURL),
+                            widget.movie.imageUrl),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -61,7 +77,7 @@ class SingleMoviePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              movieList[index].title.toString(),
+                              widget.movie.title.toString(),
                               style: Styles.overTheImageTitle,
                             ),
                             GestureDetector(
@@ -76,49 +92,62 @@ class SingleMoviePage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Text(movieList[index].year.toString(), style: Styles.overTheImageSubTitle),
+                        Text(widget.movie.year.toString(), style: Styles.overTheImageSubTitle),
                       ],
                     ),
                   ),
                 ],
               ),
               SinglePageHeader(
-                  header: "Heading Movie",
+                  header: widget.movie.title,
                   reusableWidget: Text(
-                    movieList[1].description.toString(),
+                    widget.movie.description.toString(),
                     style: Styles.textSectionBody,
                   )),
               SinglePageHeader(
                   header: "Cast and Crew",
-                  reusableWidget: Column(
-                    children:  [
-                      Container(
-                        width: 400,
-                        height: 90,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 4,
-                          itemBuilder: (ctx,i) => Padding(
-                            padding: const EdgeInsets.only(
-                              bottom: 10
+                  reusableWidget: Container(
+                    width: 400,
+                    height: 90,
+                    child: StreamBuilder<List<MovieActor>>(
+                      stream: listOfActors,
+                      builder: (BuildContext context, snapshot) {
+                        if(snapshot.hasError){
+                          return Text("Error");
+                        } else if (snapshot.hasData){
+                          final data = snapshot.requireData;
+                          int? length = 0;
+                          if(data.length != 0){
+                            length = data.first.actors?.length;
+                          }
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: length,
+                            itemBuilder: (ctx,i) => Padding(
+                              padding: const EdgeInsets.only(
+                                  bottom: 10
+                              ),
+                              child:  ActorCard(actor: Actor.fromMap(data.first.actors?[(i+1).toString()], "")),
                             ),
-                            child: const ActorCard(),
-                          ),
-                        ),
-                      ),
-                    ],
+                          );
+                        } else {
+                          return Text("Something Else Happens");
+                        }
+                      }
+                    ),
                   )),
               SinglePageHeader(
                   header: "Quiz information",
                   reusableWidget: Row(
-                    children: const [
-                      // Custom Card comes here with a horizontal Scroller.
+                    children:  [
+                      Text("Quiz:", style: Styles.textSectionBody),
+                      Text("10", style: Styles.textSectionBody)
                     ],
                   )),
               SinglePageHeader(
                 header: "Movie Rating",
                 reusableWidget:
-                    Text("IMdB Movie Rating 9.8 ", style: Styles.textSectionBody),
+                    Text("Movie Rating: 9.8 ", style: Styles.textSectionBody),
               ),
             ],
           ),

@@ -58,7 +58,6 @@ class AppState extends State<App> {
 
     //loginValidation(); // checking is the user is logged in
 
-
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =
