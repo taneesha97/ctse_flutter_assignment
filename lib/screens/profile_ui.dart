@@ -1,5 +1,6 @@
 import 'package:ctse_assignment_1/components/profile/background.dart';
 import 'package:ctse_assignment_1/models/user.dart';
+import 'package:ctse_assignment_1/screens/edit_user_form.dart';
 import 'package:ctse_assignment_1/screens/leader_board.dart';
 import 'package:ctse_assignment_1/screens/quice_configuration_screen.dart';
 import 'package:ctse_assignment_1/screens/quize_list.dart';
@@ -421,13 +422,11 @@ class _ProfileUIState extends State<ProfileUI> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => UserHistory(
-                                        id: uid,
-                                      )),
+                                  builder: (context) => EditUserForm()),
                             );
                           },
                           child: const Text(
-                            'UserHistory',
+                            'Edit User',
                             style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.bold),
                           ),

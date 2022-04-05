@@ -101,7 +101,7 @@ class QuizResultCrudModel extends ChangeNotifier {
                 .collection('result-quizes')
                 .doc(QuizID1)
                 .update({
-              'id': 2 ?? '',
+              'id': 2 ,
               'correct_answer': 0,
               'wrong_answer': 0,
               'correct_points': 0

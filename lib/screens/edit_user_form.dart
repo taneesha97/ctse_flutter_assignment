@@ -1,4 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/user.dart';
+import '../util/User/UserCRUDModel.dart';
+import '../util/userAuth/userauthentication.dart';
 
 class EditUserForm extends StatefulWidget {
   const EditUserForm({Key? key}) : super(key: key);
@@ -11,15 +17,33 @@ class _EditUserFormState extends State<EditUserForm> {
 
 
   TextEditingController? myController1, myController2,myController3,myController4;
+  String? text1, text2, text3, text4;
+  List<Users> docs = [];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false)
+        .authStateChanges;
+    val.listen((event) {
+      setState(() {
+        Provider.of<UserCRUDModel>(context, listen: false)
+            .getLoginUser(event!.uid.toString())
+            .then((value) => {
+          //print(value),
+          print('user ud $value'),
+          setState(() {
+            docs = value;
+            myController1 = TextEditingController()..text = docs[0].userName;
+            myController2 = TextEditingController()..text = docs[0].email;
+            myController3 = TextEditingController()..text = 'ppp';
+            myController4 = TextEditingController()..text = docs[0].age;
+          }),
+        });
+      });
+    });
 
-    myController1 = TextEditingController()..text = 'Your initial value';
-    myController2 = TextEditingController()..text = 'Your initial value';
-    myController3 = TextEditingController()..text = 'Your initial value';
-    myController4 = TextEditingController()..text = 'Your initial value';
+
   }
 
 
@@ -76,7 +100,7 @@ class _EditUserFormState extends State<EditUserForm> {
                           height: 50,
                           child: TextField(
                             controller: myController1,
-                            //onChanged: (val) => setState(() => uname = val),
+                            onChanged: (val) => setState(() => text1 = val),
                             decoration: InputDecoration(
                               labelText: "Enter Username",
                               filled: true,
@@ -90,6 +114,30 @@ class _EditUserFormState extends State<EditUserForm> {
                         ),
                       ),
                     ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(bottom: 8.0),
+                    //   child: Center(
+                    //     child: Container(
+                    //       margin:
+                    //           EdgeInsets.symmetric(horizontal: 0, vertical: 2),
+                    //       width: 300,
+                    //       height: 50,
+                    //       child: TextField(
+                    //         controller: myController2,
+                    //         //onChanged: (val) => setState(() => uname = val),
+                    //         decoration: InputDecoration(
+                    //           labelText: "Enter Password",
+                    //           filled: true,
+                    //           fillColor: Color(0xffffffff),
+                    //           border: OutlineInputBorder(
+                    //             borderSide: new BorderSide(color: Colors.red),
+                    //             borderRadius: BorderRadius.circular(10.0),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Center(
@@ -100,31 +148,7 @@ class _EditUserFormState extends State<EditUserForm> {
                           height: 50,
                           child: TextField(
                             controller: myController2,
-                            //onChanged: (val) => setState(() => uname = val),
-                            decoration: InputDecoration(
-                              labelText: "Enter Password",
-                              filled: true,
-                              fillColor: Color(0xffffffff),
-                              border: OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.red),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Center(
-                        child: Container(
-                          margin:
-                              EdgeInsets.symmetric(horizontal: 0, vertical: 2),
-                          width: 300,
-                          height: 50,
-                          child: TextField(
-                            controller: myController3,
-                            //onChanged: (val) => setState(() => uname = val),
+                            onChanged: (val) => setState(() => text2 = val),
                             decoration: InputDecoration(
                               labelText: "Enter Email",
                               filled: true,
@@ -148,7 +172,7 @@ class _EditUserFormState extends State<EditUserForm> {
                               height: 50,
                               child: TextField(
                                 controller: myController4,
-                                //onChanged: (val) => setState(() => uname = val),
+                                onChanged: (val) => setState(() => text3 = val),
                                 decoration: InputDecoration(
                                   labelText: "Enter Age",
                                   filled: true,
