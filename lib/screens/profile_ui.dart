@@ -306,7 +306,7 @@ class _ProfileUIState extends State<ProfileUI> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => UserHistory()),
+                                builder: (context) => UserHistory(id: uid,)),
                           );
                         },
                         child: const Text(
@@ -348,7 +348,7 @@ class _ProfileUIState extends State<ProfileUI> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => UserHistory()),
+                                builder: (context) => UserHistory(id: uid,)),
                           );
                         },
                         child: const Text(
