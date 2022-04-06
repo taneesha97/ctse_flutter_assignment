@@ -52,7 +52,10 @@ class UserHistoryCrudModel extends ChangeNotifier {
               no_questions: doc['no_questions'],
               wrong_answer: doc['wrong_answer'], //correct_points
               userId: doc['userId'].toString(),
-              correct_points: doc['correct_points']);
+              correct_points: doc['correct_points'],
+              date: doc['date'].toString(),
+              category: doc['category'].toString()
+          );
           //
 
           docs1.add(b);
