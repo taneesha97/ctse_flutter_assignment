@@ -1,3 +1,4 @@
+import 'package:ctse_assignment_1/screens/edit_user_form.dart';
 import 'package:ctse_assignment_1/screens/index_page.dart';
 import 'package:ctse_assignment_1/screens/login_screen.dart';
 import 'package:ctse_assignment_1/screens/movie_library_form.dart';
@@ -30,8 +31,7 @@ import 'bottom_navigation/app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-  );
+  await Firebase.initializeApp();
   runApp(const MyApp());
   // if (Firebase.apps.isEmpty) {
   //   WidgetsFlutterBinding.ensureInitialized();
@@ -52,8 +52,6 @@ Future<void> main() async {
   // runApp(const MyApp());
 }
 
-
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -66,10 +64,13 @@ class MyApp extends StatelessWidget {
           create: (_) => UserAuthentication(FirebaseAuth.instance),
         ),
         StreamProvider(
-          create: (context) => context.read<UserAuthentication>().authStateChanges, initialData: null,
+          create: (context) =>
+              context.read<UserAuthentication>().authStateChanges,
+          initialData: null,
         ),
         ChangeNotifierProvider(create: (context) => CrudModel()),
-        ChangeNotifierProvider(create: (context) => UserAuthentication(FirebaseAuth.instance)),
+        ChangeNotifierProvider(
+            create: (context) => UserAuthentication(FirebaseAuth.instance)),
         ChangeNotifierProvider(create: (context) => QuizCrudModel()),
         ChangeNotifierProvider(create: (context) => QuizListCrudModel()),
         ChangeNotifierProvider(create: (context) => FeedBackCrudModel()),
@@ -79,16 +80,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserHistoryCrudModel()),
       ],
       child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          backgroundColor: Colors.black,
-        ),
-        home:
-         RegisterScreen()
-        // App()
-      ),
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            backgroundColor: Colors.black,
+          ),
+          home:
+              RegisterScreen()
+             // EditUserForm()
+          // App()
+          ),
     );
   }
 }
