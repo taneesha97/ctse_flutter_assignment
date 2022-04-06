@@ -70,7 +70,7 @@ class _SplashQuiceConfigState extends State<SplashQuiceConfig> {
                   onPressed: (){
                     Provider.of<QuizResultCrudModel>(context, listen: false)
                         .insertQuizData(widget.questions,
-                        uid) // here no of quizes are entered, userID are entered
+                        uid, widget.cattegory) // here no of quizes are entered, userID are entered
                         .then((value) {
                       storage.setItem('QuizID', value.toString());
                     });
