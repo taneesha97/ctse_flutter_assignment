@@ -51,31 +51,69 @@ class _LoginScreen extends State<LoginScreen> {
         elevation: 0,
         toolbarHeight: 10,
       ),
-    body: Padding(
-        padding: EdgeInsets.all(0),
+    body: Container(
         child: Form(
           key: formKey,
           child: Column(
             children: [
-              SizedBox(
-                child: TextField(
-                  onChanged: (val) => setState(() => emailadd = val.trim()),
-                  decoration: const InputDecoration(
-                    labelText: "Enter Username",
-                    filled: true,
-                    fillColor: Color(0xffffffff),
-                    border:  InputBorder.none,
+              Container(
+                color:  Color(0xff0DD6E3),
+                padding: EdgeInsets.symmetric(vertical: 10 ,horizontal: 0),
+                width: 1000,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Welcome Movie Quiz',
+                            style: Styles.mainWelcomeText,
+                          ),
+                          Text(
+                            'Welcome Movie Quize',
+                            style: Styles.subWelcomeText,)
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(4, 20, 4, 4),
+                padding: EdgeInsets.symmetric(vertical: 0 ,horizontal: 10),
+                child: SizedBox(
+                  child: TextField(
+                    onChanged: (val) => setState(() => emailadd = val.trim()),
+                    decoration: InputDecoration(
+                      labelText: "Enter Username",
+                      filled: true,
+                      fillColor: Color(0xffffffff),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
                   ),
                 ),
               ),
-              SizedBox(
-                child: TextField(
-                  onChanged: (val) => setState(() => password = val),
-                  decoration: const InputDecoration(
-                    labelText: "Enter Username",
-                    filled: true,
-                    fillColor: Color(0xffffffff),
-                    border:  InputBorder.none,
+              Container(
+                margin: EdgeInsets.fromLTRB(4, 8, 4, 0),
+                padding: EdgeInsets.symmetric(vertical: 0 ,horizontal: 10),
+                child: SizedBox(
+                  child: TextField(
+                    onChanged: (val) => setState(() => password = val),
+                    decoration: InputDecoration(
+                      labelText: "Enter Password",
+                      filled: true,
+                      fillColor: Color(0xffffffff),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -86,21 +124,7 @@ class _LoginScreen extends State<LoginScreen> {
                         padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5)),
                     onPressed: () {
                       Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
-                      print('111111111111111111111111111111111111111111');
-                      print(val.first);
                       loginUserMethod(val);
-
-                      // if(firebaseUser != null){
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => App()),
-                      //   );
-                          // .logInUser(emailadd!, password! ); //'hello1234'
-                      // final firebaseUser = context.watch<User>();
-                      // print('firebaseUser $firebaseUser');
-
-                      // }
                     },
                     child: const Text('Login'),
                   )
