@@ -20,12 +20,44 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreen extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
   String? emailadd, password;
+  String? ErrorMsg = '';
+
+  Future<void> alertDialogBox() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          backgroundColor: Color(0xffc5f7fa),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Email or Password empty'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
 
   @override
   Widget build(BuildContext context) {
 
-    void loginUserMethod(Stream<User?> val) {
+    void loginUserMethod(String email, String pwd) {
+
+      Provider.of<UserAuthentication>(context, listen: false).logInUser(emailadd!, pwd!);
+      Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
       val.listen((event) {
         print('event email $event.email');
         if(event != null){
@@ -90,7 +122,7 @@ class _LoginScreen extends State<LoginScreen> {
                   child: TextField(
                     onChanged: (val) => setState(() => emailadd = val.trim()),
                     decoration: InputDecoration(
-                      labelText: "Enter Username",
+                      labelText: "Enter Email Address",
                       filled: true,
                       fillColor: Color(0xffffffff),
                       border: OutlineInputBorder(
@@ -123,8 +155,12 @@ class _LoginScreen extends State<LoginScreen> {
                         primary: Styles.primaryThemeColor,
                         padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5)),
                     onPressed: () {
-                      Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
-                      loginUserMethod(val);
+                      if(emailadd == null || password == null ){
+                        alertDialogBox();
+                        return;
+                      } else{
+                        loginUserMethod(emailadd!, password!);
+                      }
                     },
                     child: const Text('Login'),
                   )
