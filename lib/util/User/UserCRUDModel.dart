@@ -204,14 +204,16 @@ Future updateUserDataSpecific(String? uid, String? username, String? age, String
     print(uid);
 
     FirebaseFirestore.instance.collection("User")
-        .where("id", isEqualTo:uid).get()
-        .then((querySnapshot) => querySnapshot.docs.map((documentSnapshot) => {
-          documentSnapshot.reference.set({
+        .where("id", isEqualTo:uid)
+        .get()
+        .then((querySnapshot) => querySnapshot.docs.forEach((documentSnapshot) => {
+          documentSnapshot.reference.update({
             'userName': username ?? '',
             'email': email ?? '',
             'profileUrl': '',
             'age': age ?? '',
-          })
+          }
+          )
     }));
 }
 
