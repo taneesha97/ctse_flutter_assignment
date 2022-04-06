@@ -104,7 +104,7 @@ class _EditUserFormState extends State<EditUserForm> {
 
       // Update user standalone method.
       Provider.of<UserCRUDModel>(context, listen: false)
-          .updateUserData(uiD, UserName, Age, Email);
+          .updateUserDataSpecific(uiD, UserName, Age, Email);
 
       // Update User Crud Method : Parameters(UserId, )
       // Provider.of<UserCRUDModel>(context, listen: false)

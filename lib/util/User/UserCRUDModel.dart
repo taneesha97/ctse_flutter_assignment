@@ -196,5 +196,23 @@ class UserCRUDModel extends ChangeNotifier {
         'age': age ?? '',
       });
   }
+  
+  // Conditionally update the user.
+Future updateUserDataSpecific(String? uid, String? username, String? age, String? email) async{
+
+    // Debugging
+    print(uid);
+
+    FirebaseFirestore.instance.collection("User")
+        .where("id", isEqualTo:uid).get()
+        .then((querySnapshot) => querySnapshot.docs.map((documentSnapshot) => {
+          documentSnapshot.reference.set({
+            'userName': username ?? '',
+            'email': email ?? '',
+            'profileUrl': '',
+            'age': age ?? '',
+          })
+    }));
+}
 
 }
