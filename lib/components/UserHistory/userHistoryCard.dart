@@ -34,7 +34,7 @@ class UserHistoryCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
 
                     children:<Widget> [
-                      Text('Quiz ID: ' + model.id.toString(), style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold)),
+                      Text('Date: ' + model.date.toString(), style: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 5),
                       Text('Total Points: ' + (model.no_questions! * 10).toString(), style: TextStyle(color: Colors.grey,fontSize: 16.0,)),
                     ],
