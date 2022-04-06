@@ -59,7 +59,12 @@ class _ProfileUIState extends State<ProfileUI> {
             .then((value) => {
                   //print(value),
                   setState(() {
-                    correctCount = value.toString();
+                    if(value.toString() == "null"){
+                      correctCount = '0';
+                    } else{
+                      correctCount = value.toString();
+                    }
+
                     // print('correctCount');
                     // print(correctCount);
                   }),
@@ -70,7 +75,11 @@ class _ProfileUIState extends State<ProfileUI> {
             .then((value) => {
                   //print(value),
                   setState(() {
-                    wrongCount = value.toString();
+                    if(value.toString() == "null"){
+                      wrongCount = '0';
+                    } else{
+                      wrongCount = value.toString();
+                    }
                     // print('wrongCount');
                     // print(wrongCount);
                   }),
@@ -81,7 +90,11 @@ class _ProfileUIState extends State<ProfileUI> {
                   print('error occured'),
                   print(value),
                   setState(() {
-                    noQuestionCount = value.toString();
+                    if(value.toString() == "null"){
+                      noQuestionCount = '0';
+                    } else {
+                      noQuestionCount = value.toString();
+                    }
                     // print('wrongCount');
                     // print(wrongCount);
                   }),
@@ -91,7 +104,11 @@ class _ProfileUIState extends State<ProfileUI> {
             .then((value) => {
                   //print(value),
                   setState(() {
-                    highestScore = value.toString();
+                    if(value.toString() == "null"){
+                      highestScore = '0';
+                    } else{
+                      highestScore = value.toString();
+                    }
                     // print('wrongCount');
                     // print(wrongCount);
                   }),
@@ -110,6 +127,7 @@ class _ProfileUIState extends State<ProfileUI> {
 
   @override
   Widget build(BuildContext context) {
+    String Age = docs[0].age.toString();
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -122,7 +140,7 @@ class _ProfileUIState extends State<ProfileUI> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(
-              width: 50,
+              width: 30,
             ),
             Container(
               width: 70,
@@ -137,7 +155,7 @@ class _ProfileUIState extends State<ProfileUI> {
               ),
             ),
             const SizedBox(
-              width: 30,
+              width: 20,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -145,14 +163,14 @@ class _ProfileUIState extends State<ProfileUI> {
               children: [
                 Text(
                   docs[0].userName.toString(),
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
                 Text(
                   docs[0].email.toString(),
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
-                Text(
-                  docs[0].age.toString(),
+                Text('Age - $Age'
+                  ,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 // StreamBuilder<List<Users>>(
