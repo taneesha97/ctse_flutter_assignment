@@ -372,6 +372,7 @@ class _ProfileUIState extends State<ProfileUI> {
                         ),
                       ],
                     ),
+
                   ),
                   const SizedBox(
                     height: 5,
@@ -403,26 +404,6 @@ class _ProfileUIState extends State<ProfileUI> {
                       spacing: 30,
                       runSpacing: 10,
                       children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white, // background
-                            onPrimary: Colors.black,
-                            padding: const EdgeInsets.all(10.0),
-                            fixedSize: const Size(120, 20),
-                            // foreground
-                          ),
-                          onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => ProfileUI()),
-                            // );
-                          },
-                          child: const Text(
-                            'Clear',
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.bold),
-                          ),
-                        ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white, // background
@@ -488,7 +469,30 @@ class _ProfileUIState extends State<ProfileUI> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.red, // background
+                            primary: Colors.white, // background
+                            onPrimary: Colors.black,
+                            padding: const EdgeInsets.all(10.0),
+                            fixedSize: const Size(120, 20),
+                            // foreground
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => UserHistory(
+                                    id: uid,
+                                  )),
+                            );
+                          },
+                          child: const Text(
+                            'User History',
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red.shade800, // background
                             onPrimary: Colors.white,
                             padding: const EdgeInsets.all(10.0),
                             fixedSize: const Size(120, 20),
@@ -511,23 +515,17 @@ class _ProfileUIState extends State<ProfileUI> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.white, // background
-                            onPrimary: Colors.black,
+                            primary: Colors.red, // background
+                            onPrimary: Colors.white,
                             padding: const EdgeInsets.all(10.0),
                             fixedSize: const Size(120, 20),
                             // foreground
                           ),
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UserHistory(
-                                    id: uid,
-                                  )),
-                            );
+                            Provider.of<UserAuthentication>(context, listen: false).signoutUser();
                           },
                           child: const Text(
-                            'User History',
+                            'Logout',
                             style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.bold),
                           ),
