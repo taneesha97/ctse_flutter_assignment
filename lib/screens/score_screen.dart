@@ -39,14 +39,7 @@ class _ScorePageState extends State<ScorePage> with TickerProviderStateMixin {
   LocalStorage storage = new LocalStorage('localstorage_app');
   List<ResultQuiz> docs = [];
 
-  bool isBack = true;
-  double angle = 0;
 
-  void _flip() {
-    setState(() {
-      angle = (angle + pi) % (2 * pi);
-    });
-  }
 
   var alertStyle = AlertStyle(
     overlayColor: const Color.fromARGB(196, 151, 151, 163),
