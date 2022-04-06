@@ -125,6 +125,50 @@ class _ProfileUIState extends State<ProfileUI> {
     });
   }
 
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    String? valueText;
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(docs[0].email.toString()),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  valueText = value;
+                });
+              },
+              decoration: InputDecoration(hintText: "Enter Your Password Here"),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                color: Colors.red,
+                textColor: Colors.white,
+                child: Text('CANCEL'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              FlatButton(
+                color: Colors.green,
+                textColor: Colors.white,
+                child: Text('OK'),
+                onPressed: () {
+                  Provider.of<UserAuthentication>(context, listen: false).logInUser(docs[0].email.toString(), valueText!);
+                  Stream<User?> val1 = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+                  val1.listen((event) {
+                    Provider.of<UserAuthentication>(context, listen: false).deleteUserAccount();
+                  });
+                },
+              ),
+
+            ],
+          );
+        });
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -506,6 +550,8 @@ class _ProfileUIState extends State<ProfileUI> {
                             //             id: uid,
                             //           )),
                             // );
+                            _displayTextInputDialog(context);
+
                           },
                           child: const Text(
                             'Delete Account',
