@@ -27,6 +27,9 @@ class _ProfileUIState extends State<ProfileUI> {
   String correctCount = '';
   String wrongCount = '';
   String noQuestionCount = '';
+  String name = '';
+  String email = '';
+  String age = '';
   String highestScore = '';
   Stream<List<Users>>? listUser;
 
@@ -51,6 +54,9 @@ class _ProfileUIState extends State<ProfileUI> {
                 print('user ud $value'),
                   setState(() {
                     docs = value;
+                    name = docs[0].userName.toString();
+                    age = docs[0].age.toString();
+                    email = docs[0].email.toString();
                   }),
                 });
        // listUser = Provider.of<UserCRUDModel>(context).getUserDetails(event!.uid.toString());
@@ -144,15 +150,16 @@ class _ProfileUIState extends State<ProfileUI> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  docs[0].userName.toString(),
+                  name,
+                  //docs[0].userName.toString(),
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 Text(
-                  docs[0].email.toString(),
+                  email,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 Text(
-                  docs[0].age.toString(),
+                  age,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 // StreamBuilder<List<Users>>(
@@ -350,20 +357,30 @@ class _ProfileUIState extends State<ProfileUI> {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        'Profile Configurations',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
                   ),
                   Container(
-                    padding: EdgeInsets.all(15),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                    //color:
                     decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Color.fromARGB(235, 141, 141, 141),
-                            Color.fromARGB(235, 141, 141, 141),
-                          ],
-                        )),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      color: Color.fromARGB(255, 15, 223, 232),
+                    ),
                     child: Wrap(
                       direction: Axis.horizontal,
                       spacing: 30,
@@ -374,7 +391,7 @@ class _ProfileUIState extends State<ProfileUI> {
                             primary: Colors.white, // background
                             onPrimary: Colors.black,
                             padding: const EdgeInsets.all(10.0),
-                            //fixedSize: const Size(640, 70),
+                            fixedSize: const Size(120, 20),
                             // foreground
                           ),
                           onPressed: () {
@@ -394,7 +411,7 @@ class _ProfileUIState extends State<ProfileUI> {
                             primary: Colors.white, // background
                             onPrimary: Colors.black,
                             padding: const EdgeInsets.all(10.0),
-                            //fixedSize: const Size(640, 70),
+                            fixedSize: const Size(120, 20),
                             // foreground
                           ),
                           onPressed: () {
@@ -415,7 +432,7 @@ class _ProfileUIState extends State<ProfileUI> {
                             primary: Colors.white, // background
                             onPrimary: Colors.black,
                             padding: const EdgeInsets.all(10.0),
-                            //fixedSize: const Size(640, 70),
+                            fixedSize: const Size(120, 20),
                             // foreground
                           ),
                           onPressed: () {
@@ -436,7 +453,7 @@ class _ProfileUIState extends State<ProfileUI> {
                             primary: Colors.white, // background
                             onPrimary: Colors.black,
                             padding: const EdgeInsets.all(10.0),
-                            //fixedSize: const Size(640, 70),
+                            fixedSize: const Size(120, 20),
                             // foreground
                           ),
                           onPressed: () {
@@ -454,10 +471,33 @@ class _ProfileUIState extends State<ProfileUI> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                            primary: Colors.red, // background
+                            onPrimary: Colors.white,
+                            padding: const EdgeInsets.all(10.0),
+                            fixedSize: const Size(120, 20),
+                            // foreground
+                          ),
+                          onPressed: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => UserHistory(
+                            //             id: uid,
+                            //           )),
+                            // );
+                          },
+                          child: const Text(
+                            'Delete Account',
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
                             primary: Colors.white, // background
                             onPrimary: Colors.black,
                             padding: const EdgeInsets.all(10.0),
-                            //fixedSize: const Size(640, 70),
+                            fixedSize: const Size(120, 20),
                             // foreground
                           ),
                           onPressed: () {
@@ -465,8 +505,8 @@ class _ProfileUIState extends State<ProfileUI> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => UserHistory(
-                                        id: uid,
-                                      )),
+                                    id: uid,
+                                  )),
                             );
                           },
                           child: const Text(

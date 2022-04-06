@@ -1,6 +1,8 @@
+import 'package:ctse_assignment_1/screens/profile_ui.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../models/user.dart';
 import '../util/User/UserCRUDModel.dart';
@@ -14,10 +16,11 @@ class EditUserForm extends StatefulWidget {
 }
 
 class _EditUserFormState extends State<EditUserForm> {
-
-
-  TextEditingController? myController1, myController2,myController3,myController4;
-  String? text1, text2, text3, text4;
+  TextEditingController? userNameController,
+      emailController,
+      myController3,
+      ageController;
+  String? UserName, Email, Age, uiD;
   List<Users> docs = [];
   @override
   void initState() {
@@ -27,28 +30,127 @@ class _EditUserFormState extends State<EditUserForm> {
         .authStateChanges;
     val.listen((event) {
       setState(() {
+        uiD = event!.uid.toString();
         Provider.of<UserCRUDModel>(context, listen: false)
             .getLoginUser(event!.uid.toString())
             .then((value) => {
-          //print(value),
-          print('user ud $value'),
-          setState(() {
-            docs = value;
-            myController1 = TextEditingController()..text = docs[0].userName;
-            myController2 = TextEditingController()..text = docs[0].email;
-            myController3 = TextEditingController()..text = 'ppp';
-            myController4 = TextEditingController()..text = docs[0].age;
-          }),
-        });
+                  //print(value),
+                  print('user ud $value'),
+                  setState(() {
+                    docs = value;
+                    userNameController = TextEditingController()
+                      ..text = docs[0].userName;
+                    UserName = docs[0].userName;
+                    emailController = TextEditingController()
+                      ..text = docs[0].email;
+                    Email = docs[0].email;
+                    myController3 = TextEditingController()..text = 'ppp'; // ? Purpose of usage unknown.
+                    ageController = TextEditingController()..text = docs[0].age;
+                    Age = docs[0].age;
+                  }),
+                });
       });
     });
+  }
 
+  var alertStyle = AlertStyle(
+    overlayColor: const Color.fromARGB(196, 151, 151, 163),
+    animationType: AnimationType.fromTop,
+    isCloseButton: false,
+    isOverlayTapDismiss: false,
+    descStyle: TextStyle(fontWeight: FontWeight.bold),
+    animationDuration: Duration(milliseconds: 400),
+    alertBorder: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(50.0),
+      side: BorderSide(
+        color: Colors.grey,
+      ),
+    ),
+    titleStyle: const TextStyle(
+      color: Color.fromRGBO(91, 55, 185, 1.0),
+      //fontSize: 10
+    ),
+  );
+
+  void onTextFieldChangeUserName(String value) {
+    print(value);
+    setState(() {
+      UserName = value; //
+    });
 
   }
 
+  void onTextFieldChangeEmail(String value) {
+    print(value);
+    setState(() {
+      Email = value;
+    });
+  }
+
+  void onTextFieldChangeAge(String value) {
+    print(value);
+    setState(() {
+      Age = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    void onPress() {
+
+      // Debugging.
+      print(" -- Debugging at on Press -- ");
+      print("Email  $Email");
+      print("User Id  $uiD");
+      print("Age  $Age");
+      print("UserName  $UserName");
+
+      // Update user standalone method.
+      Provider.of<UserCRUDModel>(context, listen: false)
+          .updateUserDataSpecific(uiD, UserName, Age, Email);
+
+      // Update User Crud Method : Parameters(UserId, )
+      // Provider.of<UserCRUDModel>(context, listen: false)
+      //     .updateUserData(uiD, UserName, Age, Email)
+      // .then((value1) {
+      //   bool value = value1;
+      //   if (value == true) {
+          Alert(
+            context: context,
+            style: alertStyle,
+            type: AlertType.success,
+            //title: "",
+            desc: "Thank You for the feedback",
+            buttons: [
+              DialogButton(
+                child: const Text(
+                  "Ok",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  print('is it working');
+                  // Provider.of<UserCRUDModel>(context, listen: false)
+                  //     .updateUserData(uiD, text1, text3, text2);
+                  Navigator.of(context, rootNavigator: true).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ProfileUI()),
+                  );
+                },
+                color: Color.fromRGBO(91, 55, 185, 1.0),
+                radius: BorderRadius.circular(10.0),
+              ),
+            ],
+          ).show();
+      //   }
+      // });
+
+
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => const ProfileUI()),
+      // );
+    }
 
     return Scaffold(
         extendBodyBehindAppBar: true,
@@ -99,8 +201,8 @@ class _EditUserFormState extends State<EditUserForm> {
                           width: 300,
                           height: 50,
                           child: TextField(
-                            controller: myController1,
-                            onChanged: (val) => setState(() => text1 = val),
+                            controller: userNameController,
+                            onChanged: onTextFieldChangeUserName,
                             decoration: InputDecoration(
                               labelText: "Enter Username",
                               filled: true,
@@ -114,30 +216,6 @@ class _EditUserFormState extends State<EditUserForm> {
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(bottom: 8.0),
-                    //   child: Center(
-                    //     child: Container(
-                    //       margin:
-                    //           EdgeInsets.symmetric(horizontal: 0, vertical: 2),
-                    //       width: 300,
-                    //       height: 50,
-                    //       child: TextField(
-                    //         controller: myController2,
-                    //         //onChanged: (val) => setState(() => uname = val),
-                    //         decoration: InputDecoration(
-                    //           labelText: "Enter Password",
-                    //           filled: true,
-                    //           fillColor: Color(0xffffffff),
-                    //           border: OutlineInputBorder(
-                    //             borderSide: new BorderSide(color: Colors.red),
-                    //             borderRadius: BorderRadius.circular(10.0),
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Center(
@@ -147,8 +225,8 @@ class _EditUserFormState extends State<EditUserForm> {
                           width: 300,
                           height: 50,
                           child: TextField(
-                            controller: myController2,
-                            onChanged: (val) => setState(() => text2 = val),
+                            controller: emailController,
+                            onChanged: onTextFieldChangeEmail,
                             decoration: InputDecoration(
                               labelText: "Enter Email",
                               filled: true,
@@ -162,60 +240,60 @@ class _EditUserFormState extends State<EditUserForm> {
                         ),
                       ),
                     ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Center(
-                            child: Container(
-                              margin:
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Center(
+                        child: Container(
+                          margin:
                               EdgeInsets.symmetric(horizontal: 0, vertical: 2),
-                              width: 300,
-                              height: 50,
-                              child: TextField(
-                                controller: myController4,
-                                onChanged: (val) => setState(() => text3 = val),
-                                decoration: InputDecoration(
-                                  labelText: "Enter Age",
-                                  filled: true,
-                                  fillColor: Color(0xffffffff),
-                                  border: OutlineInputBorder(
-                                    borderSide: new BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                ),
+                          width: 300,
+                          height: 50,
+                          child: TextField(
+                            controller: ageController,
+                            onChanged: onTextFieldChangeAge,
+
+                            //setState(() => text3 = val),
+                            decoration: InputDecoration(
+                              labelText: "Enter Age",
+                              filled: true,
+                              fillColor: Color(0xffffffff),
+                              border: OutlineInputBorder(
+                                borderSide: new BorderSide(color: Colors.red),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
                           ),
                         ),
-                        Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(100, 40),
-                                      textStyle: TextStyle(fontSize: 15),
-                                      primary: Colors.blueGrey,
-                                      shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                        new BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    child: Text('Submit'),
-                                    onPressed: (){}),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(100, 40),
-                                      textStyle: TextStyle(fontSize: 15),
-                                      primary: Colors.blueGrey,
-                                      shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                        new BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    child: Text('Cancel'),
-                                    onPressed: (){}),
-                              ],
-                            )),
+                      ),
+                    ),
+                    Center(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(100, 40),
+                              textStyle: TextStyle(fontSize: 15),
+                              primary: Colors.blueGrey,
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: Text('Submit'),
+                            onPressed: onPress),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(100, 40),
+                              textStyle: TextStyle(fontSize: 15),
+                              primary: Colors.blueGrey,
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: Text('Cancel'),
+                            onPressed: () {}),
+                      ],
+                    )),
                   ]))
                 ],
               ),
