@@ -16,11 +16,11 @@ class EditUserForm extends StatefulWidget {
 }
 
 class _EditUserFormState extends State<EditUserForm> {
-  TextEditingController? myController1,
-      myController2,
+  TextEditingController? userNameController,
+      emailController,
       myController3,
-      myController4;
-  String? text1, text2, text3, text4, uiD;
+      ageController;
+  String? UserName, Email, Age, uiD;
   List<Users> docs = [];
   @override
   void initState() {
@@ -38,12 +38,12 @@ class _EditUserFormState extends State<EditUserForm> {
                   print('user ud $value'),
                   setState(() {
                     docs = value;
-                    myController1 = TextEditingController()
+                    userNameController = TextEditingController()
                       ..text = docs[0].userName;
-                    myController2 = TextEditingController()
+                    emailController = TextEditingController()
                       ..text = docs[0].email;
-                    myController3 = TextEditingController()..text = 'ppp';
-                    myController4 = TextEditingController()..text = docs[0].age;
+                    myController3 = TextEditingController()..text = 'ppp'; // ? Purpose of usage unknown.
+                    ageController = TextEditingController()..text = docs[0].age;
                   }),
                 });
       });
@@ -69,38 +69,42 @@ class _EditUserFormState extends State<EditUserForm> {
     ),
   );
 
-  void onTextFieldChange(String value) {
+  void onTextFieldChangeUserName(String value) {
     print(value);
     setState(() {
-      text1 = value;
+      UserName = value; //
     });
 
   }
 
-  void onTextFieldChange2(String value) {
+  void onTextFieldChangeEmail(String value) {
     print(value);
     setState(() {
-      text2 = value;
+      Email = value;
     });
   }
 
-  void onTextFieldChange3(String value) {
+  void onTextFieldChangeAge(String value) {
     print(value);
     setState(() {
-      text3 = value;
+      Age = value;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     void onPress() {
-      print('sssssww');
-      print(text1);
-      print(text2);
-      print(text3);
-      print(text4);
+
+      // Debugging.
+      print(" -- Debugging at on Press -- ");
+      print("Email  $Email");
+      print("User Id  $uiD");
+      print("Age  $Age");
+      print("UserName  $UserName");
+
+      // Update User Crud Method : Parameters(UserId, )
       Provider.of<UserCRUDModel>(context, listen: false)
-          .updateUserData(uiD, text1, text3, text2)
+          .updateUserData(uiD, UserName, Age, Email)
       .then((value1) {
         bool value = value1;
         if (value == true) {
@@ -190,8 +194,8 @@ class _EditUserFormState extends State<EditUserForm> {
                           width: 300,
                           height: 50,
                           child: TextField(
-                            controller: myController1,
-                            onChanged: onTextFieldChange,
+                            controller: userNameController,
+                            onChanged: onTextFieldChangeUserName,
                             decoration: InputDecoration(
                               labelText: "Enter Username",
                               filled: true,
@@ -214,8 +218,8 @@ class _EditUserFormState extends State<EditUserForm> {
                           width: 300,
                           height: 50,
                           child: TextField(
-                            controller: myController2,
-                            onChanged: (val) => onTextFieldChange2,
+                            controller: emailController,
+                            onChanged: onTextFieldChangeEmail,
                             decoration: InputDecoration(
                               labelText: "Enter Email",
                               filled: true,
@@ -238,8 +242,8 @@ class _EditUserFormState extends State<EditUserForm> {
                           width: 300,
                           height: 50,
                           child: TextField(
-                            controller: myController4,
-                            onChanged: (val) => onTextFieldChange3,
+                            controller: ageController,
+                            onChanged: onTextFieldChangeAge,
 
                             //setState(() => text3 = val),
                             decoration: InputDecoration(
