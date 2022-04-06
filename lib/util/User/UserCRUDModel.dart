@@ -186,19 +186,35 @@ class UserCRUDModel extends ChangeNotifier {
   //   // yeild wrong_answer;
   //   //wrongAnswer = (wrongAnswer! + e['wrong_answer'])
   // }
-  Future<dynamic> updateUserData(String? uID, String? username, String? age, String? email) async {
-    try {
-      await FirebaseFirestore.instance.collection('User').doc(uID).update({
+  Future updateUserData(String? uID, String? username, String? age, String? email) async {
+
+      final doc =  FirebaseFirestore.instance.collection('User').doc(uID);
+      doc.update({
         'userName': username ?? '',
         'email': email ?? '',
         'profileUrl': '',
         'age': age ?? '',
       });
-      return true;
-    } catch (e) {
-      return false;
-      print(e);
-    }
   }
+  
+  // Conditionally update the user.
+Future updateUserDataSpecific(String? uid, String? username, String? age, String? email) async{
+
+    // Debugging
+    print(uid);
+
+    FirebaseFirestore.instance.collection("User")
+        .where("id", isEqualTo:uid)
+        .get()
+        .then((querySnapshot) => querySnapshot.docs.forEach((documentSnapshot) => {
+          documentSnapshot.reference.update({
+            'userName': username ?? '',
+            'email': email ?? '',
+            'profileUrl': '',
+            'age': age ?? '',
+          }
+          )
+    }));
+}
 
 }
