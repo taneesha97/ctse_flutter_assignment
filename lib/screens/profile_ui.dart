@@ -27,6 +27,9 @@ class _ProfileUIState extends State<ProfileUI> {
   String correctCount = '';
   String wrongCount = '';
   String noQuestionCount = '';
+  String name = '';
+  String email = '';
+  String age = '';
   String highestScore = '';
   Stream<List<Users>>? listUser;
 
@@ -51,6 +54,9 @@ class _ProfileUIState extends State<ProfileUI> {
                 print('user ud $value'),
                   setState(() {
                     docs = value;
+                    name = docs[0].userName.toString();
+                    age = docs[0].age.toString();
+                    email = docs[0].email.toString();
                   }),
                 });
        // listUser = Provider.of<UserCRUDModel>(context).getUserDetails(event!.uid.toString());
@@ -144,15 +150,16 @@ class _ProfileUIState extends State<ProfileUI> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  docs[0].userName.toString(),
+                  name,
+                  //docs[0].userName.toString(),
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 Text(
-                  docs[0].email.toString(),
+                  email,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 Text(
-                  docs[0].age.toString(),
+                  age,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 // StreamBuilder<List<Users>>(

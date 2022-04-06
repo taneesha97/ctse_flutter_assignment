@@ -16,9 +16,10 @@ class EditUserForm extends StatefulWidget {
 }
 
 class _EditUserFormState extends State<EditUserForm> {
-
-
-  TextEditingController? myController1, myController2,myController3,myController4;
+  TextEditingController? myController1,
+      myController2,
+      myController3,
+      myController4;
   String? text1, text2, text3, text4, uiD;
   List<Users> docs = [];
   @override
@@ -33,20 +34,20 @@ class _EditUserFormState extends State<EditUserForm> {
         Provider.of<UserCRUDModel>(context, listen: false)
             .getLoginUser(event!.uid.toString())
             .then((value) => {
-          //print(value),
-          print('user ud $value'),
-          setState(() {
-            docs = value;
-            myController1 = TextEditingController()..text = docs[0].userName;
-            myController2 = TextEditingController()..text = docs[0].email;
-            myController3 = TextEditingController()..text = 'ppp';
-            myController4 = TextEditingController()..text = docs[0].age;
-          }),
-        });
+                  //print(value),
+                  print('user ud $value'),
+                  setState(() {
+                    docs = value;
+                    myController1 = TextEditingController()
+                      ..text = docs[0].userName;
+                    myController2 = TextEditingController()
+                      ..text = docs[0].email;
+                    myController3 = TextEditingController()..text = 'ppp';
+                    myController4 = TextEditingController()..text = docs[0].age;
+                  }),
+                });
       });
     });
-
-
   }
 
   var alertStyle = AlertStyle(
@@ -70,55 +71,70 @@ class _EditUserFormState extends State<EditUserForm> {
 
   void onTextFieldChange(String value) {
     print(value);
-    text1 = value;
+    setState(() {
+      text1 = value;
+    });
+
   }
+
   void onTextFieldChange2(String value) {
     print(value);
-    text2 = value;
+    setState(() {
+      text2 = value;
+    });
   }
+
   void onTextFieldChange3(String value) {
     print(value);
-    text3 = value;
+    setState(() {
+      text3 = value;
+    });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
-
     void onPress() {
       print('sssssww');
       print(text1);
       print(text2);
       print(text3);
       print(text4);
+      Provider.of<UserCRUDModel>(context, listen: false)
+          .updateUserData(uiD, text1, text3, text2)
+      .then((value1) {
+        bool value = value1;
+        if (value == true) {
+          Alert(
+            context: context,
+            style: alertStyle,
+            type: AlertType.success,
+            //title: "",
+            desc: "Thank You for the feedback",
+            buttons: [
+              DialogButton(
+                child: const Text(
+                  "Ok",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  print('is it working');
+                  // Provider.of<UserCRUDModel>(context, listen: false)
+                  //     .updateUserData(uiD, text1, text3, text2);
+                  Navigator.of(context, rootNavigator: true).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ProfileUI()),
+                  );
+                },
+                color: Color.fromRGBO(91, 55, 185, 1.0),
+                radius: BorderRadius.circular(10.0),
+              ),
+            ],
+          ).show();
+        }
+      });
 
-      Alert(
-        context: context,
-        style: alertStyle,
-        type: AlertType.success,
-        //title: "",
-        desc: "Thank You for the feedback",
-        buttons: [
-          DialogButton(
-            child: const Text(
-              "Ok",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            onPressed: (){
-              // Provider.of<UserCRUDModel>(context, listen: false)
-              //     .updateUserData(uiD, text1, text3, text2);
-              Navigator.of(context, rootNavigator: true).pop();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ProfileUI()),
-              );
-            },
-            color: Color.fromRGBO(91, 55, 185, 1.0),
-            radius: BorderRadius.circular(10.0),
-          ),
-        ],
-      ).show();
+
       // Navigator.push(
       //   context,
       //   MaterialPageRoute(builder: (context) => const ProfileUI()),
@@ -189,7 +205,6 @@ class _EditUserFormState extends State<EditUserForm> {
                         ),
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Center(
@@ -214,62 +229,60 @@ class _EditUserFormState extends State<EditUserForm> {
                         ),
                       ),
                     ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Center(
-                            child: Container(
-                              margin:
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Center(
+                        child: Container(
+                          margin:
                               EdgeInsets.symmetric(horizontal: 0, vertical: 2),
-                              width: 300,
-                              height: 50,
-                              child: TextField(
-                                controller: myController4,
-                                onChanged: (val) => onTextFieldChange3,
+                          width: 300,
+                          height: 50,
+                          child: TextField(
+                            controller: myController4,
+                            onChanged: (val) => onTextFieldChange3,
 
-                                    //setState(() => text3 = val),
-                                decoration: InputDecoration(
-                                  labelText: "Enter Age",
-                                  filled: true,
-                                  fillColor: Color(0xffffffff),
-                                  border: OutlineInputBorder(
-                                    borderSide: new BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                ),
+                            //setState(() => text3 = val),
+                            decoration: InputDecoration(
+                              labelText: "Enter Age",
+                              filled: true,
+                              fillColor: Color(0xffffffff),
+                              border: OutlineInputBorder(
+                                borderSide: new BorderSide(color: Colors.red),
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
                           ),
                         ),
-                        Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(100, 40),
-                                      textStyle: TextStyle(fontSize: 15),
-                                      primary: Colors.blueGrey,
-                                      shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                        new BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    child: Text('Submit'),
-                                    onPressed: onPress),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(100, 40),
-                                      textStyle: TextStyle(fontSize: 15),
-                                      primary: Colors.blueGrey,
-                                      shape: new RoundedRectangleBorder(
-                                        borderRadius:
-                                        new BorderRadius.circular(10.0),
-                                      ),
-                                    ),
-                                    child: Text('Cancel'),
-                                    onPressed: (){}),
-                              ],
-                            )),
+                      ),
+                    ),
+                    Center(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(100, 40),
+                              textStyle: TextStyle(fontSize: 15),
+                              primary: Colors.blueGrey,
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: Text('Submit'),
+                            onPressed: onPress),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(100, 40),
+                              textStyle: TextStyle(fontSize: 15),
+                              primary: Colors.blueGrey,
+                              shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: Text('Cancel'),
+                            onPressed: () {}),
+                      ],
+                    )),
                   ]))
                 ],
               ),
