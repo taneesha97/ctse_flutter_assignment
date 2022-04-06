@@ -40,10 +40,13 @@ class _EditUserFormState extends State<EditUserForm> {
                     docs = value;
                     userNameController = TextEditingController()
                       ..text = docs[0].userName;
+                    UserName = docs[0].userName;
                     emailController = TextEditingController()
                       ..text = docs[0].email;
+                    Email = docs[0].email;
                     myController3 = TextEditingController()..text = 'ppp'; // ? Purpose of usage unknown.
                     ageController = TextEditingController()..text = docs[0].age;
+                    Age = docs[0].age;
                   }),
                 });
       });
@@ -112,33 +115,33 @@ class _EditUserFormState extends State<EditUserForm> {
       // .then((value1) {
       //   bool value = value1;
       //   if (value == true) {
-      //     Alert(
-      //       context: context,
-      //       style: alertStyle,
-      //       type: AlertType.success,
-      //       //title: "",
-      //       desc: "Thank You for the feedback",
-      //       buttons: [
-      //         DialogButton(
-      //           child: const Text(
-      //             "Ok",
-      //             style: TextStyle(color: Colors.white, fontSize: 20),
-      //           ),
-      //           onPressed: () {
-      //             print('is it working');
-      //             // Provider.of<UserCRUDModel>(context, listen: false)
-      //             //     .updateUserData(uiD, text1, text3, text2);
-      //             Navigator.of(context, rootNavigator: true).pop();
-      //             Navigator.push(
-      //               context,
-      //               MaterialPageRoute(builder: (context) => const ProfileUI()),
-      //             );
-      //           },
-      //           color: Color.fromRGBO(91, 55, 185, 1.0),
-      //           radius: BorderRadius.circular(10.0),
-      //         ),
-      //       ],
-      //     ).show();
+          Alert(
+            context: context,
+            style: alertStyle,
+            type: AlertType.success,
+            //title: "",
+            desc: "Thank You for the feedback",
+            buttons: [
+              DialogButton(
+                child: const Text(
+                  "Ok",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onPressed: () {
+                  print('is it working');
+                  // Provider.of<UserCRUDModel>(context, listen: false)
+                  //     .updateUserData(uiD, text1, text3, text2);
+                  Navigator.of(context, rootNavigator: true).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ProfileUI()),
+                  );
+                },
+                color: Color.fromRGBO(91, 55, 185, 1.0),
+                radius: BorderRadius.circular(10.0),
+              ),
+            ],
+          ).show();
       //   }
       // });
 
