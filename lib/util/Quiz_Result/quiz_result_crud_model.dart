@@ -24,7 +24,7 @@ class QuizResultCrudModel extends ChangeNotifier {
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           ResultQuiz b = ResultQuiz(
-              id: doc['id'],
+              id: doc['id'].toString(),
               correct_answer: doc['correct_answer'],
               no_questions: doc['no_questions'],
               wrong_answer: doc['wrong_answer'], //correct_points
@@ -101,7 +101,7 @@ class QuizResultCrudModel extends ChangeNotifier {
                 .collection('result-quizes')
                 .doc(QuizID1)
                 .update({
-              'id': 2 ?? '',
+              'id': 2 ,
               'correct_answer': 0,
               'wrong_answer': 0,
               'correct_points': 0
