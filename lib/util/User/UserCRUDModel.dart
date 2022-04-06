@@ -194,7 +194,9 @@ class UserCRUDModel extends ChangeNotifier {
         'profileUrl': '',
         'age': age ?? '',
       });
+      return true;
     } catch (e) {
+      return false;
       print(e);
     }
   }
