@@ -102,41 +102,45 @@ class _EditUserFormState extends State<EditUserForm> {
       print("Age  $Age");
       print("UserName  $UserName");
 
-      // Update User Crud Method : Parameters(UserId, )
+      // Update user standalone method.
       Provider.of<UserCRUDModel>(context, listen: false)
-          .updateUserData(uiD, UserName, Age, Email)
-      .then((value1) {
-        bool value = value1;
-        if (value == true) {
-          Alert(
-            context: context,
-            style: alertStyle,
-            type: AlertType.success,
-            //title: "",
-            desc: "Thank You for the feedback",
-            buttons: [
-              DialogButton(
-                child: const Text(
-                  "Ok",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                onPressed: () {
-                  print('is it working');
-                  // Provider.of<UserCRUDModel>(context, listen: false)
-                  //     .updateUserData(uiD, text1, text3, text2);
-                  Navigator.of(context, rootNavigator: true).pop();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ProfileUI()),
-                  );
-                },
-                color: Color.fromRGBO(91, 55, 185, 1.0),
-                radius: BorderRadius.circular(10.0),
-              ),
-            ],
-          ).show();
-        }
-      });
+          .updateUserData(uiD, UserName, Age, Email);
+
+      // Update User Crud Method : Parameters(UserId, )
+      // Provider.of<UserCRUDModel>(context, listen: false)
+      //     .updateUserData(uiD, UserName, Age, Email)
+      // .then((value1) {
+      //   bool value = value1;
+      //   if (value == true) {
+      //     Alert(
+      //       context: context,
+      //       style: alertStyle,
+      //       type: AlertType.success,
+      //       //title: "",
+      //       desc: "Thank You for the feedback",
+      //       buttons: [
+      //         DialogButton(
+      //           child: const Text(
+      //             "Ok",
+      //             style: TextStyle(color: Colors.white, fontSize: 20),
+      //           ),
+      //           onPressed: () {
+      //             print('is it working');
+      //             // Provider.of<UserCRUDModel>(context, listen: false)
+      //             //     .updateUserData(uiD, text1, text3, text2);
+      //             Navigator.of(context, rootNavigator: true).pop();
+      //             Navigator.push(
+      //               context,
+      //               MaterialPageRoute(builder: (context) => const ProfileUI()),
+      //             );
+      //           },
+      //           color: Color.fromRGBO(91, 55, 185, 1.0),
+      //           radius: BorderRadius.circular(10.0),
+      //         ),
+      //       ],
+      //     ).show();
+      //   }
+      // });
 
 
       // Navigator.push(
