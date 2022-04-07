@@ -113,10 +113,19 @@ class _LoginScreen extends State<LoginScreen> {
                 ),
               ),
               Container(
-
+                width: 800,
+                height: 220,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  image: DecorationImage(
+                      image: AssetImage(
+                        "assets/images/cinemaz.jpeg",
+                      ),
+                      fit: BoxFit.fill),
+                ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(4, 20, 4, 4),
+                margin: EdgeInsets.fromLTRB(4, 8, 4, 4),
                 padding: EdgeInsets.symmetric(vertical: 0 ,horizontal: 10),
                 child: SizedBox(
                   child: TextField(
