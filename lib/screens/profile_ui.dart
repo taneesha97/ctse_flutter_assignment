@@ -65,7 +65,12 @@ class _ProfileUIState extends State<ProfileUI> {
             .then((value) => {
                   //print(value),
                   setState(() {
-                    correctCount = value.toString();
+                    if(value.toString() == "null"){
+                      correctCount = '0';
+                    } else{
+                      correctCount = value.toString();
+                    }
+
                     // print('correctCount');
                     // print(correctCount);
                   }),
@@ -76,7 +81,11 @@ class _ProfileUIState extends State<ProfileUI> {
             .then((value) => {
                   //print(value),
                   setState(() {
-                    wrongCount = value.toString();
+                    if(value.toString() == "null"){
+                      wrongCount = '0';
+                    } else{
+                      wrongCount = value.toString();
+                    }
                     // print('wrongCount');
                     // print(wrongCount);
                   }),
@@ -87,7 +96,11 @@ class _ProfileUIState extends State<ProfileUI> {
                   print('error occured'),
                   print(value),
                   setState(() {
-                    noQuestionCount = value.toString();
+                    if(value.toString() == "null"){
+                      noQuestionCount = '0';
+                    } else {
+                      noQuestionCount = value.toString();
+                    }
                     // print('wrongCount');
                     // print(wrongCount);
                   }),
@@ -97,7 +110,11 @@ class _ProfileUIState extends State<ProfileUI> {
             .then((value) => {
                   //print(value),
                   setState(() {
-                    highestScore = value.toString();
+                    if(value.toString() == "null"){
+                      highestScore = '0';
+                    } else{
+                      highestScore = value.toString();
+                    }
                     // print('wrongCount');
                     // print(wrongCount);
                   }),
@@ -108,6 +125,50 @@ class _ProfileUIState extends State<ProfileUI> {
     });
   }
 
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    String? valueText;
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(docs[0].email.toString()),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  valueText = value;
+                });
+              },
+              decoration: InputDecoration(hintText: "Enter Your Password Here"),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                color: Colors.red,
+                textColor: Colors.white,
+                child: Text('CANCEL'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              FlatButton(
+                color: Colors.green,
+                textColor: Colors.white,
+                child: Text('OK'),
+                onPressed: () {
+                  Provider.of<UserAuthentication>(context, listen: false).logInUser(docs[0].email.toString(), valueText!);
+                  Stream<User?> val1 = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+                  val1.listen((event) {
+                    Provider.of<UserAuthentication>(context, listen: false).deleteUserAccount();
+                  });
+                },
+              ),
+
+            ],
+          );
+        });
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -116,6 +177,7 @@ class _ProfileUIState extends State<ProfileUI> {
 
   @override
   Widget build(BuildContext context) {
+    String Age = docs[0].age.toString();
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -128,7 +190,7 @@ class _ProfileUIState extends State<ProfileUI> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(
-              width: 50,
+              width: 30,
             ),
             Container(
               width: 70,
@@ -143,23 +205,22 @@ class _ProfileUIState extends State<ProfileUI> {
               ),
             ),
             const SizedBox(
-              width: 30,
+              width: 20,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
-                  //docs[0].userName.toString(),
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  docs[0].userName.toString(),
+                  style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
                 Text(
-                  email,
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  docs[0].email.toString(),
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
-                Text(
-                  age,
+                Text('Age - $Age'
+                  ,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
                 // StreamBuilder<List<Users>>(
@@ -355,6 +416,7 @@ class _ProfileUIState extends State<ProfileUI> {
                         ),
                       ],
                     ),
+
                   ),
                   const SizedBox(
                     height: 5,
@@ -386,26 +448,6 @@ class _ProfileUIState extends State<ProfileUI> {
                       spacing: 30,
                       runSpacing: 10,
                       children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white, // background
-                            onPrimary: Colors.black,
-                            padding: const EdgeInsets.all(10.0),
-                            fixedSize: const Size(120, 20),
-                            // foreground
-                          ),
-                          onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => ProfileUI()),
-                            // );
-                          },
-                          child: const Text(
-                            'Clear',
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.bold),
-                          ),
-                        ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white, // background
@@ -471,29 +513,6 @@ class _ProfileUIState extends State<ProfileUI> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.red, // background
-                            onPrimary: Colors.white,
-                            padding: const EdgeInsets.all(10.0),
-                            fixedSize: const Size(120, 20),
-                            // foreground
-                          ),
-                          onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => UserHistory(
-                            //             id: uid,
-                            //           )),
-                            // );
-                          },
-                          child: const Text(
-                            'Delete Account',
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
                             primary: Colors.white, // background
                             onPrimary: Colors.black,
                             padding: const EdgeInsets.all(10.0),
@@ -511,6 +530,48 @@ class _ProfileUIState extends State<ProfileUI> {
                           },
                           child: const Text(
                             'User History',
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red.shade800, // background
+                            onPrimary: Colors.white,
+                            padding: const EdgeInsets.all(10.0),
+                            fixedSize: const Size(120, 20),
+                            // foreground
+                          ),
+                          onPressed: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => UserHistory(
+                            //             id: uid,
+                            //           )),
+                            // );
+                            _displayTextInputDialog(context);
+
+                          },
+                          child: const Text(
+                            'Delete Account',
+                            style: TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red, // background
+                            onPrimary: Colors.white,
+                            padding: const EdgeInsets.all(10.0),
+                            fixedSize: const Size(120, 20),
+                            // foreground
+                          ),
+                          onPressed: () {
+                            Provider.of<UserAuthentication>(context, listen: false).signoutUser();
+                          },
+                          child: const Text(
+                            'Logout',
                             style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.bold),
                           ),
