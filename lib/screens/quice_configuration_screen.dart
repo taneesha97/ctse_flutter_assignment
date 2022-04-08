@@ -14,7 +14,7 @@ class DropDown extends StatefulWidget {
   _DropDownState createState() => _DropDownState();
 }
 List <String> _list =['Action',"Romance","Thriller",'Animation', "Comedy", "Horror"];
-List <String> _list2 =['5',"10","15",'20'];
+List <String> _list2 =['2',"3","5",'7', '10'];
 List <String> _list3 =['10',"15","20", "30"];
 
 class _DropDownState extends State<DropDown> {
@@ -200,6 +200,7 @@ class _DropDownState extends State<DropDown> {
                                                             });
                                                           }
                                                           else if (val == 4) {
+
                                                             setState(() {
                                                               category =
                                                               'Comedy';
@@ -307,27 +308,34 @@ class _DropDownState extends State<DropDown> {
                                                         if (val == 0) {
                                                           setState(() {
                                                             questions =
-                                                            5;
+                                                            2;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         } else if (val == 1) {
                                                           setState(() {
                                                             questions =
-                                                            10;
+                                                            3;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         }
                                                         else if (val == 2) {
                                                           setState(() {
                                                             questions =
-                                                            15;
+                                                            5;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         }
                                                         else if (val == 3) {
                                                           setState(() {
                                                             questions =
-                                                            20;
+                                                            7;
+                                                            title2 = _list2.elementAt(index);
+                                                          });
+                                                        }
+                                                        else if (val == 4) {
+                                                          setState(() {
+                                                            questions =
+                                                            10;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         }

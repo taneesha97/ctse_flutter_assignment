@@ -10,12 +10,13 @@ class CardView1 extends StatefulWidget {
 
   final int index;
   final String text1, id;
-  final int text2, questions;
+  final int text2, questions, text3;
   const CardView1({
     Key? key,
     required this.index,
     required this.text1,
     required this.text2,
+    required this.text3,
     required this.questions,
     required this.id,
 
@@ -88,7 +89,15 @@ class _CardView1State extends State<CardView1> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:<Widget> [
                         Text(widget.text1, style: TextStyle(color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.bold)),
-                        Text(widget.text2.toString(), style: TextStyle(color: Colors.grey)),
+                        Row(
+                          children: [
+                            const Text('time - ', style: TextStyle(color: Colors.grey)),
+                            Text(widget.text2.toString(), style: TextStyle(color: Colors.grey)),
+                            SizedBox(width: 15.0),
+                            const Text('questions - ', style: TextStyle(color: Colors.grey)),
+                            Text(widget.text3.toString(), style: TextStyle(color: Colors.grey)),
+                          ],
+                        ),
                       ],
                     ),
                   ],

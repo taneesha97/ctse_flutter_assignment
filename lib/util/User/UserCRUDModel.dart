@@ -96,6 +96,30 @@ class UserCRUDModel extends ChangeNotifier {
     }
   }
 
+
+  Future getTotal(String id) async {
+
+    Stream<QuerySnapshot> stream =  _db
+        .collection('result-quizes').where('userId', isEqualTo: id.toString()).snapshots();
+    if(stream != null){
+      int counter = 0;
+      await stream.listen((data) =>
+          data.docs.forEach((element) => {
+            counter += (element['correct_answer'] as int ),
+            print("The total1 is $counter")
+          })
+
+      );
+      print("The total is $counter");
+      return counter;
+    }
+
+       // data.doc.forEach((doc) => counter += (doc["score"])));
+    //counter += (element['correct_answer'] as int )
+
+  }
+
+
   Future<dynamic> getWrongAnswers(String id) async {
     QuerySnapshot querySnapshot;
     Stream<QuerySnapshot> _quizList;
