@@ -31,14 +31,6 @@ class _UserHistoryState extends State<UserHistory> {
   void initState() {
     super.initState();
 
-    // Provider.of<UserHistoryCrudModel>(context, listen: false)
-    //     .readUserHistoryDetails(widget.id)
-    //     .then((value) => {
-    //       print(value),
-    //   setState(() {
-    //     docs1 = value;
-    //   }),
-    // });
   }
 
   @override
@@ -108,12 +100,7 @@ class _UserHistoryState extends State<UserHistory> {
                   ],
                 ),
               ),
-              // Flexible(
-              //   child: Container(
-              //     color: Colors.black12,
-              //     child:
-              //   ),
-              // ),
+              
               Flexible(
                 child: StreamBuilder<List<ResultQuiz>>(
                     stream: list,
@@ -130,17 +117,6 @@ class _UserHistoryState extends State<UserHistory> {
                                   UserHistoryCard(index: index, model: data[index])
                           );
 
-                          // ListView.builder(
-                          //   itemCount: data.length,
-                          //   shrinkWrap: true,
-                          //   itemBuilder: (BuildContext context, int index) =>
-                          //       Container(
-                          //         width: MediaQuery.of(context).size.width,
-                          //         padding: EdgeInsets.symmetric(
-                          //             horizontal: 2.0, vertical: 2.0),
-                          //         child: LeaderBoradCard(
-                          //             index: index, model: data[index]),
-                          //       ));
                       } else {
                         return Center(
                           child: CircularProgressIndicator(),
