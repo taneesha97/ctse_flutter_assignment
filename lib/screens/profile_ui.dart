@@ -30,6 +30,7 @@ class _ProfileUIState extends State<ProfileUI> {
   String name = '';
   String email = '';
   String age = '';
+  String count1 = '';
   String highestScore = '';
   Stream<List<Users>>? listUser;
 
@@ -75,6 +76,26 @@ class _ProfileUIState extends State<ProfileUI> {
                     // print(correctCount);
                   }),
                 });
+        Provider.of<UserCRUDModel>(context, listen: false)
+            .getTotal(event!.uid.toString())
+            .then((value) => {
+          print(value),
+          setState(() {
+            count1 = value.toString();
+            print('check 11');
+            print(count1);
+            // if(value.toString() == "null"){
+            //   correctCount = '0';
+            // } else{
+            //   correctCount = value.toString();
+            // }
+
+            // print('correctCount');
+            // print(correctCount);
+          }),
+        });
+
+
 
         Provider.of<UserCRUDModel>(context, listen: false)
             .getWrongAnswers(event!.uid.toString())
@@ -177,7 +198,7 @@ class _ProfileUIState extends State<ProfileUI> {
 
   @override
   Widget build(BuildContext context) {
-    String Age = docs[0].age.toString();
+   //String Age = docs[0].age.toString();
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -212,14 +233,14 @@ class _ProfileUIState extends State<ProfileUI> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  docs[0].userName.toString(),
+                  name,
                   style: TextStyle(fontSize: 24, color: Colors.white),
                 ),
                 Text(
-                  docs[0].email.toString(),
+                  email,
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
-                Text('Age - $Age'
+                Text('Age - $age'
                   ,
                   style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
@@ -365,26 +386,7 @@ class _ProfileUIState extends State<ProfileUI> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 30,
                                     color: Colors.yellow)),
-                            // StreamBuilder(
-                            //     stream: count,
-                            //     builder: (BuildContext context, snapshot) {
-                            //       if(snapshot.hasData){
-                            //         final data = snapshot.requireData;
-                            //         return Text(data.toString(),
-                            //             style: const TextStyle(
-                            //                 fontWeight: FontWeight.bold,
-                            //                 fontSize: 30,
-                            //                 color: Colors.yellow));
-                            //       }else{
-                            //         return const Text("",
-                            //             style: TextStyle(
-                            //                 fontWeight: FontWeight.bold,
-                            //                 fontSize: 30,
-                            //                 color: Colors.yellow));
-                            //       }
-                            //
-                            //     }
-                            // ),
+
                           ],
                         ),
                         Column(
