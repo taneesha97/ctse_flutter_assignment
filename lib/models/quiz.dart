@@ -6,7 +6,7 @@ class Question {
   Question({this.id, this.question, this.imageUri, this.answer, this.options});
 
   Question.fromMap(Map snapshot, String id)
-      : id = id ?? '',
+      : id = id,
         question = snapshot['question'] ?? '',
         answer = snapshot['answer'] ?? '',
         options = snapshot['options'] ?? '',

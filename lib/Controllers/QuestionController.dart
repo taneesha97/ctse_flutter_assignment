@@ -38,7 +38,7 @@ class QuestionController extends GetxController
   // int _numOfCorrectAns = 0;
   // int get numOfCorrectAns => this._numOfCorrectAns;
 
-  int _time = 10;
+  int _time = 60;
 
   List<int?>? valueSet;
 

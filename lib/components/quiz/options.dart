@@ -35,8 +35,6 @@ class Options extends StatelessWidget {
             } else {
               return Color.fromARGB(255, 0, 238, 255);
             }
-            //return Color.fromARGB(255, 0, 238, 255);
-            // };
           }
 
           Color getTheRightColor1() {
@@ -46,7 +44,6 @@ class Options extends StatelessWidget {
               }
             }
             return Colors.black;
-            // };
           }
 
           return Center(

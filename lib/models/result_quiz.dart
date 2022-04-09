@@ -1,8 +1,8 @@
 class ResultQuiz{
-  final String? userId, id;
-  final int? correct_answer, no_questions, wrong_answer, correct_points;
+  final String userId, id, date, category;
+  final int correct_answer, no_questions, wrong_answer, correct_points;
 
-  ResultQuiz({required this.id, required this.userId, required this.correct_answer, required this.no_questions, required this.wrong_answer, required this.correct_points});
+  ResultQuiz({required this.id, required this.userId, required this.correct_answer, required this.no_questions, required this.wrong_answer, required this.correct_points, required this.category, required this.date});
 
   ResultQuiz.fromMap(Map snapshot, String id)
       : id = snapshot['id']  ?? '',
@@ -10,7 +10,9 @@ class ResultQuiz{
         correct_answer = snapshot['correct_answer'] ?? '',
         no_questions = snapshot['no_questions'] ?? '',
         wrong_answer = snapshot['wrong_answer'] ?? '',
-        correct_points = snapshot['correct_points'] ?? '';
+        correct_points = snapshot['correct_points'] ?? '',
+        category = snapshot['category'] ?? '',
+        date = snapshot['date'] ?? '';
 
   toJson() {
     return {

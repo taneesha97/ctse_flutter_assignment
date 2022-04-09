@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/quiz.dart';
 import '../../models/result_quiz.dart';
+import 'package:intl/intl.dart';
 
 class QuizResultCrudModel extends ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -24,12 +25,15 @@ class QuizResultCrudModel extends ChangeNotifier {
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
           ResultQuiz b = ResultQuiz(
-              id: doc['id'],
+              id: doc['id'].toString(),
               correct_answer: doc['correct_answer'],
               no_questions: doc['no_questions'],
               wrong_answer: doc['wrong_answer'], //correct_points
               userId: doc['userId'].toString(),
-              correct_points: doc['correct_points']);
+              correct_points: doc['correct_points'],
+              date: doc['date'].toString(),
+              category: doc['category'].toString()
+          );
           //
 
           docs1.add(b);
@@ -101,7 +105,7 @@ class QuizResultCrudModel extends ChangeNotifier {
                 .collection('result-quizes')
                 .doc(QuizID1)
                 .update({
-              'id': 2 ?? '',
+              'id': 2 ,
               'correct_answer': 0,
               'wrong_answer': 0,
               'correct_points': 0
@@ -124,12 +128,16 @@ class QuizResultCrudModel extends ChangeNotifier {
     }
   }
 
-  Future<dynamic> insertQuizData(int noQuestions, String userId) async {
+  Future<dynamic> insertQuizData(int noQuestions, String userId, String category) async {
     try {
+
+      print(DateFormat.yMMMd().format(DateTime.now()));
       DocumentReference<Map<String, dynamic>> value =
           await FirebaseFirestore.instance.collection('result-quizes').add({
         'id': 0, // need to changed to reattempt id
         'no_questions': noQuestions,
+        'date': DateFormat.yMMMd().format(DateTime.now()).toString(),
+         'category': category,
         'userId': userId,
         'correct_answer': 0,
         'wrong_answer': 0,

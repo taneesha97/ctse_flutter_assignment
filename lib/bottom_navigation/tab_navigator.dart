@@ -1,7 +1,4 @@
-import 'package:ctse_assignment_1/bottom_navigation/page1.dart';
-import 'package:ctse_assignment_1/bottom_navigation/page2.dart';
-import 'package:ctse_assignment_1/bottom_navigation/page3.dart';
-import 'package:ctse_assignment_1/screens/index_page.dart';
+
 import 'package:flutter/material.dart';
 
 import '../screens/movie_library_list.dart';
