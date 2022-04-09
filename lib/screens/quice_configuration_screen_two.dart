@@ -185,14 +185,14 @@ class _DropDownNewState extends State<DropDownNew> {
                                                             setState(() {
                                                               category =
                                                               'Action';
-                                                              title = _list.elementAt(index);
+                                                              widget.category = _list.elementAt(index);
                                                               categoryRadioValue = 0;
                                                             });
                                                           } else if (val == 1) {
                                                             setState(() {
                                                               category =
                                                               'Romance';
-                                                              title = _list.elementAt(index);
+                                                              widget.category = _list.elementAt(index);
                                                               categoryRadioValue = 1;
                                                             });
                                                           }
@@ -200,7 +200,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                             setState(() {
                                                               category =
                                                               'Thriller';
-                                                              title = _list.elementAt(index);
+                                                              widget.category = _list.elementAt(index);
                                                               categoryRadioValue = 2;
                                                             });
                                                           }
@@ -208,7 +208,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                             setState(() {
                                                               category =
                                                               'Animation';
-                                                              title = _list.elementAt(index);
+                                                              widget.category = _list.elementAt(index);
                                                               categoryRadioValue = 3;
                                                             });
                                                           }
@@ -217,7 +217,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                             setState(() {
                                                               category =
                                                               'Comedy';
-                                                              title = _list.elementAt(index);
+                                                              widget.category = _list.elementAt(index);
                                                               categoryRadioValue = 4;
                                                             });
                                                           }
@@ -225,7 +225,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                             setState(() {
                                                               category =
                                                               'Horror';
-                                                              title = _list.elementAt(index);
+                                                              widget.category = _list.elementAt(index);
                                                               categoryRadioValue = 5;
                                                             });
                                                           }
