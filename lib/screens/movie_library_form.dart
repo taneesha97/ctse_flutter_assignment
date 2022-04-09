@@ -1,17 +1,20 @@
 import 'package:ctse_assignment_1/components/movie/status_tag.dart';
 import 'package:ctse_assignment_1/styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import '../models/library_model.dart';
 import '../util/crud_model.dart';
+import '../util/userAuth/userauthentication.dart';
 import 'movie_library_list.dart';
 
 class LibraryForm extends StatefulWidget {
   final int functionValue;
   final String libraryId;
   final String libraryName;
+  String? userId; // Put a initial value here if necessary.
 
   LibraryForm(
       {Key? key,
@@ -28,10 +31,35 @@ class _LibraryFormState extends State<LibraryForm> {
   final formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String? lname;
-  String? color;
+  String? color = "4280391411";
+
+  void getColor() {
+    int colorInteger = int.parse(color.toString());
+    Color newColor = Color(colorInteger);
+  }
+
+  // Creating a common navigation method.
+  void navigatorMethod() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LibraryList()),
+    );
+  }
+
+  storeSession() {
+    Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false)
+        .authStateChanges;
+    val.listen((event) => {
+          setState(() {
+            widget.userId = event!.uid.toString();
+          }), //Get the User Id.
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Initiation Methods.
+    storeSession();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -106,7 +134,7 @@ class _LibraryFormState extends State<LibraryForm> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Center(
@@ -131,7 +159,8 @@ class _LibraryFormState extends State<LibraryForm> {
                                   pickerColor: Colors.red, //default color
                                   onColorChanged: (Color col) {
                                     //on color picked
-                                    setState(() => color = col.value.toString());
+                                    setState(
+                                        () => color = col.value.toString());
                                     Navigator.pop(context);
                                   },
                                 )
@@ -156,7 +185,8 @@ class _LibraryFormState extends State<LibraryForm> {
                             primary: Colors.teal,
                             padding: EdgeInsets.all(15)),
                         onPressed: () {
-                          if (formKey.currentState!.validate() && !(color==null)) {
+                          if (formKey.currentState!.validate() &&
+                              !(color == null)) {
                             // Update and Inserting Logic Separation.
                             if (widget.functionValue == 0) {
                               // Create the Library Model.
@@ -165,6 +195,7 @@ class _LibraryFormState extends State<LibraryForm> {
                                 optional: "optional",
                                 id: 'default-id',
                                 color: color.toString(),
+                                userId: widget.userId.toString(), // Update this userId.
                               );
 
                               // Printing color.
@@ -173,11 +204,13 @@ class _LibraryFormState extends State<LibraryForm> {
                               // Call the DB method to write to the database.
                               Provider.of<CrudModel>(context, listen: false)
                                   .addLibraries(library);
+                              Navigator.of(context).pop();
                             } else {
                               // Calling the Database Update Method.
                               Provider.of<CrudModel>(context, listen: false)
-                                  .libraryNameUpate(
-                                      lname.toString(), widget.libraryId, color.toString());
+                                  .libraryNameUpate(lname.toString(),
+                                      widget.libraryId, color.toString());
+                              Navigator.of(context).pop();
                             }
                           } else {
                             // Toast Messages are deprecated above Android 11.
@@ -195,7 +228,9 @@ class _LibraryFormState extends State<LibraryForm> {
                           }
                         },
                         child: Text(
-                          "Add to the Library",
+                          widget.functionValue == 0
+                              ? "Insert the Libraries"
+                              : "Update the Library",
                           style: Styles.navBarTitle,
                         )),
                   ),

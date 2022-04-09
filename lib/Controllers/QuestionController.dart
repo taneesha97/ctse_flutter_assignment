@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../models/quiz.dart';
 import '../screens/feedback_form.dart';
+import '../screens/quiz_screen.dart';
 
 class QuestionController extends GetxController
     with SingleGetTickerProviderMixin {
@@ -20,6 +21,8 @@ class QuestionController extends GetxController
   late String _correctAns;
   String get correctAns => this._correctAns;
 
+  late BuildContext context;
+
   int _noOfQuestions = 10;
   String _cattegory = '';
 
@@ -32,10 +35,10 @@ class QuestionController extends GetxController
   RxInt _questionNumber = 1.obs;
   RxInt get questionNumber => this._questionNumber;
 
-  int _numOfCorrectAns = 0;
-  int get numOfCorrectAns => this._numOfCorrectAns;
+  // int _numOfCorrectAns = 0;
+  // int get numOfCorrectAns => this._numOfCorrectAns;
 
-  int _time = 10;
+  int _time = 60;
 
   List<int?>? valueSet;
 
@@ -52,8 +55,8 @@ class QuestionController extends GetxController
         update();
       });
     print('calling2');
-   _animationController.forward().whenComplete(nextQuestion);
-   _pageController = PageController();
+    _animationController.forward().whenComplete(nextQuestion);
+    _pageController = PageController();
   }
 
   @override
@@ -83,31 +86,17 @@ class QuestionController extends GetxController
     _pageController.dispose();
   }
 
-  // List<int?>? checkCorrectWrongAnswers(
-  //     Question question, String selectedIndex) {
-  //   int noCorrectAnswers = 0;
-  //   int AnsweredQuestions = 0;
-  //   int noWrongAnswers = 0;
-  //   if (question.answer! == selectedIndex) {
-  //     noCorrectAnswers++;
-  //     AnsweredQuestions++;
-  //   } else if (question.answer! != selectedIndex) {
-  //     noWrongAnswers++;
-  //     AnsweredQuestions++;
-  //   }
-  //   valueSet?.add(AnsweredQuestions);
-  //   valueSet?.add(noCorrectAnswers);
-  //   valueSet?.add(noWrongAnswers);
-  //   return valueSet;
-  // }
+
+  void saveContext(BuildContext buildContext) {
+    print(buildContext);
+    context = buildContext;
+  }
 
   void checkAns(Question question, String selectedIndex) {
     // because once user press any option then it will run
     _isAnswered = true;
     _correctAns = question.answer!;
     _selectedAns = selectedIndex;
-
-    if (_correctAns == _selectedAns) _numOfCorrectAns++;
 
     // It will stop the counter
     _animationController.stop();
@@ -120,28 +109,30 @@ class QuestionController extends GetxController
     });
   }
 
-
   void nextQuestion() {
-    print(_noOfQuestions);
-    print('next ques');
-    print(_questionNumber.value);
+    _isAnswered = false;
 
     if (_questionNumber.value != _noOfQuestions) {
       _isAnswered = false;
-      print(_isAnswered);
       _pageController.nextPage(
           duration: Duration(milliseconds: 250), curve: Curves.ease);
 
-      // Reset the counter
       _animationController.reset();
 
-      // Then start it again
-      // Once timer is finish go to the next qn
       print('calling4');
       _animationController.forward().whenComplete(nextQuestion);
     } else {
-      //Get package provide us simple way to naviigate another page
-      Get.to(() => const FeedBackForm());
+      print('error');
+      print(_noOfQuestions);
+      print(_questionNumber.value);
+
+      //Get.to(() => const FeedBackForm());
+      _isAnswered = false;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const FeedBackForm()),
+      );
     }
   }
 
@@ -153,7 +144,11 @@ class QuestionController extends GetxController
     _questionNumber.value = 1;
   }
 
-  List<Object> getQuizDetails(){
+  List<Object> getQuizDetails() {
     return [_noOfQuestions, _time, _cattegory];
+  }
+
+  void setisAnsweredFalse(){
+    _isAnswered = false;
   }
 }

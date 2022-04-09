@@ -1,10 +1,7 @@
 import 'package:ctse_assignment_1/bottom_navigation/tab_navigator.dart';
-import 'package:ctse_assignment_1/screens/register_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import 'live_view_page.dart';
+
 
 class App extends StatefulWidget {
   @override
@@ -42,21 +39,25 @@ class AppState extends State<App> {
     print("Init State");
   }
 
-  void loginValidation() {
-    final firebaseUser = context.watch<User>();
-    print('firebaseUser $firebaseUser');
-    if(firebaseUser == null){
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => RegisterScreen()),
-      );
-    }
-  }
+  // void loginValidation() {
+  //   Stream<User?> val = Provider.of<UserAuthentication>(context, listen: false).authStateChanges;
+  //   val.listen((event) {
+  //     if(event == null){
+  //       //if the user object is null. will forward to Register page
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //             builder: (context) => RegisterScreen()),
+  //       );
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
-    //loginValidation();
+
+    //loginValidation(); // checking is the user is logged in
+
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =

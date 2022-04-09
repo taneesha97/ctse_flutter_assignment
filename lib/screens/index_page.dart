@@ -207,48 +207,22 @@ class _IndexPageState extends State<IndexPage> {
                       // foreground
                     ),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SingleMoviePage(
-                                  index: 1,
-                                )),
-                      );
-                    },
-                    child: const Text(
-                      'Single Movie Page',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Styles.indexPurple, // background
-                      onPrimary: Colors.white,
-                      padding: const EdgeInsets.all(20.0),
-                      fixedSize: const Size(640, 70),
-                      // foreground
-                    ),
-                    onPressed: () {
-                      Provider.of<QuizResultCrudModel>(context, listen: false)
-                          .insertQuizData(4,
-                              'U001') // here no of quizes are entered, userID are entered
-                          .then((value) {
-                        storage.setItem('QuizID', value.toString());
-                      });
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QuizScreen(
-                                  noOfQuestions: 4,
-                                  time: 20,
-                                  cattegory: 'Horror',
-                                )),
-                      );
+                      // Provider.of<QuizResultCrudModel>(context, listen: false)
+                      //     .insertQuizData(4,
+                      //         'U001') // here no of quizes are entered, userID are entered
+                      //     .then((value) {
+                      //   storage.setItem('QuizID', value.toString());
+                      // });
+                      //
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => QuizScreen(
+                      //             noOfQuestions: 4,
+                      //             time: 20,
+                      //             cattegory: 'Horror',
+                      //           )),
+                      // );
                     },
                     child: const Text(
                       'Audio Quiz',

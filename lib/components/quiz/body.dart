@@ -1,5 +1,4 @@
 import 'package:ctse_assignment_1/Controllers/QuestionController.dart';
-import 'package:ctse_assignment_1/service/quiz_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,13 +11,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 
 class Body extends StatefulWidget {
-
   int time, noOfQuestions;
   String category;
-  Body({
-    Key? key,
-    required this.time, required this.noOfQuestions, required this.category
-  }) : super(key: key);
+  Body(
+      {Key? key,
+      required this.time,
+      required this.noOfQuestions,
+      required this.category})
+      : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -27,9 +27,10 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   List<Question> docs1 = [];
   late QuestionController _questionController;
-  late AnimationController controller;
+  //late AnimationController controller;
 
   List<Question> docs = [];
+  BuildContext? context1;
 
   @override
   void initState() {
@@ -38,15 +39,16 @@ class _BodyState extends State<Body> {
     Provider.of<QuizCrudModel>(context, listen: false)
         .readQuizesByGrouping(widget.category)
         .then((value) => {
-          //print(value),
+              //print(value),
               setState(() {
                 docs1 = value;
               }),
               // docs1 = value
             });
     _questionController = Get.put(QuestionController());
-    
-    _questionController.setQuestionParameter(widget.noOfQuestions, widget.time, widget.category);
+
+    _questionController.setQuestionParameter(
+        widget.noOfQuestions, widget.time, widget.category);
   }
 
   @override
@@ -59,16 +61,16 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return SafeArea(
+    return Container(
         child: Padding(
       padding: EdgeInsets.symmetric(horizontal: 12),
       child: Column(
         children: [
-          SizedBox(
-            height: 10,
-          ),
-          Text("Movie Categories",
-              style: Styles.textSectionHeader),
+          // SizedBox(
+          //   height: 10,
+          // ),
+          // Text("Movie Categories", style: Styles.textSectionHeader),
+
           SizedBox(
             height: 10,
           ),
