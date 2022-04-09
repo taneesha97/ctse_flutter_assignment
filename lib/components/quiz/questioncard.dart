@@ -106,15 +106,15 @@ class QuestionCard extends StatelessWidget {
                   if (question.imageUri.toString() != "") ...[
                     Image.network(
                       question.imageUri.toString(),
-                      height: 250,
-                      width: 200,
+                      height: 150,
+                      width: 170,
                     ),
                   ] else ...[
 
                     Image.network(
                       'https://cdn1.vectorstock.com/i/1000x1000/50/20/no-photo-or-blank-image-icon-loading-images-vector-37375020.jpg',
-                      height: 250,
-                      width: 200,
+                      height: 150,
+                      width: 170,
                     ),
                   ],
                 ],
