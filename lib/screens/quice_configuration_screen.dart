@@ -29,6 +29,15 @@ class _DropDownState extends State<DropDown> {
   String? category;
   int? questions, time;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    category = 'Action';
+    questions = 1;
+    time = 10;
+  }
+
   void onPress () {
     print(category);
     Provider.of<QuizListCrudModel>(context, listen: false).insertQuizListData(category, questions, time)
@@ -304,6 +313,7 @@ class _DropDownState extends State<DropDown> {
                                                       title: Text(_list2.elementAt(index)),
                                                       value: index,
                                                       groupValue: questions,
+
                                                       onChanged: (val) {
                                                         if (val == 0) {
                                                           setState(() {
