@@ -44,8 +44,37 @@ class _RegisterScreen  extends State<RegisterScreen>{
           });
         });
       });
+      _showMyDialog();
     }
+  }
 
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Success..!!'),
+          backgroundColor: Color(0xffc5f7fa),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('You Have Registered successfully.'),
+                Text('Please Login to continue.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -153,6 +182,9 @@ class _RegisterScreen  extends State<RegisterScreen>{
                                   //   fillColor: Color(0xffffffff),
                                   //   border:  InputBorder.none,
                                   // ),
+                                  obscureText: true,
+                                  enableSuggestions: false,
+                                  autocorrect: false,
                                   decoration: InputDecoration(
                                     labelText: "Enter Password",
                                     filled: true,

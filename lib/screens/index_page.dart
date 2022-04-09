@@ -207,22 +207,22 @@ class _IndexPageState extends State<IndexPage> {
                       // foreground
                     ),
                     onPressed: () {
-                      Provider.of<QuizResultCrudModel>(context, listen: false)
-                          .insertQuizData(4,
-                              'U001') // here no of quizes are entered, userID are entered
-                          .then((value) {
-                        storage.setItem('QuizID', value.toString());
-                      });
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QuizScreen(
-                                  noOfQuestions: 4,
-                                  time: 20,
-                                  cattegory: 'Horror',
-                                )),
-                      );
+                      // Provider.of<QuizResultCrudModel>(context, listen: false)
+                      //     .insertQuizData(4,
+                      //         'U001') // here no of quizes are entered, userID are entered
+                      //     .then((value) {
+                      //   storage.setItem('QuizID', value.toString());
+                      // });
+                      //
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => QuizScreen(
+                      //             noOfQuestions: 4,
+                      //             time: 20,
+                      //             cattegory: 'Horror',
+                      //           )),
+                      // );
                     },
                     child: const Text(
                       'Audio Quiz',

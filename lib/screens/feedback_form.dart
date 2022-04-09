@@ -99,7 +99,6 @@ class _FeedBackFormState extends State<FeedBackForm> {
     QuestionController _controller = Get.put(QuestionController());
     //loginValidation();
     void onPressAlert() {
-      print('hi');
       //Navigator.pop(context);
       Navigator.of(context, rootNavigator: true).pop();
       Navigator.push(
@@ -109,8 +108,6 @@ class _FeedBackFormState extends State<FeedBackForm> {
     }
 
     void cancel() {
-      // print('hi');
-      // Navigator.pop(context);
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const ScorePage()),
@@ -146,6 +143,9 @@ class _FeedBackFormState extends State<FeedBackForm> {
       });
     }
 
+
+
+
     return Scaffold(
       extendBodyBehindAppBar: false,
       appBar: PreferredSize(
@@ -171,10 +171,16 @@ class _FeedBackFormState extends State<FeedBackForm> {
                   bottomRight: Radius.circular(50),
                   bottomLeft: Radius.circular(50))),
         ),
-        // title: Text(
-        //   "Quiz Configuration",
-        //   style: TextStyle(color: Colors.black),
-        // ),
+
+
+
+
+
+
+
+
+
+
       ),
       body: SingleChildScrollView(
         child: Container(
