@@ -14,7 +14,7 @@ class LibraryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Stream<List<Library>> libraries =
-        Provider.of<CrudModel>(context, listen: false).getListOfLibraries;
+        Provider.of<CrudModel>(context, listen: false).getMoviesFromLibraryUserId("WDItvqRYPngIzmBPSVmA83VU1IH2");
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.teal,
