@@ -39,6 +39,8 @@ class _DropDownNewState extends State<DropDownNew> {
   late String category, id;
   late int questions, time;
 
+  // Radio button values.
+  int? categoryRadioValue, questionRadioValue, timeRadioValue;
 
   @override
   Widget build(BuildContext context) {
@@ -177,19 +179,21 @@ class _DropDownNewState extends State<DropDownNew> {
                                                     return RadioListTile(
                                                         title: Text(_list.elementAt(index)),
                                                         value: index,
-                                                        groupValue: widget.category,
+                                                        groupValue: categoryRadioValue,
                                                         onChanged: (val) {
                                                           if (val == 0) {
                                                             setState(() {
                                                               category =
                                                               'Action';
                                                               title = _list.elementAt(index);
+                                                              categoryRadioValue = 0;
                                                             });
                                                           } else if (val == 1) {
                                                             setState(() {
                                                               category =
                                                               'Romance';
                                                               title = _list.elementAt(index);
+                                                              categoryRadioValue = 1;
                                                             });
                                                           }
                                                           else if (val == 2) {
@@ -197,6 +201,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                               category =
                                                               'Thriller';
                                                               title = _list.elementAt(index);
+                                                              categoryRadioValue = 2;
                                                             });
                                                           }
                                                           else if (val == 3) {
@@ -204,6 +209,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                               category =
                                                               'Animation';
                                                               title = _list.elementAt(index);
+                                                              categoryRadioValue = 3;
                                                             });
                                                           }
                                                           else if (val == 4) {
@@ -212,6 +218,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                               category =
                                                               'Comedy';
                                                               title = _list.elementAt(index);
+                                                              categoryRadioValue = 4;
                                                             });
                                                           }
                                                           else if (val == 5) {
@@ -219,6 +226,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                               category =
                                                               'Horror';
                                                               title = _list.elementAt(index);
+                                                              categoryRadioValue = 5;
                                                             });
                                                           }
                                                         }
@@ -311,18 +319,20 @@ class _DropDownNewState extends State<DropDownNew> {
                                                   return RadioListTile(
                                                       title: Text(_list2.elementAt(index)),
                                                       value: index,
-                                                      groupValue: widget.questions,
+                                                      groupValue: questionRadioValue,
                                                       onChanged: (val) {
                                                         if (val == 0) {
                                                           setState(() {
                                                             questions =
                                                             2;
+                                                            questionRadioValue = 0;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         } else if (val == 1) {
                                                           setState(() {
                                                             questions =
                                                             3;
+                                                            questionRadioValue = 1;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         }
@@ -330,6 +340,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                           setState(() {
                                                             questions =
                                                             5;
+                                                            questionRadioValue = 2;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         }
@@ -337,6 +348,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                           setState(() {
                                                             questions =
                                                             7;
+                                                            questionRadioValue = 3;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         }
@@ -344,6 +356,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                           setState(() {
                                                             questions =
                                                             10;
+                                                            questionRadioValue = 0;
                                                             title2 = _list2.elementAt(index);
                                                           });
                                                         }
@@ -436,18 +449,20 @@ class _DropDownNewState extends State<DropDownNew> {
                                                   return RadioListTile(
                                                       title: Text(_list3.elementAt(index)),
                                                       value: index,
-                                                      groupValue: widget.time,
+                                                      groupValue: timeRadioValue,
                                                       onChanged: (val) {
                                                         if (val == 0) {
                                                           setState(() {
                                                             time =
                                                             10;
+                                                            timeRadioValue = 0;
                                                             title3 = _list3.elementAt(index);
                                                           });
                                                         } else if (val == 1) {
                                                           setState(() {
                                                             time =
                                                             15;
+                                                            timeRadioValue = 1;
                                                             title3 = _list3.elementAt(index);
                                                           });
                                                         }
@@ -455,6 +470,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                           setState(() {
                                                             time =
                                                             20;
+                                                            timeRadioValue = 2;
                                                             title3 = _list3.elementAt(index);
                                                           });
                                                         }
@@ -462,6 +478,7 @@ class _DropDownNewState extends State<DropDownNew> {
                                                           setState(() {
                                                             time =
                                                             30;
+                                                            timeRadioValue = 3;
                                                             title3 = _list3.elementAt(index);
                                                           });
                                                         }
